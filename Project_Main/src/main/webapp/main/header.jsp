@@ -10,11 +10,11 @@
 <!-- Top Background Image Wrapper -->
   <header id="header" class="hoc clear">
     <div id="logo" class="fl_left"> 
-      <h1><a href="index.html">JOBPRO</a></h1>
+      <h1><a href="main.do">JOBPRO</a></h1>
     </div>
     <nav id="mainav" class="fl_right"> 
       <ul class="clear">
-        <li class="active"><a href="index.html">메인</a></li>
+        <li class="active"><a href="main.do">메인</a></li>
         <li><a class="drop" href="#">공고</a>
           <ul>
             <li><a href="#">공고 목록</a></li>

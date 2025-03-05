@@ -14,7 +14,7 @@
 	      <hr class="btmspace-50">
 	      <nav>
 	        <ul class="nospace">
-	          <li><a href="index.html"><i class="fas fa-lg fa-home"></i></a></li>
+	          <li><a href="main.do"><i class="fas fa-lg fa-home"></i></a></li>
 	          <li><a href="#">공고</a></li>
 	          <li><a href="#">기업</a></li>
 	          <li><a href="#">커뮤니티</a></li>
