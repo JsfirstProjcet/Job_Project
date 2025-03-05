@@ -1,11 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	document.getElementById('login').addEventListener("click", function() {
+		let id=document.getElementById('id').value.trim();
+		let pwd=document.getElementById('pwd').value.trim();
+		if(id!=="") 
+		{
+			if(pwd==="")
+			{
+				alert("비밀번호를 입력하세요");
+				document.getElementById('pwd').focus()
+				return
+			}
+			alert('id:'+id+' password:'+pwd)
+			sessionStorage.setItem("id",id)
+			sessionStorage.setItem("pwd",pwd)
+			if(id==='148cl0ud@gmail.com')
+			{
+				sessionStorage.setItem("admin",'y')
+			}	
+		}	
+	});
+})
+</script>
 </head>
 <body>
 	<div class="wrapper row0">
@@ -16,7 +43,18 @@
 	        <li><i class="far fa-envelope rgtspace-5"></i> info@domain.com</li>
 	      </ul>
 	    </div>
-	    <div class="fl_right">
+	    <div class="fl_right" style="display: flex; justify-content: right; gap: 5px;">
+	    	<c:if test="${sessionScope.id==null }">
+			<input type="text" placeholder="Enter e-mail" size=12 id="id">
+			<input type="password" placeholder="Enter password" size=12 id="pwd" style="color:black; visibility: visible; opacity:1.0">
+			<input type="button" value="로그인" id="login" class="btn-sm btn-success">
+			<input type="button" value="회원가입" id="signup" class="btn-sm btn-primary">
+			</c:if>
+	    	<c:if test="${sessionScope.id!=null }">
+	    	${sessionScope.name }(${sessionScope.admin=='y'?"관리자":"일반사용자" }) 님 로그인되었습니다.&nbsp;&nbsp;
+			<input type="button" value="로그아웃" id="logout" class="btn-sm btn-success">
+			</c:if>
+<!-- 
 	      <ul class="nospace">
 	        <li><a href="#"><i class="fas fa-home"></i></a></li>
 	        <li><a href="#" title="Help Centre"><i class="far fa-life-ring"></i></a></li>
@@ -34,6 +72,7 @@
 	          </div>
 	        </li>
 	      </ul>
+ -->
 	    </div>
 	  </div>
 	</div>
