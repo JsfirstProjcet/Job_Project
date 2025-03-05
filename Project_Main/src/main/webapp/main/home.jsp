@@ -9,14 +9,7 @@
 <body>
     <div id="pageintro" class="hoc clear"> 
 	    <article>
-	      <h3 class="heading">Senectus et netus</h3>
-	      <p>Et malesuada fames ac turpis egestas duis rutrum eros ut sapien in hac habitasse platea dictumst aliquam venenatis leo et orci ut pretium odio eu nisi nulla at.</p>
-	      <footer>
-	        <ul class="nospace inline pushright">
-	          <li><a class="btn" href="#">Egestas</a></li>
-	          <li><a class="btn inverse" href="#">Tristique</a></li>
-	        </ul>
-	      </footer>
+	      <h3 class="heading">대기업 공고</h3>
 	    </article>
 	  </div>
 	<!-- End Top Background Image Wrapper -->
@@ -46,85 +39,13 @@
 	    <div class="clear"></div>
 	  </main>
 	</div>
-	<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
-	  <section class="hoc container clear"> 
-	    <figure class="one_half first">
-	      <h6 class="heading">Ante fringilla nisl eu</h6>
-	      <p class="btmspace-30">Gravida lorem ligula quis ligula pellentesque congue semper felis maecenas rutrum euismod nibh class aptent taciti.</p>
-	      <ul class="nospace clear points">
-	        <li><a href="#"><i class="fas fa-equals"></i></a>
-	          <h6 class="heading">Sociosqu ad litora torquent</h6>
-	          <p>Per conubia nostra per inceptos himenaeos mauris lectus enim luctus vitae viverra a pharetra mollis diam aliquam.</p>
-	        </li>
-	        <li><a href="#"><i class="fas fa-exclamation-circle"></i></a>
-	          <h6 class="heading">Sociosqu ad litora torquent</h6>
-	          <p>Per conubia nostra per inceptos himenaeos mauris lectus enim luctus vitae viverra a pharetra mollis diam aliquam.</p>
-	        </li>
-	      </ul>
-	    </figure>
-	    <div class="one_half last"><a class="imgover" href="#"><img src="../images/demo/480x300.png" alt=""></a></div>
-	  </section>
-	</div>
-	<div class="wrapper row3">
-	  <section id="services" class="hoc container clear"> 
-	    <div class="sectiontitle">
-	      <p class="nospace font-xs">Mollis eu commodo eu dui quisque</p>
-	      <h6 class="heading">Ut ipsum vivamus tincidunt</h6>
-	    </div>
-	    <ul class="nospace group grid-3">
-	      <li class="one_third">
-	        <article><a href="#"><i class="fas fa-chess-king"></i></a>
-	          <h6 class="heading">Tincidunt enim etiam</h6>
-	          <p>Tellus lacus tempor in pharetra id imperdiet sit amet enim suspendisse potenti fusce ornare imperdiet sit amet enim suspendisse.</p>
-	          <footer><a href="#">Read More</a></footer>
-	        </article>
-	      </li>
-	      <li class="one_third">
-	        <article><a href="#"><i class="fas fa-archive"></i></a>
-	          <h6 class="heading">Tincidunt enim etiam</h6>
-	          <p>Tellus lacus tempor in pharetra id imperdiet sit amet enim suspendisse potenti fusce ornare imperdiet sit amet enim suspendisse.</p>
-	          <footer><a href="#">Read More</a></footer>
-	        </article>
-	      </li>
-	      <li class="one_third">
-	        <article><a href="#"><i class="fas fa-backspace"></i></a>
-	          <h6 class="heading">Tincidunt enim etiam</h6>
-	          <p>Tellus lacus tempor in pharetra id imperdiet sit amet enim suspendisse potenti fusce ornare imperdiet sit amet enim suspendisse.</p>
-	          <footer><a href="#">Read More</a></footer>
-	        </article>
-	      </li>
-	      <li class="one_third">
-	        <article><a href="#"><i class="fas fa-bezier-curve"></i></a>
-	          <h6 class="heading">Tincidunt enim etiam</h6>
-	          <p>Tellus lacus tempor in pharetra id imperdiet sit amet enim suspendisse potenti fusce ornare imperdiet sit amet enim suspendisse.</p>
-	          <footer><a href="#">Read More</a></footer>
-	        </article>
-	      </li>
-	      <li class="one_third">
-	        <article><a href="#"><i class="fas fa-box-open"></i></a>
-	          <h6 class="heading">Tincidunt enim etiam</h6>
-	          <p>Tellus lacus tempor in pharetra id imperdiet sit amet enim suspendisse potenti fusce ornare imperdiet sit amet enim suspendisse.</p>
-	          <footer><a href="#">Read More</a></footer>
-	        </article>
-	      </li>
-	      <li class="one_third">
-	        <article><a href="#"><i class="fas fa-luggage-cart"></i></a>
-	          <h6 class="heading">Tincidunt enim etiam</h6>
-	          <p>Tellus lacus tempor in pharetra id imperdiet sit amet enim suspendisse potenti fusce ornare imperdiet sit amet enim suspendisse.</p>
-	          <footer><a href="#">Read More</a></footer>
-	        </article>
-	      </li>
-	    </ul>
-	  </section>
-	</div>
 	<div class="wrapper row2">
 	  <section class="hoc container clear"> 
 	    <div class="sectiontitle">
-	      <p class="nospace font-xs">Mollis eu commodo eu dui quisque</p>
-	      <h6 class="heading">Ut ipsum vivamus tincidunt</h6>
+	      <p class="nospace font-xs">지금바로 지원하라!!</p>
+	      <h6 class="heading">주목해야할 채용 공고</h6>
 	    </div>
 	    <figure>
-	      <figcaption class="center btmspace-50"><a href="#">Pharetra</a> / <a href="#">Imperdiet</a> / <a href="#">Suspendisse</a> / <a href="#">Potenti</a></figcaption>
 	      <ul class="nospace group grid-3">
 	        <li class="one_third"><a class="imgover" href="#"><img src="../images/demo/348x261.png" alt=""></a></li>
 	        <li class="one_third"><a class="imgover" href="#"><img src="../images/demo/348x261.png" alt=""></a></li>
@@ -136,21 +57,11 @@
 	    </figure>
 	  </section>
 	</div>
-	<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
-	  <section id="testimonials" class="hoc container clear"> 
-	    <article>
-	      <figure><img src="../images/demo/100x100.png" alt=""></figure>
-	      <h6 class="heading font-x2">J. Doe</h6>
-	      <em>Conubia nostra per inceptos</em>
-	      <blockquote>Himenaeos curabitur feugiat etiam in enim sed felis interdum lobortis phasellus nec eros ut arcu sollicitudin pellentesque curabitur porta justo vitae molestie semper ligula enim sed felis interdum lobortis phasellus nec eros ut arcu sollicitudin pellentesque curabitur porta justo vitae molestie semper ligula.</blockquote>
-	    </article>
-	  </section>
-	</div>
 	<div class="wrapper row2">
 	  <section class="hoc container clear"> 
 	    <div class="sectiontitle">
-	      <p class="nospace font-xs">Mollis eu commodo eu dui quisque</p>
-	      <h6 class="heading">Ut ipsum vivamus tincidunt</h6>
+	      <p class="nospace font-xs">현직자의 지혜를 빌려보자</p>
+	      <h6 class="heading">현직자 인터뷰</h6>
 	    </div>
 	    <ul id="latest" class="nospace group sd-third">
 	      <li class="one_third first">
