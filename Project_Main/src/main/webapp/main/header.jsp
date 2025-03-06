@@ -35,7 +35,11 @@
         </li>
         <li><a class="drop" href="#">마이페이지</a>
           <ul>
-            <li><a href="#">계정 정보</a></li>
+             <li><a href="#">MY</a></li>
+            <li><a href="#">계정</a></li>
+            <li><a href="#">리뷰</a></li>
+            <li><a href="#">이력서</a></li>
+            <li><a href="#">멤버십/결제</a></li>
           </ul>
         </li>
         <li><a class="drop" href="#">Dropdown</a>
