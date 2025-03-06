@@ -11,21 +11,22 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
-	document.getElementById('login').addEventListener("click", function() {
-		let id=document.getElementById('id').value.trim();
-		let pwd=document.getElementById('pwd').value.trim();
-		if(id!=="") 
+	//document.getElementById('login').addEventListener("click", function() {
+	$('#login').on("click", function() { 	
+		//let id=document.getElementById('id').value.trim();
+		//let pwd=document.getElementById('pwd').value.trim();
+		if($('#id')!=="") 
 		{
-			if(pwd==="")
+			if($('#pwd')==="")
 			{
-				alert("비밀번호를 입력하세요");
+				$('#msgbar').text("비밀번호를 입력하세요");
 				document.getElementById('pwd').focus()
 				return
 			}
-			alert('id:'+id+' password:'+pwd)
+			$('#msgbar').text('id:'+id+' password:'+pwd)
 			sessionStorage.setItem("id",id)
-			sessionStorage.setItem("pwd",pwd)
-			if(id==='148cl0ud@gmail.com')
+			//sessionStorage.setItem("pwd",pwd)
+			if($('#id')==='148cl0ud@gmail.com')
 			{
 				sessionStorage.setItem("admin",'y')
 			}	
@@ -43,12 +44,15 @@ $(function(){
 	        <li><i class="far fa-envelope rgtspace-5"></i> info@domain.com</li>
 	      </ul>
 	    </div>
-	    <div class="fl_right" style="display: flex; justify-content: right; gap: 5px;">
+	    <div id="topbar" class="hoc clear">
+	    <div class="fl_right" style="display: flex; flex-direction: column; align-items: flex-end; gap: 5px;">
 	    	<c:if test="${sessionScope.id==null }">
 			<input type="text" placeholder="Enter e-mail" size=12 id="id">
 			<input type="password" placeholder="Enter password" size=12 id="pwd" style="color:black; visibility: visible; opacity:1.0">
 			<input type="button" value="로그인" id="login" class="btn-sm btn-success">
 			<input type="button" value="회원가입" id="signup" class="btn-sm btn-primary">
+	  		//<div id="msgbar" class="hoc clear" style="display: flex;"></div>
+			<div id="msgbar" style="color: red; font-size: 14px; text-align: left; width: 100%;"></div>
 			</c:if>
 	    	<c:if test="${sessionScope.id!=null }">
 	    	${sessionScope.name }(${sessionScope.admin=='y'?"관리자":"일반사용자" }) 님 로그인되었습니다.&nbsp;&nbsp;
