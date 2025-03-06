@@ -10,11 +10,11 @@
 <!-- Top Background Image Wrapper -->
   <header id="header" class="hoc clear">
     <div id="logo" class="fl_left"> 
-      <h1><a href="main.do">JOBPRO</a></h1>
+      <h1><a href="../main/main.do">JOBPRO</a></h1>
     </div>
     <nav id="mainav" class="fl_right"> 
       <ul class="clear">
-        <li class="active"><a href="main.do">메인</a></li>
+        <li class="active"><a href="../main/main.do">메인</a></li>
         <li><a class="drop" href="#">공고</a>
           <ul>
             <li><a href="#">공고 목록</a></li>
@@ -38,7 +38,7 @@
              <li><a href="#">MY</a></li>
             <li><a href="#">계정</a></li>
             <li><a href="#">리뷰</a></li>
-            <li><a href="#">이력서</a></li>
+            <li><a href="../resume/resume.do">이력서</a></li>
             <li><a href="#">멤버십/결제</a></li>
           </ul>
         </li>
