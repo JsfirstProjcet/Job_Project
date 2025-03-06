@@ -17,14 +17,14 @@
         <li class="active"><a href="../main/main.do">메인</a></li>
         <li><a class="drop" href="#">공고</a>
           <ul>
-            <li><a href="#">공고 목록</a></li>
+            <li><a href="../emp/emp_list.do">공고 목록</a></li>
             <li><a href="#">공고 검색</a></li>
             <li><a href="#">실시간 공고</a></li>
           </ul>
         </li>
         <li><a class="drop" href="#">기업</a>
           <ul>
-            <li><a href="#">기업 목록</a></li>
+            <li><a href="../company/com_list.do">기업 목록</a></li>
             <li><a href="#">기업 검색</a></li>
           </ul>
         </li>

@@ -15,8 +15,8 @@
 	      <nav>
 	        <ul class="nospace">
 	          <li><a href="main.do"><i class="fas fa-lg fa-home"></i></a></li>
-	          <li><a href="#">공고</a></li>
-	          <li><a href="#">기업</a></li>
+	          <li><a href="../emp/emp_list.do">공고</a></li>
+	          <li><a href="../company/com_list.do">기업</a></li>
 	          <li><a href="#">커뮤니티</a></li>
 	          <li><a href="#">마이페이지</a></li>
 	          <li><a href="#">Cookies</a></li>
