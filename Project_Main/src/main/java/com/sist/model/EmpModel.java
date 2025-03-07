@@ -18,4 +18,9 @@ public class EmpModel {
 		request.setAttribute("main_jsp", "../emp/emp_detail.jsp");
 		return "../main/main.jsp";
 	}
+	@RequestMapping("emp/emp_find.do")
+	public String emp_find(HttpServletRequest request, HttpServletResponse response) {
+		request.setAttribute("main_jsp", "../emp/emp_find.jsp");
+		return "../main/main.jsp";
+	}
 }

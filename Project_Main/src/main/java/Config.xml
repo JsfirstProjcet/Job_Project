@@ -3,9 +3,11 @@
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+  <properties resource="db.properties"/>
   <!-- VO 등록 -->
   <typeAliases>
-    <typeAlias type="com.sist.vo.test" alias=""/>
+    <typeAlias type="com.sist.vo.CompanyVO" alias="CompanyVO"/>
+    <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
   </typeAliases>
   <!-- 오라클 환경 설정 getConnection / disConnection-->
   <environments default="development">
@@ -21,6 +23,7 @@
   </environments>
   <!-- SQL문장 첨부 -->
   <mappers>
-    <mapper resource=""/>
+    <mapper resource="com/sist/mapper/company-mapper.xml"/>
+    <mapper resource="com/sist/mapper/emp-mapper.xml"/>
   </mappers>
 </configuration>

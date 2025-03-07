@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
     
 <!DOCTYPE html>
 <html>
@@ -20,72 +19,65 @@
   <!-- ################################################################################################ -->
   <div id="breadcrumb" class="hoc clear"> 
     <!-- ################################################################################################ -->
-    <h6 class="heading">기업 목록</h6>
+    <h6 class="heading">기업 검색</h6>
     <!-- ################################################################################################ -->
   </div>
   <!-- ################################################################################################ -->
-
+	<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');"> 
+	  <div class="wrapper row3">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                             <select id="fd" class="input-sm">
+                               <option value="c_type">1000대기업</option>                                            
+                               <option value="c_type">대기업</option>
+                               <option value="c_type">중소기업</option>
+                               <option value="c_type">중견기업</option>
+                               <option value="c_type">스타트업</option>
+                               <option value="c_type">기타</option>
+                               <option value="address" selected>주소</option>
+                             </select>
+                             <input type=text size= id="ss" class="input-sm">
+                             <input type=button value="검색" class="btn-sm btn-primary" id="findBtn">                                                          
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
   <!-- ################################################################################################ -->
 <!-- End Top Background Image Wrapper -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <!-- ################################################################################################ -->
 <div class="wrapper row3">
-    <section class="archive-area section_padding_80">
+  <main class="hoc container clear"> 
     <!-- main body -->
     <!-- ################################################################################################ -->
-    <div class="container"> 
+    <div class="content"> 
       <!-- ################################################################################################ -->
-        <div class="row">
-            <!-- Single Post -->
-            <c:forEach var="vo" items="${list }">
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
-                    <!-- Post Thumb -->
-                    <div class="post-thumb">
-                      <a href="../company/com_detail_before.do?cid=${vo.cid }">
-                        <img src="https://pds.saramin.co.kr/company${vo.poster }" alt="">
-                      </a>
-                    </div>
-                    <!-- Post Content -->
-                    <div class="post-content">
-                        <div class="post-meta d-flex">
-                            <div class="post-author-date-area d-flex">
-                                <!-- Post Author -->
-                                <div class="post-author">
-                                    <a href="#">${vo.c_type }</a>
-                                </div>
-                                <!-- Post Date -->
-                                <div class="post-date">
-                                    <a href="#">${vo.estdate }</a>
-                                </div>
-                            </div>
-                            <!-- Post Comment & Share Area -->
-                            <div class="post-comment-share-area d-flex">
-                                <!-- Post Favourite -->
-                                <div class="post-favourite">
-                                    <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i>${vo.ecount }</a>
-                                </div>
-                                <!-- Post Comments -->
-                                <div class="post-comments">
-                                    <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>${vo.take }</a>
-                                </div>
-                                <!-- Post Share -->
-                                <div class="post-share">
-                                    <a href="#"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="../company/com_detail_before.do?cid=${vo.cid }">
-                            <h4 class="post-headline">${vo.name }</h4>
-                        </a>
-                    </div>
-                </div>
-            </div>
-           </c:forEach>
-           </div>
-           </div>
-           </section>
+      <div id="gallery">
+        <figure>
+          <header class="heading">기업 정보</header>
+          <ul class="nospace clear">
+            <li class="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
+          </ul>
+        </figure>
+      </div>
       <!-- ################################################################################################ -->
       <!-- ################################################################################################ -->
       <nav class="pagination">
@@ -109,6 +101,7 @@
     <!-- ################################################################################################ -->
     <!-- / main body -->
     <div class="clear"></div>
+  </main>
 </div>
 </body>
 </html>
