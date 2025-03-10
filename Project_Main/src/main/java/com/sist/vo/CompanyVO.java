@@ -7,8 +7,14 @@ public class CompanyVO {
 	private String cid,name,introduction,c_type,industry,
 				representative,homepage,bu_details,address,history,
 				access_key,poster,sample; 
-	private Date estadte;
+	private Date estdate;
 	
+	public Date getEstdate() {
+		return estdate;
+	}
+	public void setEstdate(Date estdate) {
+		this.estdate = estdate;
+	}
 	public int getEcount() {
 		return ecount;
 	}
@@ -99,11 +105,5 @@ public class CompanyVO {
 	public void setSample(String sample) {
 		this.sample = sample;
 	}
-	public Date getEstadte() {
-		return estadte;
-	}
-	public void setEstadte(Date estadte) {
-		this.estadte = estadte;
-	}
-	
+
 }

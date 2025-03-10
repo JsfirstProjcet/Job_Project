@@ -6,14 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업 목록</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-</script>
+<title>Insert title here</title>
 </head>
-<body id="top">
+<body>
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
   <!-- ################################################################################################ -->
@@ -23,14 +18,6 @@
     <h6 class="heading">기업 목록</h6>
     <!-- ################################################################################################ -->
   </div>
-  <!-- ################################################################################################ -->
-
-  <!-- ################################################################################################ -->
-<!-- End Top Background Image Wrapper -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row3">
     <section class="archive-area section_padding_80">
     <!-- main body -->
     <!-- ################################################################################################ -->
@@ -77,35 +64,42 @@
                             </div>
                         </div>
                         <a href="../company/com_detail_before.do?cid=${vo.cid }">
-                            <h4 class="post-headline">${vo.name }</h4>
-                        </a>
+                           <h4 class="post-headline">${vo.name }</h4>
+                        </a>                    
                     </div>
                 </div>
             </div>
            </c:forEach>
+           
+           <div class="col-12">
+               <div class="pagination-area d-sm-flex mt-15">
+                   <nav aria-label="#">
+                       <ul class="pagination">
+                          <c:if test="${startPage>1 }">
+                            <li class="page-item">
+                               <a class="page-link" href="../company/com_list.do?page=${startPage-1 }">이전 <i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+                            </li>
+                           </c:if>
+                           
+                           <c:forEach var="i" begin="${startPage }" end="${endPage }">
+                            <li class="page-item ${i==curpage?'active':'' }"><a class="page-link" href="../company/com_list.do?page=${i }">${i }</a></li>
+                           </c:forEach>
+                           
+                           <c:if test="${endPage<totalpage }">
+                            <li class="page-item">
+                               <a class="page-link" href="../company/com_list.do?page=${endPage+1 }">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                            </li>
+                           </c:if>
+                       </ul>
+                   </nav>
+                   <div class="page-status">
+                       <p>Page ${curpage } of ${totalpage } results</p>
+                   </div>
+               </div>
+           </div>
            </div>
            </div>
            </section>
-      <!-- ################################################################################################ -->
-      <!-- ################################################################################################ -->
-      <nav class="pagination">
-        <ul>
-          <li><a href="#">&laquo; Previous</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">6</a></li>
-          <li class="current"><strong>7</strong></li>
-          <li><a href="#">8</a></li>
-          <li><a href="#">9</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">14</a></li>
-          <li><a href="#">15</a></li>
-          <li><a href="#">Next &raquo;</a></li>
-        </ul>
-      </nav>
-      <!-- ################################################################################################ -->
-    </div>
     <!-- ################################################################################################ -->
     <!-- / main body -->
     <div class="clear"></div>
