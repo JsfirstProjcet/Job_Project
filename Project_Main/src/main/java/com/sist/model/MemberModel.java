@@ -69,7 +69,7 @@ public class MemberModel {
 		return "redirect:../main/main.do";
 	}
 	@RequestMapping("member/login.do") 
-	public String member_login(HttpServletRequest request,HttpServletResponse response)
+	public String member_login(HttpServletRequest request,HttpServletResponse response) 
 	{
 		return "../member/login.jsp";
 	}
