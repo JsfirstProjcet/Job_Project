@@ -40,6 +40,15 @@
 Shadowbox.init({
     players:['iframe']
 })
+function login(){
+    Shadowbox.open({
+        content:'../member/login.do',
+        player:'iframe',
+        width:380,
+        height:290,
+        title:'로그인'
+    })	
+}
 $(function(){
 	//document.getElementById('login').addEventListener("click", function() {
 	$('#msgbar').text("");
@@ -84,23 +93,15 @@ $(function(){
 	        		}	
 	        	}
 	        })
-	      /*   
-	        $('#msgbar').text('email: '+email+',  password: '+pw)
-			sessionStorage.setItem("email",email)
-			if(id==='148cl0ud@gmail.com')
-			{
-				sessionStorage.setItem("admin",'y')
-			}	
-	        */ 
 		}
 	})
-	$('#logout').click(function(){
+/* 	$('#logout').click(function(){
 		location.href="../member/logout.do"
 	})
 	$('#signup').click(function(){
 		location.href="../member/join.do"
 	})
-
+ */
 })
 </script>
 <body>

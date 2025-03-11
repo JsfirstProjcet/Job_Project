@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 
 <link href="../css/style.css" rel="stylesheet">
 <link href="../css/responsive/responsive.css" rel="stylesheet">
+ -->
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
@@ -74,6 +76,20 @@ $(function(){
 </script>
 </head>
 <body>
+
+        <!-- Header End -->
+        <div class="container-xxl py-5 bg-dark page-header mb-5">
+            <div class="container my-5 pt-5 pb-4">
+                <h1 class="display-3 text-white mb-3 animated slideInDown">회원가입</h1>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb text-uppercase">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item text-white active" aria-current="page">회원가입</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <!-- Header End -->
     <!-- ****** Archive Area Start ****** -->
         <div class="container">
             <div class="row" style="width:100%;">

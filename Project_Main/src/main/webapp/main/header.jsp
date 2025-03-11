@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,8 +83,19 @@
 	                </div>
 	            </div>
 	        </div>
-	        <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Login</a>
-	    </div>
+ 		  	<c:if test="${sessionScope.id==null }">
+		        <div id="sign" class="navbar-nav ms-auto p-4 p-lg-0">
+			        <a href="javascript:login()" class="btn btn-primary">로그인</a>
+			        <a href="../member/join.do" class="btn btn-primary">회원가입</a>
+		        </div>
+			</c:if>
+	    	<c:if test="${sessionScope.id!=null }">
+		        <div class="navbar-nav ms-auto p-4 p-lg-0">
+			        ${sessionScope.name }${sessionScope.isadmin==1?"(관리자)":" 님" }
+			        <a href="../member/logout.do" class="btn btn-primary">로그아웃</a>
+		        </div>
+			</c:if>
+		</div>
 	</nav>
 	<!-- Navbar End -->
 

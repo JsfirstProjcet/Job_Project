@@ -10,38 +10,40 @@
 <script type="text/javascript">
 $(function(){
 	$('#logBtn').click(function(){
-		let id=$('#id').val()
-		if(id.trim()==="")
+		let email=$('#email').val()
+		if(email.trim()==="")
 		{
-			$('#id').focus()
+			$('#msg').text("이메일을 입력하세요")
+			$('#email').focus()
 			return
 		}	
 		
-        let pwd=$('#pwd').val()
-        if(pwd.trim()==="")
+        let pw=$('#pw').val()
+        if(pw.trim()==="")
         {
-            $('#pwd').focus()
+			$('#msg').text("비밀번호를 입력하세요")
+            $('#pw').focus()
             return
         }   
 	    
         $.ajax({
         	type:'post',
         	url:'../member/login_ok.do',
-        	data:{"id":id,"pwd":pwd},
+        	data:{"email":email,"pw":pw},
         	success:function(result){
         		// NOID, NOPWD, OK
         		if(result==='NOID')
         		{
-        			alert("아이디가 존재하지 않습니다")
-        			$('#id').val("")
-        			$('#pwd').val("")
-        			$('#id').focus()
+        			$('#msg').text("아이디가 존재하지 않습니다")
+        			$('#email').val("")
+        			$('#pw').val("")
+        			$('#email').focus()
         		}	
         		else if(result==='NOPWD')
         		{
-                    alert("비밀번호가 틀립니다")
-                    $('#pwd').val("")
-                    $('#pwd').focus()
+        			$('#msg').text("비밀번호가 틀립니다")
+                    $('#pw').val("")
+                    $('#pw').focus()
         		}	
         		else
         		{
@@ -51,29 +53,39 @@ $(function(){
         	}
         })
 	})
+	$('#canBtn').click(function(){
+		parent.Shadowbox.close()
+	})
 })
 </script>
 </head>
 <body>
     <div class="container" style="margin-top: 50px;">
-        <div class="row" style="width: 290px">
+        <div class="row" style="width: 340px">
             <table class="table">
                 <tr>
-                    <th width=20%>ID</th>
+                    <th width=20%>Email</th>
                     <td width=80%>
-                        <input type=text name="id" id="id" size=15 class="form-control-sm">
+                        <input type=text name="email" id="email" size=30 class="form-control-sm"
+                        	placeholder="이메일 입력">
                     </td>
                 </tr>
                 <tr>
                     <th width=15% class="text-center" style="color:gray">Password</th>
                     <td width=85%>
-                        <input type=password name="pwd" id="pwd" size=15 class="form-control-sm">
+                        <input type=password name="pw" id="pw" size=15 class="form-control-sm"
+                        	placeholder="비밀번호 입력">
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2" class="text-center">
                         <input type=button id="logBtn" class="btn-sm btn-success" value="로그인">
-                        <input type=button id="logBtn" class="btn-sm btn-info" value="취소">
+                        <input type=button id="canBtn" class="btn-sm btn-info" value="취소">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span id="msg" style="color:red"></span>
                     </td>
                 </tr>
             </table>
