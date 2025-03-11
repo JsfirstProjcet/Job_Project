@@ -8,6 +8,7 @@
   <typeAliases>
     <typeAlias type="com.sist.vo.CompanyVO" alias="CompanyVO"/>
     <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
+    <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/> 
   </typeAliases>
   <!-- 오라클 환경 설정 getConnection / disConnection-->
   <environments default="development">
@@ -25,5 +26,6 @@
   <mappers>
     <mapper resource="com/sist/mapper/company-mapper.xml"/>
     <mapper resource="com/sist/mapper/emp-mapper.xml"/>
+    <mapper resource="com/sist/mapper/member-mapper.xml"/>
   </mappers>
 </configuration>
