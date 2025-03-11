@@ -5,10 +5,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
+
+<!-- Favicon -->
+<link href="../img/favicon.ico" rel="icon">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+
+<!-- Icon Font Stylesheet -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+<link href="../lib/animate/animate.min.css" rel="stylesheet">
+<link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="../tcss/bootstrap.min.css" rel="stylesheet">
+
+<!-- Template Stylesheet -->
+<link href="../tcss/style.css" rel="stylesheet">
+
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript">
@@ -78,64 +103,32 @@ $(function(){
 
 })
 </script>
-</head>
 <body>
-	<div class="wrapper row0">
-	  <div id="topbar" class="hoc clear"> 
-	    <div class="fl_left">
-	      <ul class="nospace">
-	        <li><i class="fas fa-mobile-alt rgtspace-5"></i> +00 (123) 456 7890</li>
-	        <li><i class="far fa-envelope rgtspace-5"></i> info@domain.com</li>
-	      </ul>
-	    </div>
-	    <div style="display: flex; flex-direction: column; align-items: flex-end;">
-	    	<c:if test="${sessionScope.id==null }">
-	    	<div style="display: flex; align-items: center; gap: 5px;">
-			<input type="text" id="email" placeholder="이메일 입력" size=25 style="color:black;">
-			<input type="password" id="pw" placeholder="비밀번호 입력" size=12 style="color:black;">
-			<input type="button" value="로그인" id="login" class="btn-sm btn-success">
-			<input type="button" value="회원가입" id="signup" class="btn-sm btn-primary">
-			</div>
-			<div id="msgbar" style="color: red; font-size: 14px; text-align: left; width: 500px;"></div>
-			</c:if>
-	    	<c:if test="${sessionScope.id!=null }">
-			<div style="display: flex; align-items: center; gap: 5px;">
-	    	${sessionScope.name }${sessionScope.isadmin==1?"(관리자)":"" } 님이 로그인 되었습니다.&nbsp;&nbsp;
-			<input type="button" value="로그아웃" id="logout" class="btn-sm btn-success">
-			</c:if>
-			</div>
-<!-- 
-	      <ul class="nospace">
-	        <li><a href="#"><i class="fas fa-home"></i></a></li>
-	        <li><a href="#" title="Help Centre"><i class="far fa-life-ring"></i></a></li>
-	        <li><a href="#" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
-	        <li><a href="#" title="Sign Up"><i class="fas fa-edit"></i></a></li>
-	        <li id="searchform">
-	          <div>
-	            <form action="#" method="post">
-	              <fieldset>
-	                <legend>Quick Search:</legend>
-	                <input type="text" placeholder="Enter search term&hellip;">
-	                <button type="submit"><i class="fas fa-search"></i></button>
-	              </fieldset>
-	            </form>
-	          </div>
-	        </li>
-	      </ul>
- -->
-	    </div>
-	  </div>
-	</div>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
 		
-	<jsp:include page="../main/header.jsp"></jsp:include>
+		<jsp:include page="../main/header.jsp"/>
+		
+        <jsp:include page="${main_jsp }"/>
+        
+        <jsp:include page="../main/footer.jsp"/>
+    </div>
 
-	<jsp:include page="${main_jsp }"></jsp:include>
-	
-	<jsp:include page="../main/footer.jsp"></jsp:include>
-	
-	<!-- JAVASCRIPTS -->
-	<script src="../layout/scripts/jquery.min.js"></script>
-	<script src="../layout/scripts/jquery.backtotop.js"></script>
-	<script src="../layout/scripts/jquery.mobilemenu.js"></script>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../js/main.js"></script>
 </body>
 </html>
