@@ -23,8 +23,15 @@ public class CompanyDAO {
 	public static List<CompanyVO> companyListData(Map map)
 	{
 		SqlSession session=ssf.openSession();
-		List<CompanyVO> list=session.selectOne("companyListData");
+		List<CompanyVO> list=session.selectList("companyListData",map);
 		session.close();
 		return list;
+	}
+	public static int companyTotalPage()
+	{
+		SqlSession session=ssf.openSession();
+		int total=session.selectOne("companyTotalPage");
+		session.close();
+		return total;
 	}
 }
