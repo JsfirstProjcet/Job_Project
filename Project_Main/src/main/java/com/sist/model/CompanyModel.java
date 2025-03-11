@@ -44,15 +44,15 @@ public class CompanyModel {
 	@RequestMapping("company/com_detail_before.do")
 	public String com_detail_before(HttpServletRequest request,HttpServletResponse response)
 	{
-		String cid=request.getParameter("cid_int");
-		Cookie cookie=new Cookie("com_"+cid, cid);
+		String cno=request.getParameter("cno");
+		Cookie cookie=new Cookie("com_"+cno, cno);
 		cookie.setPath("/");
 		cookie.setMaxAge(60*60*24);
 		// 전송	 
 		response.addCookie(cookie);
   
 		// 화면 이동 
-		return "redirect:com_detail.do?cid="+cid;
+		return "redirect:com_detail.do?cno="+cno;
 	}
 	@RequestMapping("company/com_detail.do")
 	public String com_detail(HttpServletRequest request, HttpServletResponse response) {

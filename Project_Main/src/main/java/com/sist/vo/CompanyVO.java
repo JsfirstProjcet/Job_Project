@@ -3,12 +3,38 @@ package com.sist.vo;
 import java.util.*;
 
 public class CompanyVO {
-	private int ecount,take;
+	private int ecount,take,cno,fo_count;
 	private String cid,name,introduction,c_type,industry,
 				representative,homepage,bu_details,address,history,
-				access_key,poster,sample; 
+				access_key,poster,sample,dbesterdate; 
 	private Date estdate;
+	private OfficialVO vo=new OfficialVO();
 	
+	
+	public int getFo_count() {
+		return fo_count;
+	}
+	public void setFo_count(int fo_count) {
+		this.fo_count = fo_count;
+	}
+	public String getDbesterdate() {
+		return dbesterdate;
+	}
+	public void setDbesterdate(String dbesterdate) {
+		this.dbesterdate = dbesterdate;
+	}
+	public OfficialVO getVo() {
+		return vo;
+	}
+	public void setVo(OfficialVO vo) {
+		this.vo = vo;
+	}
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public Date getEstdate() {
 		return estdate;
 	}

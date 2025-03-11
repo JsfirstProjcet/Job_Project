@@ -7,9 +7,9 @@
 		WHERE rownum&lt;=1
 	</select>
 	<select id="companyListData" resultType="CompanyVO" parameterType="hashmap">
-	   SELECT TO_NUMBER(SUBSTR(cid, 2)) AS cid_int,name,poster,estdate,c_type,ecount,address,num
-	   FROM (SELECT cid,name,poster,estdate,c_type,ecount,address,rownum as num 
-	   FROM (SELECT /*+ INDEX_ASC(company company_list_seq)*/cid,name,poster,estdate,c_type,ecount,address
+	   SELECT cno,name,poster,estdate,c_type,ecount,address,num
+	   FROM (SELECT cno,name,poster,estdate,c_type,ecount,address,rownum as num 
+	   FROM (SELECT /*+ INDEX_ASC(company company_list_seq)*/cno,name,poster,estdate,c_type,ecount,address
 	   FROM company))
 	   WHERE num BETWEEN #{start} AND #{end}
 	</select>

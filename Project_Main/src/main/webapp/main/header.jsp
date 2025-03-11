@@ -31,7 +31,7 @@
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업</a>
 	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="../company/com_find.do" class="dropdown-item">기업 목록</a>
+	                    <a href="../company/com_list.do" class="dropdown-item">기업 목록</a>
 	                    <a href="../company/com_find.do" class="dropdown-item">기업 검색</a>
 	                </div>
 	            </div>

@@ -3,10 +3,29 @@ package com.sist.vo;
 import java.util.*;
 
 public class EmpVO {
-	private int eno,salary,education,hit;
+	private int eno,salary,education,hit,fo_count,se_count;
 	private String name,title,personal_history,loc,emp_type,cid,content;
 	private Date regdate,deadline;
+	private CompanyVO vo=new CompanyVO();
 	
+	public int getFo_count() {
+		return fo_count;
+	}
+	public void setFo_count(int fo_count) {
+		this.fo_count = fo_count;
+	}
+	public int getSe_count() {
+		return se_count;
+	}
+	public void setSe_count(int se_count) {
+		this.se_count = se_count;
+	}
+	public CompanyVO getVo() {
+		return vo;
+	}
+	public void setVo(CompanyVO vo) {
+		this.vo = vo;
+	}
 	public String getContent() {
 		return content;
 	}
