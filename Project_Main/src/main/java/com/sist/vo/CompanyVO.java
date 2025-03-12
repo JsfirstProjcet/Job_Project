@@ -3,25 +3,37 @@ package com.sist.vo;
 import java.util.*;
 
 public class CompanyVO {
-	private int ecount,take,cno,fo_count;
+	private int ecount,take,cno,fo_count,jo,uk,man;
 	private String cid,name,introduction,c_type,industry,
 				representative,homepage,bu_details,address,history,
-				access_key,poster,sample,dbesterdate; 
+				access_key,poster,sample,dbestdate;
 	private Date estdate;
 	private OfficialVO vo=new OfficialVO();
 	
 	
+	public int getJo() {
+		return jo;
+	}
+	public void setJo(int jo) {
+		this.jo = jo;
+	}
+	public int getUk() {
+		return uk;
+	}
+	public void setUk(int uk) {
+		this.uk = uk;
+	}
+	public int getMan() {
+		return man;
+	}
+	public void setMan(int man) {
+		this.man = man;
+	}
 	public int getFo_count() {
 		return fo_count;
 	}
 	public void setFo_count(int fo_count) {
 		this.fo_count = fo_count;
-	}
-	public String getDbesterdate() {
-		return dbesterdate;
-	}
-	public void setDbesterdate(String dbesterdate) {
-		this.dbesterdate = dbesterdate;
 	}
 	public OfficialVO getVo() {
 		return vo;
@@ -40,6 +52,12 @@ public class CompanyVO {
 	}
 	public void setEstdate(Date estdate) {
 		this.estdate = estdate;
+	}
+	public String getDbestdate() {
+		return dbestdate;
+	}
+	public void setDbestdate(String dbestdate) {
+		this.dbestdate = dbestdate;
 	}
 	public int getEcount() {
 		return ecount;

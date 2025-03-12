@@ -16,4 +16,31 @@
 	<select id="companyTotalPage" resultType="int">
 	   SELECT CEIL(COUNT(*)/12.0) FROM company
 	</select>
+	<!-- 기업 상세보기 -->
+	<select id="comDetailData" resultType="CompanyVO" parameterType="int">
+		SELECT cid,name,introduction,TO_CHAR(estdate,'YYYY-MM-DD') as dbestdate,c_type,ecount,
+		TRUNC(take/1000000000000) as jo,
+		TRUNC(MOD(take,1000000000000)/100000000) as uk,
+		TRUNC(MOD(take,100000000)/10000) as man,
+		industry,representative,homepage,bu_details,address,history,access_key,poster,sample,fo_count,cno
+		FROM company
+		WHERE cno=#{cno}
+	</select>
+	<!-- 기업 복지 -->
+	<select id="comDetailWelfareData" resultType="WelfareVO" parameterType="String">
+		SELECT w.*
+		FROM welfare w,com_welfare c
+		WHERE w.wno=c.wno
+		AND cid=#{cid}
+	</select>
+	<!-- 기업 복지 태그 -->
+	<select id="comDetailWelfareTag" resultType="WelfareVO" parameterType="String">
+		SELECT *
+		FROM welfare
+		WHERE wno IN(
+			SELECT distinct w.wno2
+		    FROM welfare w,com_welfare c
+		    WHERE w.wno=c.wno
+		    AND cid=#{cid})
+	</select>
 </mapper>

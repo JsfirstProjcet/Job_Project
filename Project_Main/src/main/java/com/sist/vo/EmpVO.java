@@ -4,7 +4,19 @@ import java.util.*;
 
 public class EmpVO {
 	private int eno,salary,education,hit,fo_count,se_count;
-	private String name,title,personal_history,loc,emp_type,cid,content;
+	private String name,title,personal_history,loc,emp_type,cid,content,dbregdate,dbdeadline;
+	public String getDbregdate() {
+		return dbregdate;
+	}
+	public void setDbregdate(String dbregdate) {
+		this.dbregdate = dbregdate;
+	}
+	public String getDbdeadline() {
+		return dbdeadline;
+	}
+	public void setDbdeadline(String dbdeadline) {
+		this.dbdeadline = dbdeadline;
+	}
 	private Date regdate,deadline;
 	private CompanyVO vo=new CompanyVO();
 	
