@@ -11,7 +11,7 @@
 
 	<!-- Navbar Start -->
 	<nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
-	    <a href="index.html" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
+	    <a href="../main/main.do" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
 	        <h1 class="m-0 text-primary">JobEntry</h1>
 	    </a>
 	    <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -45,6 +45,15 @@
 	                </div>
 	            </div>
 	            <div class="nav-item dropdown">
+	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업페이지</a>
+	                <div class="dropdown-menu rounded-0 m-0">
+	                    <a href="#" class="dropdown-item">MyCompany</a>
+	                    <a href="#" class="dropdown-item">등록한 공고</a>
+	                    <a href="#" class="dropdown-item">지원자</a>
+	                </div>
+	            </div>
+	            <c:if test="${sessionScope.id!=null and sessionScope.isadmin==0 }">
+	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">마이페이지</a>
 	                <div class="dropdown-menu rounded-0 m-0">
 	                    <a href="#l" class="dropdown-item">My</a>
@@ -54,14 +63,8 @@
 	                    <a href="#l" class="dropdown-item">멤버십/결제</a>
 	                </div>
 	            </div>
-	            <div class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업페이지</a>
-	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="#" class="dropdown-item">MyCompany</a>
-	                    <a href="#" class="dropdown-item">등록한 공고</a>
-	                    <a href="#" class="dropdown-item">지원자</a>
-	                </div>
-	            </div>
+	            </c:if>
+	            <c:if test="${sessionScope.id!=null and sessionScope.isadmin==1 }">
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">관리자페이지</a>
 	                <div class="dropdown-menu rounded-0 m-0">
@@ -70,6 +73,7 @@
 	                    <a href="" class="dropdown-item"></a>
 	                </div>
 	            </div>
+	            </c:if>
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">샘플페이지</a>
 	                <div class="dropdown-menu rounded-0 m-0">
