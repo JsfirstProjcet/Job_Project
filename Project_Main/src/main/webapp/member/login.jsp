@@ -72,7 +72,7 @@ $(function(){
 </head>
 <body>
 
-            
+              <div style="margin: 5px;">
                 <!-- 탭 메뉴 -->
                 <ul class="nav nav-tabs" id="loginTabs">
                     <li class="nav-item">
@@ -116,6 +116,7 @@ $(function(){
                     </div>
                 </div>
  	            <div id="msg" style="color:red"></div>
+ 	          </div>  
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
