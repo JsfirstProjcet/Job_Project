@@ -74,7 +74,7 @@ public class OfficialModel {
 		if(vo.getMsg().equals("OK"))
 		{
 			HttpSession session=request.getSession();
-			session.setAttribute("id", vo.getCid());
+			session.setAttribute("cid", vo.getCid()); 
 			session.setAttribute("name", vo.getName());
 			session.setAttribute("email", email);
 			session.setAttribute("state", vo.getState());
