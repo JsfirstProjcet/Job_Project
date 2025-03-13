@@ -9,7 +9,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
-<title>Insert title here</title>
+<title>JobEntry 프로젝트</title>
 <link rel="stylesheet" href="../shadow/css/shadowbox.css">
 
 <!-- Favicon -->

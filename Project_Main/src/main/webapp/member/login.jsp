@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko"> 
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +15,8 @@
 <script type="text/javascript">
 $(function(){
 	$('.login').click(function(){
-		let email = $(this).closest('div').find('input[name="email"]').val();  // 이메일
+        let activeTab=$('#loginTabs .nav-link.active').attr('data-bs-target'); // 현재 활성화된 탭
+        let email=$(activeTab).find('input[name="email"]').val(); // 이메일
 		if(email.trim()==="")
 		{
 			$('#msg').html("&nbsp;<i class='bi bi-exclamation-triangle'></i>&nbsp;이메일을 입력하세요")
@@ -23,7 +24,7 @@ $(function(){
 			return
 		}	
 		
-	    let pw = $(this).closest('div').find('input[name="pw"]').val();  // 비밀번호
+        let pw = $(activeTab).find('input[name="pw"]').val(); // 비밀번호
 	    if(pw.trim()==="")
 	    {
 			$('#msg').html("&nbsp;<i class='bi bi-exclamation-triangle'></i>&nbsp;비밀번호를 입력하세요")
@@ -31,9 +32,8 @@ $(function(){
 	        return
 	    }   
 	    
-		let gubun=$(this).attr('gubun')
-		let url=(gubun === 'p') ? '../personal/login_ok.do' : (gubun === 'c') ? '../official/login_ok.do' : '';
-	    $.ajax({
+		let url = (activeTab === '#personalTab') ? '../personal/login_ok.do' : '../official/login_ok.do';
+		$.ajax({
 	    	type:'post',
 	    	url:url,
 	    	data:{"email":email,"pw":pw},
@@ -97,7 +97,7 @@ $(function(){
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <button id=personal type="button" class="login btn btn-primary w-100" gubun='p'>로그인</button>
+                            <button type="button" class="login btn btn-primary w-100">로그인</button>
                     </div>
 
                     <!-- 기업회원 -->
@@ -112,7 +112,7 @@ $(function(){
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
-                            <button type="submit" class="login btn btn-primary w-100" gubun='c'>로그인</button>
+                            <button type="button" class="login btn btn-primary w-100">로그인</button>
                     </div>
                 </div>
  	            <div id="msg" style="color:red"></div>
