@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>       
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +32,7 @@
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업</a>
 	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="../company/com_list.do" class="dropdown-item">기업 목록</a>
+	                    <a href="../company/com_find.do" class="dropdown-item">기업 목록</a>
 	                    <a href="../company/com_find.do" class="dropdown-item">기업 검색</a>
 	                </div>
 	            </div>
@@ -83,19 +83,22 @@
 	                </div>
 	            </div>
 	        </div>
+<!-- 
+	        <div id="sign" class="d-lg-block" style="width: 200px;display: flex;flex-direction: row; gap: 5px;">
+ -->
  		  	<c:if test="${sessionScope.id==null }">
 		        <div id="sign" class="navbar-nav ms-auto p-4 p-lg-0">
 			        <a href="javascript:login()" class="btn btn-primary">로그인</a>
-			        <a href="../member/join.do" class="btn btn-primary">회원가입</a>
+			        <a href="../personal/join.do" class="btn btn-primary">회원가입</a>
 		        </div>
 			</c:if>
 	    	<c:if test="${sessionScope.id!=null }">
 		        <div class="navbar-nav ms-auto p-4 p-lg-0">
 			        ${sessionScope.name }${sessionScope.isadmin==1?"(관리자)":" 님" }
-			        <a href="../member/logout.do" class="btn btn-primary">로그아웃</a>
+			        <a href="../personal/logout.do" class="btn btn-primary">로그아웃</a>
 		        </div>
 			</c:if>
-		</div>
+	    </div>
 	</nav>
 	<!-- Navbar End -->
 

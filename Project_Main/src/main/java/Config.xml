@@ -8,7 +8,7 @@
   <typeAliases>
     <typeAlias type="com.sist.vo.CompanyVO" alias="CompanyVO"/>
     <typeAlias type="com.sist.vo.EmpVO" alias="EmpVO"/>
-    <typeAlias type="com.sist.vo.MemberVO" alias="MemberVO"/> 
+    <typeAlias type="com.sist.vo.PersonalVO" alias="PersonalVO"/> 
     <typeAlias type="com.sist.vo.OfficialVO" alias="OfficialVO"/> 
     <typeAlias type="com.sist.vo.WelfareVO" alias="WelfareVO"/> 
   </typeAliases>
@@ -28,6 +28,7 @@
   <mappers>
     <mapper resource="com/sist/mapper/company-mapper.xml"/>
     <mapper resource="com/sist/mapper/emp-mapper.xml"/>
-    <mapper resource="com/sist/mapper/member-mapper.xml"/>
+    <mapper resource="com/sist/mapper/personal-mapper.xml"/>
+    <mapper resource="com/sist/mapper/official-mapper.xml"/>
   </mappers>
 </configuration>

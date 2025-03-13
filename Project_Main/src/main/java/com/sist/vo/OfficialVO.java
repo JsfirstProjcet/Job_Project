@@ -3,6 +3,7 @@ package com.sist.vo;
 import lombok.Data;
 
 /*
+ * 
 CID        NOT NULL VARCHAR2(10)  
 PW         NOT NULL VARCHAR2(10)  
 EMAIL      NOT NULL VARCHAR2(30)  
@@ -15,6 +16,6 @@ ACCESS_KEY          VARCHAR2(100)
  */
 @Data
 public class OfficialVO {
-	private String cid,pw,email,cname,name,phone,brnumber,access_key;
 	private int state;
+	private String cid,pw,email,cname,name,phone,brnumber,access_key,msg;
 }
