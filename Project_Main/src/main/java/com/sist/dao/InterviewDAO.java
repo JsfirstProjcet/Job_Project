@@ -118,4 +118,33 @@ public class InterviewDAO {
 	    session.close();
 	    return list;
 	}
+	
+	/*
+	 * 
+	 * <select id="interviewSearch" resultType="interviewVO" parameterType="string">
+		SELECT ino,title,company,department,name
+		FROM INTERVIEW
+		WHERE title LIKE '%' || #{search} || '%'
+		OR name LIKE '%' || #{search} || '%'
+		OR company LIKE '%' || #{search} || '%'
+		OR department LIKE '%' || #{search} || '%'
+		</select>
+	 */
+	
+	public static List<InterviewVO> interviewSearch(String search){
+		
+		SqlSession session=null;
+		List<InterviewVO> list=null;
+		try {
+			 session=ssf.openSession();
+			 list=session.selectList("interviewSearch",search);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
 }

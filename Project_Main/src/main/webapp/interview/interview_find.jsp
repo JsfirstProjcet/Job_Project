@@ -1,20 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%-- <c:choose>
-	<c:when test="${mode==2 }">
-		<c:set var="title" value="IT개발·데이터" />
-	</c:when>
-	<c:when test="${mode==3 }">
-		<c:set var="title" value="회계·세무·재무" />
-	</c:when>
-	<c:when test="${mode==3 }">
-		<c:set var="title" value="총무·법무·사무" />
-	</c:when>
-	<c:when test="${mode==4 }">
-		<c:set var="title" value="인사·노무·HRD" />
-	</c:when>
-</c:choose> --%>
+
 <!DOCTYPE html>
 <!--
 Template Name: Spourmo
@@ -244,7 +231,12 @@ Licence URI: https://www.os-templates.com/template-terms
 				<div id="gallery">
 					<figure>
 						<header class="heading"></header>
+						<c:if test="${empty key }">
 						<h2>현직자 인터뷰 | ${category[mode-1] }</h2>
+						</c:if>
+						<c:if test="${not empty key}">
+						<h2>현직자 인터뷰 | ${key }</h2>
+						</c:if>
 					        <div class="category-box">
 							    <c:forEach var="cate" items="${category}" varStatus="status">
 							        <a href="../interview/interview_find.do?mode=${status.count}">
@@ -255,8 +247,11 @@ Licence URI: https://www.os-templates.com/template-terms
 							
 							
 	                <div class="position-relative ms-auto" style="max-width: 400px; height: 35px; margin: 0 150px 40px 0;">
-	                    <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="제목 또는 기업명으로 검색하세요">
-	                    <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">검색</button>
+	                	<form action="../interview/interview_find.do" method="post">
+		                    <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" 
+		                    placeholder="제목 또는 기업명으로 검색하세요" name="search" value="${key }">
+		                    <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">검색</button>
+	                    </form>
 	                </div>
 	                
 						<ul class="nospace clear">

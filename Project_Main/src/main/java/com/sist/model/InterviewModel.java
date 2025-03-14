@@ -107,7 +107,13 @@ public class InterviewModel {
 		}
 		List<InterviewVO> list;
 		
-		if(mode.equals("1")) {
+		String key=request.getParameter("search");
+		System.out.println(key);
+		
+		if(key != null) {
+			list=InterviewDAO.interviewSearch(key);
+			System.out.println("통과");
+		}else if(mode.equals("1")) {
 			list = InterviewDAO.interviewAll();
 		}else {
 			list = InterviewDAO.interviewFindData(Integer.parseInt(mode));
@@ -129,9 +135,11 @@ public class InterviewModel {
 		request.setAttribute("category", category);
 		request.setAttribute("list", list);
 		request.setAttribute("mode", mode);
-
+		request.setAttribute("key", key);
+		
 		request.setAttribute("main_jsp", "../interview/interview_find.jsp");
 		return "../main/main.jsp";
 	}
+	
 	
 }

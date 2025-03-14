@@ -10,7 +10,7 @@
 		FROM INTERVIEW))
 		WHERE NUM BETWEEN #{start} AND #{end}
 	</select>
-	 
+	
 	<select id="interviewTotalPage" resultType="int"> 
 			SELECT CEIL(COUNT(*)/12.0) FROM INTERVIEW
 	</select>
@@ -51,6 +51,15 @@
            TO_CHAR(idate, 'YY-MM-DD') AS idate, hit, poster
     FROM INTERVIEW
     ORDER BY ino ASC
+	</select>
+	
+	<select id="interviewSearch" resultType="interviewVO" parameterType="string">
+		SELECT ino,title,sub_title,company,department,name,TO_CHAR(idate, 'YY-MM-DD') AS idate,hit,poster
+		FROM INTERVIEW
+		WHERE title LIKE '%' || #{search} || '%'
+		OR name LIKE '%' || #{search} || '%'
+		OR company LIKE '%' || #{search} || '%'
+		OR department LIKE '%' || #{search} || '%'
 	</select>
 </mapper>
 
