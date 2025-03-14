@@ -88,21 +88,23 @@
 	                </div>
 	            </div>
 	        </div>
-<!-- 
-	        <div id="sign" class="d-lg-block" style="width: 200px;display: flex;flex-direction: row; gap: 5px;">
- -->
- 		  	<c:if test="${sessionScope.email==null }">
-		        <div id="sign" class="navbar-nav ms-auto p-4 p-lg-0">
-			        <a href="javascript:login()" class="btn btn-primary">로그인</a>
-			        <a href="../personal/join.do" class="btn btn-primary">회원가입</a>
-		        </div>
-			</c:if>
-	    	<c:if test="${sessionScope.email!=null }">
-		        <div class="navbar-nav ms-auto p-4 p-lg-0">
-			        ${sessionScope.name }${sessionScope.isadmin==1?"(관리자)":" 님" }
-			        <a href="../personal/logout.do" class="btn btn-primary">로그아웃</a>
-		        </div>
-			</c:if>
+	        <div id="sign" class="d-lg-block">
+	 		  	<c:if test="${sessionScope.email==null }">
+			        <div id="sign" class="navbar-nav ms-auto p-4 p-lg-0">
+				        <a href="javascript:login()" class="btn btn-primary px-4 d-flex align-items-center">로그인</a>
+				        <a href="../personal/join.do" class="btn btn-primary px-4 d-flex align-items-center">회원가입</a>
+			        </div>
+				</c:if>
+		    	<c:if test="${sessionScope.email!=null }">
+			        <div class="navbar-nav ms-auto p-4 p-lg-0 d-flex align-items-center">
+				        <div class="btn btn-outline-primary text-center me-3 px-3 py-2">
+			                <span class="d-block fw-bold"><b>${sessionScope.name}</b></span>
+			                <span class="d-block small text-muted">${sessionScope.isadmin==1 ? "(관리자)" : "님"}</span>
+			            </div>
+				        <a href="../personal/logout.do" class="btn btn-primary px-4 d-flex align-items-center">로그아웃</a>
+			        </div>
+				</c:if>
+		    </div>
 	    </div>
 	</nav>
 	<!-- Navbar End -->
