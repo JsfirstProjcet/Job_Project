@@ -66,8 +66,10 @@ public class EmpModel {
 	@RequestMapping("emp/emp_detail.do")
 	public String emp_detail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../emp/emp_detail.jsp");
-		String eno=request.getParameter("eno");
+		String eno=request.getParameter("no");
+		EmpVO vo=EmpDAO.empDetailData(Integer.parseInt(eno));
 		
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../emp/emp_detail.jsp");
 		return "../main/main.jsp";
 	}

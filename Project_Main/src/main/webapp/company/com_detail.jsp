@@ -64,7 +64,7 @@ $(function(){
                     	</div>
                     	<div class="row mt-5">
                    			<c:if test="${vo.industry!=null }">
-	                    		<div class="row col-6">
+	                    		<div class="row col-6 mt-3">
 	                    			<div class="col-3">
 	                    				업종
 	                    			</div>
@@ -72,7 +72,7 @@ $(function(){
 	                    		</div>
                    			</c:if>
                    			<c:if test="${vo.representative!=null }">
-	                    		<div class="row col-6">
+	                    		<div class="row col-6 mt-3">
 	                    			<div class="col-3">
 	                    				대표자명
 	                    			</div>
@@ -80,7 +80,7 @@ $(function(){
 	                    		</div>
                    			</c:if>
                    			<c:if test="${vo.homepage!=null }">
-	                    		<div class="row col-6">
+	                    		<div class="row col-6 mt-3">
 	                    			<div class="col-3">
 	                    				홈페이지
 	                    			</div>
@@ -88,7 +88,7 @@ $(function(){
 	                    		</div>
                    			</c:if>
                    			<c:if test="${vo.bu_details!=null }">
-	                    		<div class="row col-6">
+	                    		<div class="row col-6 mt-3">
 	                    			<div class="col-3">
 	                    				사업내용
 	                    			</div>
@@ -96,7 +96,7 @@ $(function(){
 	                    		</div>
                    			</c:if>
                    			<c:if test="${vo.address!=null }">
-		                   		<div class="row col-6">
+		                   		<div class="row col-6 mt-3">
 		                   			<div class="col-3">
 		                   				주소
 		                   			</div>

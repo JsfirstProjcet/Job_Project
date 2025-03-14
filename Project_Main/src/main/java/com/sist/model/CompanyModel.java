@@ -112,6 +112,7 @@ public class CompanyModel {
 		request.setAttribute("cList", cList);
 		request.setAttribute("wList", wList);
 		request.setAttribute("wTag", wTag);
+		request.setAttribute("com_title", "기업 상세");
 		request.setAttribute("com_jsp", "../company/com_detail.jsp");
 		request.setAttribute("main_jsp", "../company/com_main.jsp");
 		return "../main/main.jsp";
@@ -122,6 +123,7 @@ public class CompanyModel {
 		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
 		
 		request.setAttribute("vo", vo);
+		request.setAttribute("com_title", "공고 목록");
 		request.setAttribute("com_jsp", "../company/com_emp_list.jsp");
 		request.setAttribute("main_jsp", "../company/com_main.jsp");
 		return "../main/main.jsp";

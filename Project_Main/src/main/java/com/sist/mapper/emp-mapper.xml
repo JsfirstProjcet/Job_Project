@@ -117,4 +117,9 @@
 			</when>
 		</choose>
 	</select>
+	<select id="empDetailData" resultType="EmpVO" parameterType="int">
+		SELECT e.*
+		FROM employment e
+		WHERE eno=#{eno}
+	</select>
 </mapper>

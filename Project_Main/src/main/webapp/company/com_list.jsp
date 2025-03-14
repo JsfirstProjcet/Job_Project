@@ -18,12 +18,6 @@
                     <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
                         <li class="nav-item">
                             <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 
-                                 <c:choose>
-                                     <c:when test="${tab == 'all'}">active</c:when>
-                                     <c:otherwise></c:otherwise>
-                                 </c:choose>"
-                                  href="?tab=all">
-                                 <h6 class="mt-n1 mb-0">전체</h6>
                                 <c:choose>
                                     <c:when test="${tab == 'all'}">active</c:when>
                                     <c:otherwise></c:otherwise>

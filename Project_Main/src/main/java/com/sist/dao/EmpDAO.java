@@ -43,6 +43,14 @@ public class EmpDAO {
 		session.close();
 		return total;
 	}
+	public static EmpVO empDetailData(int no)
+	{
+		SqlSession session=ssf.openSession();
+		EmpVO vo=session.selectOne("empDetailData",no);
+		session.close();
+		return vo;
+	}
+	
 	//////////////////////////////////////// 기업
 	public static List<EmpVO> empComListData(Map map) {
 		SqlSession session = null;
