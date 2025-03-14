@@ -1,6 +1,11 @@
 package com.sist.model;
 
+import java.io.PrintWriter;
 import java.util.*;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 
@@ -63,8 +68,10 @@ public class CompanyModel {
 		
 		String cno=request.getParameter("cno");
 		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
-		String str=vo.getIntroduction().replaceAll("\\.", ".<br>");
-		vo.setIntroduction(str);
+		if(vo.getIntroduction()!=null) {
+			String str=vo.getIntroduction().replaceAll("다\\.", "다.<br>");
+			vo.setIntroduction(str);
+		}
 		String[] history= {};
 		List<String> hList=new ArrayList<String>();
 		List<String> yList=new ArrayList<String>();
@@ -99,10 +106,82 @@ public class CompanyModel {
 		request.setAttribute("main_jsp", "../company/com_main.jsp");
 		return "../main/main.jsp";
 	}
-	@RequestMapping("com/map.do")
-	public String com_map(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping("company/com_emp_list.do")
+	public String com_emp_list(HttpServletRequest request, HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
 		
-		return "../company/com_map.jsp";
+		request.setAttribute("vo", vo);
+		request.setAttribute("com_jsp", "../company/com_emp_list.jsp");
+		request.setAttribute("main_jsp", "../company/com_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("company/com_emp_list_print.do")
+	public void com_emp_list_print(HttpServletRequest request, HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		String type=request.getParameter("type");
+		String ph=request.getParameter("ph");
+		String page=request.getParameter("page");
+		if(page==null) page="1";
+		int curpage=Integer.parseInt(page);
+		
+		Map map=new HashMap();
+		map.put("cno", Integer.parseInt(cno));
+		map.put("type", type);
+		map.put("ph", ph);
+		map.put("start",(curpage*5)-4);
+		map.put("end",curpage*5);
+		
+		List<EmpVO> list=EmpDAO.empComListData(map);
+		
+		int count=EmpDAO.empComCount(curpage);
+		int totalpage=(int)(Math.ceil(count/5.0));
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		
+		if(endPage>totalpage) endPage=totalpage;
+		
+		for(EmpVO vo:list) {
+			int d=vo.getDtype();
+			if(d==0) {
+				vo.setDbdeadline("D-day");
+			}else if(d<=7) {
+				vo.setDbdeadline("D-"+d);
+			}
+		}
+		
+		// JSON변경
+		JSONArray arr=new JSONArray();
+		//eno,name,title,personal_history,loc,emp_type,hit,dbregdate,dbdeadline,fo_count,se_count,dtype,rtype
+		for(EmpVO vo:list) {
+			JSONObject obj=new JSONObject();
+			obj.put("eno", vo.getEno());
+			obj.put("name", vo.getName());
+			obj.put("title", vo.getTitle());
+			obj.put("personal_history", vo.getPersonal_history());
+			obj.put("loc", vo.getLoc());
+			obj.put("emp_type", vo.getEmp_type());
+			obj.put("hit", vo.getHit());
+			obj.put("dbregdate", vo.getDbregdate());
+			obj.put("dbdeadline", vo.getDbdeadline());
+			obj.put("fo_count", vo.getFo_count());
+			obj.put("se_count", vo.getSe_count());
+			if(arr.size()==0) {
+				obj.put("curpage",curpage);
+				obj.put("totalpage",totalpage);
+				obj.put("startPage",startPage);
+				obj.put("endPage",endPage);
+			}
+			arr.add(obj);
+		}
+		// 전송
+		try {
+			response.setContentType("text/plain;charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.write(arr.toJSONString());
+		} catch (Exception e) {}
 	}
 	@RequestMapping("company/com_find.do")
 	public String com_find(HttpServletRequest request, HttpServletResponse response) {

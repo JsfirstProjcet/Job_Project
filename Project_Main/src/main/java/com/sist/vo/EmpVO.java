@@ -3,8 +3,23 @@ package com.sist.vo;
 import java.util.*;
 
 public class EmpVO {
-	private int eno,salary,education,hit,fo_count,se_count;
+	private int eno,salary,education,hit,fo_count,se_count,rtype,dtype;
 	private String name,title,personal_history,loc,emp_type,cid,content,dbregdate,dbdeadline;
+	private Date regdate,deadline;
+	private CompanyVO cvo=new CompanyVO();
+	
+	public int getRtype() {
+		return rtype;
+	}
+	public void setRtype(int rtype) {
+		this.rtype = rtype;
+	}
+	public int getDtype() {
+		return dtype;
+	}
+	public void setDtype(int dtype) {
+		this.dtype = dtype;
+	}
 	public String getDbregdate() {
 		return dbregdate;
 	}
@@ -17,9 +32,6 @@ public class EmpVO {
 	public void setDbdeadline(String dbdeadline) {
 		this.dbdeadline = dbdeadline;
 	}
-	private Date regdate,deadline;
-	private CompanyVO vo=new CompanyVO();
-	
 	public int getFo_count() {
 		return fo_count;
 	}
@@ -32,11 +44,11 @@ public class EmpVO {
 	public void setSe_count(int se_count) {
 		this.se_count = se_count;
 	}
-	public CompanyVO getVo() {
-		return vo;
+	public CompanyVO getCvo() {
+		return cvo;
 	}
-	public void setVo(CompanyVO vo) {
-		this.vo = vo;
+	public void setCvo(CompanyVO cvo) {
+		this.cvo = cvo;
 	}
 	public String getContent() {
 		return content;

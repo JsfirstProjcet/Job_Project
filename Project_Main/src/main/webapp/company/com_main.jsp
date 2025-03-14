@@ -29,7 +29,7 @@
 				<jsp:include page="../company/com_menu.jsp"/>
 			</div>
 			<div class="col-9">
-				<jsp:include page="../company/com_detail.jsp"/>
+				<jsp:include page="${com_jsp}"/>
 			</div>
 		</div>
 	</div>
