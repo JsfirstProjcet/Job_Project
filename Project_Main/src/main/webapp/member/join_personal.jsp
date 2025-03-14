@@ -74,12 +74,17 @@ $(function(){
           <!-- 비밀번호 -->
           <div class="mb-3 row">
             <label class="col-sm-2 col-form-label text-end">비밀번호</label>
-            <div class="col-sm-5">
-              <input type="password" name="pw" id="pwd1_pr" class="form-control" placeholder="비밀번호 입력" required>
+            <div class="col-sm-4">
+              <input type="password" name="pw" id="pwd1_pr" class="form-control password" placeholder="비밀번호 입력" required>
             </div>
-            <div class="col-sm-5">
-              <input type="password" name="pwd1" id="pwd2_pr" class="form-control" placeholder="비밀번호 재입력" required>
+            <div class="col-sm-4">
+              <input type="password" name="pwd1" id="pwd2_pr" class="form-control password" placeholder="비밀번호 재입력" required>
             </div>
+		    <div class="col-sm-2">
+		        <button class="btn btn-outline-secondary togglePassword" type="button">
+		            <i class="fas fa-eye"></i>
+		        </button>
+		    </div>
           </div>
 
           <!-- 이름 -->
