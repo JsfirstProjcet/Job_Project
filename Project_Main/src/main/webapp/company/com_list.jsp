@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
- 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,6 @@
 <title>기업 목록</title>
 </head>
 <body>
-  
         <!-- Jobs Start -->
         <div class="container-xxl py-5">
             <div class="container">
@@ -25,6 +24,12 @@
                                  </c:choose>"
                                   href="?tab=all">
                                  <h6 class="mt-n1 mb-0">전체</h6>
+                                <c:choose>
+                                    <c:when test="${tab == 'all'}">active</c:when>
+                                    <c:otherwise></c:otherwise>
+                                </c:choose>"
+                                 href="?tab=all">
+                                <h6 class="mt-n1 mb-0">전체</h6>
                             </a>
                         </li>
                         <li class="nav-item">
