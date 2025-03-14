@@ -1,6 +1,7 @@
 package com.sist.model;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.json.simple.JSONArray;
@@ -26,12 +27,20 @@ public class CompanyModel {
 	public String com_list(HttpServletRequest request, HttpServletResponse response) {
 
 		String page=request.getParameter("page");
-		if(page==null)
-			page="1";
+		if(page==null){
+ 			page="1";
+ 		}
 		int curpage=Integer.parseInt(page);
-		Map map=new HashMap();
+
+ 		String tab=request.getParameter("tab");
+ 		if(tab==null) {
+ 			tab="all";
+ 		}
+ 
+ 		Map<String , Object> map=new HashMap<>();
 		map.put("start", (curpage*12)-11);
 		map.put("end",curpage*12);
+		map.put("tab", tab);
 		List<CompanyVO> list=CompanyDAO.companyListData(map);
 		int totalpage=CompanyDAO.companyTotalPage();
 	  
@@ -43,6 +52,7 @@ public class CompanyModel {
 			endPage=totalpage;
 	  
 		request.setAttribute("list", list);
+		request.setAttribute("tab", tab);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("startPage", startPage);
@@ -125,16 +135,23 @@ public class CompanyModel {
 		if(page==null) page="1";
 		int curpage=Integer.parseInt(page);
 		
+		int mode=0;//0 진행중 1//마감된
+		if(Integer.parseInt(type)==-1&&Integer.parseInt(ph)==-1) {
+			mode=1;
+		}
+		
 		Map map=new HashMap();
 		map.put("cno", Integer.parseInt(cno));
 		map.put("type", Integer.parseInt(type));
 		map.put("ph", Integer.parseInt(ph));
 		map.put("start",(curpage*5)-4);
 		map.put("end",curpage*5);
+		map.put("mode", mode);
 		
 		List<EmpVO> list=EmpDAO.empComListData(map);
-		
 		int count=EmpDAO.empComCount(map);
+		
+		
 		int totalpage=(int)(Math.ceil(count/5.0));
 		
 		final int BLOCK=10;
@@ -144,14 +161,32 @@ public class CompanyModel {
 		if(endPage>totalpage) endPage=totalpage;
 		
 		for(EmpVO vo:list) {
+			// D-day 표시
 			int d=vo.getDtype();
-			if(d==0) {
+			if(mode==0&&d<0) {
+				vo.setDbdeadline("상시 채용");
+			}else if(mode==0&&d==0) {
 				vo.setDbdeadline("D-day");
-			}else if(d<=7) {
+			}else if(d>0&&d<=7) {
 				vo.setDbdeadline("D-"+d);
+			}else {
+				try {
+					SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat newDtFormat = new SimpleDateFormat("MM월dd일(E)");
+					
+					Date formatDate = dtFormat.parse(vo.getDbdeadline());
+					
+					vo.setDbdeadline("~"+newDtFormat.format(formatDate));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			// 근무지가 복수일경우 처리
+			if(vo.getLoc()!=null) {
+				vo.setLoc(vo.getLoc().replaceAll(",", " |"));
 			}
 		}
-		
 		// JSON변경
 		JSONArray arr=new JSONArray();
 		//eno,name,title,personal_history,loc,emp_type,hit,dbregdate,dbdeadline,fo_count,se_count,dtype,rtype
@@ -169,10 +204,25 @@ public class CompanyModel {
 			obj.put("fo_count", vo.getFo_count());
 			obj.put("se_count", vo.getSe_count());
 			if(arr.size()==0) {
+				obj.put("mode",mode);
 				obj.put("curpage",curpage);
 				obj.put("totalpage",totalpage);
 				obj.put("startPage",startPage);
 				obj.put("endPage",endPage);
+				if(mode==0) {
+					map.put("ph", 0);
+					int e_count0=EmpDAO.empComCount(map);
+					map.put("ph", 1);
+					int e_count1=EmpDAO.empComCount(map);
+					map.put("ph", 2);
+					int e_count2=EmpDAO.empComCount(map);
+					
+					obj.put("e_count0",e_count0);
+					obj.put("e_count1",e_count1);
+					obj.put("e_count2",e_count2);
+				}else if(mode==1) {
+					obj.put("ed_count",count);
+				}
 			}
 			arr.add(obj);
 		}

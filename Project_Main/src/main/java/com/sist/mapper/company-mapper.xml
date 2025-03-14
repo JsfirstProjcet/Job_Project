@@ -10,8 +10,21 @@
 	   SELECT cno,name,poster,estdate,c_type,ecount,address,num
 	   FROM (SELECT cno,name,poster,estdate,c_type,ecount,address,rownum as num 
 	   FROM (SELECT /*+ INDEX_ASC(company company_list_seq)*/cno,name,poster,estdate,c_type,ecount,address
-	   FROM company))
-	   WHERE num BETWEEN #{start} AND #{end}
+	   FROM company
+ 			<where>
+ 			   <if test="tab == 'all'">
+ 			   		1 = 1
+ 			   </if>
+ 			   <if test="tab != 'all'"> 
+                     AND c_type LIKE '%' || #{tab} || '%'
+ 		       </if>
+ 		       <if test="tab == '대기업'">
+ 				    AND c_type NOT LIKE '%1000대기업%'
+ 			   </if>
+ 	       </where>
+ 	  	  )
+ 	   )
+ 	   WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="companyTotalPage" resultType="int">
 	   SELECT CEIL(COUNT(*)/12.0) FROM company

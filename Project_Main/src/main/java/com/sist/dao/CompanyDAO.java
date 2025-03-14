@@ -20,7 +20,7 @@ public class CompanyDAO {
 		session.close();
 		return vo;
 	}
-	public static List<CompanyVO> companyListData(Map map)
+	public static List<CompanyVO> companyListData(Map<String, Object> map)
 	{
 		SqlSession session=ssf.openSession();
 		List<CompanyVO> list=session.selectList("companyListData",map);

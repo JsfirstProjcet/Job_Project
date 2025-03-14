@@ -7,12 +7,26 @@
 		ORDER BY DBMS_RANDOM.RANDOM)
 		WHERE rownum&lt;=1
 	</select>
+	<select id="empMainHouseData8" resultType="EmpVO">
+ 		SELECT * FROM (SELECT * FROM employment
+ 		ORDER BY DBMS_RANDOM.RANDOM)
+ 		WHERE rownum&lt;=8
+ 	</select>
 	<select id="empListData" resultType="EmpVO" parameterType="hashmap">
 	   SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,num
 	   FROM (SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,rownum as num 
 	   FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq)*/eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count
-	   FROM employment))
-	   WHERE num BETWEEN #{start} AND #{end}
+	   FROM employment
+ 		   <where>
+ 			   <if test="tab == 'all'">
+ 			   		1 = 1
+ 			   </if>
+ 			   <if test="tab != 'all'"> 
+                     AND emp_type LIKE '%' || #{tab} || '%'
+ 		       </if>
+ 	       </where>
+ 	  	  )
+ 	   )
 	</select>
 	<select id="empTotalPage" resultType="int">
 	   SELECT CEIL(COUNT(*)/12.0) FROM employment
@@ -25,42 +39,49 @@
 			fo_count,se_count,dtype,rtype,num
 		FROM (SELECT eno,name,title,personal_history,loc,emp_type,hit,regdate,deadline,fo_count,se_count,dtype,rtype,rownum as num
 		FROM (SELECT eno,e.name,title,personal_history,loc,emp_type,hit,regdate,deadline,e.fo_count,se_count,
-				TRUNC(deadline,'DD')-TRUNC(SYSDATE,'DD') as dtype,
+				NVL(TRUNC(deadline,'DD')-TRUNC(SYSDATE,'DD'),-1) as dtype,
 				TRUNC(SYSDATE,'DD')-TRUNC(regdate,'DD') as rtype
 		FROM employment e,company c
 		WHERE e.cid=c.cid 
 		AND cno=#{cno}
-		AND deadline&gt;SYSDATE
 			<choose>
-				<!-- 
-					0 : 전체
-					1 : 신입
-					2 : 경력
-				 -->
-				<when test="ph==0">
-				
+				<when test="mode==1"><!-- 마감된 공고 -->
+					AND deadline&lt;SYSDATE
 				</when>
-				<when test="ph==1">
-					AND personal_history LIKE '%'||'신입'||'%'
-				</when>
-				<when test="ph==2">
-					AND personal_history LIKE '%'||'경력'||'%'
-				</when>
-			</choose>
-			<choose>
-				<!-- 
-					0 : 마감임박순
-					1 : 최신등록순
-					2 : 조회수많은순
-				 -->
-				<when test="type==0">
-					ORDER BY deadline ASC
-				</when>
-				<when test="type==1">
-					ORDER BY regdate DESC
-				</when>
-				<when test="type==2">
-					ORDER BY hit DESC
+				<when test="mode==0"><!-- 진행중인 공고 -->
+					AND (deadline&gt;SYSDATE OR deadline is null)
+					<choose>
+						<!-- 
+							0 : 전체
+							1 : 신입
+							2 : 경력
+						 -->
+						<when test="ph==0">
+						
+						</when>
+						<when test="ph==1">
+							AND personal_history LIKE '%'||'신입'||'%'
+						</when>
+						<when test="ph==2">
+							AND personal_history LIKE '%'||'경력'||'%'
+						</when>
+					</choose>
+					<choose>
+						<!-- 
+							0 : 마감임박순
+							1 : 최신등록순
+							2 : 조회수많은순
+						 -->
+						<when test="type==0">
+							ORDER BY deadline ASC
+						</when>
+						<when test="type==1">
+							ORDER BY regdate DESC
+						</when>
+						<when test="type==2">
+							ORDER BY hit DESC
+						</when>
+					</choose>
 				</when>
 			</choose>
 		))
@@ -71,21 +92,28 @@
 		FROM employment e,company c
 		WHERE e.cid=c.cid 
 		AND cno=#{cno}
-		AND deadline&gt;SYSDATE
 		<choose>
-			<!-- 
-				0 : 전체
-				1 : 신입
-				2 : 경력
-			 -->
-			<when test="ph==0">
-			
+			<when test="mode==1"><!-- 마감된 공고 -->
+				AND deadline&lt;SYSDATE
 			</when>
-			<when test="ph==1">
-				AND personal_history LIKE '%'||'신입'||'%'
-			</when>
-			<when test="ph==2">
-				AND personal_history LIKE '%'||'경력'||'%'
+			<when test="mode==0"><!-- 진행중인 공고 -->
+				AND (deadline&gt;SYSDATE OR deadline is null)
+				<choose>
+					<!-- 
+						0 : 전체
+						1 : 신입
+						2 : 경력
+					 -->
+					<when test="ph==0">
+					
+					</when>
+					<when test="ph==1">
+						AND personal_history LIKE '%'||'신입'||'%'
+					</when>
+					<when test="ph==2">
+						AND personal_history LIKE '%'||'경력'||'%'
+					</when>
+				</choose>
 			</when>
 		</choose>
 	</select>

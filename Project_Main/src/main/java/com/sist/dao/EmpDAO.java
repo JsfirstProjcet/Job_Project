@@ -22,7 +22,14 @@ public class EmpDAO {
 		session.close();
 		return vo;
 	}
-	public static List<EmpVO> empListData(Map map)
+	public static List<EmpVO> empMainHouseData8()
+ 	{
+ 		SqlSession session=ssf.openSession();
+ 		List<EmpVO> list=session.selectList("empMainHouseData8");
+ 		session.close();
+ 		return list;
+ 	}	
+ 	public static List<EmpVO> empListData(Map<String, Object> map)
 	{
 		SqlSession session=ssf.openSession();
 		List<EmpVO> list=session.selectList("empListData",map);
