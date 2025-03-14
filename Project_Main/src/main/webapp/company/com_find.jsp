@@ -5,103 +5,104 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기업 목록</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<link href="../layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
-</script>
+<title>공고 목록</title>
 </head>
 <body id="top">
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <!-- ################################################################################################ -->
-  <div id="breadcrumb" class="hoc clear"> 
-    <!-- ################################################################################################ -->
-    <h6 class="heading">기업 검색</h6>
-    <!-- ################################################################################################ -->
-  </div>
-  <!-- ################################################################################################ -->
-	<div class="bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');"> 
-	  <div class="wrapper row3">
-            <div class="row">
-                <div class="col-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                             <select id="fd" class="input-sm">
-                               <option value="c_type">1000대기업</option>                                            
-                               <option value="c_type">대기업</option>
-                               <option value="c_type">중소기업</option>
-                               <option value="c_type">중견기업</option>
-                               <option value="c_type">스타트업</option>
-                               <option value="c_type">기타</option>
-                               <option value="address" selected>주소</option>
+      <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
+         <div class="container">
+             <div class="row g-2">
+                 <div class="col-md-10">
+                     <div class="row g-2">
+                         <div class="col-md-4">
+                             <input type="text" class="form-control border-0" placeholder="Keyword" />
+                         </div>
+                         <div class="col-md-4">
+                             <select class="form-select border-0">
+                                 <option selected>Category</option>
+                                 <option value="1">Category 1</option>
+                                 <option value="2">Category 2</option>
+                                 <option value="3">Category 3</option>
                              </select>
-                             <input type=text size= id="ss" class="input-sm">
-                             <input type=button value="검색" class="btn-sm btn-primary" id="findBtn">                                                          
-                            </li>
-                        </ol>
-                    </nav>
+                         </div>
+                         <div class="col-md-4">
+                             <select class="form-select border-0">
+                                 <option selected>Location</option>
+                                 <option value="1">Location 1</option>
+                                 <option value="2">Location 2</option>
+                                 <option value="3">Location 3</option>
+                             </select>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="col-md-2">
+                     <button class="btn btn-dark border-0 w-100">Search</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ 
+    <div class="container-xxl py-5">
+        <div class="container">
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
+                        <h6 class="mb-3">Marketing</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-headset text-primary mb-4"></i>
+                        <h6 class="mb-3">Customer Service</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
+                        <h6 class="mb-3">Human Resource</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-tasks text-primary mb-4"></i>
+                        <h6 class="mb-3">Project Management</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-chart-line text-primary mb-4"></i>
+                        <h6 class="mb-3">Business Development</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
+                        <h6 class="mb-3">Sales & Communication</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
+                        <h6 class="mb-3">Teaching & Education</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <a class="cat-item rounded p-4" href="">
+                        <i class="fa fa-3x fa-drafting-compass text-primary mb-4"></i>
+                        <h6 class="mb-3">Design & Creative</h6>
+                        <p class="mb-0">123 Vacancy</p>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-  <!-- ################################################################################################ -->
-<!-- End Top Background Image Wrapper -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<!-- ################################################################################################ -->
-<div class="wrapper row3">
-  <main class="hoc container clear"> 
-    <!-- main body -->
-    <!-- ################################################################################################ -->
-    <div class="content"> 
-      <!-- ################################################################################################ -->
-      <div id="gallery">
-        <figure>
-          <header class="heading">기업 정보</header>
-          <ul class="nospace clear">
-            <li class="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter first"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-            <li class="one_quarter"><a href="#"><img src="../images/demo/gallery/01.png" alt=""></a></li>
-          </ul>
-        </figure>
-      </div>
-      <!-- ################################################################################################ -->
-      <!-- ################################################################################################ -->
-      <nav class="pagination">
-        <ul>
-          <li><a href="#">&laquo; Previous</a></li>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">6</a></li>
-          <li class="current"><strong>7</strong></li>
-          <li><a href="#">8</a></li>
-          <li><a href="#">9</a></li>
-          <li><strong>&hellip;</strong></li>
-          <li><a href="#">14</a></li>
-          <li><a href="#">15</a></li>
-          <li><a href="#">Next &raquo;</a></li>
-        </ul>
-      </nav>
-      <!-- ################################################################################################ -->
-    </div>
-    <!-- ################################################################################################ -->
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
 </body>
 </html>
