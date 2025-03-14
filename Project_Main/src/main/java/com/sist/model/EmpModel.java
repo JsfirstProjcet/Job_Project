@@ -17,12 +17,20 @@ public class EmpModel {
 	public String emp_list(HttpServletRequest request, HttpServletResponse response) {
 
 		String page=request.getParameter("page");
-		if(page==null)
+		if(page==null) {
 			page="1";
+		}
 		int curpage=Integer.parseInt(page);
-		Map map=new HashMap();
+		
+		String tab=request.getParameter("tab");
+		if(tab==null) {
+			tab="all";
+		}
+		
+		Map<String , Object> map=new HashMap<>();
 		map.put("start", (curpage*12)-11);
 		map.put("end",curpage*12);
+		map.put("tab", tab);
 		List<EmpVO> list=EmpDAO.empListData(map);
 		int totalpage=EmpDAO.empTotalPage();
 	  
@@ -34,6 +42,7 @@ public class EmpModel {
 			endPage=totalpage;
 	  
 		request.setAttribute("list", list);
+		request.setAttribute("tab", tab);		
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("startPage", startPage);

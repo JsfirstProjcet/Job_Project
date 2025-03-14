@@ -7,11 +7,26 @@
 		ORDER BY DBMS_RANDOM.RANDOM)
 		WHERE rownum&lt;=1
 	</select>
+	<select id="empMainHouseData8" resultType="EmpVO">
+		SELECT * FROM (SELECT * FROM employment
+		ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE rownum&lt;=8
+	</select>
 	<select id="empListData" resultType="EmpVO" parameterType="hashmap">
 	   SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,num
 	   FROM (SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,rownum as num 
 	   FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq)*/eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count
-	   FROM employment))
+	   FROM employment
+		   <where>
+			   <if test="tab == 'all'">
+			   		1 = 1
+			   </if>
+			   <if test="tab != 'all'"> 
+                    AND emp_type LIKE '%' || #{tab} || '%'
+		       </if>
+	       </where>
+	  	  )
+	   )
 	   WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="empTotalPage" resultType="int">
