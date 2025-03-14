@@ -74,7 +74,7 @@ $(function(){
             </div>
 		    <div class="col-sm-2">
 		        <button class="btn btn-outline-secondary togglePassword" type="button">
-		            <i class="fas fa-eye"></i>
+		            <i class="fas fa-eye-slash"></i>
 		        </button>
 		    </div>
           </div>

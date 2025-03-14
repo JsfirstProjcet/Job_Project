@@ -39,7 +39,7 @@ $(function(){
         });
 
         // 아이콘 초기화 (눈 모양 아이콘을 "fa-eye"로 설정)
-        $('.togglePassword i').removeClass('fa-eye-slash').addClass('fa-eye');
+        $('.togglePassword i').removeClass('fa-eye').addClass('fa-eye-slash');
     });
     // 비밀번호 보이기/숨기기
     $(document).on('click','.togglePassword',function() {

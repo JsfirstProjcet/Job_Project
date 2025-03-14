@@ -71,8 +71,8 @@ $(function(){
             $(this).attr('type', 'password'); // 타입을 "password"로 설정
         });
 
-        // 아이콘 초기화 (눈 모양 아이콘을 "fa-eye"로 설정)
-        $('.togglePassword i').removeClass('fa-eye-slash').addClass('fa-eye');
+        // 아이콘 초기화 (눈 모양 아이콘을 "fa-eye-slash"로 설정)
+        $('.togglePassword i').removeClass('fa-eye').addClass('fa-eye-slash');
     });
     // 비밀번호 보이기/숨기기
     $(document).on('click','.togglePassword',function() {
@@ -108,7 +108,7 @@ $(function(){
                             <div class="mb-3 input-group">
                                 <input type="password" name="pw" class="form-control password" placeholder="비밀번호를 입력하세요...">
                                 <button class="btn btn-outline-secondary togglePassword" type="button">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="fas fa-eye-slash"></i>
                                 </button>
                             </div>
                             <button type="button" class="login btn btn-primary w-100">로그인</button>
@@ -123,7 +123,7 @@ $(function(){
                             <div class="mb-3 input-group">
                                 <input type="password" name="pw" class="form-control password" placeholder="비밀번호를 입력하세요...">
                                 <button class="btn btn-outline-secondary togglePassword" type="button">
-                                    <i class="fas fa-eye"></i>
+                                    <i class="fas fa-eye-slash"></i>
                                 </button>
                             </div>
                             <button type="button" class="login btn btn-primary w-100">로그인</button>
