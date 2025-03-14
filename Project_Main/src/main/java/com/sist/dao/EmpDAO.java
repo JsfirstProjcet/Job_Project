@@ -58,9 +58,9 @@ public class EmpDAO {
 		return list;
 	}
 
-	public static int empComCount(int cno) {
+	public static int empComCount(Map map) {
 		SqlSession session = ssf.openSession();
-		int count = session.selectOne("empComCount", cno);
+		int count = session.selectOne("empComCount", map);
 		session.close();
 		return count;
 	}

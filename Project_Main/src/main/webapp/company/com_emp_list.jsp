@@ -15,19 +15,23 @@ $(function(){
 	
 	$('.type').change(function(){
 		type=$(this).val()
+		page=1
 		print()
 	})
 	
 	$('.ph').click(function(){
 		ph=$(this).attr("data-on")
+		page=1
 		print()
 	})
 	$('.emp-box').click(function(){
-		alert(1234)
 		let test=$(this).attr("data-on")
-		print()
 	})
 })
+function pageChange(p){
+	page=p
+	print()
+}
 function print(){
 	$.ajax({
 		type:'post',
@@ -65,6 +69,36 @@ function jsonView(json){
 			+'</div>'
 		+'</div>'
 	})
+	html+=''
+		+'<div class="col-12">'
+			+'<div class="pagination-area d-sm-flex mt-15">'
+				+'<nav aria-label="#">'
+					+'<ul class="pagination">'
+						if(json[0].startPage>1){
+							html+=''
+							+'<li class="page-item">'
+								+'<a class="page-link" onclick="pageChange('+(json[0].startPage-1)+')"><i class="fa fa-angle-double-left" aria-hidden="true"></i>이전</a>'
+							+'</li>'
+						}
+						for(let i=json[0].startPage;i<=json[0].endPage;i++){
+							html+=''
+							+'<li class="page-item '+(json[0].curpage==i?"active":"")+'"><a class="page-link" onclick="pageChange('+i+')">'+i+'</a></li>'
+						}
+						if(json[0].endPage<json[0].totalpage){
+							html+=''
+							+'<li class="page-item">'
+								+'<a class="page-link" onclick="pageChange('+(json[0].endPage+1)+')">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>'
+							+'</li>'
+						}
+				html+=''
+					+'</ul>'
+				+'</nav>'
+				+'<div class="page-status">'
+				+'<p>Page '+json[0].curpage+' of '+json[0].totalpage+' results</p>'
+				+'</div>'
+			+'</div>'
+		+'</div>'
+	
 	$('#tab').html(html)
 }
 </script>

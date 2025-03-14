@@ -81,7 +81,7 @@
 		))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
-	<select id="empComCount" resultType="int" parameterType="int">
+	<select id="empComCount" resultType="int" parameterType="hashmap">
 		SELECT COUNT(*)
 		FROM employment e,company c
 		WHERE e.cid=c.cid 

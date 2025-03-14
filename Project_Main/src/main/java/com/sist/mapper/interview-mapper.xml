@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.interview-mapper">
+
+	<!-- 인터뷰 리스트 -->
+	<select id="interviewListData" resultType="InterviewVO" parameterType="hashmap">
+		SELECT ino,title,sub_title,company,department,name,TO_CHAR(idate, 'YY-MM-DD') AS idate,hit,poster,num
+		FROM (SELECT ino,title,sub_title,company,department,name,idate,hit,poster,rownum as num
+		FROM (SELECT /*+ INDEX_ASC(INTERVIEW PK_INTERVIEW)*/ino,title,sub_title,company,department,name,idate,hit,poster
+		FROM INTERVIEW))
+		WHERE NUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="interviewTotalPage" resultType="int"> 
+			SELECT CEIL(COUNT(*)/12.0) FROM INTERVIEW
+	</select>
+
+	<select id="interviewDetailData" resultType="InterviewVO" parameterType="int">
+	  SELECT * FROM INTERVIEW
+	  WHERE ino=#{ino}
+	</select>
+
+	<update id="interviewHitIncrement" parameterType="int">
+		UPDATE INTERVIEW SET
+		hit=hit+1
+		WHERE ino=#{ino}
+	</update>
+	
+	<!-- 인터뷰 파인드 -->
+	<select id="interviewFindData" resultType="InterviewVO" parameterType="int">
+		SELECT i.ino, i.title, i.sub_title, i.company, i.department, i.name,
+		 TO_CHAR(i.idate, 'YY-MM-DD') AS idate, i.hit, i.poster, job.name AS job_name, num
+		FROM (SELECT i.*, rownum as num
+		FROM (SELECT ino, title, sub_title, company, department, name, idate, hit, poster
+		FROM INTERVIEW ORDER BY ino ASC)i)i
+		JOIN INTERVIEW_TYPE it ON i.ino = it.ino
+		JOIN JOB job ON it.jno = job.jno
+		WHERE it.jno=#{type}
+	</select>
+	
+	<!-- 카테고리 카운트 -->
+	<select id="categoryCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) 
+		FROM interview_type
+		WHERE jno=#{jno}
+	</select>
+	
+	<!-- 전체데이터 -->
+	<select id="interviewAll" resultType="InterviewVO">
+    SELECT ino, title, sub_title, company, department, name,
+           TO_CHAR(idate, 'YY-MM-DD') AS idate, hit, poster
+    FROM INTERVIEW
+    ORDER BY ino ASC
+	</select>
+	
+	<select id="interviewSearch" resultType="interviewVO" parameterType="string">
+		SELECT ino,title,sub_title,company,department,name,TO_CHAR(idate, 'YY-MM-DD') AS idate,hit,poster
+		FROM INTERVIEW
+		WHERE title LIKE '%' || #{search} || '%'
+		OR name LIKE '%' || #{search} || '%'
+		OR company LIKE '%' || #{search} || '%'
+		OR department LIKE '%' || #{search} || '%'
+	</select>
+</mapper>
+

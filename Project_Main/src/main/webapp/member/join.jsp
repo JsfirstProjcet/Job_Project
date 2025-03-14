@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="../shadow/css/shadowbox.css">
+<link href="../shadow/css/shadowbox.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="../shadow/js/shadowbox.js"></script>
 <script type="text/javascript" src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -20,10 +21,6 @@ function getMemberStr(){
 }
 $(function(){
     Shadowbox.init()
-    //activeTab=$('#loginTabs .nav-link.active').attr('data-bs-target')
-    //$('button[data-bs-toggle="tab"]').on('shown.bs.tab', function(event) {
-    //	activeTab=$(event.target).attr('data-bs-target')
-    //});
 	$('.idBtn').on('click',function(){
 		Shadowbox.open({
 			content:'../personal/emailcheck.do',
@@ -33,6 +30,28 @@ $(function(){
 			title:'이메일중복체크'
 		})
 	})
+	// Bootstrap 탭 전환 이벤트 감지
+    $(document).on('shown.bs.tab','#loginTabs',function () {
+        // 모든 비밀번호 필드를 초기화
+        $('.password').each(function () {
+            $(this).val(''); // 비밀번호 필드 초기화
+            $(this).attr('type', 'password'); // 타입을 "password"로 설정
+        });
+
+        // 아이콘 초기화 (눈 모양 아이콘을 "fa-eye"로 설정)
+        $('.togglePassword i').removeClass('fa-eye').addClass('fa-eye-slash');
+    });
+    // 비밀번호 보이기/숨기기
+    $(document).on('click','.togglePassword',function() {
+        $('.password').each(function () {
+            let input = $(this);
+            
+            // 현재 타입을 확인하여 password <-> text로 변경
+            let type = input.attr("type") === "password" ? "text" : "password";
+            input.attr("type", type);
+        });
+        $(this).find("i").toggleClass("fa-eye fa-eye-slash");
+    });		
 })
 </script>
 </head>

@@ -62,7 +62,7 @@ $(function(){
 	                    		</div>
                     		</c:if>
                     	</div>
-                    	<div class="row">
+                    	<div class="row mt-5">
                    			<c:if test="${vo.industry!=null }">
 	                    		<div class="row col-6">
 	                    			<div class="col-3">
@@ -168,12 +168,14 @@ $(function(){
 		                    	</div>
                    			</c:if>
                     	</div>
-                        <div class="row mb-5">
+                        <div class="row mt-5 mb-5">
                         	<c:if test="${vo.introduction != null }">
+                        		<hr>
 	                            <h4 class="mb-3">기업 소개</h4>
 	                            <pre style="white-space: pre-line;">${vo.introduction }</pre>
                         	</c:if>
                         	<c:if test="${vo.history != null }">
+                        		<hr>
 	                            <h4 class="mb-3">연혁</h4>
 	                            <table class="table">
 	                            	<tr><td colspan="2"></td></tr>
@@ -194,6 +196,7 @@ $(function(){
 	                            </table>
                         	</c:if>
                         	<c:if test="${wList[0] != null }">
+                        		<hr>
 	                            <h4 class="mb-3">복지</h4>
 	                            <div class="row">
 	                            <c:forEach var="tag" items="${wTag }" varStatus="i">

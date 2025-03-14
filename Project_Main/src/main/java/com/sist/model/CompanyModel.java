@@ -136,14 +136,14 @@ public class CompanyModel {
 		
 		Map map=new HashMap();
 		map.put("cno", Integer.parseInt(cno));
-		map.put("type", type);
-		map.put("ph", ph);
+		map.put("type", Integer.parseInt(type));
+		map.put("ph", Integer.parseInt(ph));
 		map.put("start",(curpage*5)-4);
 		map.put("end",curpage*5);
 		
 		List<EmpVO> list=EmpDAO.empComListData(map);
 		
-		int count=EmpDAO.empComCount(curpage);
+		int count=EmpDAO.empComCount(map);
 		int totalpage=(int)(Math.ceil(count/5.0));
 		
 		final int BLOCK=10;
