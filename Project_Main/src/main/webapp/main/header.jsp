@@ -107,7 +107,7 @@
 		    </div>
 	    </div>
 	</nav>
-	<!-- Navbar End -->
+	<!-- Navbar End --> 
 
 <!-- Top Background Image Wrapper 
   <header id="header" class="hoc clear">
