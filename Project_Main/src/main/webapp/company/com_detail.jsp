@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script type="text/javascript">
+let check=false
 $(function(){
-	let check=false
 	
 	$('.btn-map').click(function(){
 		if(check){
@@ -84,7 +84,9 @@ $(function(){
 	                    			<div class="col-3">
 	                    				홈페이지
 	                    			</div>
-	                    			<div class="col-9">${vo.homepage }</div>
+	                    			<div class="col-9">
+		                    			<a href="${vo.homepage }" target="_blank">${vo.homepage }</a>
+	                    			</div>
 	                    		</div>
                    			</c:if>
                    			<c:if test="${vo.bu_details!=null }">
@@ -101,7 +103,7 @@ $(function(){
 		                   				주소
 		                   			</div>
 		                   			<div class="col-9">
-		                   				${vo.address }
+		                   				${vo.address }<br>
 		                   				<a href="javascript:map()" class="btn btn-sm btn-outline-primary btn-map" style="border: 1px solid; border-radius: 2px;cursor: pointer;">
 		                   					<i class="bi-map-fill"></i>지도
 		                   				</a>
@@ -204,7 +206,7 @@ $(function(){
 	                            		<h6><i class="bi-${icons[i.index]} text-primary me-2"></i>${tag.name }</h6>
 	                            		<ul>
 	                            			<c:forEach var="vo" items="${wList }">
-	                            				<c:if test="${i.index+1==vo.wno2 }">
+	                            				<c:if test="${tag.wno==vo.wno2 }">
 			                            			<li>${vo.name }</li>
 	                            				</c:if>
 	                            			</c:forEach>

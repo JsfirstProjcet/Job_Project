@@ -4,10 +4,16 @@ import java.util.*;
 
 public class EmpVO {
 	private int eno,salary,education,hit,fo_count,se_count,rtype,dtype;
-	private String name,title,personal_history,loc,emp_type,cid,content,dbregdate,dbdeadline;
+	private String name,title,personal_history,salary_str,loc,emp_type,cid,content,dbregdate,dbdeadline;
 	private Date regdate,deadline;
 	private CompanyVO cvo=new CompanyVO();
 	
+	public String getSalary_str() {
+		return salary_str;
+	}
+	public void setSalary_str(String salary_str) {
+		this.salary_str = salary_str;
+	}
 	public int getRtype() {
 		return rtype;
 	}

@@ -43,12 +43,20 @@ public class EmpDAO {
 		session.close();
 		return total;
 	}
-	public static EmpVO empDetailData(int no)
+	public static EmpVO empDetailData(int eno)
 	{
 		SqlSession session=ssf.openSession();
-		EmpVO vo=session.selectOne("empDetailData",no);
+		session.update("empHitIncrement",eno);
+		session.commit();
+		EmpVO vo=session.selectOne("empDetailData",eno);
 		session.close();
 		return vo;
+	}
+	public static List<JobVO> empDetailJobData(int eno) {
+		SqlSession session=ssf.openSession();
+		List<JobVO> list=session.selectList("empDetailJobData",eno);
+		session.close();
+		return list;
 	}
 	
 	//////////////////////////////////////// 기업

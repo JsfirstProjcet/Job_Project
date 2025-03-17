@@ -12,6 +12,7 @@
     <typeAlias type="com.sist.vo.OfficialVO" alias="OfficialVO"/> 
     <typeAlias type="com.sist.vo.WelfareVO" alias="WelfareVO"/> 
     <typeAlias type="com.sist.vo.InterviewVO" alias="InterviewVO"/>
+    <typeAlias type="com.sist.vo.JobVO" alias="JobVO"/>
   </typeAliases>
   <!-- 오라클 환경 설정 getConnection / disConnection-->
   <environments default="development">

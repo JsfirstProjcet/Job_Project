@@ -67,9 +67,16 @@ public class EmpModel {
 	public String emp_detail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../emp/emp_detail.jsp");
 		String eno=request.getParameter("no");
-		EmpVO vo=EmpDAO.empDetailData(Integer.parseInt(eno));
 		
-		request.setAttribute("vo", vo);
+		EmpVO evo=EmpDAO.empDetailData(Integer.parseInt(eno));
+		int cno=CompanyDAO.conByCid(evo.getCid());
+		CompanyVO cvo=CompanyDAO.comDetailData(cno);
+		
+		List<JobVO> jList=EmpDAO.empDetailJobData(evo.getEno());
+		
+		request.setAttribute("evo", evo);
+		request.setAttribute("cvo", cvo);
+		request.setAttribute("jList", jList);
 		request.setAttribute("main_jsp", "../emp/emp_detail.jsp");
 		return "../main/main.jsp";
 	}

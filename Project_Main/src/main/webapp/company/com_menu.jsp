@@ -15,8 +15,14 @@
 <body>
 	<div class="container" style="margin-top: 50px">
 		<div class="row-menu">
-			<img class="flex-shrink-0 img-fluid border rounded" src="https://pds.saramin.co.kr/company${vo.poster }"
-			style="width: 100%; height: 80px;background-color: white; border-radius: 50px; border: none">
+			<c:if test="${vo.poster!=null }">
+				<img class="flex-shrink-0 img-fluid border rounded" src="https://pds.saramin.co.kr/company${vo.poster }"
+					style="width: 100%; height: 80px;background-color: white; border-radius: 50px; border: none">
+			</c:if>
+			<c:if test="${vo.poster==null }">
+				<img class="flex-shrink-0 img-fluid border rounded" src="../img/logo/noimg1.png"
+					style="width: 100%; height: 80px;background-color: white; border-radius: 50px; border: none">
+			</c:if>
 		</div>
 		<div class="row-menu">
 			<h4 class="mb-3">${vo.name }</h4>
@@ -34,19 +40,21 @@
 					<li class="list-group-item"><a href="../company/com_emp_list.do?cno=${vo.cno }">진행중인 공고</a></li>
 				</ul>
 			</div>
-		<div class="row-menu">
-		</div>
-			<div class="panel panel-warning">
-				<div class="panel-heading">
-					<h3 class="panel-title">기업관리</h3>
-				</div>
-				<ul class="list-group">
-					<li class="list-group-item"><a href="#">새 공고 등록</a></li>
-					<li class="list-group-item"><a href="#">공고 관리</a></li>
-					<li class="list-group-item"><a href="#">지원자 관리</a></li>
-					<li class="list-group-item"><a href="#">계정 관리</a></li>
-				</ul>
+			<div class="row-menu">
 			</div>
+			<c:if test="${sessionScope.cid!=null&&sessionScope.access_key!=null&&sessionScope.access_key==vo.access_key }">
+				<div class="panel panel-warning">
+					<div class="panel-heading">
+						<h3 class="panel-title">기업관리</h3>
+					</div>
+					<ul class="list-group">
+						<li class="list-group-item"><a href="#">새 공고 등록</a></li>
+						<li class="list-group-item"><a href="#">공고 관리</a></li>
+						<li class="list-group-item"><a href="#">지원자 관리</a></li>
+						<li class="list-group-item"><a href="#">계정 관리</a></li>
+					</ul>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

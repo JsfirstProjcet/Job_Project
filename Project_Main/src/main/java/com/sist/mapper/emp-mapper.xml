@@ -122,4 +122,16 @@
 		FROM employment e
 		WHERE eno=#{eno}
 	</select>
+	<update id="empHitIncrement" parameterType="int">
+		UPDATE employment SET
+		hit=hit+1
+		WHERE eno=#{eno}
+	</update>
+	<!-- 공고 업종 -->
+	<select id="empDetailJobData" resultType="JobVO" parameterType="int">
+		SELECT *
+		FROM emp_job e, job j
+		WHERE e.jno=j.jno
+		AND eno=#{eno}
+	</select>
 </mapper>

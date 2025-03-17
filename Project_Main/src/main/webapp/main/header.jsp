@@ -48,7 +48,7 @@
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업페이지</a>
 	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="#" class="dropdown-item">MyCompany</a>
+	                    <a href="../company/com_main.do" class="dropdown-item">MyCompany</a>
 	                    <a href="#" class="dropdown-item">등록한 공고</a>
 	                    <a href="#" class="dropdown-item">지원자</a>
 	                </div>

@@ -55,4 +55,10 @@ public class CompanyDAO {
 		session.close();
 		return list;
 	}
+	public static int conByCid(String cid) {
+		SqlSession session=ssf.openSession();
+		int cno=session.selectOne("cnoByCid",cid);
+		session.close();
+		return cno;
+	}
 }

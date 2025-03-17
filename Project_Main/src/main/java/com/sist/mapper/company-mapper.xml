@@ -56,4 +56,9 @@
 		    WHERE w.wno=c.wno
 		    AND cid=#{cid})
 	</select>
+	<select id="cnoByCid" resultType="int" parameterType="String">
+		SELECT cno
+		FROM company
+		WHERE cid=#{cid}
+	</select>
 </mapper>

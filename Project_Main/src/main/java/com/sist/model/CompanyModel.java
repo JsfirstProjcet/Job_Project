@@ -13,6 +13,7 @@ import com.sist.controller.RequestMapping;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import com.sist.vo.*;
 import com.sist.dao.*;
@@ -239,5 +240,12 @@ public class CompanyModel {
 	public String com_find(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../company/com_find.jsp");
 		return "../main/main.jsp";
+	}
+	@RequestMapping("company/com_main.do")
+	public String com_main(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		return "redirect:../company/com_detail.do?cno="+cno;
 	}
 }

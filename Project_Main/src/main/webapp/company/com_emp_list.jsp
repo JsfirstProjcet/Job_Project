@@ -101,7 +101,7 @@ function jsonView(json){
 								+emp.title
 							}
 						html+='&nbsp;&nbsp;&nbsp;&nbsp;'
-							+'<span class="text-truncate me-3"><i class="far bi-eye text-dark me-2"></i>'+emp.fo_count+'</span>'
+							+'<span class="text-truncate me-3"><i class="far bi-eye text-dark me-2"></i>'+emp.hit+'</span>'
 							+'<span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>'+emp.fo_count+'</span>'
 	                        +'<span class="text-truncate me-3"><i class="fas fa-user-tie text-primary me-2"></i>'+emp.se_count+'</span>'
 						+'</strong>'
