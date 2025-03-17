@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.commune-mapper">
+	<select id="communeListData" resultType="CommuneVO" parameterType="hashmap">
+		SELECT bno,content,subject,nickname,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,likes,reply,num
+		FROM (SELECT bno,content,subject,nickname,regdate,hit,likes,reply,rownum as num
+		FROM (SELECT bno,content,subject,nickname,regdate,hit,likes,reply
+		FROM COMMUNITY ORDER BY bno DESC))
+		WHERE num BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<select id="communeTotalPage" resultType="int">
+		SELECT CEIL (COUNT(*)/10.0) FROM COMMUNITY
+	</select>
+</mapper>
