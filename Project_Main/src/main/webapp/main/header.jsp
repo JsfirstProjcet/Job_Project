@@ -39,8 +39,8 @@
 	             <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">커뮤니티</a>
 	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="#" class="dropdown-item">자유게시판</a>
-	                    <a href="#" class="dropdown-item">묻고답하기</a>
+	                   <a href="#" class="dropdown-item">자유게시판</a>
+	                  	<a href="../interview/commune.do" class="dropdown-item">묻고답하기</a>
 	                    <a href="../interview/interview_list.do" class="dropdown-item">인터뷰</a>
 	                    <a href="../interview/interview_find.do" class="dropdown-item">인터뷰 찾기</a>
 	                </div>
