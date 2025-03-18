@@ -17,8 +17,16 @@ import java.util.*;
 
 public class CommuneVO {
 	private int bno,hit,type,reply,likes;
-	private String subject,content,id,nickname,dbday;
+	private String subject,content,id,nickname,dbday,hashtag;
 	private Date regdate;
+	
+	
+	public String getHashtag() {
+		return hashtag;
+	}
+	public void setHashtag(String hashtag) {
+		this.hashtag = hashtag;
+	}
 	public int getBno() {
 		return bno;
 	}

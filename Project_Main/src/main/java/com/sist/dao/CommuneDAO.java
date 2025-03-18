@@ -52,4 +52,25 @@ public class CommuneDAO {
 		session.close();
 		return total;
 	}
+	
+	/*
+		<insert id="communeInsert" parameterType="CommuneVO" >
+			INSERT INTO community(bno,subject,content,regdate) 
+			VALUES(pn_no_seq.nextval,#{subject},#{content},#{regdate})
+		</insert>
+	 */
+	public static void communeInsert(CommuneVO vo) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession();
+			session.insert("communeInsert",vo);
+			session.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
 }

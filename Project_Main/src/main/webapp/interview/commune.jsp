@@ -7,6 +7,12 @@
 <meta charset="utf-8">
 <title>JobEntry - Job Portal Website Template</title>
 <style type="text/css">
+
+.pagination{display:block; width:100%; text-align:center; clear:both; color: #8EC837; }
+.pagination .page-link:hover{ background-color: #8EC837; color: white; border:1px solid gray; }
+.pagination li{display:inline-block; margin:0 2px 0 0;}
+.pagination li:last-child{margin-right:0;}
+.pagination .page-link, .pagination strong{display:block; padding:8px 11px; border:1px solid gray; background-clip:padding-box; font-weight:normal;}
 .mb-3 {
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
@@ -21,6 +27,7 @@
 		<!-- Testimonial Start -->
 		<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
 			<div class="container">
+			
 				<h1 class="text-center mb-5">Our Clients Say!!!</h1>
 				<div class="owl-carousel testimonial-carousel">
 					<div class="testimonial-item bg-light rounded p-4">
@@ -92,7 +99,7 @@
 				<div class="tab-class text-center wow fadeInUp"
 					data-wow-delay="0.3s">
 					<ul
-						class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+						class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-3" >
 
 						<li class="nav-item"><a
 							class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active"
@@ -109,20 +116,23 @@
 							data-bs-toggle="pill" href="#tab-3">
 								<h6 class="mt-n1 mb-0">Part Time</h6>
 						</a></li>
+						
 					</ul>
+					<div class="text-end" style="margin-right: 200px; margin-bottom: 30px;">
+					  <a class="btn btn-primary py-3 px-5" href="../interview/commune_insert.do">새글 작성</a>
+					</div>
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane fade show p-0 active">
 							<c:forEach var="vo" items="${list }">
-								<div class="job-item p-4 mb-4"
-									style="max-width: 900px; margin: 0 auto;">
+							  
+								<div class="job-item p-4 mb-4"	style="max-width: 900px; margin: 0 auto;">
 									<div>
 										<div class="d-flex align-items-center">
-											<img class="flex-shrink-0 img-fluid border rounded"
-												src="../img/com-logo-1.jpg" alt=""
-												style="width: 80px; height: 80px;">
 											<div class="text-start ps-4" style="flex-grow: 1;">
+											  <a href="../interview/commune_detail.do">
 												<h5 class="mb-3">${vo.subject }</h5>
-												<h5 class="mb-3">${vo.content }</h5>
+												<p class="mb-3" style="color:gray;">${vo.content }</p>
+											  </a>
 												<div
 													class="d-flex align-items-center justify-content-between mt-2">
 													<div class="d-flex">
@@ -138,21 +148,22 @@
 													</div>
 
 													<div class="d-flex">
-														<span class="text-truncate me-3"> <i class="far fa-heart text-primary me-1"></i>좋아요
-														</span> <span class="text-truncate me-3"> <i
-															class="far fa-comment text-primary me-1"></i>댓글
-														</span> <span class="text-truncate me-3"> <i
-															class="far fa-eye text-primary me-1"></i>조회수
+														<span class="text-truncate me-3"> 
+														<i class="far fa-heart text-primary me-1"></i>좋아요${vo.likes }
+														</span> <span class="text-truncate me-3"> 
+														<i class="far fa-comment text-primary me-1"></i>댓글${vo.reply }
+														</span> <span class="text-truncate me-3"> 
+														<i class="far fa-eye text-primary me-1"></i>조회수${vo.hit }
 														</span>
 													</div>
 												</div>
-
+											 
 											</div>
 										</div>
 									</div>
 								</div>
+								
 							</c:forEach>
-							<a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
 						</div>
 						
 					</div>
@@ -160,7 +171,23 @@
 			</div>
 		</div>
 		<!-- Jobs End -->
-
+				<nav class="pagination">
+					<ul>
+						<c:if test="${startPage>1 }">
+							<li><a class="page-link" href="../interview/commune.do?page=${startPage-1 }"><i class="fa fa-angle-double-left" aria-hidden="true"></i>이전</a></li>
+						 </c:if>
+						 
+						 <c:forEach var="i" begin="${startPage }" end="${endPage }">
+                            <li class="${i==curpage?'current':'' }"><a class="page-link" href="../interview/commune.do?page=${i }">${i }</a></li>
+                          </c:forEach>
+                         
+						  <c:if test="${endPage<totalpage }">
+                           <li class="page-item">
+                               <a class="page-link" href="../interview/commune.do?page=${endPage+1 }">다음<i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                           </li>
+                          </c:if>
+					</ul>
+				</nav>
 	</div>
 </body>
 
