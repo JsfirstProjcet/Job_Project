@@ -18,24 +18,59 @@
                          </div>
                          <div class="col-md-4">
                              <select class="form-select border-0">
-                                 <option selected>Category</option>
-                                 <option value="1">Category 1</option>
-                                 <option value="2">Category 2</option>
-                                 <option value="3">Category 3</option>
+                                 <option selected>직업별</option>
+                                 <option value="16">기획·전략</option>
+                                 <option value="14">마케팅·홍보·조사</option>
+                                 <option value="3">회계·세무·재무</option>
+                                 <option value="5">인사·노무·HRD</option>
+                                 <option value="4">총무·법무·사무</option>
+                                 <option value="2">IT개발·데이터</option>
+                                 <option value="15">디자인</option>
+                                 <option value="8">영업·판매·무역</option>
+                                 <option value="21">고객상담·TM</option>
+                                 <option value="18">구매·자재·물류</option>
+                                 <option value="12">상품기획·MD</option>
+                                 <option value="7">운전·운송·배송</option>
+                                 <option value="10">서비스</option>
+                                 <option value="11">생산</option>
+                                 <option value="22">건설·건축</option>
+                                 <option value="6">의료</option>
+                                 <option value="9">연구·R&D</option>
+                                 <option value="19">교육</option>
+                                 <option value="13">미디어·문화·스포츠</option>
+                                 <option value="17">금융·보험</option>
+                                 <option value="20">공공·복지</option>
                              </select>
                          </div>
                          <div class="col-md-4">
                              <select class="form-select border-0">
-                                 <option selected>근무지역</option>
-                                 <option value="1">서울</option>
-                                 <option value="2">경기</option>
-                                 <option value="3">광주</option>
-                                 <option value="4">대구</option>
-                                 <option value="5">대전</option>
-                                 <option value="6">부산</option>
-                                 <option value="7">울산</option>
-                                 <option value="8">인천</option>
-                                 <option value="9">강원</option>
+                                 <option selected>지역별</option>
+                                 <option value="117000">전국</option>
+                                 <option value="101000">서울</option>
+                                 <option value="102000">경기</option>
+                                 <option value="103000">광주</option>
+                                 <option value="104000">대구</option>
+                                 <option value="105000">대전</option>
+                                 <option value="106000">부산</option>
+                                 <option value="107000">울산</option>
+                                 <option value="108000">인천</option>
+                                 <option value="109000">강원</option>
+                                 <option value="110000">경남</option>
+                                 <option value="111000">경북</option>
+                                 <option value="112000">전남</option>
+                                 <option value="113000">전북</option>
+                                 <option value="114000">충북</option>
+                                 <option value="115000">충남</option>
+                                 <option value="116000">제주</option>
+                                 <option value="118000">세종</option>
+                                 <option value="210000">아시아·중동</option>
+                                 <option value="220000">북·중미</option>
+                                 <option value="230000">남미</option>
+                                 <option value="240000">유럽</option>
+                                 <option value="250000">오세아니아</option>
+                                 <option value="260000">아프리카</option>
+                                 <option value="270000">남극대륙</option>
+                                 <option value="280000">기타해외</option>
                              </select>
                          </div>
                      </div>

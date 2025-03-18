@@ -64,7 +64,7 @@
 	                         <a href="../main/main.do">Home</a>
 	                         <a href="">Cookies</a>
 	                         <a href="">Help</a>
-	                         <a href="">FQAs</a>
+	                         <a href="">FAQ</a>
 	                     </div>
 	                 </div>
 	             </div>
