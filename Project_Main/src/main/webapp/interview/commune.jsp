@@ -119,7 +119,13 @@
 						
 					</ul>
 					<div class="text-end" style="margin-right: 200px; margin-bottom: 30px;">
-					  <a class="btn btn-primary py-3 px-5" href="../interview/commune_insert.do">새글 작성</a>
+					 <c:if test="${sessionScope.id!=null }">
+					 <a class="btn btn-primary py-3 px-5" href="../interview/commune_insert.do">새글 작성</a>
+					 </c:if>
+					 <c:if test="${sessionScope.id==null }">
+					 <a href="javascript:void(0);" onclick="alert('로그인이 필요합니다!');" class="btn btn-primary py-3 px-5">새글 작성</a>
+					 </c:if>
+					  
 					</div>
 					<div class="tab-content">
 						<div id="tab-1" class="tab-pane fade show p-0 active">
@@ -129,7 +135,7 @@
 									<div>
 										<div class="d-flex align-items-center">
 											<div class="text-start ps-4" style="flex-grow: 1;">
-											  <a href="../interview/commune_detail.do">
+											  <a href="../interview/commune_detail.do?bno=${vo.bno }">
 												<h5 class="mb-3">${vo.subject }</h5>
 												<p class="mb-3" style="color:gray;">${vo.content }</p>
 											  </a>

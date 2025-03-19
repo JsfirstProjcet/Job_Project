@@ -16,10 +16,28 @@
 	<insert id="communeInsert" parameterType="CommuneVO">
     INSERT INTO community(bno, subject, content, regdate, hashtag, id, nickname)
     VALUES(co_bno_seq.nextval, #{subject}, #{content}, sysdate, #{hashtag}, #{id}, #{nickname})
-</insert>
-<!-- 	<update id="communeHitIncrement" parameterType="int">
+	</insert>
+ 	
+ 	<update id="communeHitIncrement" parameterType="int">
 		UPDATE community SET
 		hit=hit+1
 		WHERE bno=#{bno}
-	</update> -->
+	</update> 
+	
+	<select id="communeDetailData" resultType="CommuneVO" parameterType="int">
+		SELECT bno, subject, content, TO_CHAR(regdate,'YYYY-MM-DD HH:MI:SS') as dbday, hashtag, id, nickname,hit,type,reply,likes
+		FROM community
+		WHERE bno=#{bno}
+	</select>
+	
+	<update id="communeUpdate" parameterType="CommuneVO">
+	 	UPDATE community SET
+		subject=#{subject},content=#{content},hashtag=#{hashtag}
+		WHERE bno=#{bno}
+	</update>	
+	
+	<delete id="communeDelete" parameterType="int">
+	  DELETE FROM community
+	  WHERE bno=#{bno}
+	</delete>
 </mapper>

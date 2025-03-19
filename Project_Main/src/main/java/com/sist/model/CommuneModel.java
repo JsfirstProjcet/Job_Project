@@ -46,6 +46,7 @@ public class CommuneModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		
+		
 		request.setAttribute("main_jsp", "../interview/commune.jsp");
 		return "../main/main.jsp";
 	}
@@ -90,10 +91,59 @@ public class CommuneModel {
 	@RequestMapping("interview/commune_detail.do")
 	public String commune_detail(HttpServletRequest request, HttpServletResponse response) {
 		
+		String bno=request.getParameter("bno");
+		CommuneVO vo=CommuneDAO.communeDetailData(Integer.parseInt(bno));
 		
+		String[] hash=vo.getHashtag().split(",");
 		
+		request.setAttribute("hash", hash);
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../interview/commune_detail.jsp");
 		return "../main/main.jsp";
 	}
 	
+	// 업데이트
+	@RequestMapping("interview/commune_update.do")
+	public String qna_update(HttpServletRequest request, HttpServletResponse response) {
+		String bno=request.getParameter("bno");
+		CommuneVO vo=CommuneDAO.CommuneUpdateData(Integer.parseInt(bno));
+		String[] hashtag = vo.getHashtag().split(",");
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("hashtag",hashtag);
+		request.setAttribute("main_jsp", "../interview/commune_update.jsp");
+		return "../main/main.jsp";
+	}	
+	
+	//ajax로 처리 void 리다이렉트 없음 
+	@RequestMapping("interview/commune_update_ok.do")
+	public void commune_update_ok(HttpServletRequest request, HttpServletResponse response) {
+		
+		String subject=request.getParameter("subject");
+		String content=request.getParameter("content");
+		String bno=request.getParameter("bno");
+		String[] hashtag =request.getParameterValues("hashtag");
+		
+		String hash = "";
+	    if (hashtag != null) {
+	        hash = String.join(",", hashtag); // 콤마(,)로 구분해서 저장
+	    }
+		
+		CommuneVO vo=new CommuneVO();
+		vo.setBno(Integer.parseInt(bno));
+		vo.setSubject(subject);
+		vo.setContent(content);
+		vo.setHashtag(hash);
+		CommuneDAO.communeUpdate(vo);
+		
+	}
+	
+	// 삭제 
+	@RequestMapping("interview/commune_delete.do")
+	public String qna_delete(HttpServletRequest request, HttpServletResponse response) {
+			
+		String bno=request.getParameter("bno");
+		CommuneDAO.communeDelete(Integer.parseInt(bno));
+		return "redirect:../interview/commune_detail.do";
+	}
 }
