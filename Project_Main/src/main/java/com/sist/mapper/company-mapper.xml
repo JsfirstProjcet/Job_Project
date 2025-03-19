@@ -31,7 +31,7 @@
 	</select>
 	<!-- 기업 상세보기 -->
 	<select id="comDetailData" resultType="CompanyVO" parameterType="int">
-		SELECT cid,name,introduction,TO_CHAR(estdate,'YYYY-MM-DD') as dbestdate,c_type,ecount,
+		SELECT cid,name,introduction,TO_CHAR(estdate,'YYYY-MM-DD') as dbestdate,estdate,c_type,ecount,
 		TRUNC(take/1000000000000) as jo,
 		TRUNC(MOD(take,1000000000000)/100000000) as uk,
 		TRUNC(MOD(take,100000000)/10000) as man,
@@ -61,4 +61,12 @@
 		FROM company
 		WHERE cid=#{cid}
 	</select>
+	<insert id="comInsert" parameterType="CompanyVO">
+		INSERT INTO company(cid,name,cno)
+		VALUES(
+			#{cid},
+			#{name},
+			(SELECT NVL(MAX(cno)+1,1) FROM company)
+		)
+	</insert>
 </mapper>

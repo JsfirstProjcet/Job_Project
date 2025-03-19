@@ -22,4 +22,8 @@
       SELECT cid,pw,name,state,access_key
       FROM official
       WHERE email=#{email}
-  </select></mapper> 
+  </select>
+  <select id="officialGetCname" resultType="String" parameterType="String">
+  	SELECT cname FROM official WHERE cid=#{cid}
+  </select>
+ </mapper> 

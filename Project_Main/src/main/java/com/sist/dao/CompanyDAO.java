@@ -61,4 +61,9 @@ public class CompanyDAO {
 		session.close();
 		return cno;
 	}
+	public static void comInsert(CompanyVO vo) {
+		SqlSession session=ssf.openSession(true);
+		session.insert("comInsert",vo);
+		session.close();
+	}
 }

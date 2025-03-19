@@ -92,7 +92,6 @@ public class EmpModel {
 				fvo.setType(1);
 				eCheck=FollowDAO.followCheck(fvo);
 			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 		request.setAttribute("cCheck", cCheck);

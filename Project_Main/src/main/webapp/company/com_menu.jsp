@@ -117,6 +117,7 @@ function printComFollow(){
 						<h3 class="panel-title">기업관리</h3>
 					</div>
 					<ul class="list-group">
+						<li class="list-group-item"><a href="../company/com_update.do?cno=${vo.cno }">기업 정보 수정</a></li>
 						<li class="list-group-item"><a href="#">새 공고 등록</a></li>
 						<li class="list-group-item"><a href="#">공고 관리</a></li>
 						<li class="list-group-item"><a href="#">지원자 관리</a></li>
