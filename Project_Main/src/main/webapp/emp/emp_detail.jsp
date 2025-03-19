@@ -25,9 +25,115 @@ $(function(){
 	})
 	setTimeout(() => {
 	    $("a").removeAttr("target");
-	    $("a.btn-find-map").attr("target","_blank");
+	    $(".content a").attr("target","_blank");
 	}, 100)
 })
+function insertComFollow(cno){
+	let id='${sessionScope.id}'
+	console.log(id)
+	let type=0
+	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
+		$.ajax({
+			type:'post',
+			url:'../follow/follow_insert.do',
+			data:{"no":cno,"id":id,"type":type},
+			success:function(res){
+				printComFollow(cno)
+			}
+		})
+	}else {
+		alert("일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")
+		return
+	}
+}
+function deleteComFollow(cno){
+	let id='${sessionScope.id}'
+	let type=0
+	$.ajax({
+		type:'post',
+		url:'../follow/follow_delete.do',
+		data:{"no":cno,"id":id,"type":type},
+		success:function(res){
+			printComFollow(cno)
+		}
+	})
+}
+// 기업 팔로우
+function printComFollow(cno){
+	let id='${sessionScope.id}'
+	let type=0
+	let html=''
+	$.ajax({
+		type:'post',
+		url:'../follow/follow_print.do',
+		data:{"no":cno,"id":id,"type":type},
+		success:function(res){
+			if(res.check==0){
+				$('.follow-com').attr("onclick","insertComFollow("+cno+")")
+				$('.follow-com .bi-star-fill').css("color","gray")
+				
+				$('.follow-com .bi-star-fill').removeClass("bi-star-fill").addClass("bi-star")
+			}else if(res.check==1){
+				$('.follow-com').attr("onclick","deleteComFollow("+cno+")")
+				$('.follow-com .bi-star').css("color","orange")
+				
+				$('.follow-com .bi-star').removeClass("bi-star").addClass("bi-star-fill")
+			}
+		}
+	})
+}
+// 공고 팔로우
+function insertEmpFollow(eno){
+	let id='${sessionScope.id}'
+	let ftype=1
+	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
+		$.ajax({
+			type:'post',
+			url:'../follow/follow_insert.do',
+			data:{"no":eno,"id":id,"type":ftype},
+			success:function(res){
+				printEmpFollow(eno)
+			}
+		})
+	}else{
+		alert("일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")
+		return
+	}
+}
+function deleteEmpFollow(eno){
+	let id='${sessionScope.id}'
+	let ftype=1
+	$.ajax({
+		type:'post',
+		url:'../follow/follow_delete.do',
+		data:{"no":eno,"id":id,"type":ftype},
+		success:function(res){
+			printEmpFollow(eno)
+		}
+	})
+}
+function printEmpFollow(eno){
+	let id='${sessionScope.id}'
+	let ftype=1
+	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
+		$.ajax({
+			type:'post',
+			url:'../follow/follow_print.do',
+			data:{"no":eno,"id":id,"type":ftype},
+			success:function(res){
+				if(res.check==0){
+					$('.follow-emp .bi-heart-fill').removeClass("bi-heart-fill").addClass("bi-heart")
+					$('.follow-emp').attr("onclick","insertEmpFollow("+eno+")")
+				}else if(res.check==1){
+					$('.follow-emp .bi-heart').removeClass("bi-heart").addClass("bi-heart-fill")
+					$('.follow-emp').attr("onclick","deleteEmpFollow("+eno+")")
+				}
+				html='<i class="far fa-heart text-danger me-2"></i>'+res.fCount
+				$('.follow-span').html(html)
+			}
+		})
+	}
+}
 </script>
 <style type="text/css">
 </style>
@@ -57,9 +163,16 @@ $(function(){
                         <div class="row d-flex align-items-center mb-5">
                         	<div class="col-8" style="float: left;">
 	                            <strong><a href="../company/com_emp_list.do?cno=${cvo.cno }" >${evo.name }</a></strong>
-	                            <a href="#" class="btn btn-sm btn-light" style="border: 1px solid gray; border-radius: 5px;">
-	                            	<i class="far bi-star me-2" style="color: gray"></i>관심기업
-	                            </a>
+	                            <c:if test="${cCheck==0 }">
+		                            <a class="btn btn-sm btn-light follow-com" style="border: 1px solid gray; border-radius: 5px;" onclick="insertComFollow(${cvo.cno })">
+		                            	<i class="far bi-star me-2" style="color: gray"></i>관심기업
+		                            </a>
+	                            </c:if>
+	                            <c:if test="${cCheck==1 }">
+		                            <a class="btn btn-sm btn-light follow-com" style="border: 1px solid gray; border-radius: 5px;" onclick="deleteComFollow(${cvo.cno })">
+		                            	<i class="far bi-star-fill me-2" style="color: orange"></i>관심기업
+		                            </a>
+	                            </c:if>
                                 <h3 class="mb-3">${evo.title }</h3>
                         	</div>
                             <div class="col-4">
@@ -67,11 +180,16 @@ $(function(){
 									<div class="row mb-3" style="height: 20px; float: right">
 										<p">
 			                           		<span class="me-3"><i class="far bi-eye text-dark me-2"></i>${evo.hit }</span>
-											<span class="me-3"><i class="far fa-heart text-danger me-2"></i>${evo.fo_count }</span>
-					                        <span class="me-3"><i class="fas fa-user-tie text-primary me-2"></i>${evo.se_count }</span>
+											<span class="me-3 follow-span"><i class="far fa-heart text-danger me-2"></i>${evo.fo_count }</span>
+					                        <span class="me-3 seeker-span"><i class="fas fa-user-tie text-primary me-2"></i>${evo.se_count }</span>
 										</p>
 									</div>
-	                           		<a class="btn btn-light btn-square me-3 col-3" href="#"><i class="far fa-heart text-primary"></i></a>
+									<c:if test="${eCheck==0 }">
+		                           		<a class="btn btn-light btn-square me-3 col-3 follow-emp" onclick="insertEmpFollow(${evo.eno})"><i class="far bi-heart text-primary"></i></a>
+									</c:if>
+									<c:if test="${eCheck==1 }">
+		                           		<a class="btn btn-light btn-square me-3 col-3 follow-emp" onclick="deleteEmpFollow(${evo.eno})"><i class="far bi-heart-fill text-primary"></i></a>
+									</c:if>
 									<a class="btn btn-primary mb-3 col-9" href="#">지원하기</a>
 	                           	</div>
                             </div>
@@ -129,9 +247,16 @@ $(function(){
                         		<div class="col-10">
 		                        	<h3>기업정보</h3>
 	                        		<strong><a href="../company/com_emp_list.do?cno=${cvo.cno }" >${evo.name }</a></strong>
-		                            <a href="#" class="btn btn-sm btn-light" style="border: 1px solid gray; border-radius: 5px;">
-		                            	<i class="far bi-star me-2" style="color: gray"></i>관심기업
-		                            </a>
+		                            <c:if test="${cCheck==0 }">
+			                            <a class="btn btn-sm btn-light follow-com" style="border: 1px solid gray; border-radius: 5px;" onclick="insertComFollow(${cvo.cno })">
+			                            	<i class="far bi-star me-2" style="color: gray"></i>관심기업
+			                            </a>
+		                            </c:if>
+		                            <c:if test="${cCheck==1 }">
+			                            <a class="btn btn-sm btn-light follow-com" style="border: 1px solid gray; border-radius: 5px;" onclick="deleteComFollow(${cvo.cno })">
+			                            	<i class="far bi-star-fill me-2" style="color: orange"></i>관심기업
+			                            </a>
+		                            </c:if>
                         		</div>
                         		<div class="col-2">
 		                        	<c:if test="${cvo.poster!=null }">

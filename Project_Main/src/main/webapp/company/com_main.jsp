@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,9 +26,11 @@
     
 	<div class="container">
 		<div class="row">
-			<div class="col-3 bg-light" style="margin-bottom: -48px">
-				<jsp:include page="../company/com_menu.jsp"/>
-			</div>
+			<c:if test="${param.cno!=null&&param.cno!=0 }">
+				<div class="col-3 bg-light" style="margin-bottom: -48px">
+					<jsp:include page="../company/com_menu.jsp"/>
+				</div>
+			</c:if>
 			<div class="col-9">
 				<jsp:include page="${com_jsp}"/>
 			</div>

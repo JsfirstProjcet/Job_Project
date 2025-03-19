@@ -103,6 +103,16 @@ public class CompanyModel {
 				}
 			}
 		} catch (Exception e) {}
+		try {
+			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat newDtFormat = new SimpleDateFormat("YYYY년MM월dd일");
+			
+			Date formatDate = dtFormat.parse(vo.getDbestdate());
+			
+			vo.setDbestdate(newDtFormat.format(formatDate));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		List<WelfareVO> wList=CompanyDAO.comDetailWelfareData(vo.getCid());
 		List<WelfareVO> wTag=CompanyDAO.comDetailWelfareTag(vo.getCid());
 		
@@ -190,6 +200,9 @@ public class CompanyModel {
 				vo.setLoc(vo.getLoc().replaceAll(",", " |"));
 			}
 		}
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
 		// JSON변경
 		JSONArray arr=new JSONArray();
 		//eno,name,title,personal_history,loc,emp_type,hit,dbregdate,dbdeadline,fo_count,se_count,dtype,rtype
@@ -227,6 +240,22 @@ public class CompanyModel {
 					obj.put("ed_count",count);
 				}
 			}
+			if(id!=null) {
+				FollowVO fvo=new FollowVO();
+				fvo.setId(id);
+				fvo.setNo(vo.getEno());
+				fvo.setType(1);
+				int check=0;
+				int fCount=0;
+				try {
+					check=FollowDAO.followCheck(fvo);
+					fCount=FollowDAO.followCount(fvo);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				obj.put("check", check);
+				obj.put("fCount", fCount);
+			}
 			arr.add(obj);
 		}
 		// 전송
@@ -245,7 +274,27 @@ public class CompanyModel {
 	public String com_main(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		String cid=(String)session.getAttribute("cid");
-		int cno=CompanyDAO.conByCid(cid);
+		int state=(int)session.getAttribute("state");
+		int cno=0;
+		
+		try {
+			cno=CompanyDAO.conByCid(cid);
+		} catch (Exception e) {}
+		if(state==0) {//승인받지 못한 기업계정
+			String msg="승인 후 이용해주세요";
+			request.setAttribute("msg", msg);
+			request.setAttribute("main_jsp", "../company/com_error.jsp");
+			return "../main/main.jsp";
+		}else if(state==2) {//정지당한 기업계정
+			String msg="정지된 계정입니다<br>관리자에게 문의해주세요";
+			request.setAttribute("msg", msg);
+			request.setAttribute("main_jsp", "../company/com_error.jsp");
+			return "../main/main.jsp";
+		}else if(state==1&&cno==0) {
+			request.setAttribute("com_jsp", "../company/com_insert.jsp");
+			request.setAttribute("main_jsp", "../company/com_main.jsp");
+			return "../main/main.jsp";
+		}
 		return "redirect:../company/com_detail.do?cno="+cno;
 	}
 }

@@ -86,7 +86,7 @@ function jsonView(json){
 	let html=''
 	json.map(function(emp){
 		html+=''
-		+'<div class="job-item p-4 mb-4">'
+		+'<div class="job-item p-4 mb-2">'
 			+'<div class="row g-4">'
 				+'<div class="col-sm-12 col-md-9 d-flex align-items-center emp-box" >'
 					+'<div class="text-start ps-4 row text-loc">'
@@ -100,10 +100,7 @@ function jsonView(json){
 								html+=''
 								+emp.title
 							}
-						html+='&nbsp;&nbsp;&nbsp;&nbsp;'
-							+'<span class="text-truncate me-3"><i class="far bi-eye text-dark me-2"></i>'+emp.hit+'</span>'
-							+'<span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>'+emp.fo_count+'</span>'
-	                        +'<span class="text-truncate me-3"><i class="fas fa-user-tie text-primary me-2"></i>'+emp.se_count+'</span>'
+						html+=''
 						+'</strong>'
 						+'<small class="text-truncate me-3" title="'+emp.loc+'">'
 							+'<i class="fas fa-map-marker-alt text-primary me-2"></i>'+emp.loc
@@ -113,10 +110,16 @@ function jsonView(json){
 					+'</div>'
 				+'</div>'
 				+'<div class="col-sm-12 col-md-3 d-flex flex-column align-items-start align-items-md-end justify-content-center">'
-					+'<div class="d-flex mb-3">'
+					+'<div class="d-flex mb-1">'
 					if(json[0].mode==0){
+						if(emp.check==0){
+							html+=''
+							+'<a class="btn btn-light btn-square me-3 fo-insert-'+emp.eno+'" onclick="insertEmpFollow('+emp.eno+')"><i class="far bi-heart text-primary"></i></a>'
+						}else if(emp.check==1){
+							html+=''
+							+'<a class="btn btn-light btn-square me-3 fo-delete-'+emp.eno+'" onclick="deleteEmpFollow('+emp.eno+')"><i class="far bi-heart-fill text-primary"></i></a>'
+						}
 						html+=''
-						+'<a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>'
 						+'<a class="btn btn-primary" href="../emp/emp_detail.do?no='+emp.eno+'">Recruit</a>'
 					}else{
 						html+=''
@@ -124,9 +127,14 @@ function jsonView(json){
 					}
 				html+=''
 					+'</div>'
-					+'<div class="col-3">'
+					+'<div class="text-start ps-4 row text-loc">'
+						+'<strong>'
+						+'<span class="text-truncate me-3"><i class="far bi-eye text-dark me-2"></i>'+emp.hit+'</span>'
+						+'<span class="text-truncate me-3 follow-'+emp.eno+'"><i class="far fa-heart text-danger me-2"></i>'+emp.fo_count+'</span>'
+                        +'<span class="text-truncate me-3 seeker-'+emp.eno+'"><i class="fas fa-user-tie text-primary me-2"></i>'+emp.se_count+'</span>'
+						+'</strong>'
 					+'</div>'
-					+'<div class="col-9">'
+					+'<div class="row">'
 						+'<small class="text-truncate"><i class="far fa-calendar-times text-primary me-2"></i>'+emp.dbdeadline+'</small>'
 						+'<small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>'+emp.dbregdate+'등록</small>'
 					+'</div>'
@@ -147,7 +155,7 @@ function jsonView(json){
 							}else{
 								html+='1'
 							}
-						html+='('+(json[0].startPage-1)+')"><i class="fa fa-angle-double-left" aria-hidden="true"></i>이전</a>'
+						html+='('+(json[0].startPage-1)+')"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>'
 						+'</li>'
 					}
 					for(let i=json[0].startPage;i<=json[0].endPage;i++){
@@ -169,7 +177,7 @@ function jsonView(json){
 							}else{
 								html+='1'
 							}
-						html+='('+(json[0].endPage+1)+')">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>'
+						html+='('+(json[0].endPage+1)+')"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>'
 						+'</li>'
 					}
 			html+=''
@@ -180,6 +188,62 @@ function jsonView(json){
 			+'</div>'
 		+'</div>'
 	return html
+}
+// 공고 팔로우
+function insertEmpFollow(eno){
+	let id='${sessionScope.id}'
+	let ftype=1
+	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
+		$.ajax({
+			type:'post',
+			url:'../follow/follow_insert.do',
+			data:{"no":eno,"id":id,"type":ftype},
+			success:function(res){
+				printEmpFollow(eno)
+			}
+		})
+	}else{
+		alert("일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")
+		return
+	}
+}
+function deleteEmpFollow(eno){
+	let id='${sessionScope.id}'
+	let ftype=1
+	$.ajax({
+		type:'post',
+		url:'../follow/follow_delete.do',
+		data:{"no":eno,"id":id,"type":ftype},
+		success:function(res){
+			printEmpFollow(eno)
+		}
+	})
+}
+function printEmpFollow(eno){
+	let id='${sessionScope.id}'
+	let ftype=1
+	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
+		$.ajax({
+			type:'post',
+			url:'../follow/follow_print.do',
+			data:{"no":eno,"id":id,"type":ftype},
+			success:function(res){
+				if(res.check==0){
+					$('.fo-delete-'+eno+' .bi-heart-fill').removeClass("bi-heart-fill").addClass("bi-heart")
+					$('.fo-delete-'+eno).attr("onclick","insertEmpFollow("+eno+")")
+					
+					$('.fo-delete-'+eno).removeClass("fo-delete-"+eno).addClass("fo-insert-"+eno)
+				}else if(res.check==1){
+					$('.fo-insert-'+eno+' .bi-heart').removeClass("bi-heart").addClass("bi-heart-fill")
+					$('.fo-insert-'+eno).attr("onclick","deleteEmpFollow("+eno+")")
+					
+					$('.fo-insert-'+eno).removeClass("fo-insert-"+eno).addClass("fo-delete-"+eno)
+				}
+				html='<i class="far fa-heart text-danger me-2"></i>'+res.fCount
+				$('.follow-'+eno).html(html)
+			}
+		})
+	}
 }
 </script>
 <style type="text/css">

@@ -10,6 +10,7 @@ import com.sist.vo.*;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class EmpModel {
@@ -73,6 +74,30 @@ public class EmpModel {
 		CompanyVO cvo=CompanyDAO.comDetailData(cno);
 		
 		List<JobVO> jList=EmpDAO.empDetailJobData(evo.getEno());
+		
+		////////// follow 정보
+		int cCheck=0;
+		int eCheck=0;
+
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		if(id!=null) {
+			FollowVO fvo=new FollowVO();
+			fvo.setId(id);
+			try {
+				fvo.setNo(cno);
+				fvo.setType(0);
+				cCheck=FollowDAO.followCheck(fvo);
+				fvo.setNo(Integer.parseInt(eno));
+				fvo.setType(1);
+				eCheck=FollowDAO.followCheck(fvo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		request.setAttribute("cCheck", cCheck);
+		request.setAttribute("eCheck", eCheck);
+		//////////
 		
 		request.setAttribute("evo", evo);
 		request.setAttribute("cvo", cvo);
