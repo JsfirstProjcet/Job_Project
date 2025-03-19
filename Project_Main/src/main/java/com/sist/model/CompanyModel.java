@@ -240,22 +240,22 @@ public class CompanyModel {
 					obj.put("ed_count",count);
 				}
 			}
+			int check=0;
+			int fCount=0;
+			FollowVO fvo=new FollowVO();
+			fvo.setId(id);
+			fvo.setNo(vo.getEno());
+			fvo.setType(1);
+			fCount=FollowDAO.followCount(fvo);
 			if(id!=null) {
-				FollowVO fvo=new FollowVO();
-				fvo.setId(id);
-				fvo.setNo(vo.getEno());
-				fvo.setType(1);
-				int check=0;
-				int fCount=0;
 				try {
 					check=FollowDAO.followCheck(fvo);
-					fCount=FollowDAO.followCount(fvo);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				obj.put("check", check);
-				obj.put("fCount", fCount);
 			}
+			obj.put("check", check);
+			obj.put("fCount", fCount);
 			arr.add(obj);
 		}
 		// 전송

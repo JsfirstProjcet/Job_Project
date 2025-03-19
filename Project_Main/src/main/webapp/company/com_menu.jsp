@@ -28,8 +28,14 @@ function insertComFollow(cno){
 				printComFollow()
 			}
 		})
+	}else if(${sessionScope.cid!=null}){
+		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")){
+		}else{
+			return
+		}
 	}else {
 		alert("일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")
+		javascript:login()
 		return
 	}
 }
