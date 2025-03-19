@@ -144,6 +144,7 @@ public class CommuneModel {
 			
 		String bno=request.getParameter("bno");
 		CommuneDAO.communeDelete(Integer.parseInt(bno));
-		return "redirect:../interview/commune_detail.do";
+		
+		return "redirect:../interview/commune.do?msg=delete";
 	}
 }
