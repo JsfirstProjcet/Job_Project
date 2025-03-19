@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.service-mapper">
+  <!-- QnA 리스트 -->
+  <select id="getServiceList" resultType="ServiceVO" parameterType="hashmap">
+    select id, pid, qtitle, visible, ok, qdate, num
+    from (select id, pid, qtitle, visible, ok, qdate, ROWNUM as num
+          from (select id, pid, qtitle, visible, ok, qdate
+                from SERVICE
+                order by id desc))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- QnA 상세 보기 -->
+  <select id="getServiceDetail" resultType="ServiceVO" parameterType="string">
+    SELECT id,
+           pid,
+           qtitle,
+           qcontent,
+           atitle,
+           acontent,
+           visible,
+           ok,
+           qdate,
+           adate
+    FROM SERVICE
+    where id = #{id}
+  </select>
+  <!-- 문의 -->
+  <insert id="serviceInsert" parameterType="ServiceVO">
+    INSERT INTO SERVICE(id, pid, qtitle, qcontent, visible, qdate)
+    VALUES (SERVICE_LIST_SEQ.nextval, #{pid}, #{title}, #{content}, #{visible}, sysdate)
+  </insert>
+  <!-- 답변 -->
+  <update id="serviceAnswerUpdate" parameterType="ServiceVO">
+    UPDATE SERVICE
+    SET ATITLE=#{title},
+        ACONTENT=#{content},
+        ADATE=#{date},
+        OK=1
+    WHERE id = #{id}
+  </update>
+  <!-- QnA 삭제 -->
+  <select id="serviceDelete" parameterType="string">
+    delete
+    from SERVICE
+    where id = #{id}
+  </select>
+</mapper>

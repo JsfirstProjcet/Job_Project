@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.user-mapper">
+  <!-- 유저 리스트 -->
+  <select id="getUserList" resultType="UserVO" parameterType="hashmap">
+    SELECT id, nickname, email, name, phone, num
+    FROM (SELECT id, nickname, email, name, phone, rownum as num
+          FROM (SELECT id, nickname, email, name, phone
+                FROM PERSONAL
+                order by id desc))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- 유저 상세 보기 -->
+  <select id="getUserDetail" resultType="UserVO" parameterType="string">
+    SELECT id,
+           nickname,
+           email,
+           sex,
+           addr1,
+           addr2,
+           poster,
+           name,
+           phone
+    FROM PERSONAL
+    where id = #{id}
+  </select>
+  <!-- 유저 삭제 -->
+  <select id="userDelete" parameterType="string">
+    delete
+    from PERSONAL
+    where id = #{id}
+  </select>
+</mapper>

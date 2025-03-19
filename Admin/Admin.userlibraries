@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="Maven: org.opentest4j:opentest4j:1.3.0">
+    <archive path="/Users/cl0ud/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar" />
+  </library>
+  <library name="Maven: org.junit.jupiter:junit-jupiter-engine:5.11.0">
+    <archive path="/Users/cl0ud/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.0/junit-jupiter-engine-5.11.0.jar" />
+  </library>
+  <library name="Maven: org.junit.jupiter:junit-jupiter-api:5.11.0">
+    <archive path="/Users/cl0ud/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.0/junit-jupiter-api-5.11.0.jar" />
+  </library>
+  <library name="Maven: org.junit.platform:junit-platform-engine:1.11.0">
+    <archive path="/Users/cl0ud/.m2/repository/org/junit/platform/junit-platform-engine/1.11.0/junit-platform-engine-1.11.0.jar" />
+  </library>
+  <library name="Maven: org.junit.platform:junit-platform-commons:1.11.0">
+    <archive path="/Users/cl0ud/.m2/repository/org/junit/platform/junit-platform-commons/1.11.0/junit-platform-commons-1.11.0.jar" />
+  </library>
+  <library name="slf4j-api-2.0.1">
+    <archive path="/Users/cl0ud/IdeaProjects/Admin/src/main/webapp/WEB-INF/lib/slf4j-api-2.0.1.jar" />
+  </library>
+  <library name="ojdbc8">
+    <archive path="/Users/cl0ud/IdeaProjects/Admin/src/main/webapp/WEB-INF/lib/ojdbc8.jar" />
+  </library>
+  <library name="log4j-api-2.19.0">
+    <archive path="/Users/cl0ud/IdeaProjects/Admin/src/main/webapp/WEB-INF/lib/log4j-api-2.19.0.jar" />
+  </library>
+  <library name="lombok">
+    <archive path="/Users/cl0ud/IdeaProjects/Admin/src/main/webapp/WEB-INF/lib/lombok.jar" />
+  </library>
+  <library name="con">
+    <archive path="/Users/cl0ud/IdeaProjects/Admin/src/main/webapp/WEB-INF/lib/con.jar" />
+  </library>
+  <library name="mybatis-3.5.11">
+    <archive path="/Users/cl0ud/IdeaProjects/Admin/src/main/webapp/WEB-INF/lib/mybatis-3.5.11.jar" />
+  </library>
+  <library name="Maven: org.apiguardian:apiguardian-api:1.1.2">
+    <archive path="/Users/cl0ud/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar" />
+  </library>
+  <library name="Maven: jakarta.servlet:jakarta.servlet-api:6.1.0">
+    <archive path="/Users/cl0ud/.m2/repository/jakarta/servlet/jakarta.servlet-api/6.1.0/jakarta.servlet-api-6.1.0.jar" />
+  </library>
+  <library name="Maven: org.jetbrains:annotations:13.0">
+    <archive path="/Users/cl0ud/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar" />
+  </library>
+  <library name="@tailwindcss">
+    <archive path="/Users/cl0ud/Library/Application Support/JetBrains/IntelliJIdea2024.3/javascript/extLibs/http_unpkg.com_@tailwindcss_browser@4.js" />
+  </library>
+  <library name="bootstrap">
+    <archive path="/Users/cl0ud/Library/Application Support/JetBrains/IntelliJIdea2024.3/javascript/extLibs/http_cdn.jsdelivr.net_npm_bootstrap@5.3.3_dist_css_bootstrap.css" />
+  </library>
+</eclipse-userlibraries>
+

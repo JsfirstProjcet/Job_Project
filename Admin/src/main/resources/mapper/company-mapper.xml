@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.company-mapper">
+  <!-- 기업 리스트 -->
+  <select id="getCompanyList" resultType="CompanyVO" parameterType="hashmap">
+    SELECT cid,
+           email,
+           cname,
+           name,
+           phone,
+           brnumber,
+           access_key,
+           num
+    FROM (SELECT cid,
+                 email,
+                 cname,
+                 name,
+                 phone,
+                 brnumber,
+                 access_key,
+                 rownum as num
+          FROM (SELECT cid,
+                       email,
+                       cname,
+                       name,
+                       phone,
+                       brnumber,
+                       access_key
+                FROM OFFICIAL
+                order by cid desc))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- 기업 상세 보기 -->
+  <select id="getCompanyDetail" resultType="CompanyVO" parameterType="string">
+    SELECT cid,
+           email,
+           cname,
+           name,
+           phone,
+           brnumber,
+           access_key
+    FROM OFFICIAL
+    WHERE cid = #{id}
+  </select>
+  <!-- 기업 계정 삭제 -->
+  <select id="companyDelete" parameterType="string">
+    delete
+    from OFFICIAL
+    where cid = #{id}
+  </select>
+</mapper>
