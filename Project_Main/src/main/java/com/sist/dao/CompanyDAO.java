@@ -27,10 +27,10 @@ public class CompanyDAO {
 		session.close();
 		return list;
 	}
-	public static int companyTotalPage()
+	public static int companyTotalPage(String tab)
 	{
 		SqlSession session=ssf.openSession();
-		int total=session.selectOne("companyTotalPage");
+		int total=session.selectOne("companyTotalPage",tab);
 		session.close();
 		return total;
 	}

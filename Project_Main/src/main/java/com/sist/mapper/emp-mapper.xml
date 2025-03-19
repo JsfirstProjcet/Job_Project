@@ -30,7 +30,13 @@
  	   WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="empTotalPage" resultType="int">
-	   SELECT CEIL(COUNT(*)/12.0) FROM employment
+	   SELECT CEIL(COUNT(*)/12.0) 
+	   FROM employment
+	   <where>
+	       <if test="tab != 'all'">
+	            AND emp_type = #{tab}
+	       </if>
+       </where>
 	</select>
 	<!-- 기업 -->
 	<select id="empComListData" resultType="EmpVO" parameterType="hashmap">

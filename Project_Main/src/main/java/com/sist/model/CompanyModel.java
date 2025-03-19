@@ -43,7 +43,7 @@ public class CompanyModel {
 		map.put("end",curpage*12);
 		map.put("tab", tab);
 		List<CompanyVO> list=CompanyDAO.companyListData(map);
-		int totalpage=CompanyDAO.companyTotalPage();
+		int totalpage=CompanyDAO.companyTotalPage(tab);
 	  
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
