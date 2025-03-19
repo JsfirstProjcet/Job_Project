@@ -31,18 +31,21 @@
     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
       <i class="fas fa-ellipsis-v"></i>
     </button>
-	<c:if test="${sessionScope.id!=null and sessionScope.id==vo.id}">
+    <c:choose>
+    <c:when test="${sessionScope.id!=null and sessionScope.id==vo.id}">
+    
 	    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="reportDropdown">
 	      <li><a href="../interview/commune_update.do?bno=${vo.bno }" class="dropdown-item" >게시글 수정</a></li>
 	      <li><a href="../interview/commune_delete.do?bno=${vo.bno }" class="dropdown-item">게시글 삭제</a></li>
 	    </ul>
-    </c:if>
-    <c:if test="${sessionScope.id==null">
+    </c:when>
+    <c:otherwise>
 	    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="reportDropdown">
-	      <li><a href="../interview/commune_update.do?bno=${vo.bno }" class="dropdown-item" >게시글 수정</a></li>
-	      <li><a href="../interview/commune_delete.do?bno=${vo.bno }" class="dropdown-item">게시글 삭제</a></li>
+	      <li><a href="javascript:void(0);"  onclick="alert('작성자만 수정 가능합니다.');" class="dropdown-item" >게시글 수정</a></li>
+	      <li><a href="javascript:void(0);"  onclick="alert('작성자만 삭제 가능합니다.');" class="dropdown-item">게시글 삭제</a></li>
 	    </ul>
-    </c:if>
+    </c:otherwise>
+    </c:choose>
   </div>
 </div>
 
