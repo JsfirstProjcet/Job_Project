@@ -37,7 +37,12 @@
 	      <li><a href="../interview/commune_delete.do?bno=${vo.bno }" class="dropdown-item">게시글 삭제</a></li>
 	    </ul>
     </c:if>
-	              	 
+    <c:if test="${sessionScope.id==null">
+	    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="reportDropdown">
+	      <li><a href="../interview/commune_update.do?bno=${vo.bno }" class="dropdown-item" >게시글 수정</a></li>
+	      <li><a href="../interview/commune_delete.do?bno=${vo.bno }" class="dropdown-item">게시글 삭제</a></li>
+	    </ul>
+    </c:if>
   </div>
 </div>
 
