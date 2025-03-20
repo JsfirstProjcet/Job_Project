@@ -25,16 +25,12 @@
     <!-- Header End -->
     
 	<div class="container">
-		<div class="row" style="min-height: 800px">
+		<div class="row">
 			<c:if test="${param.cno!=null&&param.cno!=0 }">
 				<div class="col-3 bg-light" style="margin-bottom: -48px">
 					<jsp:include page="../company/com_menu.jsp"/>
 				</div>
 			</c:if>
-		<div class="row">
-			<div class="col-3 bg-light" style="margin-bottom: -48px">
-				<jsp:include page="../company/com_menu.jsp"/>
-			</div>
 			<div class="col-9">
 				<jsp:include page="${com_jsp}"/>
 			</div>
