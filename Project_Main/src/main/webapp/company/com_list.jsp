@@ -104,13 +104,13 @@
 											        <a href="../company/com_detail_before.do?cno=${vo.cno }" class="text-decoration-none text-dark">${vo.name }</a>
 											    </h5>
  	                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>대한민국, ${vo.address.substring(0,2) }</span>
- 	                                            <span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>${vo.fo_count }</span>
+ 	                                            <span class="text-truncate me-3"><i class="far fa-star text-warning me-2"></i>${vo.fo_count }</span>
  	                                            <span class="text-truncate me-0"><i class="far fa-building text-primary me-2"></i>${vo.c_type }</span>
  	                                        </div>
  	                                    </div>
  	                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
  	                                        <div class="d-flex mb-3">
- 	                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+ 	                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-star text-primary"></i></a>
  	                                            <a class="btn btn-primary" href="../company/com_emp_list.do?cno=${vo.cno }">Recruit</a>
  	                                        </div>
  	                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>설립일 :
