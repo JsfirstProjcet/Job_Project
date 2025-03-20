@@ -36,10 +36,10 @@ public class EmpDAO {
 		session.close();
 		return list;
 	}
-	public static int empTotalPage()
+	public static int empTotalPage(String tab)
 	{
 		SqlSession session=ssf.openSession();
-		int total=session.selectOne("empTotalPage");
+		int total=session.selectOne("empTotalPage",tab);
 		session.close();
 		return total;
 	}

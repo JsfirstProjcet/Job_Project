@@ -30,17 +30,17 @@
 </style>
 </head>
 <body>
-	<div class="container" style="max-width: 900px; margin: 0 auto;">
+	<div class="container" style="max-width: 800px; margin: 0 auto;">
 		<h4 class="mb-4 mt-5">커뮤니티 글 입력</h4>
 		<form method="post" action="../interview/commune_insert_ok.do">
 			<div class="row g-3" style="margin: 0 auto;">
 				<div class="col-12">
 					 <h4> 제목 </h4>
-					 <input type="text" class="form-control" name=subject placeholder="제목을 입력하세요" style="width: 80%">
+					 <input type="text" class="form-control" name=subject placeholder="제목을 입력하세요" style="width: 100%">
 				</div>
 				<div class="col-12">
 					<h4> 내용 </h4>
-					<textarea rows="10" cols="50" name=content placeholder="내용을 입력하세요" style="width: 80%"></textarea>
+					<textarea rows="10" cols="50" name=content placeholder="내용을 입력하세요" style="width: 100%"></textarea>
 				</div>
 				<!-- <div class="col-12 col-sm-6">
 					<input type="text" class="form-control" placeholder="Portfolio Website">
@@ -51,7 +51,7 @@
 				<div class="col-12">
 					<textarea class="form-control" rows="5" placeholder="Coverletter"></textarea>
 				</div> -->
-					<div class="col-12" style="width: 80%">
+					<div class="col-12" style="width: 100%">
 					<h4>해시태그</h4>
 					<div style="display: flex; flex-wrap: wrap; gap: 5px;">
 						<input type="checkbox" id="tag1" name="hashtag" value="#신입">
@@ -77,8 +77,9 @@
 					</div>
 				</div>
 					
-					<div class="col-12" style="width: 80%">
-						<button class="btn btn-primary w-100" type="submit" >등록하기</button>
+					<div class="col-12 " style="width: 100%; display: flex; justify-content: space-between; gap: 10px;">
+						<button class="btn btn-secondary w-50" type="button" onclick="javascript:history.back()">취소하기</button>
+						<button class="btn btn-primary w-50" type="submit" >등록하기</button>
 					</div>
 			</div>
 		</form>

@@ -31,6 +31,10 @@
 					<jsp:include page="../company/com_menu.jsp"/>
 				</div>
 			</c:if>
+		<div class="row">
+			<div class="col-3 bg-light" style="margin-bottom: -48px">
+				<jsp:include page="../company/com_menu.jsp"/>
+			</div>
 			<div class="col-9">
 				<jsp:include page="${com_jsp}"/>
 			</div>

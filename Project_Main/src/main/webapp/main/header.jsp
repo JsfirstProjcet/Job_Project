@@ -45,16 +45,14 @@
 	                    <a href="../interview/interview_find.do" class="dropdown-item">인터뷰 찾기</a>
 	                </div>
 	            </div>
-	            <c:if test="${sessionScope.cid!=null }">
-		            <div class="nav-item dropdown">
-		                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업페이지</a>
-		                <div class="dropdown-menu rounded-0 m-0">
-		                    <a href="../company/com_main.do" class="dropdown-item">MyCompany</a>
-		                    <a href="#" class="dropdown-item">등록한 공고</a>
-		                    <a href="#" class="dropdown-item">지원자</a>
-		                </div>
-		            </div>
-	            </c:if>
+	            <div class="nav-item dropdown">
+	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업페이지</a>
+	                <div class="dropdown-menu rounded-0 m-0">
+	                    <a href="../company/com_main.do" class="dropdown-item">MyCompany</a>
+	                    <a href="#" class="dropdown-item">등록한 공고</a>
+	                    <a href="#" class="dropdown-item">지원자</a>
+	                </div>
+	            </div>
 	            <c:if test="${sessionScope.id!=null and sessionScope.isadmin==0 }">
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">마이페이지</a>

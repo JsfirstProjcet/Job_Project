@@ -27,7 +27,13 @@
  	   WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="companyTotalPage" resultType="int">
-	   SELECT CEIL(COUNT(*)/12.0) FROM company
+	   SELECT CEIL(COUNT(*)/12.0) 
+	   FROM company
+	   <where>
+	      <if test="tab != 'all'">
+	            AND c_type = #{tab}
+	      </if>
+       </where>	   
 	</select>
 	<!-- 기업 상세보기 -->
 	<select id="comDetailData" resultType="CompanyVO" parameterType="int">

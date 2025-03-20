@@ -2,21 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
-<!--
-Template Name: Spourmo
-Author: <a href="https://www.os-templates.com/">OS Templates</a>
-Author URI: https://www.os-templates.com/
-Copyright: OS-Templates.com
-Licence: Free to use under our free template licence terms
-Licence URI: https://www.os-templates.com/template-terms
--->
-<html lang="">
-<!-- To declare your language - read more here: https://www.w3.org/International/questions/qa-html-language-declarations -->
+<html lang="ko">
 <head>
 
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	
 <style type="text/css">
 .heading{
@@ -281,18 +270,5 @@ Licence URI: https://www.os-templates.com/template-terms
 			</div>
 		</main>
 	</div>
-	       <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    
-        <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../lib/wow/wow.min.js"></script>
-    <script src="../lib/easing/easing.min.js"></script>
-    <script src="../lib/waypoints/waypoints.min.js"></script>
-    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="../js/main.js"></script>
 </body>
 </html>
