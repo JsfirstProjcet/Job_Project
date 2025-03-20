@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.follow-mapper">
+	<insert id="followInsert" parameterType="FollowVO">
+		INSERT into FOLLOW VALUES(
+			(SELECT NVL(MAX(fno)+1,1) FROM follow),
+			#{id},
+			#{no},
+			#{type}
+		)
+	</insert>
+	<delete id="followDelete" parameterType="int">
+		DELETE FROM follow
+		WHERE fno=#{fno}
+	</delete>
+	<select id="followCheck" resultType="int" parameterType="FollowVO">
+		SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE id=#{id} AND no=#{no} AND type=#{type}
+	</select>
+	<select id="followCount" resultType="int" parameterType="FollowVO">
+		SELECT COUNT(*)
+		FROM FOLLOW
+		WHERE no=#{no} AND type=#{type}
+	</select>
+	<select id="followFno" resultType="int" parameterType="FollowVO">
+		SELECT fno
+		FROM FOLLOW
+		WHERE id=#{id} AND no=#{no} AND type=#{type}
+	</select>
+</mapper>

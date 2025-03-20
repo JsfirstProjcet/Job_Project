@@ -14,6 +14,7 @@
     <typeAlias type="com.sist.vo.InterviewVO" alias="InterviewVO"/>
     <typeAlias type="com.sist.vo.CommuneVO" alias="CommuneVO"/>
     <typeAlias type="com.sist.vo.JobVO" alias="JobVO"/>
+    <typeAlias type="com.sist.vo.FollowVO" alias="FollowVO"/>
   </typeAliases>
   <!-- 오라클 환경 설정 getConnection / disConnection-->
   <environments default="development">
@@ -35,5 +36,6 @@
     <mapper resource="com/sist/mapper/official-mapper.xml"/>
     <mapper resource="com/sist/mapper/interview-mapper.xml" />
     <mapper resource="com/sist/mapper/commune-mapper.xml" />
+    <mapper resource="com/sist/mapper/follow-mapper.xml" />
   </mappers>
 </configuration>

@@ -33,7 +33,7 @@ public class EmpModel {
 		map.put("end",curpage*12);
 		map.put("tab", tab);
 		List<EmpVO> list=EmpDAO.empListData(map);
-		int totalpage=EmpDAO.empTotalPage();
+		int totalpage=EmpDAO.empTotalPage(tab);
 	  
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
