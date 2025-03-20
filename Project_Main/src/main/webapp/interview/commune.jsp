@@ -35,62 +35,24 @@
 			<div class="container">
 				<h1 class="text-center mb-5">Our Clients Say!!!</h1>
 				<div class="owl-carousel testimonial-carousel">
-					<div class="testimonial-item bg-light rounded p-4">
-						<i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-						<p>Dolor et eos labore, stet justo sed est sed. Diam sed sed
-							dolor stet amet eirmod eos labore diam</p>
-						<div class="d-flex align-items-center">
+				   <c:forEach var="tvo" items="${topList }">
+					<div class="testimonial-item bg-light rounded p-4" style="height: 220px; display: flex; flex-direction: column; justify-content: space-between;">
+						<div>
+							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${tvo.subject }</p>
+							<p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">${tvo.content }</p>
+						</div>
+						<div class="d-flex align-items-center mt-2">
 							<img class="../img-fluid flex-shrink-0 rounded"
 								src="../img/testimonial-1.jpg"
 								style="width: 50px; height: 50px;">
 							<div class="ps-3">
-								<h5 class="mb-1">Client Name</h5>
-								<small>Profession</small>
+								<h5 class="mb-1">${tvo.nickname}</h5>
+								<small>${tvo.nickname }</small>
 							</div>
 						</div>
 					</div>
-					<div class="testimonial-item bg-light rounded p-4">
-						<i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-						<p>Dolor et eos labore, stet justo sed est sed. Diam sed sed
-							dolor stet amet eirmod eos labore diam</p>
-						<div class="d-flex align-items-center">
-							<img class="../img-fluid flex-shrink-0 rounded"
-								src="../img/testimonial-2.jpg"
-								style="width: 50px; height: 50px;">
-							<div class="ps-3">
-								<h5 class="mb-1">Client Name</h5>
-								<small>Profession</small>
-							</div>
-						</div>
-					</div>
-					<div class="testimonial-item bg-light rounded p-4">
-						<i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-						<p>Dolor et eos labore, stet justo sed est sed. Diam sed sed
-							dolor stet amet eirmod eos labore diam</p>
-						<div class="d-flex align-items-center">
-							<img class="../img-fluid flex-shrink-0 rounded"
-								src="../img/testimonial-3.jpg"
-								style="width: 50px; height: 50px;">
-							<div class="ps-3">
-								<h5 class="mb-1">Client Name</h5>
-								<small>Profession</small>
-							</div>
-						</div>
-					</div>
-					<div class="testimonial-item bg-light rounded p-4">
-						<i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-						<p>Dolor et eos labore, stet justo sed est sed. Diam sed sed
-							dolor stet amet eirmod eos labore diam</p>
-						<div class="d-flex align-items-center">
-							<img class="../img-fluid flex-shrink-0 rounded"
-								src="../img/testimonial-4.jpg"
-								style="width: 50px; height: 50px;">
-							<div class="ps-3">
-								<h5 class="mb-1">Client Name</h5>
-								<small>Profession</small>
-							</div>
-						</div>
-					</div>
+				    </c:forEach>
+					
 				</div>
 			</div>
 		</div>

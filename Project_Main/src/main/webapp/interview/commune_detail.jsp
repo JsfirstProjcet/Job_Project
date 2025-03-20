@@ -15,6 +15,10 @@
         alert('링크가 복사되었습니다!');
       })
   }
+  
+  function replyclear(){
+	  document.getElementById('replytext').value="";
+  }
 
 </script>
 </head>
@@ -131,32 +135,29 @@
       <img src="../img/woman.png" alt="프로필" class="rounded-circle me-2"  width="50" height="50">
       <span class="fw-bold text-primary">우기99님</span><span class="ms-1">, 따뜻한 댓글을 남겨주세요 :)</span>
     </div>
-    <textarea class="form-control mb-2" rows="5" placeholder="댓글을 입력해주세요 :)"></textarea>
+    <textarea class="form-control mb-2" rows="5" placeholder="댓글을 입력해주세요 :)" id="replytext"></textarea>
     <div class="d-flex justify-content-between align-items-center">
       <small class="text-muted">0/5000자</small>
       <div>
-        <button class="btn btn-light btn-sm me-2">취소</button>
+        <button class="btn btn-light btn-sm me-2" onclick="replyclear()">취소</button>
         <button class="btn btn-primary btn-sm">등록</button>
       </div>
     </div>
   </div>
 
   <!-- 댓글 리스트 아이템 -->
+  <c:forEach var="rvo" items="${rList}">
   <div class="card p-4 mb-3">
     <div class="d-flex mb-3 align-items-center">
       <img src="../img/woman.png" alt="댓글 작성자" class="rounded-circle me-2" width="50" height="50">
       <div>
-        <div class="fw-bold">HR백풍원 <span class="badge bg-light text-secondary ms-1">주식회사루미루코리아</span></div>
-        <div class="text-muted small">인사(HR) 8년차 · 6시간 전</div>
+        <div class="fw-bold">${rvo.nickname } <span class="badge bg-light text-secondary ms-1">주식회사루미루코리아</span></div>
+        <div class="text-muted small">인사(HR) 8년차 · ${rvo.dbday}</div>
       </div>
     </div>
 
     <div class="mb-3" style="white-space: pre-line;">
-      안녕하세요~ 사람인 공식 멘토이자 인사담당자 9년차 경험을 가지고 있는 HR백풍원 입니다~  
-      인원이 적으면 잘못 채용한 사람 하나만 잘못 들어올 경우 내부 분위기를 해치는 데 있어서  
-      상당히 리스크가 큽니다.  
-      면접보시면 정말 다양한 수단을 통해서 면접자를 걸러내게 되긴 하는데  
-      솔직히 합하면 이렇게 해도 사람 속은 모르죠
+     ${rvo.msg }
     </div>
 
     <div class="d-flex justify-content-between align-items-center">
@@ -171,6 +172,7 @@
       <button class="btn btn-outline-primary btn-sm">멘토링 신청</button>
     </div>
   </div>
+  </c:forEach>
 
 </div>
 <!-- 댓글 영역 끝 -->

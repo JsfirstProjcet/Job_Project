@@ -37,8 +37,6 @@ public class CommuneDAO {
 				session.close();
 		}
 		return list;
-		
-				
 	}
 	/*
 	 * <select id="communeTotalPage" resultType="int">
@@ -159,5 +157,30 @@ public class CommuneDAO {
 			if(session!=null)
 				session.close();
 		}
+	}
+	/*
+	 * 	<!-- 조회수 높은거 상단에 -->
+		<select id="communeTop4" resultType="CommuneVO">
+	    SELECT bno, subject, nickname, hit
+	    FROM community
+	    ORDER BY hit DESC
+	    LIMIT 4
+		</select>
+	 */
+	
+	public static List<CommuneVO> communeTop4() {
+		SqlSession session=null;
+		List<CommuneVO> list=null;
+		try {
+			session=ssf.openSession();
+			list=session.selectList("communeTop4");
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		return list;
 	}
 }
