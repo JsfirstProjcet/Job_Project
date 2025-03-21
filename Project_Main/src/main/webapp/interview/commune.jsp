@@ -33,26 +33,32 @@
 		<!-- Testimonial Start -->
 		<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
 			<div class="container">
-				<h1 class="text-center mb-5">Our Clients Say!!!</h1>
+				<h1 class="text-center mb-5">오늘의 인기글 !!!</h1>
 				<div class="owl-carousel testimonial-carousel">
 				   <c:forEach var="tvo" items="${topList }">
-					<div class="testimonial-item bg-light rounded p-4" style="height: 220px; display: flex; flex-direction: column; justify-content: space-between;">
+					    <div class="testimonial-item bg-light rounded p-4 position-relative" 
+      						   style="height: 220px; display: flex; flex-direction: column; justify-content: space-between;">
+						  <!-- 인기글 배지 -->
+						      <span class="badge bg-danger position-absolute me-2 rounded-pill" style="top: 15px; left: 20px; z-index: 1;">
+						        인기글
+						      </span>
 						<div>
-							<p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${tvo.subject }</p>
-							<p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;">${tvo.content }</p>
+						<a href="../interview/commune_detail.do?bno=${tvo.bno }" >
+							<h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black; margin-top: 20px;">${tvo.subject }</h5>
+							<p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: black">${tvo.content }</p>
+						</a>
 						</div>
 						<div class="d-flex align-items-center mt-2">
-							<img class="../img-fluid flex-shrink-0 rounded"
-								src="../img/testimonial-1.jpg"
-								style="width: 50px; height: 50px;">
+							<img class="../img-fluid flex-shrink-0 rounded"	src="../img/${tvo.poster }"		style="width: 50px; height: 50px;">
 							<div class="ps-3">
 								<h5 class="mb-1">${tvo.nickname}</h5>
-								<small>${tvo.nickname }</small>
+								<small>${tvo.dbday }</small>
+							
 							</div>
 						</div>
 					</div>
-				    </c:forEach>
 					
+				    </c:forEach>
 				</div>
 			</div>
 		</div>
@@ -61,25 +67,24 @@
 		<!-- Jobs Start -->
 		<div class="container-xxl py-5">
 			<div class="container">
-				<h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job
-					Listing</h1>
+				<h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">게시글</h1>
 				<div class="tab-class text-center wow fadeInUp"
 					data-wow-delay="0.3s">
 					<ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-3" >
 						<li class="nav-item"><a
 							class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active"
 							data-bs-toggle="pill" href="#tab-1">
-								<h6 class="mt-n1 mb-0">Featured</h6>
+								<h6 class="mb-0">최신순</h6>
 						</a></li>
 						<li class="nav-item"><a
 							class="d-flex align-items-center text-start mx-3 pb-3"
 							data-bs-toggle="pill" href="#tab-2">
-								<h6 class="mt-n1 mb-0">Full Time</h6>
+								<h6 class="mb-0">인기순</h6>
 						</a></li>
 						<li class="nav-item"><a
 							class="d-flex align-items-center text-start mx-3 me-0 pb-3"
 							data-bs-toggle="pill" href="#tab-3">
-								<h6 class="mt-n1 mb-0">Part Time</h6>
+								<h6 class="mb-0">댓글순</h6>
 						</a></li>
 						
 					</ul>

@@ -183,4 +183,57 @@ public class CommuneDAO {
 		}
 		return list;
 	}
+	
+	/*
+	 * <select id="communePoster" resultType="CommuneVO">
+		SELECT id,poster
+		FROM personal
+		WHERE id=#{id}
+		</select>
+	 */
+	public static CommuneVO communePoster(String string)
+	{
+	SqlSession session=null;
+	CommuneVO vo=null;
+	try {
+		session=ssf.openSession();
+		vo=session.selectOne("communePoster",string);
+		session.commit();
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}finally {
+		if(session!=null)
+			session.close();
+	}
+	return vo;
+	}
+	
+/*
+ * 	<!-- 아이디 세션으로 포스터 가져오기 -->
+	<select id="communePoster1" resultType="string" parameterType="string">
+		SELECT poster
+		FROM personal
+		WHERE id=#{id}
+	</select>
+ */
+	
+	public static String communePoster1(String string)
+	{
+	SqlSession session=null;
+	String poster=null;
+	try {
+		session=ssf.openSession();
+		poster=session.selectOne("communePoster1",string);
+		session.commit();
+	} catch (Exception e) {
+		// TODO: handle exception
+		e.printStackTrace();
+	}finally {
+		if(session!=null)
+			session.close();
+	}
+	return poster;
+	}
+	
 }

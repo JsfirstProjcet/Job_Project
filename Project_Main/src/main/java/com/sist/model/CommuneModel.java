@@ -51,6 +51,7 @@ public class CommuneModel {
 		// 조회수 높은거 상단 고정 
 		List<CommuneVO> topList = CommuneDAO.communeTop4();
 		request.setAttribute("topList", topList);
+		
 		    
 		request.setAttribute("main_jsp", "../interview/commune.jsp");
 		return "../main/main.jsp";
@@ -100,19 +101,33 @@ public class CommuneModel {
 		CommuneVO vo=CommuneDAO.communeDetailData(Integer.parseInt(bno));
 		
 		String[] hash=vo.getHashtag().split(",");
+		CommuneVO pvo=CommuneDAO.communePoster(vo.getId());
 		
+		HttpSession session = request.getSession();
+		String id = (String) session.getAttribute("id");
+
+		// 아이디 세션으로 포스터 가져오기
+		if(id != null) {
+			String poster=CommuneDAO.communePoster1(id);
+			request.setAttribute("poster", poster);
+			System.out.println(poster);
+		}
 		
 		//댓글 작업
 		  ReplyVO rvo=new ReplyVO();
 		  rvo.setRno(Integer.parseInt(bno));
 		  List<ReplyVO> rlist=ReplyDAO.replyListData(Integer.parseInt(bno));
-		//  int count=ReplyDAO.replyCount(rvo);
-		//  request.setAttribute("count", count);
+		  int count=ReplyDAO.replyCount(Integer.parseInt(bno));
+		  request.setAttribute("count", count);
 		  request.setAttribute("rList", rlist);
-		
+		  
+		  
+		//////////////////////////////////////////////////
+		  
 		
 		request.setAttribute("hash", hash);
 		request.setAttribute("vo", vo);
+		request.setAttribute("pvo", pvo);
 		request.setAttribute("main_jsp", "../interview/commune_detail.jsp");
 		return "../main/main.jsp";
 	}
