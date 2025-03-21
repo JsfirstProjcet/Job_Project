@@ -134,13 +134,47 @@ $(document).ready(function(){
         			<!-- 이미지가 없을 경우 아이콘 표시 -->    
                   	<c:if test="${rvo.poster==null }">
 			        <i id="defaultIcon" class="bi bi-person-circle text-secondary fs-1 position-absolute 
-			        	top-50 start-50 translate-middle" style="display: none;"></i>    
+			        	top-50 start-50 translate-middle"></i>이미지 없음    
 			        </c:if>
-			      </label>      
+			      </label>  
+			      <!-- 파일 업로드 input -->
+    			  <input type="file" id="profileUpload" accept="image/*" class="d-none">
+			          
                 </div>
             </div>
         </div>
     </div>
+    <script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    const profileUpload = document.getElementById("profileUpload");
+	    const profileImage = document.getElementById("profileImage");
+	    const defaultIcon = document.getElementById("defaultIcon");
+	
+	    // 이미지가 없을 경우 기본 아이콘 표시
+	    if (!profileImage.src || profileImage.src.includes("moon.png") === false) {
+	        profileImage.style.display = "none";
+	        defaultIcon.style.display = "block";
+	    }
+	
+	    // 파일 선택 시 이미지 미리보기
+	    profileUpload.addEventListener("change", function (event) {
+	        const file = event.target.files[0];
+	        if (file) {
+	            const reader = new FileReader();
+	            reader.onload = function (e) {
+	                profileImage.src = e.target.result;
+	                profileImage.style.display = "block";
+	                defaultIcon.style.display = "none"; // 기본 아이콘 숨김
+	            };
+	            reader.readAsDataURL(file);
+	        }
+	    });
+	
+	    // 클릭 시 파일 업로드 창 열기
+	    profileImage.addEventListener("click", () => profileUpload.click());
+	    defaultIcon.addEventListener("click", () => profileUpload.click());
+	});
+	</script>
 
     <!-- 추가 내용 예시 -->
     <div class="card shadow-sm mb-3">
