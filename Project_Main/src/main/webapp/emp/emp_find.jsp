@@ -1,24 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공고 검색</title>
+<title>공고 목록</title>
 </head>
-<body id="top">
+<body>
+  <!-- Jobs Start -->
+  <div class="container-xxl py-5">
+      <div class="container">
+          <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Employment Listing</h1>
+          <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+	<form action="emp_find.do" method="get">
       <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
          <div class="container">
              <div class="row g-2">
                  <div class="col-md-10">
                      <div class="row g-2">
                          <div class="col-md-4">
-                             <input type="text" class="form-control border-0" placeholder="Keyword" />
+							<input type="text" class="form-control border-0" name="keyword" value="${param.keyword}" placeholder="Keyword" />
                          </div>
                          <div class="col-md-4">
-                             <select class="form-select border-0">
-                                 <option selected>직업별</option>
+                             <select class="form-select border-0" name="jno">
+                                 <option selected value="${param.jno}">직업별</option>
                                  <option value="16">기획·전략</option>
                                  <option value="14">마케팅·홍보·조사</option>
                                  <option value="3">회계·세무·재무</option>
@@ -43,200 +53,115 @@
                              </select>
                          </div>
                          <div class="col-md-4">
-                             <select class="form-select border-0">
-                                 <option selected>지역별</option>
-                                 <option value="117000">전국</option>
-                                 <option value="101000">서울</option>
-                                 <option value="102000">경기</option>
-                                 <option value="103000">광주</option>
-                                 <option value="104000">대구</option>
-                                 <option value="105000">대전</option>
-                                 <option value="106000">부산</option>
-                                 <option value="107000">울산</option>
-                                 <option value="108000">인천</option>
-                                 <option value="109000">강원</option>
-                                 <option value="110000">경남</option>
-                                 <option value="111000">경북</option>
-                                 <option value="112000">전남</option>
-                                 <option value="113000">전북</option>
-                                 <option value="114000">충북</option>
-                                 <option value="115000">충남</option>
-                                 <option value="116000">제주</option>
-                                 <option value="118000">세종</option>
-                                 <option value="210000">아시아·중동</option>
-                                 <option value="220000">북·중미</option>
-                                 <option value="230000">남미</option>
-                                 <option value="240000">유럽</option>
-                                 <option value="250000">오세아니아</option>
-                                 <option value="260000">아프리카</option>
-                                 <option value="270000">남극대륙</option>
-                                 <option value="280000">기타해외</option>
+                             <select class="form-select border-0" name="loc">
+                                 <option selected value="${param.loc}">지역별</option>
+                                 <option value="전국">전국</option>
+                                 <option value="서울">서울</option>
+                                 <option value="경기">경기</option>
+                                 <option value="광주">광주</option>
+                                 <option value="대구">대구</option>
+                                 <option value="대전">대전</option>
+                                 <option value="부산">부산</option>
+                                 <option value="울산">울산</option>
+                                 <option value="인천">인천</option>
+                                 <option value="강원">강원</option>
+                                 <option value="경남">경남</option>
+                                 <option value="경북">경북</option>
+                                 <option value="전남">전남</option>
+                                 <option value="전북">전북</option>
+                                 <option value="충북">충북</option>
+                                 <option value="충남">충남</option>
+                                 <option value="제주">제주</option>
+                                 <option value="세종">세종</option>
+                                 <option value="아시아·중동">아시아·중동</option>
+                                 <option value="북·중미">북·중미</option>
+                                 <option value="남미">남미</option>
+                                 <option value="유럽">유럽</option>
+                                 <option value="오세아니아">오세아니아</option>
+                                 <option value="아프리카">아프리카</option>
+                                 <option value="남극대륙">남극대륙</option>
+                                 <option value="기타해외">기타해외</option>
                              </select>
                          </div>
                      </div>
                  </div>
                  <div class="col-md-2">
-                     <button class="btn btn-dark border-0 w-100">Search</button>
+                     <button class="btn btn-dark border-0 w-100" type="submit">Search</button>
                  </div>
              </div>
          </div>
      </div>
- 
-    <div class="container-xxl py-5">
-        <div class="container">
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By 	Job</h1>
-            <div class="row g-4">
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="cat-item rounded p-4" href="">
-                    <i class="fa-solid fa-chart-column">‌</i>
-                        <i class="fa fa-3x fa-chart-pie text-primary mb-4" ></i>
-                        <h6 class="mb-3">기획·전략</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
-                        <h6 class="mb-3">마케팅·홍보·조사</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-file-invoice-dollar text-primary mb-4"></i>
-                        <h6 class="mb-3">회계·세무·재무</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                    <i class="fa-solid fa-arrows-down-to-people">‌</i>
-                        <i class="fa fa-3x fa-user-plus text-primary mb-4"></i>
-                        <h6 class="mb-3">인사·노무·HRD</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-user-tie text-primary mb-4"></i>
-                        <h6 class="mb-3">총무·법무·사무</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-globe text-primary mb-4"></i>
-                        <h6 class="mb-3">IT개발·데이터</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-edit text-primary mb-4"></i>
-                        <h6 class="mb-3">디자인</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-hands-helping text-primary mb-4"></i>
-                        <h6 class="mb-3">영업·판매·무역</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-headset text-primary mb-4"></i>
-                        <h6 class="mb-3">고객상담·TM</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-shopping-cart text-primary mb-4"></i>
-                        <h6 class="mb-3">구매·자재·물류</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-lightbulb text-primary mb-4"></i>
-                        <h6 class="mb-3">상품기획·MD</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-truck text-primary mb-4"></i>
-                        <h6 class="mb-3">운전·운송·배송</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-comments text-primary mb-4"></i>
-                        <h6 class="mb-3">서비스</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-industry text-primary mb-4"></i>
-                        <h6 class="mb-3">생산</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-wrench text-primary mb-4"></i>
-                        <h6 class="mb-3">건설·건축</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-medkit text-primary mb-4"></i>
-                        <h6 class="mb-3">의료	</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-flask text-primary mb-4"></i>
-                        <h6 class="mb-3">연구·R&D</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-book-reader text-primary mb-4"></i>
-                        <h6 class="mb-3">교육</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-trophy text-primary mb-4"></i>
-                        <h6 class="mb-3">미디어·문화·스포츠</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-university text-primary mb-4"></i>
-                        <h6 class="mb-3">금융·보험</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
-                </div>
-                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <a class="cat-item rounded p-4" href="">
-                        <i class="fa fa-3x fa-wheelchair text-primary mb-4"></i>
-                        <h6 class="mb-3">공공·복지</h6>
-                        <p class="mb-0">123 Vacancy</p>
-                    </a>
+ </form>
+
+                    <div class="tab-content">
+                        <div id="tab-all" class="tab-pane fade show p-0 active">
+                            <c:choose>
+                            	<c:when test="${empty list}">
+                            		<p>검색된 공고가 없습니다.</p>
+                            	</c:when>
+                            	<c:otherwise>
+                            	   <c:forEach var="vo" items="${list }">                                                     	
+                            		<div class="job-item p-4 mb-4">
+		                                <div class="row g-4">
+		                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+		                                        <div class="text-start ps-4">
+		                                            <h5 class="mb-3">
+												        <a href="../emp/emp_detail.do?no=${vo.eno }" class="text-decoration-none text-dark">${vo.title }</a>
+												    </h5>
+		                                            <span class="text-truncate me-3"><i class="far fa-building text-primary me-2"></i>${vo.name }</span>
+		                                            <span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>${vo.fo_count }</span>
+		                                            <span class="text-truncate me-3"><i class="fas fa-user-tie text-primary me-2"></i>${vo.se_count }</span>
+		                                            <span class="text-truncate me-0"><i class="fas fa-project-diagram text-primary me-2"></i>${vo.emp_type }</span>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+		                                        <div class="d-flex mb-3">
+ 	                                            	<a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+		                                            <a class="btn btn-primary" href="../emp/emp_detail.do?no=${vo.eno }">Detail</a>
+		                                        </div>
+		                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>등록일 : 
+													<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />
+												</small>
+		                                        <small class="text-truncate"><i class="far fa-calendar-times text-primary me-2"></i>마감일 : 
+													<fmt:formatDate value="${vo.deadline}" pattern="yyyy-MM-dd" />
+		                                        </small>
+			                                    </div>
+			                                </div>
+			                            </div>
+	                    			</c:forEach>
+                           		</c:otherwise>
+							</c:choose>
+                        <div class="page-status-container" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="page-status" style="text-align: left;">
+                                <p>Page ${curpage} of ${totalpage} results</p>
+                            </div>                                       
+                            <ul class="pagination" style="text-align: right; margin: 0; order: -1;">
+                                <c:if test="${startPage > 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="../emp/emp_list.do?page=${startPage - 1}&tab=${tab}">
+                                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>이전
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                                    <li class="page-item ${i == curpage ? 'current' : ''}">
+                                        <a class="page-link" href="../emp/emp_list.do?page=${i}&tab=${tab}">${i}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${endPage < totalpage}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="../emp/emp_list.do?page=${endPage + 1}&tab=${tab}">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>다음
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+ <!-- Jobs End -->
 </body>
 </html>

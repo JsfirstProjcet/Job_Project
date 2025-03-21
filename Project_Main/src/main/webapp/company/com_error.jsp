@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +14,18 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                         <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
-                        <h1 class="mb-4">${msg }</h1>
-                        <a class="btn btn-primary py-3 px-5" href="../main/main.do">홈으로</a>
+                        <c:if test="${sessionScope.cid==null }">
+	                        <h1 class="mb-4">${msg }</h1>
+	                        <a class="btn btn-primary py-3 px-5" href="../main/main.do">홈으로</a>
+                        </c:if>
+                        <c:if test="${sessionScope.cid!=null and sessionScope.state!=1 }">
+	                        <h1 class="mb-4">${msg }</h1>
+	                        <a class="btn btn-primary py-3 px-5" href="../main/main.do">홈으로</a>
+                        </c:if>
+                        <c:if test="${sessionScope.cid!=null and sessionScope.state==1 }">
+	                        <h1 class="mb-4">${msg }</h1>
+	                        <a class="btn btn-primary py-3 px-5" href="../company/com_insert.do">등록하기</a>
+                        </c:if>
                     </div>
                 </div>
             </div>

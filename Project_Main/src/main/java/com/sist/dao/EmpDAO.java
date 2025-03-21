@@ -36,10 +36,10 @@ public class EmpDAO {
 		session.close();
 		return list;
 	}
-	public static int empTotalPage()
+	public static int empTotalPage(String tab)
 	{
 		SqlSession session=ssf.openSession();
-		int total=session.selectOne("empTotalPage");
+		int total=session.selectOne("empTotalPage",tab);
 		session.close();
 		return total;
 	}
@@ -58,7 +58,12 @@ public class EmpDAO {
 		session.close();
 		return list;
 	}
-	
+	public static List<JobVO> empFindData(Map<String, Object> map) {
+		SqlSession session=ssf.openSession();
+		List<JobVO> list=session.selectList("empFindData",map);
+		session.close();
+		return list;
+	}
 	//////////////////////////////////////// 기업
 	public static List<EmpVO> empComListData(Map map) {
 		SqlSession session = null;

@@ -1,25 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mapper.commune-mapper">
-	<select id="communeListData" resultType="CommuneVO" parameterType="hashmap">
-		SELECT bno,content,subject,nickname,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,likes,reply,num
-		FROM (SELECT bno,content,subject,nickname,regdate,hit,likes,reply,rownum as num
+	<select id="communeListData" resultType="CommuneVO"
+		parameterType="hashmap">
+		SELECT
+		bno,content,subject,nickname,TO_CHAR(regdate,'YYYY-MM-DD') as
+		dbday,hit,likes,reply,num
+		FROM (SELECT
+		bno,content,subject,nickname,regdate,hit,likes,reply,rownum as num
 		FROM (SELECT bno,content,subject,nickname,regdate,hit,likes,reply
-		FROM COMMUNITY ORDER BY bno DESC))
-		WHERE num BETWEEN #{start} AND #{end} 
+		FROM
+		COMMUNITY ORDER BY bno DESC))
+		WHERE num BETWEEN #{start} AND #{end}
 	</select>
-	
+
 	<select id="communeTotalPage" resultType="int">
-		SELECT CEIL (COUNT(*)/5.0) FROM COMMUNITY
+		SELECT CEIL
+		(COUNT(*)/5.0) FROM COMMUNITY
 	</select>
-	
+
 	<insert id="communeInsert" parameterType="CommuneVO">
-    INSERT INTO community(bno, subject, content, regdate, hashtag, id, nickname)
-    VALUES(co_bno_seq.nextval, #{subject}, #{content}, sysdate, #{hashtag}, #{id}, #{nickname})
-</insert>
-<!-- 	<update id="communeHitIncrement" parameterType="int">
-		UPDATE community SET
+		INSERT INTO community(bno, subject, content, regdate, hashtag, id, nickname)
+		VALUES(co_bno_seq.nextval, #{subject}, #{content}, sysdate,
+		#{hashtag}, #{id}, #{nickname})
+	</insert>
+
+	<update id="communeHitIncrement" parameterType="int">
+		UPDATE community
+		SET
 		hit=hit+1
 		WHERE bno=#{bno}
-	</update> -->
+	</update>
+
+	<select id="communeDetailData" resultType="CommuneVO"
+		parameterType="int">
+		SELECT bno, subject, content,
+		TO_CHAR(regdate,'YYYY-MM-DD HH:MI:SS') as dbday, hashtag, id,
+		nickname,hit,type,reply,likes
+		FROM community
+		WHERE bno=#{bno}
+	</select>
+
+	<update id="communeUpdate" parameterType="CommuneVO">
+		UPDATE community SET
+		subject=#{subject},content=#{content},hashtag=#{hashtag}
+		WHERE
+		bno=#{bno}
+	</update>
+
+	<delete id="communeDelete" parameterType="int">
+		DELETE FROM community
+		WHERE bno=#{bno}
+	</delete>
+
+	<!-- 조회수 높은거 상단에 -->
+	<select id="communeTop4" resultType="CommuneVO">
+		SELECT bno, subject,content,nickname, hit
+		FROM (
+		SELECT bno, subject,content,nickname, hit
+		FROM community
+		ORDER BY hit DESC
+		)
+		WHERE ROWNUM &lt;= 4
+	</select>
 </mapper>

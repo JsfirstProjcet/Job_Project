@@ -21,9 +21,10 @@ import com.sist.dao.*;
 @Controller
 public class CompanyModel {
 	//								  0 지원금/보험	  1 급여 2 선물  3 교육/생활  4 근무환경		5 조직 문화		6 출퇴근		7 리프레시
-	List<String> icons= Arrays.asList("inboxes-fill","coin","gift","book","building-check","emoji-laughing","bus-front","airplane",
+	List<String> icons=Arrays.asList("inboxes-fill","coin","gift","book","building-check","emoji-laughing","bus-front","airplane",
 	//		8 지도	9 연혁			10 기업형태	11 사원수				12 매출
 			"map","clock-history","buildings","person-plus-fill","currency-exchange");
+	List<String> ctype=Arrays.asList("1000대기업","대기업","중견기업","중소기업","스타트업","개인사업자","기타");
 	@RequestMapping("company/com_list.do")
 	public String com_list(HttpServletRequest request, HttpServletResponse response) {
 
@@ -43,7 +44,7 @@ public class CompanyModel {
 		map.put("end",curpage*12);
 		map.put("tab", tab);
 		List<CompanyVO> list=CompanyDAO.companyListData(map);
-		int totalpage=CompanyDAO.companyTotalPage();
+		int totalpage=CompanyDAO.companyTotalPage(tab);
 	  
 		final int BLOCK=10;
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
@@ -111,7 +112,6 @@ public class CompanyModel {
 			
 			vo.setDbestdate(newDtFormat.format(formatDate));
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 		List<WelfareVO> wList=CompanyDAO.comDetailWelfareData(vo.getCid());
 		List<WelfareVO> wTag=CompanyDAO.comDetailWelfareTag(vo.getCid());
@@ -191,7 +191,6 @@ public class CompanyModel {
 					
 					vo.setDbdeadline("~"+newDtFormat.format(formatDate));
 				} catch (Exception e) {
-					e.printStackTrace();
 				}
 			}
 			
@@ -240,22 +239,21 @@ public class CompanyModel {
 					obj.put("ed_count",count);
 				}
 			}
+			int check=0;
+			int fCount=0;
+			FollowVO fvo=new FollowVO();
+			fvo.setId(id);
+			fvo.setNo(vo.getEno());
+			fvo.setType(1);
+			fCount=FollowDAO.followCount(fvo);
 			if(id!=null) {
-				FollowVO fvo=new FollowVO();
-				fvo.setId(id);
-				fvo.setNo(vo.getEno());
-				fvo.setType(1);
-				int check=0;
-				int fCount=0;
 				try {
 					check=FollowDAO.followCheck(fvo);
-					fCount=FollowDAO.followCount(fvo);
 				} catch (Exception e) {
-					e.printStackTrace();
 				}
-				obj.put("check", check);
-				obj.put("fCount", fCount);
 			}
+			obj.put("check", check);
+			obj.put("fCount", fCount);
 			arr.add(obj);
 		}
 		// 전송
@@ -274,13 +272,22 @@ public class CompanyModel {
 	public String com_main(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		String cid=(String)session.getAttribute("cid");
-		int state=(int)session.getAttribute("state");
+		int state=-1;
+		if(session.getAttribute("state")!=null) {
+			state=(int)session.getAttribute("state");
+		}
+		
 		int cno=0;
 		
 		try {
 			cno=CompanyDAO.conByCid(cid);
 		} catch (Exception e) {}
-		if(state==0) {//승인받지 못한 기업계정
+		if(state==-1) {//기업계정이 아닌 경우
+			String msg="기업계정으로 로그인 후 이용해주세요";
+			request.setAttribute("msg", msg);
+			request.setAttribute("main_jsp", "../company/com_error.jsp");
+			return "../main/main.jsp";
+		}else if(state==0) {//승인받지 못한 기업계정
 			String msg="승인 후 이용해주세요";
 			request.setAttribute("msg", msg);
 			request.setAttribute("main_jsp", "../company/com_error.jsp");
@@ -291,10 +298,39 @@ public class CompanyModel {
 			request.setAttribute("main_jsp", "../company/com_error.jsp");
 			return "../main/main.jsp";
 		}else if(state==1&&cno==0) {
-			request.setAttribute("com_jsp", "../company/com_insert.jsp");
-			request.setAttribute("main_jsp", "../company/com_main.jsp");
+			String msg="등록된 기업정보가 없습니다";
+			request.setAttribute("msg", msg);
+			request.setAttribute("main_jsp", "../company/com_error.jsp");
 			return "../main/main.jsp";
 		}
 		return "redirect:../company/com_detail.do?cno="+cno;
+	}
+	@RequestMapping("company/com_insert.do")
+	public String com_insert(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		String cname=OfficialDAO.officialGetCname(cid);
+		
+		CompanyVO vo=new CompanyVO();
+		vo.setCid(cid);
+		vo.setName(cname);
+		
+		CompanyDAO.comInsert(vo);
+		
+		int cno=CompanyDAO.conByCid(cid);
+		
+		return "redirect:../company/com_detail.do?cno="+cno;
+	}
+	@RequestMapping("company/com_update.do")
+	public String com_update(HttpServletRequest request, HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		
+		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("ctype", ctype);
+		request.setAttribute("com_jsp", "../company/com_update.jsp");
+		request.setAttribute("main_jsp", "../company/com_main.jsp");
+		return "../main/main.jsp";
 	}
 }

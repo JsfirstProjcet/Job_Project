@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
     
 <!DOCTYPE html>
@@ -108,23 +109,52 @@
 		                                    </div>
 		                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
 		                                        <div class="d-flex mb-3">
-		                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+ 	                                            	<a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
 		                                            <a class="btn btn-primary" href="../emp/emp_detail.do?no=${vo.eno }">Detail</a>
 		                                        </div>
-		                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>등록일 : ${vo.regdate }</small>
-		                                        <small class="text-truncate"><i class="far fa-calendar-times text-primary me-2"></i>마감일 : ${vo.deadline }</small>
+		                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>등록일 : 
+													<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />
+												</small>
+		                                        <small class="text-truncate"><i class="far fa-calendar-times text-primary me-2"></i>마감일 : 
+													<fmt:formatDate value="${vo.deadline}" pattern="yyyy-MM-dd" />
+		                                        </small>
 			                                    </div>
 			                                </div>
 			                            </div>
 									</c:when>
 								</c:choose>
 		                    </c:forEach>
-                            <a id="browseMoreBtn" class="btn btn-primary py-3 px-5" href="javascript:void(0);">Browse More Jobs</a>
+                        <div class="page-status-container" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="page-status" style="text-align: left;">
+                                <p>Page ${curpage} of ${totalpage} results</p>
+                            </div>                                       
+                            <ul class="pagination" style="text-align: right; margin: 0; order: -1;">
+                                <c:if test="${startPage > 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="../emp/emp_list.do?page=${startPage - 1}&tab=${tab}">
+                                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>이전
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                                    <li class="page-item ${i == curpage ? 'current' : ''}">
+                                        <a class="page-link" href="../emp/emp_list.do?page=${i}&tab=${tab}">${i}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${endPage < totalpage}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="../emp/emp_list.do?page=${endPage + 1}&tab=${tab}">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>다음
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Jobs End -->
+    </div>
+ <!-- Jobs End -->
 </body>
 </html>

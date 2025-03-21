@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -90,7 +91,7 @@
                     <div class="tab-content">
                         <div id="tab-all" class="tab-pane fade show p-0 active">
                           <c:forEach var="vo" items="${list }">                         
-                            			  <c:choose>
+                            <c:choose>
                              	<c:when test="${tab == 'all' || fn:contains(vo.c_type, tab)}">                           
                              	<div class="job-item p-4 mb-4">
  	                                <div class="row g-4">
@@ -103,29 +104,56 @@
 											        <a href="../company/com_detail_before.do?cno=${vo.cno }" class="text-decoration-none text-dark">${vo.name }</a>
 											    </h5>
  	                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>대한민국, ${vo.address.substring(0,2) }</span>
- 	                                            <span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>${vo.fo_count }</span>
+ 	                                            <span class="text-truncate me-3"><i class="far fa-star text-warning me-2"></i>${vo.fo_count }</span>
  	                                            <span class="text-truncate me-0"><i class="far fa-building text-primary me-2"></i>${vo.c_type }</span>
  	                                        </div>
  	                                    </div>
  	                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
  	                                        <div class="d-flex mb-3">
- 	                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+ 	                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-star text-primary"></i></a>
  	                                            <a class="btn btn-primary" href="../company/com_emp_list.do?cno=${vo.cno }">Recruit</a>
  	                                        </div>
- 	                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>${vo.estdate }</small>
+ 	                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>설립일 :
+												<fmt:formatDate value="${vo.estdate}" pattern="yyyy-MM-dd" />
+ 	                                        </small>
  			                                    </div>
  			                                </div>
  			                            </div>
                              		</c:when>
  								</c:choose>
  		                    </c:forEach>
-                            <a class="btn btn-primary py-3 px-5" href="">Browse More Companies</a>
+                        <div class="page-status-container" style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="page-status" style="text-align: left;">
+                                <p>Page ${curpage} of ${totalpage} results</p>
+                            </div>                                       
+                            <ul class="pagination" style="text-align: right; margin: 0; order: -1;">
+                                <c:if test="${startPage > 1}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="../company/com_list.do?page=${startPage - 1}&tab=${tab}">
+                                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>이전
+                                        </a>
+                                    </li>
+                                </c:if>
+                                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                                    <li class="page-item ${i == curpage ? 'current' : ''}">
+                                        <a class="page-link" href="../company/com_list.do?page=${i}&tab=${tab}">${i}</a>
+                                    </li>
+                                </c:forEach>
+                                <c:if test="${endPage < totalpage}">
+                                    <li class="page-item">
+                                        <a class="page-link" href="../company/com_list.do?page=${endPage + 1}&tab=${tab}">
+                                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>다음
+                                        </a>
+                                    </li>
+                                </c:if>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Jobs End -->
+    </div>
+<!-- Jobs End -->
 
 </body>
 </html>

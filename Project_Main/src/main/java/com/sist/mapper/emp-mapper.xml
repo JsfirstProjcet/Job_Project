@@ -30,7 +30,29 @@
  	   WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="empTotalPage" resultType="int">
-	   SELECT CEIL(COUNT(*)/12.0) FROM employment
+	   SELECT CEIL(COUNT(*)/12.0) 
+	   FROM employment
+	   <where>
+	       <if test="tab != 'all'">
+	            AND emp_type = #{tab}
+	       </if>
+       </where>
+	</select>
+	<select id="empFindData">
+	SELECT eno, name, title, personal_history, salary_str, loc, emp_type, regdate, deadline, hit, fo_count, se_count, num
+	FROM (SELECT eno, name, title, personal_history, salary_str, loc, emp_type, regdate, deadline, hit, fo_count, se_count, rownum AS num
+	FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq) */
+				e.eno, e.name, e.title, e.personal_history, e.salary_str, e.loc, e.emp_type, e.regdate, e.deadline, e.hit, e.fo_count, e.se_count
+	        FROM employment e
+	        LEFT JOIN emp_job ej ON e.jno = ej.jno  
+	        LEFT JOIN job j ON ej.jno = j.jno       
+	        WHERE 
+	            e.${fd} LIKE '%' || #{ss} || '%'  
+	            AND (#{jno} IS NULL OR ej.jno = #{jno})  
+	            AND (#{loc} IS NULL OR e.loc = #{loc})  	          
+	    )
+	)
+	WHERE num BETWEEN #{start} AND #{end}	
 	</select>
 	<!-- 기업 -->
 	<select id="empComListData" resultType="EmpVO" parameterType="hashmap">

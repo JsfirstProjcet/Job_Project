@@ -27,10 +27,10 @@ public class CompanyDAO {
 		session.close();
 		return list;
 	}
-	public static int companyTotalPage()
+	public static int companyTotalPage(String tab)
 	{
 		SqlSession session=ssf.openSession();
-		int total=session.selectOne("companyTotalPage");
+		int total=session.selectOne("companyTotalPage",tab);
 		session.close();
 		return total;
 	}
@@ -60,5 +60,10 @@ public class CompanyDAO {
 		int cno=session.selectOne("cnoByCid",cid);
 		session.close();
 		return cno;
+	}
+	public static void comInsert(CompanyVO vo) {
+		SqlSession session=ssf.openSession(true);
+		session.insert("comInsert",vo);
+		session.close();
 	}
 }

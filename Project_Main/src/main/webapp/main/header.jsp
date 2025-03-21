@@ -25,7 +25,7 @@
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공고</a>
 	                <div class="dropdown-menu rounded-0 m-0">
 	                    <a href="../emp/emp_list.do" class="dropdown-item">공고 목록</a>
-	                    <a href="../emp/emp_find.do" class="dropdown-item">공고 검색</a>
+	                    <a href="../emp/emp_find_home.do" class="dropdown-item">공고 검색</a>
 	                    <a href="#" class="dropdown-item">실시간 공고</a>
 	                </div>
 	            </div>

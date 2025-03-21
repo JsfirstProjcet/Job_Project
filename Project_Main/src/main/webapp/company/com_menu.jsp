@@ -28,8 +28,14 @@ function insertComFollow(cno){
 				printComFollow()
 			}
 		})
+	}else if(${sessionScope.cid!=null}){
+		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")){
+		}else{
+			return
+		}
 	}else {
 		alert("일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")
+		javascript:login()
 		return
 	}
 }
@@ -111,6 +117,7 @@ function printComFollow(){
 						<h3 class="panel-title">기업관리</h3>
 					</div>
 					<ul class="list-group">
+						<li class="list-group-item"><a href="../company/com_update.do?cno=${vo.cno }">기업 정보 수정</a></li>
 						<li class="list-group-item"><a href="#">새 공고 등록</a></li>
 						<li class="list-group-item"><a href="#">공고 관리</a></li>
 						<li class="list-group-item"><a href="#">지원자 관리</a></li>
