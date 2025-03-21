@@ -25,7 +25,7 @@
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공고</a>
 	                <div class="dropdown-menu rounded-0 m-0">
 	                    <a href="../emp/emp_list.do" class="dropdown-item">공고 목록</a>
-	                    <a href="../emp/emp_find.do" class="dropdown-item">공고 검색</a>
+	                    <a href="../emp/emp_find_home.do" class="dropdown-item">공고 검색</a>
 	                    <a href="#" class="dropdown-item">실시간 공고</a>
 	                </div>
 	            </div>
@@ -62,7 +62,7 @@
 	                    <a href="#l" class="dropdown-item">My</a>
 	                    <a href="#l" class="dropdown-item">계정</a>
 	                    <a href="#l" class="dropdown-item">리뷰</a>
-	                    <a href="../resume/resume.do" class="dropdown-item">이력서</a>
+	                    <a href="../resume/resume_detail.do" class="dropdown-item">이력서</a>
 	                    <a href="#l" class="dropdown-item">멤버십/결제</a>
 	                </div>
 	            </div>

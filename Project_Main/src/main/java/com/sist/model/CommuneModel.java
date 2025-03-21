@@ -4,8 +4,10 @@ import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.CommuneDAO;
 import com.sist.dao.InterviewDAO;
+import com.sist.dao.ReplyDAO;
 import com.sist.vo.CommuneVO;
 import com.sist.vo.InterviewVO;
+import com.sist.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -46,7 +48,10 @@ public class CommuneModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		
-		
+		// 조회수 높은거 상단 고정 
+		List<CommuneVO> topList = CommuneDAO.communeTop4();
+		request.setAttribute("topList", topList);
+		    
 		request.setAttribute("main_jsp", "../interview/commune.jsp");
 		return "../main/main.jsp";
 	}
@@ -95,6 +100,16 @@ public class CommuneModel {
 		CommuneVO vo=CommuneDAO.communeDetailData(Integer.parseInt(bno));
 		
 		String[] hash=vo.getHashtag().split(",");
+		
+		
+		//댓글 작업
+		  ReplyVO rvo=new ReplyVO();
+		  rvo.setRno(Integer.parseInt(bno));
+		  List<ReplyVO> rlist=ReplyDAO.replyListData(Integer.parseInt(bno));
+		//  int count=ReplyDAO.replyCount(rvo);
+		//  request.setAttribute("count", count);
+		  request.setAttribute("rList", rlist);
+		
 		
 		request.setAttribute("hash", hash);
 		request.setAttribute("vo", vo);
@@ -147,4 +162,6 @@ public class CommuneModel {
 		
 		return "redirect:../interview/commune.do?msg=delete";
 	}
+	
+	  
 }
