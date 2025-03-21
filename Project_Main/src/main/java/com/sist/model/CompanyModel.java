@@ -84,26 +84,9 @@ public class CompanyModel {
 			String str=vo.getIntroduction().replaceAll("다\\.", "다.<br>");
 			vo.setIntroduction(str);
 		}
-		String[] history= {};
-		List<String> hList=new ArrayList<String>();
-		List<String> yList=new ArrayList<String>();
-		List<Integer> cList=new ArrayList<Integer>();
-		try {
-			history=vo.getHistory().split(";");
-			int count=0;
-			for(int i=0; i<history.length; i++) {
-				String[] his=history[i].split("\\|");
-				for(int j=0; j<his.length; j++) {
-					if(j!=0) {
-						hList.add(his[j]);
-						count++;
-					}else {
-						yList.add(his[j]);
-						cList.add(count);
-					}
-				}
-			}
-		} catch (Exception e) {}
+		List<HistoryVO> hList=HistoryDAO.comHistoryList(vo.getCid());
+		List<HistoryVO> yList=HistoryDAO.comHistoryYMList(vo.getCid());
+		
 		try {
 			SimpleDateFormat dtFormat = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat newDtFormat = new SimpleDateFormat("YYYY년MM월dd일");
@@ -120,7 +103,6 @@ public class CompanyModel {
 		request.setAttribute("icons", icons);
 		request.setAttribute("hList", hList);
 		request.setAttribute("yList", yList);
-		request.setAttribute("cList", cList);
 		request.setAttribute("wList", wList);
 		request.setAttribute("wTag", wTag);
 		request.setAttribute("com_title", "기업 상세");

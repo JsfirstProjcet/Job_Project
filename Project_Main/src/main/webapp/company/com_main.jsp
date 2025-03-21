@@ -31,7 +31,7 @@
 					<jsp:include page="../company/com_menu.jsp"/>
 				</div>
 			</c:if>
-			<div class="col-9">
+			<div class="col-9" style="min-height: 800px">
 				<jsp:include page="${com_jsp}"/>
 			</div>
 		</div>
