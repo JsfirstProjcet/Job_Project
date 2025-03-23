@@ -66,4 +66,37 @@ public class CompanyDAO {
 		session.insert("comInsert",vo);
 		session.close();
 	}
+	public static void comUpdate(CompanyVO vo) {
+		SqlSession session=ssf.openSession(true);
+		try {
+			session.insert("comUpdate",vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		session.close();
+	}
+	public static List<WelfareVO> comUpdateWelfareData(String cid)
+	{
+		SqlSession session=ssf.openSession();
+		List<WelfareVO> list=session.selectList("comUpdateWelfareData",cid);
+		session.close();
+		return list;
+	}
+	public static List<WelfareVO> comUpdateWelfareTag()
+	{
+		SqlSession session=ssf.openSession();
+		List<WelfareVO> list=session.selectList("comUpdateWelfareTag");
+		session.close();
+		return list;
+	}
+	public static void comWelfareInsert(WelfareVO vo) {
+		SqlSession session=ssf.openSession(true);
+		session.insert("comWelfareInsert",vo);
+		session.close();
+	}
+	public static void comWelfareDelete(WelfareVO vo) {
+		SqlSession session=ssf.openSession(true);
+		session.insert("comWelfareDelete",vo);
+		session.close();
+	}
 }

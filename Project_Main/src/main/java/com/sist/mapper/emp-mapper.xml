@@ -141,7 +141,7 @@
 		</choose>
 	</select>
 	<select id="empDetailData" resultType="EmpVO" parameterType="int">
-		SELECT e.*
+		SELECT e.*, TO_CHAR(deadline,'YYYY-MM-DD HH24:MI:SS') as dbdeadline
 		FROM employment e
 		WHERE eno=#{eno}
 	</select>

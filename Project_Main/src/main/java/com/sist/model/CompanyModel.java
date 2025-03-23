@@ -308,11 +308,78 @@ public class CompanyModel {
 		String cno=request.getParameter("cno");
 		
 		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
+		List<WelfareVO> wList=CompanyDAO.comUpdateWelfareData(vo.getCid());
+		List<WelfareVO> tList=CompanyDAO.comUpdateWelfareTag();
 		
 		request.setAttribute("vo", vo);
+		request.setAttribute("icons", icons);
+		request.setAttribute("wList", wList);
+		request.setAttribute("tList", tList);
 		request.setAttribute("ctype", ctype);
 		request.setAttribute("com_jsp", "../company/com_update.jsp");
 		request.setAttribute("main_jsp", "../company/com_main.jsp");
 		return "../main/main.jsp";
+	}
+	@RequestMapping("company/com_update_ok.do")
+	public String com_update_ok(HttpServletRequest request, HttpServletResponse response) {
+		String estdate=request.getParameter("estdate");
+		String representative=request.getParameter("representative").trim();
+		String c_type=request.getParameter("c_type");
+		String homepage=request.getParameter("homepage").trim();
+		String ecount=request.getParameter("ecount");
+		String jo=request.getParameter("jo");
+		String uk=request.getParameter("uk");
+		String man=request.getParameter("man");
+		String address=request.getParameter("address").trim();
+		String industry=request.getParameter("industry").trim();
+		String bu_details=request.getParameter("bu_details").trim();
+		String introduction=request.getParameter("introduction").trim();
+		
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		
+		CompanyVO vo=new CompanyVO();
+		vo.setCid(cid);
+		vo.setDbestdate(estdate);
+		vo.setRepresentative(representative);
+		vo.setC_type(c_type);
+		vo.setHomepage(homepage);
+		vo.setEcount(Integer.parseInt(ecount));
+		vo.setJo(Integer.parseInt(jo));
+		vo.setUk(Integer.parseInt(uk));
+		vo.setMan(Integer.parseInt(man));
+		vo.setAddress(address);
+		vo.setIndustry(industry);
+		vo.setBu_details(bu_details);
+		vo.setIntroduction(introduction);
+		
+		CompanyDAO.comUpdate(vo);
+		
+		return "redirect:../company/com_detail.do?cno="+cno;
+	}
+	@RequestMapping("company/com_wel_insert.do")
+	public void com_wel_insert(HttpServletRequest request, HttpServletResponse response) {
+		String wno=request.getParameter("wno");
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		
+		WelfareVO vo=new WelfareVO();
+		vo.setCid(cid);
+		vo.setWno(Integer.parseInt(wno));
+		
+		CompanyDAO.comWelfareInsert(vo);
+	}
+	@RequestMapping("company/com_wel_delete.do")
+	public void com_wel_delete(HttpServletRequest request, HttpServletResponse response) {
+		String wno=request.getParameter("wno");
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		
+		WelfareVO vo=new WelfareVO();
+		vo.setCid(cid);
+		vo.setWno(Integer.parseInt(wno));
+		
+		CompanyDAO.comWelfareDelete(vo);
 	}
 }

@@ -13,4 +13,11 @@
 		disclosure=#{disclosure},scholar=#{scholar},skill=#{skill},
 		carreer=#{carreer},self_intro=#{self_intro},title=#{title}
 	</update>
+	<!-- 지원하기 -->
+	<select id="resumeListData" resultType="com.sist.vo.ResumeVO" parameterType="string">
+		SELECT rno,title,num
+		FROM (SELECT rno,title,rownum as num 
+		FROM (SELECT rno,title
+		FROM resume WHERE id=#{id} ORDER BY rno desc))
+	</select>
 </mapper>

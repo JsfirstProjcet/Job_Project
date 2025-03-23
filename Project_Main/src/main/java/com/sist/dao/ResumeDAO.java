@@ -62,4 +62,10 @@ public class ResumeDAO {
 				session.close();
 		}		
 	}
+	public static List<ResumeVO> resumeListData(String id){
+		SqlSession session=ssf.openSession();
+		List<ResumeVO> list=session.selectList("resumeListData",id);
+		session.close();
+		return list;
+	}
 }

@@ -9,7 +9,6 @@
 <script type="text/javascript">
 let check=false
 $(function(){
-	
 	$('.btn-map').click(function(){
 		if(check){
 			$('.div-map').hide()
@@ -177,7 +176,7 @@ $(function(){
 	                            <pre style="white-space: pre-line;">${vo.introduction }</pre>
                         	</c:if>
                         	
-                        	<c:if test="${yList!=null }">
+                        	<c:if test="${yList.size()!=0 }">
                         		<hr>
 	                            <h4 class="mb-3">연혁</h4>
 								<table class="table">

@@ -1,6 +1,7 @@
 package com.sist.model;
 
 import java.io.PrintWriter;
+import java.util.List;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
@@ -109,5 +110,17 @@ public class PersonalModel {
 		HttpSession session=request.getSession();
 		session.invalidate();
 		return "redirect:../main/main.do";
+	}
+	//공고 지원하기
+	@RequestMapping("personal/recruit.do") 
+	public String personal_recruit(HttpServletRequest request,HttpServletResponse response){
+		String eno=request.getParameter("eno");
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		List<ResumeVO> list=ResumeDAO.resumeListData(id);
+		request.setAttribute("list", list);
+		request.setAttribute("eno", eno);
+		return "../personal/recruit.jsp";
 	}
 }
