@@ -118,7 +118,7 @@ public class PersonalModel {
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		
-		List<ResumeVO> list=ResumeDAO.resumeListData(id);
+		List<ResumeVO> list=ResumeDAO.myResumeListData(id);
 		request.setAttribute("list", list);
 		request.setAttribute("eno", eno);
 		return "../personal/recruit.jsp";
