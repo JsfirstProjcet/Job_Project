@@ -38,22 +38,55 @@
 	       </if>
        </where>
 	</select>
-	<select id="empFindData">
-	SELECT eno, name, title, personal_history, salary_str, loc, emp_type, regdate, deadline, hit, fo_count, se_count, num
-	FROM (SELECT eno, name, title, personal_history, salary_str, loc, emp_type, regdate, deadline, hit, fo_count, se_count, rownum AS num
-	FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq) */
-				e.eno, e.name, e.title, e.personal_history, e.salary_str, e.loc, e.emp_type, e.regdate, e.deadline, e.hit, e.fo_count, e.se_count
-	        FROM employment e
-	        LEFT JOIN emp_job ej ON e.jno = ej.jno  
-	        LEFT JOIN job j ON ej.jno = j.jno       
-	        WHERE 
-	            e.${fd} LIKE '%' || #{ss} || '%'  
-	            AND (#{jno} IS NULL OR ej.jno = #{jno})  
-	            AND (#{loc} IS NULL OR e.loc = #{loc})  	          
-	    )
-	)
-	WHERE num BETWEEN #{start} AND #{end}	
+	<select id="empFindData" resultType="EmpVO" parameterType="hashmap">
+	SELECT eno,name,title,personal_history,salary_str,loc,loc_num,emp_type,regdate,deadline,hit,fo_count,se_count,num
+    FROM (SELECT eno,name,title,personal_history,salary_str,loc,loc_num,emp_type,regdate,deadline,hit,fo_count,se_count,rownum AS num
+          FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq) */
+                    e.eno,e.name,e.title,e.personal_history,e.salary_str,e.loc,e.loc_num,e.emp_type,e.regdate,e.deadline,e.hit,e.fo_count,e.se_count
+            FROM employment e
+            LEFT JOIN emp_job ej ON e.eno = ej.eno  
+            LEFT JOIN job j ON ej.jno = j.jno      
+            WHERE e.title LIKE '%' || #{keyword} || '%'  
+            <if test="loc != null and loc != ''">
+                AND e.loc_num = #{loc}
+            </if>
+            <if test="jno != null">
+                AND ej.jno = #{jno}
+            </if>
+        )
+    )
+    WHERE num BETWEEN #{start} AND #{end}
 	</select>
+	<select id="empFindTotalPage" resultType="int" parameterType="hashmap">
+    SELECT CEIL(COUNT(*) / 12.0)  
+    FROM employment e
+    LEFT JOIN emp_job ej ON e.eno = ej.eno
+    LEFT JOIN job j ON ej.jno = j.jno  
+      <where>
+        <if test="keyword != null and keyword != ''">
+            AND e.title LIKE '%' || #{keyword} || '%' 
+        </if>
+        <if test="loc != null and loc != ''">
+            AND e.loc_num = #{loc}  
+        </if>
+        <if test="jno != null">
+            AND ej.jno = #{jno}  
+        </if>
+      </where>
+	</select>
+	<select id="empgetCategoryCount" resultType="int" parameterType="hashmap">
+    SELECT j.jno AS job_category, COUNT(e.eno) AS count_vacancies
+    FROM employment e
+    LEFT JOIN emp_job ej ON e.eno = ej.eno
+    LEFT JOIN job j ON ej.jno = j.jno
+    <where>
+        <if test="jno != null">
+            AND ej.jno = #{jno}
+        </if>
+    </where>
+    GROUP BY j.jno
+    ORDER BY count_vacancies DESC
+	</select>	
 	<!-- 기업 -->
 	<select id="empComListData" resultType="EmpVO" parameterType="hashmap">
 		SELECT eno,name,title,personal_history,loc,emp_type,hit,
@@ -141,7 +174,7 @@
 		</choose>
 	</select>
 	<select id="empDetailData" resultType="EmpVO" parameterType="int">
-		SELECT e.*
+		SELECT e.*, TO_CHAR(deadline,'YYYY-MM-DD HH24:MI:SS') as dbdeadline
 		FROM employment e
 		WHERE eno=#{eno}
 	</select>

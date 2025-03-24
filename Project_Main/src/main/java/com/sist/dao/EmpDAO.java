@@ -58,11 +58,23 @@ public class EmpDAO {
 		session.close();
 		return list;
 	}
-	public static List<JobVO> empFindData(Map<String, Object> map) {
+	public static List<EmpVO> empFindData(Map map) {
 		SqlSession session=ssf.openSession();
-		List<JobVO> list=session.selectList("empFindData",map);
+		List<EmpVO> list=session.selectList("empFindData",map);
 		session.close();
 		return list;
+	}
+	public static int empFindTotalPage(Map map) {
+		SqlSession session=ssf.openSession();
+		int total=session.selectOne("empFindTotalPage",map);
+		session.close();
+		return total;
+	}
+	public static int empgetCategoryCount(Map map) {
+		SqlSession session=ssf.openSession();
+		int count=session.selectOne("empgetCategoryCount",map);
+		session.close();
+		return count;
 	}
 	//////////////////////////////////////// 기업
 	public static List<EmpVO> empComListData(Map map) {

@@ -28,63 +28,57 @@
                          </div>
                          <div class="col-md-4">
                              <select class="form-select border-0" name="jno">
-                                 <option selected value="${param.jno}">직업별</option>
-                                 <option value="16">기획·전략</option>
-                                 <option value="14">마케팅·홍보·조사</option>
-                                 <option value="3">회계·세무·재무</option>
-                                 <option value="5">인사·노무·HRD</option>
-                                 <option value="4">총무·법무·사무</option>
-                                 <option value="2">IT개발·데이터</option>
-                                 <option value="15">디자인</option>
-                                 <option value="8">영업·판매·무역</option>
-                                 <option value="21">고객상담·TM</option>
-                                 <option value="18">구매·자재·물류</option>
-                                 <option value="12">상품기획·MD</option>
-                                 <option value="7">운전·운송·배송</option>
-                                 <option value="10">서비스</option>
-                                 <option value="11">생산</option>
-                                 <option value="22">건설·건축</option>
-                                 <option value="6">의료</option>
-                                 <option value="9">연구·R&D</option>
-                                 <option value="19">교육</option>
-                                 <option value="13">미디어·문화·스포츠</option>
-                                 <option value="17">금융·보험</option>
-                                 <option value="20">공공·복지</option>
+                                 <option value="">직업별</option>
+                                 <option value="16" ${param.jno == '16' ? 'selected' : ''}>기획·전략</option>
+                                 <option value="14" ${param.jno == '14' ? 'selected' : ''}>마케팅·홍보·조사</option>
+                                 <option value="3" ${param.jno == '3' ? 'selected' : ''}>회계·세무·재무</option>
+                                 <option value="5" ${param.jno == '5' ? 'selected' : ''}>인사·노무·HRD</option>
+                                 <option value="4" ${param.jno == '4' ? 'selected' : ''}>총무·법무·사무</option>
+                                 <option value="2" ${param.jno == '2' ? 'selected' : ''}>IT개발·데이터</option>
+                                 <option value="15" ${param.jno == '15' ? 'selected' : ''}>디자인</option>
+                                 <option value="8" ${param.jno == '8' ? 'selected' : ''}>영업·판매·무역</option>
+                                 <option value="21" ${param.jno == '21' ? 'selected' : ''}>고객상담·TM</option>
+                                 <option value="18" ${param.jno == '18' ? 'selected' : ''}>구매·자재·물류</option>
+                                 <option value="12" ${param.jno == '12' ? 'selected' : ''}>상품기획·MD</option>
+                                 <option value="7" ${param.jno == '7' ? 'selected' : ''}>운전·운송·배송</option>
+                                 <option value="10" ${param.jno == '10' ? 'selected' : ''}>서비스</option>
+                                 <option value="11" ${param.jno == '11' ? 'selected' : ''}>생산</option>
+                                 <option value="22" ${param.jno == '22' ? 'selected' : ''}>건설·건축</option>
+                                 <option value="6" ${param.jno == '6' ? 'selected' : ''}>의료</option>
+                                 <option value="9" ${param.jno == '9' ? 'selected' : ''}>연구·R&D</option>
+                                 <option value="19" ${param.jno == '19' ? 'selected' : ''}>교육</option>
+                                 <option value="13" ${param.jno == '13' ? 'selected' : ''}>미디어·문화·스포츠</option>
+                                 <option value="17" ${param.jno == '17' ? 'selected' : ''}>금융·보험</option>
+                                 <option value="20" ${param.jno == '20' ? 'selected' : ''}>공공·복지</option>
                              </select>
                          </div>
                          <div class="col-md-4">
                              <select class="form-select border-0" name="loc">
-                                 <option selected value="${param.loc}">지역별</option>
-                                 <option value="전국">전국</option>
-                                 <option value="서울">서울</option>
-                                 <option value="경기">경기</option>
-                                 <option value="광주">광주</option>
-                                 <option value="대구">대구</option>
-                                 <option value="대전">대전</option>
-                                 <option value="부산">부산</option>
-                                 <option value="울산">울산</option>
-                                 <option value="인천">인천</option>
-                                 <option value="강원">강원</option>
-                                 <option value="경남">경남</option>
-                                 <option value="경북">경북</option>
-                                 <option value="전남">전남</option>
-                                 <option value="전북">전북</option>
-                                 <option value="충북">충북</option>
-                                 <option value="충남">충남</option>
-                                 <option value="제주">제주</option>
-                                 <option value="세종">세종</option>
-                                 <option value="아시아·중동">아시아·중동</option>
-                                 <option value="북·중미">북·중미</option>
-                                 <option value="남미">남미</option>
-                                 <option value="유럽">유럽</option>
-                                 <option value="오세아니아">오세아니아</option>
-                                 <option value="아프리카">아프리카</option>
-                                 <option value="남극대륙">남극대륙</option>
-                                 <option value="기타해외">기타해외</option>
+                                 <option value="">지역별</option>
+                                 <option value="18" ${param.loc == '18' ? 'selected' : ''}>전국</option>
+                                 <option value="1" ${param.loc == '1' ? 'selected' : ''}>서울</option>
+                                 <option value="2" ${param.loc == '2' ? 'selected' : ''}>경기</option>
+                                 <option value="3" ${param.loc == '3' ? 'selected' : ''}>광주</option>
+                                 <option value="4" ${param.loc == '4' ? 'selected' : ''}>대구</option>
+                                 <option value="5" ${param.loc == '5' ? 'selected' : ''}>대전</option>
+                                 <option value="6" ${param.loc == '6' ? 'selected' : ''}>부산</option>
+                                 <option value="7" ${param.loc == '7' ? 'selected' : ''}>울산</option>
+                                 <option value="8" ${param.loc == '8' ? 'selected' : ''}>인천</option>
+                                 <option value="9" ${param.loc == '9' ? 'selected' : ''}>강원</option>
+                                 <option value="10" ${param.loc == '10' ? 'selected' : ''}>경남</option>
+                                 <option value="11" ${param.loc == '11' ? 'selected' : ''}>경북</option>
+                                 <option value="12" ${param.loc == '12' ? 'selected' : ''}>전남</option>
+                                 <option value="13" ${param.loc == '13' ? 'selected' : ''}>전북</option>
+                                 <option value="14" ${param.loc == '14' ? 'selected' : ''}>충북</option>
+                                 <option value="15" ${param.loc == '15' ? 'selected' : ''}>충남</option>
+                                 <option value="16" ${param.loc == '16' ? 'selected' : ''}>제주</option>
+                                 <option value="17" ${param.loc == '17' ? 'selected' : ''}>세종</option>
+                                 <option value="19" ${param.loc == '19' ? 'selected' : ''}>해외</option>
+                                 <option value="20" ${param.loc == '20' ? 'selected' : ''}>기타</option>
                              </select>
                          </div>
                      </div>
-                 </div>
+                 </div>                 
                  <div class="col-md-2">
                      <button class="btn btn-dark border-0 w-100" type="submit">Search</button>
                  </div>
@@ -131,6 +125,7 @@
 	                    			</c:forEach>
                            		</c:otherwise>
 							</c:choose>
+							
                         <div class="page-status-container" style="display: flex; justify-content: space-between; align-items: center;">
                             <div class="page-status" style="text-align: left;">
                                 <p>Page ${curpage} of ${totalpage} results</p>
@@ -138,19 +133,19 @@
                             <ul class="pagination" style="text-align: right; margin: 0; order: -1;">
                                 <c:if test="${startPage > 1}">
                                     <li class="page-item">
-                                        <a class="page-link" href="../emp/emp_list.do?page=${startPage - 1}&tab=${tab}">
+                                        <a class="page-link" href="../emp/emp_find.do?page=${startPage - 1}&keyword=${param.keyword}&loc=${param.loc}&jno=${param.jno}">
                                             <i class="fa fa-angle-double-left" aria-hidden="true"></i>이전
                                         </a>
                                     </li>
                                 </c:if>
                                 <c:forEach var="i" begin="${startPage}" end="${endPage}">
                                     <li class="page-item ${i == curpage ? 'current' : ''}">
-                                        <a class="page-link" href="../emp/emp_list.do?page=${i}&tab=${tab}">${i}</a>
+                                        <a class="page-link" href="../emp/emp_find.do?page=${i}&keyword=${param.keyword}&loc=${param.loc}&jno=${param.jno}">${i}</a>
                                     </li>
                                 </c:forEach>
                                 <c:if test="${endPage < totalpage}">
                                     <li class="page-item">
-                                        <a class="page-link" href="../emp/emp_list.do?page=${endPage + 1}&tab=${tab}">
+                                        <a class="page-link" href="../emp/emp_find.do?page=${endPage + 1}&keyword=${param.keyword}&loc=${param.loc}&jno=${param.jno}">
                                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>다음
                                         </a>
                                     </li>

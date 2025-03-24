@@ -106,71 +106,65 @@ public class EmpModel {
 	}
 	@RequestMapping("emp/emp_find_home.do")
 	public String emp_find_home(HttpServletRequest request, HttpServletResponse response) {		
-		request.setAttribute("main_jsp", "../emp/emp_find_home.jsp");
+
+
+	    request.setAttribute("main_jsp", "../emp/emp_find_home.jsp");
 		return "../main/main.jsp";
 	}
 	@RequestMapping("emp/emp_find.do")
 	public String emp_find(HttpServletRequest request, HttpServletResponse response) {
-	    // 현재 페이지 정보 처리
 	    String page = request.getParameter("page");
 	    if (page == null) {
 	        page = "1";
 	    }
+	    
 	    int curpage = Integer.parseInt(page);
 
-	    // 탭 정보 처리
-	    String tab = request.getParameter("tab");
-	    if (tab == null) {
-	        tab = "all";
+	    String keyword = request.getParameter("keyword"); 
+	    if (keyword == null || keyword.isEmpty()) {
+	        keyword = "";
 	    }
-
-	    // 검색어 처리
-	    String fd = request.getParameter("fd"); // 검색 필드 (예: name, title 등)
-	    String ss = request.getParameter("keyword"); // 검색어
-
-	    // 직업 코드(jno)와 위치(loc) 처리
-	    Integer jno = null;
-	    String loc = null;
-
-	    try {
-	        jno = request.getParameter("jno") != null ? Integer.parseInt(request.getParameter("jno")) : null;
-	        loc = request.getParameter("loc") != null ? request.getParameter("loc") : null;
-	    } catch (NumberFormatException e) {
-	        jno = null;
+	    String loc = request.getParameter("loc");
+	    if (loc == null || loc.isEmpty()) {
 	        loc = null;
+	    }	    
+	    Integer jno = null;
+
+	    String jnoParam = request.getParameter("jno");
+	    if (jnoParam != null && !jnoParam.isEmpty()) {
+	        try {
+	            jno = Integer.parseInt(jnoParam);
+	        } catch (NumberFormatException e) {
+	            jno = null;
+	        }
 	    }
 
-	    // 검색 범위 및 조건 설정
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("start", (curpage * 12) - 11);  // 시작 페이지
-	    map.put("end", curpage * 12);           // 끝 페이지
-	    map.put("tab", tab);                    // 탭
-	    map.put("fd", fd);                      // 검색 필드
-	    map.put("keyword", ss);                      // 검색어
-	    map.put("jno", jno);                    // 직업 코드
-	    map.put("loc", loc);                    // 위치
+	    Map map = new HashMap();
+	    map.put("start", (curpage * 12) - 11);  
+	    map.put("end", curpage * 12);           
+	    map.put("keyword", keyword);           
+	    map.put("jno", jno);                    
+	    map.put("loc", loc);                   
 
-	    // DB에서 직원 목록을 조회
-	    List<EmpVO> list = EmpDAO.empListData(map);
-	    int totalpage = EmpDAO.empTotalPage(tab);
+	    List<EmpVO> list = EmpDAO.empFindData(map);
+	    
+	    int totalpage = EmpDAO.empFindTotalPage(map); 
 
-	    // 페이징 처리
-	    final int BLOCK = 10;  // 한 화면에 표시할 페이지 블록 개수
-	    int startPage = ((curpage - 1) / BLOCK * BLOCK) + 1;
-	    int endPage = ((curpage - 1) / BLOCK * BLOCK) + BLOCK;
+	    final int BLOCK = 10;  
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 
 	    if (endPage > totalpage) {
 	        endPage = totalpage;
 	    }
-
-	    // 요청 속성 설정
+	    
 	    request.setAttribute("list", list);
-	    request.setAttribute("tab", tab);
 	    request.setAttribute("curpage", curpage);
 	    request.setAttribute("totalpage", totalpage);
 	    request.setAttribute("startPage", startPage);
 	    request.setAttribute("endPage", endPage);
-		request.setAttribute("main_jsp", "../emp/emp_find.jsp");
-		return "../main/main.jsp";
+	    request.setAttribute("main_jsp", "../emp/emp_find.jsp");
+
+	    return "../main/main.jsp";
 	}
 }
