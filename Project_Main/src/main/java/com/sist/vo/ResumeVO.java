@@ -20,8 +20,8 @@ import java.util.*;
 import lombok.Data;
 @Data
 public class ResumeVO {
-	private int rno,num;
-	private String id,name,email,phone,birth,disclosure,scholar,skill,carreer,self_intro,title;
+	private int rno;
+	private String id,name,email,phone,birth,disclosure,scholar,skill,career,self_intro,title;
 	private String address,sex,poster;
 	private char isbasic;
 }

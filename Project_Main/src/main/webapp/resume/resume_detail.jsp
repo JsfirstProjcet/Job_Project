@@ -332,7 +332,7 @@ $(document).ready(function(){
 	<input type="hidden" id="birth" name="birth" value="${rvo.birth }" >
 	<input type="hidden" id="scholar" name="scholar" value="${rvo.scholar }" >
 	<input type="hidden" id="skill" name="skill" value="${rvo.skill }" >
-	<input type="hidden" id="carreer" name="carreer" value="${rvo.carreer }" >
+	<input type="hidden" id="career" name="career" value="${rvo.career }" >
 	<input type="hidden" id="self_intro" name="self_intro" value="${rvo.self_intro }" >
     <input type="hidden" name="isbasic" value="${rvo.isbasic}">
     <!-- 버튼 -->
