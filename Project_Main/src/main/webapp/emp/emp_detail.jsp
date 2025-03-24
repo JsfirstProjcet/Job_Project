@@ -9,7 +9,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 let check=false
+let deadline='${evo.dbdeadline}'
+let date=new Date(deadline.replace(" ", "T"));
 $(function(){
+	if(${evo.deadline==null}){
+		$('.deadline-text').text("상시 모집")
+	}else{
+		updateDeadline();
+	    const timer = setInterval(updateDeadline, 1000);
+	}
+	
 	$('.btn-map').click(function(){
 		if(check){
 			$('.div-map').hide()
@@ -26,11 +35,32 @@ $(function(){
 	setTimeout(() => {
 	    $("a").removeAttr("target");
 	    $(".content a").attr("target","_blank");
-	}, 100)
+	    $(".btn-find-map").attr("target","_blank");
+	    $(".homepage").attr("target","_blank");
+	}, 1000)
 })
+function updateDeadline() {
+    const now = new Date();
+    const timeDiff = date - now;
+    if (timeDiff <= 0) {
+    	$('.deadline-text').text("지원 마감")
+    	$('.recruit-btn').removeAttr("href")
+    	$('.recruit-btn').css({"background-color":"gray","border":"black","cursor":"default"})
+
+        clearInterval(timer);
+        return;
+    }
+
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const hours = String(Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+    const minutes = String(Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+    const seconds = String(Math.floor((timeDiff % (1000 * 60)) / 1000)).padStart(2, '0');
+    
+    let deadlineStr=days+'일 '+hours+":"+minutes+":"+seconds
+	$('.deadline').text(deadlineStr)
+}
 function insertComFollow(cno){
 	let id='${sessionScope.id}'
-	console.log(id)
 	let type=0
 	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
 		$.ajax({
@@ -146,8 +176,24 @@ function printEmpFollow(eno){
 		})
 	}
 }
+// 지원
+function recruit(eno){
+    Shadowbox.open({
+        content:'../personal/recruit.do?eno='+eno,
+        player:'iframe',
+        width:800,
+        height:600,
+        title:'${evo.title} 지원하기'
+    })	
+}
 </script>
 <style type="text/css">
+#content script {
+    display: none;
+}
+#content style {
+    display: none;
+}
 </style>
 </head>
 <body id="top">
@@ -174,7 +220,7 @@ function printEmpFollow(eno){
                     <div class="row" style="margin: 0px auto; width: 860px">
                         <div class="row d-flex align-items-center mb-5">
                         	<div class="col-8" style="float: left;">
-	                            <strong><a href="../company/com_emp_list.do?cno=${cvo.cno }" >${evo.name }</a></strong>
+	                            <strong><a href="../company/com_emp_list.do?cno=${cvo.cno }">${evo.name }</a></strong>
 	                            <c:if test="${cCheck==0 }">
 		                            <a class="btn btn-sm btn-light follow-com" style="border: 1px solid gray; border-radius: 5px;" onclick="insertComFollow(${cvo.cno })">
 		                            	<i class="far bi-star me-2" style="color: gray"></i>관심기업
@@ -202,7 +248,8 @@ function printEmpFollow(eno){
 									<c:if test="${eCheck==1 }">
 		                           		<a class="btn btn-light btn-square me-3 col-3 follow-emp" onclick="deleteEmpFollow(${evo.eno})"><i class="far bi-heart-fill text-primary"></i></a>
 									</c:if>
-									<a class="btn btn-primary mb-3 col-9" href="#">지원하기</a>
+									<a class="btn btn-primary col-9 recruit-btn" onclick="recruit(${evo.eno })">지원하기</a>
+									<span class="text-end deadline-text">남은 기간:&nbsp;<span class="deadline" style="color: red;">${evo.dbdeadline }</span></span>
 	                           	</div>
                             </div>
                             <hr>
@@ -341,7 +388,7 @@ function printEmpFollow(eno){
 	                    				홈페이지
 	                    			</div>
 	                    			<div class="col-9">
-		                    			<a href="${cvo.homepage }" target="_blank">${cvo.homepage }</a>
+		                    			<a class="homepage" href="${cvo.homepage }" target="_blank">${cvo.homepage }</a>
 	                    			</div>
 	                    		</div>
                    			</c:if>

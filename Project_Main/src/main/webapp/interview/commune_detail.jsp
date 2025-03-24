@@ -99,9 +99,9 @@
   <!-- 작성자 정보 -->
   <div class="card p-3 mb-4">
     <div class="d-flex align-items-center">
-      <img src="../img/man.png" alt="프로필 이미지" class="rounded-circle me-3" width="50" height="50">
+      <img src="../img/${pvo.poster}" alt="프로필 이미지" class="rounded-circle me-3" width="50" height="50">
       <div class="flex-grow-1">
-        <div class="fw-bold">JVHYUR</div>
+        <div class="fw-bold">${vo.nickname }</div>
         <div class="text-muted small">상품기획·MD 2년차</div>
       </div>
       <button class="btn btn-outline-primary btn-sm me-2">팔로우</button>
@@ -127,35 +127,88 @@
 <div class="container my-5" style="max-width: 800px;">
 
   <!-- 댓글 제목 -->
-  <h5 class="fw-bold mb-4">댓글 <span class="text-primary">5</span></h5>
+  <h5 class="fw-bold mb-4">댓글 <span class="text-primary">${count }</span></h5>
+
 
   <!-- 댓글 입력 폼 -->
+  <form action="../reply/reply_insert.do" method="post">
   <div class="card p-4 mb-4">
     <div class="d-flex align-items-center mb-3">
-      <img src="../img/woman.png" alt="프로필" class="rounded-circle me-2"  width="50" height="50">
-      <span class="fw-bold text-primary">우기99님</span><span class="ms-1">, 따뜻한 댓글을 남겨주세요 :)</span>
+      <!-- 로그인 되어있으면 이미지 출력함 -->
+      <c:if test="${sessionScope.id!=null }">
+      <img src="../img/${poster }" alt="프로필" class="rounded-circle me-2"  width="50" height="50">
+      <span class="fw-bold text-primary" id=nickname >${sessionScope.name}님</span><span class="ms-1">, 따뜻한 댓글을 남겨주세요 :)</span>
+      </c:if>
+      <c:if test="${sessionScope.id==null }">
+      <span class="ms-1">따뜻한 댓글을 남겨주세요 :)</span>
+      </c:if>
     </div>
-    <textarea class="form-control mb-2" rows="5" placeholder="댓글을 입력해주세요 :)" id="replytext"></textarea>
+    <textarea class="form-control mb-2" rows="5" placeholder="댓글을 입력해주세요 :)" id="replytext" name="msg"></textarea>
+    <input type="hidden" name="bno" value="${vo.bno}">
+    <input type="hidden" name="nickname" value="${sessionScope.name}">
+    <input type="hidden" name="poster" value="${poster}">
     <div class="d-flex justify-content-between align-items-center">
       <small class="text-muted">0/5000자</small>
       <div>
-        <button class="btn btn-light btn-sm me-2" onclick="replyclear()">취소</button>
-        <button class="btn btn-primary btn-sm">등록</button>
+        <button type="button" class="btn btn-light btn-sm me-2" onclick="replyclear()">취소</button>
+
+        
+        <!-- 로그인 되어야만 댓글쓸수있음 -->
+        <c:if test="${sessionScope.id!=null }">
+        <button type="submit" class="btn btn-primary btn-sm">등록</button>
+        </c:if>
+        <c:if test="${sessionScope.id==null }">
+        <a href="javascript:void(0);" onclick="alert('로그인이 필요합니다!');" class="btn btn-primary btn-sm">등록</a>
+        </c:if>
+        
       </div>
     </div>
   </div>
+  </form>
+  
 
   <!-- 댓글 리스트 아이템 -->
   <c:forEach var="rvo" items="${rList}">
   <div class="card p-4 mb-3">
     <div class="d-flex mb-3 align-items-center">
-      <img src="../img/woman.png" alt="댓글 작성자" class="rounded-circle me-2" width="50" height="50">
+    
+      <img src="../img/${rvo.poster }" alt="댓글 작성자" class="rounded-circle me-2" width="50" height="50">
       <div>
         <div class="fw-bold">${rvo.nickname } <span class="badge bg-light text-secondary ms-1">주식회사루미루코리아</span></div>
         <div class="text-muted small">인사(HR) 8년차 · ${rvo.dbday}</div>
       </div>
+      
+      <!-- 드롭다운 버튼 (오른쪽 정렬) -->
+		  <div class="dropdown ms-auto">
+		    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="reportDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+		      <i class="fas fa-ellipsis-v"></i>
+		    </button>
+		    <c:choose>
+		    <c:when test="${sessionScope.id!=null and sessionScope.id==rvo.id}">
+		    
+			    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="reportDropdown">
+			    <form action="../reply/reply_update.do" method="post">
+			      <li>                
+			     <input type="hidden" name="rno" value="${rvo.rno}">
+                <input type="hidden" name="bno" value="${vo.bno}">
+                <input type="hidden" name="msg" value="${rvo.msg}">
+                <button type="submit" class="dropdown-item">댓글 수정</button>
+                </li>
+			    </form>
+			      <li><a href="../reply/reply_delete.do?rno=${rvo.rno }&bno=${vo.bno}" class="dropdown-item">댓글 삭제</a></li>
+			    </ul>
+		    </c:when>
+		    <c:otherwise>
+			    <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="reportDropdown">
+			      <li><a href="javascript:void(0);"  onclick="alert('작성자만 수정 가능합니다.');" class="dropdown-item" >댓글 수정</a></li>
+			      <li><a href="javascript:void(0);"  onclick="alert('작성자만 삭제 가능합니다.');" class="dropdown-item">댓글 삭제</a></li>
+			    </ul>
+		    </c:otherwise>
+		    </c:choose>
+		  </div>
     </div>
-
+	
+  
     <div class="mb-3" style="white-space: pre-line;">
      ${rvo.msg }
     </div>

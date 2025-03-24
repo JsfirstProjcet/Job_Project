@@ -62,6 +62,27 @@
 		    WHERE w.wno=c.wno
 		    AND cid=#{cid})
 	</select>
+	<select id="comUpdateWelfareData" resultType="WelfareVO" parameterType="String">
+		SELECT w.wno,name,wno2,
+			CASE
+				WHEN cid IS NULL THEN 0
+				ELSE 1
+			END AS wcheck
+		FROM welfare w,(SELECT * FROM com_welfare WHERE cid=#{cid}) c
+		WHERE w.wno=c.wno(+) AND wno2 IS NOT NULL
+		ORDER BY wno ASC
+	</select>
+	<select id="comUpdateWelfareTag" resultType="WelfareVO">
+		SELECT * FROM welfare
+		WHERE wno2 IS NULL
+	</select>
+	<insert id="comWelfareInsert" parameterType="WelfareVO">
+		INSERT INTO com_welfare VALUES(#{wno},#{cid})
+	</insert>
+	<delete id="comWelfareDelete" parameterType="WelfareVO">
+		DELETE FROM com_welfare
+		WHERE wno=#{wno} AND cid=#{cid}
+	</delete>
 	<select id="cnoByCid" resultType="int" parameterType="String">
 		SELECT cno
 		FROM company
@@ -75,4 +96,18 @@
 			(SELECT NVL(MAX(cno)+1,1) FROM company)
 		)
 	</insert>
+	<update id="comUpdate" parameterType="CompanyVO">
+		UPDATE company SET
+		estdate=#{dbestdate},
+		representative=#{representative},
+		c_type=#{c_type},
+		homepage=#{homepage},
+		ecount=#{ecount},
+		take=#{jo}*1000000000000+#{uk}*100000000+#{man}*10000,
+		address=#{address},
+		industry=#{industry},
+		bu_details=#{bu_details},
+		introduction=#{introduction}
+		WHERE cid=#{cid}
+	</update>
 </mapper>

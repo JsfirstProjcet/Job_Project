@@ -40,4 +40,93 @@ public class ReplyDAO {
 		}
 		return list;
 	}
+	/*
+	 * <select id="replyCount" resultType="int" parameterType="ReplyVO">
+		SELECT COUNT(*) FROM community_reply
+		WHERE bno=#{bno}
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="replyInsert" parameterType="ReplyVO">
+		INSERT INTO community_reply(rno,bno,id,nickname,msg,regdate,group_id,group_step,group_tap)
+		VALUES(
+		(SELECT NVL(MAX(rno)+1, 1) FROM community_reply),
+		#{bno},#{id},#{nickname},#{msg},SYSDATE,
+		(SELECT NVL(MAX(group_id)+1, 1) FROM community_reply),0,0)
+	</insert>
+	 */
+	public static void replyInsert(ReplyVO vo) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.insert("replyInsert",vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
+	
+	public static int replyCount(int bno){
+		
+		SqlSession session=null;
+		int count=0;
+		try {
+			session=ssf.openSession();
+			count=session.selectOne("replyCount",bno);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		return count;
+	}
+	
+	/*
+	 *
+	 * 	<delete id="replyDelete" parameterType="int">
+		DELETE FROM community_reply
+		WHERE rno=#{rno}
+	</delete>
+	
+	
+	<update id="replyUpdate" parameterType="ReplyVO">
+		UPDATE community_reply SET
+		msg=#{msg}
+		WHERE rno=#{rno}
+	</update>
+	 */
+	 
+	
+	public static void replyDelete(int rno) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.delete("replyDelete",rno);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
+	
+	public static void replyUpdate(ReplyVO vo) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.update("replyUpdate",vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
 }

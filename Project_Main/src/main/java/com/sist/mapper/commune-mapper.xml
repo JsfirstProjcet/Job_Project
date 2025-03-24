@@ -55,12 +55,23 @@
 
 	<!-- 조회수 높은거 상단에 -->
 	<select id="communeTop4" resultType="CommuneVO">
-		SELECT bno, subject,content,nickname, hit
-		FROM (
-		SELECT bno, subject,content,nickname, hit
-		FROM community
-		ORDER BY hit DESC
-		)
+		SELECT c.bno,c.subject,c.content,c.nickname,c.hit,TO_CHAR(c.regdate, 'YYYY-MM-DD HH24:MI:SS') AS dbday,
+		c.id,p.poster
+		FROM (SELECT * FROM community ORDER BY hit DESC) c
+		JOIN personal p 
+		ON c.id = p.id 
 		WHERE ROWNUM &lt;= 4
+	</select>
+	<!-- 아이디 세션으로 포스터 가져오기 -->
+	<select id="communePoster" resultType="CommuneVO" parameterType="string">
+		SELECT id,poster
+		FROM personal
+		WHERE id=#{id}
+	</select>
+	<!-- 아이디 세션으로 포스터 가져오기 -->
+	<select id="communePoster1" resultType="string" parameterType="string">
+		SELECT poster
+		FROM personal
+		WHERE id=#{id}
 	</select>
 </mapper>

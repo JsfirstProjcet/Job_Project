@@ -9,7 +9,6 @@
 <script type="text/javascript">
 let check=false
 $(function(){
-	
 	$('.btn-map').click(function(){
 		if(check){
 			$('.div-map').hide()
@@ -176,27 +175,43 @@ $(function(){
 	                            <h4 class="mb-3">기업 소개</h4>
 	                            <pre style="white-space: pre-line;">${vo.introduction }</pre>
                         	</c:if>
-                        	<c:if test="${vo.history != null }">
+                        	
+                        	<c:if test="${yList.size()!=0 }">
                         		<hr>
 	                            <h4 class="mb-3">연혁</h4>
-	                            <table class="table">
-	                            	<tr><td colspan="2"></td></tr>
-	                            	<c:forEach var="history" items="${hList }" varStatus="i">
-                            			<tr>
-		                            		<c:forEach var="year" items="${yList }" varStatus="j">
-	                            				<c:if test="${cList[j.index]==i.index }">
-	                            					<td rowspan="${cList[j.index+1]==null?hList.size()-cList[j.index]:cList[j.index+1]-cList[j.index] }" width="10%">
-	                            						<i class="fa fa-angle-right text-primary me-2"></i>${year }
-	                            					</td>
-	                            				</c:if>
-		                            		</c:forEach>
-	                           				<td width="90%">
-	                           					${history }
-	                           				</td>
-                            			</tr>
-	                            	</c:forEach>
-	                            </table>
-                        	</c:if>
+								<table class="table">
+									<c:forEach var="yvo" items="${yList }">
+										<tr>
+											<th class="text-center" width="15%" rowspan="${yvo.count }">
+												<i class="fa fa-angle-right text-primary me-2"></i>${yvo.year }
+											</th>
+											<c:forEach var="hvo" items="${hList }">
+												<c:if test="${hvo.year==yvo.year and hvo.month==yvo.month and hvo.step==1 }">
+													<td class="text-center" width="10%" >
+														${hvo.month }월
+													</td>
+													<td class="text-left" width="75%" >
+														${hvo.content}
+													</td>
+												</c:if>
+											</c:forEach>
+										</tr>
+										<c:forEach var="hvo" items="${hList }">
+											<c:if test="${hvo.year==yvo.year and !(hvo.month==yvo.month and hvo.step==1) }">
+												<tr>
+													<td class="text-center" width="10%" >
+														${hvo.month }월
+													</td>
+													<td class="text-left" width="75%" >
+														${hvo.content}
+													</td>
+												</tr>
+											</c:if>
+										</c:forEach>
+									</c:forEach>
+								</table>
+							</c:if>
+                        	
                         	<c:if test="${wList[0] != null }">
                         		<hr>
 	                            <h4 class="mb-3">복지</h4>

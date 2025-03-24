@@ -17,10 +17,16 @@ import java.util.*;
 
 public class CommuneVO {
 	private int bno,hit,type,reply,likes;
-	private String subject,content,id,nickname,dbday,hashtag;
+	private String subject,content,id,nickname,dbday,hashtag,poster;
 	private Date regdate;
+	 
 	
-	
+	public String getPoster() {
+		return poster;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
 	public String getHashtag() {
 		return hashtag;
 	}
