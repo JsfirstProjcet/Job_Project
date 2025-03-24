@@ -23,7 +23,7 @@
       FROM official
       WHERE email=#{email}
   </select>
-  <select id="officialGetCname" resultType="String" parameterType="String">
-  	SELECT cname FROM official WHERE cid=#{cid}
+  <select id="officialDetailData" resultType="OfficialVO" parameterType="String">
+  	SELECT * FROM official WHERE cid=#{cid}
   </select>
  </mapper> 

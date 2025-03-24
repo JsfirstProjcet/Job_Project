@@ -291,7 +291,7 @@ public class CompanyModel {
 	public String com_insert(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session=request.getSession();
 		String cid=(String)session.getAttribute("cid");
-		String cname=OfficialDAO.officialGetCname(cid);
+		String cname=OfficialDAO.officialDetailData(cid).getCname();
 		
 		CompanyVO vo=new CompanyVO();
 		vo.setCid(cid);

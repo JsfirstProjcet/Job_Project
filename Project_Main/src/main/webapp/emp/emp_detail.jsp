@@ -38,6 +38,11 @@ $(function(){
 	    $(".btn-find-map").attr("target","_blank");
 	    $(".homepage").attr("target","_blank");
 	}, 1000)
+	if(${sCheck==1}){
+		$('.recruit-btn').removeAttr("onclick")
+		$('.recruit-btn').css("cursor","default")
+		$('.recruit-btn').text("지원 완료")
+	}
 })
 function updateDeadline() {
     const now = new Date();
@@ -133,6 +138,7 @@ function insertEmpFollow(eno){
 		})
 	}else if(${sessionScope.cid!=null}){
 		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다\n로그아웃 하시겠습니까?")){
+				
 		}else{
 			return
 		}
@@ -178,6 +184,19 @@ function printEmpFollow(eno){
 }
 // 지원
 function recruit(eno){
+	if(${sessionScope.cid!=null}){
+		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다\n로그아웃 하시겠습니까?")){
+			location.href='../personal/logout.do?mode=2&no='+${evo.eno}
+			return
+		}else{
+			return
+		}
+	}if(${sessionScope.id==null}){
+		if(confirm("일반 사용자 계정으로 로그인 후 이용가능한 기능입니다")){
+			javascript:login()
+		}
+		return
+	}
     Shadowbox.open({
         content:'../personal/recruit.do?eno='+eno,
         player:'iframe',

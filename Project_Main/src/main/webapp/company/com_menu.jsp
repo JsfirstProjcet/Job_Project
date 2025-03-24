@@ -121,7 +121,7 @@ function printComFollow(){
 						<li class="list-group-item"><a href="#">새 공고 등록</a></li>
 						<li class="list-group-item"><a href="#">공고 관리</a></li>
 						<li class="list-group-item"><a href="#">지원자 관리</a></li>
-						<li class="list-group-item"><a href="#">계정 관리</a></li>
+						<li class="list-group-item"><a href="../official/official_detail.do?cno=${vo.cno }">계정 관리</a></li>
 					</ul>
 				</div>
 			</c:if>

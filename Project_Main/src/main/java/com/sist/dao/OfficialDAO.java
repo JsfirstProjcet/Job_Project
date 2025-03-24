@@ -51,10 +51,10 @@ public class OfficialDAO {
 		session.close();
 		return vo;
 	}
-  	public static String officialGetCname(String cid) {
+  	public static OfficialVO officialDetailData(String cid) {
   		SqlSession session=ssf.openSession();
-  		String cname=session.selectOne("officialGetCname",cid);
+  		OfficialVO vo=session.selectOne("officialDetailData",cid);
   		session.close();
-  		return cname;
+  		return vo;
   	}
 }

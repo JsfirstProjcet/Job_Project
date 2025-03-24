@@ -75,14 +75,15 @@ public class EmpModel {
 		
 		List<JobVO> jList=EmpDAO.empDetailJobData(evo.getEno());
 		
-		////////// follow 정보
-		int cCheck=0;
-		int eCheck=0;
-
+		////////// follow + seeker 정보
+		int cCheck=0;//기업 팔로우
+		int eCheck=0;//공고 팔로우
+		int sCheck=0;//공고 지원
 		HttpSession session=request.getSession();
 		String id=(String)session.getAttribute("id");
 		if(id!=null) {
 			FollowVO fvo=new FollowVO();
+			SeekerVO svo=new SeekerVO();
 			fvo.setId(id);
 			try {
 				fvo.setNo(cno);
@@ -91,11 +92,15 @@ public class EmpModel {
 				fvo.setNo(Integer.parseInt(eno));
 				fvo.setType(1);
 				eCheck=FollowDAO.followCheck(fvo);
+				svo.setEno(Integer.parseInt(eno));
+				svo.setId(id);
+				sCheck=PersonalDAO.personalSeekerCheck(svo);
 			} catch (Exception e) {
 			}
 		}
 		request.setAttribute("cCheck", cCheck);
 		request.setAttribute("eCheck", eCheck);
+		request.setAttribute("sCheck", sCheck);
 		//////////
 		
 		request.setAttribute("evo", evo);

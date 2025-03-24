@@ -96,5 +96,39 @@ public class OfficialModel {
 		session.invalidate();
 		return "redirect:../main/main.do";
 	}
+	//계정정보 수정
+	@RequestMapping("official/official_detail.do")
+	public String official_detail(HttpServletRequest request,HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
+		OfficialVO ovo=OfficialDAO.officialDetailData(vo.getCid());
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("ovo", ovo);
+		request.setAttribute("com_jsp", "../official/official_detail.jsp");
+		request.setAttribute("main_jsp", "../company/com_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("official/official_update.do")
+	public String official_update(HttpServletRequest request,HttpServletResponse response) {
+		String cno=request.getParameter("cno");
+		CompanyVO vo=CompanyDAO.comDetailData(Integer.parseInt(cno));
+		OfficialVO ovo=OfficialDAO.officialDetailData(vo.getCid());
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("ovo", ovo);
+		request.setAttribute("com_jsp", "../official/official_update.jsp");
+		request.setAttribute("main_jsp", "../company/com_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("official/official_update_ok.do")
+	public String official_update_ok(HttpServletRequest request,HttpServletResponse response) {
+		String name=request.getParameter("name");
+		String cname=request.getParameter("cname");
+		String phone=request.getParameter("phone");
+		String brnumber=request.getParameter("brnumber");
+		return "redirect:../official/official_detail.do";
+	}
+	
 
 }

@@ -72,6 +72,14 @@ $(function(){
 			})
 		}
 	})
+	$('.wtabBtn').mouseover(function(){
+		$(this).removeClass("bg-light")
+		$(this).addClass("bg-primary")
+	})
+	$('.wtabBtn').mouseout(function(){
+		$(this).removeClass("bg-primary")
+		$(this).addClass("bg-light")
+	})
 })
 function insertHistory(){
 	if($('#content').val().trim()==""){
@@ -269,8 +277,6 @@ function printHistory(){
 function wtabChange(wno){
 	$('.wtab').hide()
 	$('.wtab-'+wno).show()
-	$('.wtabBtn').css("background-color","white")
-	$('.wtabBtn-'+wno).css("background-color","yellow")
 }
 </script>
 <style type="text/css">
@@ -295,6 +301,9 @@ input[type='number'].take {
     width: 50px;
     height: 25px;
     cursor: pointer;
+}
+.wtabBtn{
+	cursor: pointer;
 }
 </style>
 </head>
@@ -406,8 +415,8 @@ input[type='number'].take {
 		
 		<div class="row tab tab-3">
 			<c:forEach var="tag" items="${tList }" varStatus="i">
-				<div class="col-lg-3 text-center mt-3 mb-3 wtabBtn wtabBtn-${tag.wno}" onclick="wtabChange(${tag.wno})">
-					<h6 class="mt-2 mb-2"><i class="bi-${icons[i.index]} text-primary me-2"></i>${tag.name }</h6>
+				<div class="col-lg-3 text-centerwtabBtn wtabBtn wtabBtn-${tag.wno} bg-light" onclick="wtabChange(${tag.wno})">
+					<h6 class="text-center mt-3 mb-3"><i class="bi-${icons[i.index]} text-secondary me-2"></i>${tag.name }</h6>
 				</div>
 			</c:forEach>
 			<c:forEach var="tag" items="${tList }" varStatus="i">

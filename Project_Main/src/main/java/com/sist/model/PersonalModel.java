@@ -3,6 +3,8 @@ package com.sist.model;
 import java.io.PrintWriter;
 import java.util.List;
 
+import org.json.simple.JSONObject;
+
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -107,8 +109,17 @@ public class PersonalModel {
 	@RequestMapping("personal/logout.do")
 	public String personal_logout(HttpServletRequest request,HttpServletResponse response)
 	{
+		String mode=request.getParameter("mode");
+		String no=request.getParameter("no");
 		HttpSession session=request.getSession();
 		session.invalidate();
+		if(mode!=null) {
+			if(Integer.parseInt(mode)==1) {
+				return "redirect:../company/com_detail.do?cno="+no;
+			}else if(Integer.parseInt(mode)==2) {
+				return "redirect:../emp/emp_detail.do?no="+no;
+			}
+		}
 		return "redirect:../main/main.do";
 	}
 	//공고 지원하기
@@ -122,5 +133,56 @@ public class PersonalModel {
 		request.setAttribute("list", list);
 		request.setAttribute("eno", eno);
 		return "../personal/recruit.jsp";
+	}
+	@RequestMapping("personal/recruit_detail.do") 
+	public void personal_recruit_detail(HttpServletRequest request,HttpServletResponse response){
+		String eno=request.getParameter("eno");
+		String rno=request.getParameter("rno");
+		
+		ResumeVO vo=ResumeDAO.resumeDetailData(Integer.parseInt(rno));
+		/*
+		 * private int rno,num;
+			private String id,name,email,phone,birth,disclosure,scholar,skill,carreer,self_intro,title;
+			private String address,sex,poster;
+			private char isbasic;
+		 */
+		JSONObject obj=new JSONObject();
+		obj.put("rno", vo.getRno());
+		obj.put("id", vo.getId());
+		obj.put("name", vo.getName());
+		obj.put("email", vo.getEmail());
+		obj.put("phone", vo.getPhone());
+		obj.put("birth", vo.getBirth());
+		obj.put("disclosure", vo.getDisclosure());
+		obj.put("scholar", vo.getScholar());
+		obj.put("skill", vo.getSkill());
+		obj.put("carreer", vo.getCarreer());
+		obj.put("self_intro", vo.getSelf_intro());
+		obj.put("title", vo.getTitle());
+		obj.put("address", vo.getAddress());
+		obj.put("sex", vo.getSex());
+		obj.put("poster", vo.getPoster());
+		obj.put("isbasic", Character.toString(vo.getIsbasic()));
+		
+		try {
+			response.setContentType("text/plain;charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.write(obj.toJSONString());
+		} catch (Exception e) {}
+	}
+	@RequestMapping("personal/recruit_insert.do") 
+	public void personal_recruit_insert(HttpServletRequest request,HttpServletResponse response){
+		String eno=request.getParameter("eno");
+		String rno=request.getParameter("rno");
+		
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		
+		SeekerVO vo=new SeekerVO();
+		vo.setId(id);
+		vo.setRno(Integer.parseInt(rno));
+		vo.setEno(Integer.parseInt(eno));
+		
+		PersonalDAO.personalInsertSeeker(vo);
 	}
 }
