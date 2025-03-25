@@ -171,7 +171,7 @@ public class PersonalModel {
 		} catch (Exception e) {}
 	}
 	@RequestMapping("personal/recruit_insert.do") 
-	public void personal_recruit_insert(HttpServletRequest request,HttpServletResponse response){
+	public String personal_recruit_insert(HttpServletRequest request,HttpServletResponse response){
 		String eno=request.getParameter("eno");
 		String rno=request.getParameter("rno");
 		
@@ -184,5 +184,6 @@ public class PersonalModel {
 		vo.setEno(Integer.parseInt(eno));
 		
 		PersonalDAO.personalInsertSeeker(vo);
+		return "redirect:../emp/emp_detail.do?no="+eno;
 	}
 }

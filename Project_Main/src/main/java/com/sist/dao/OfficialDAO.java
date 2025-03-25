@@ -57,4 +57,9 @@ public class OfficialDAO {
   		session.close();
   		return vo;
   	}
+  	public static void officialUpdate(OfficialVO vo) {
+  		SqlSession session=ssf.openSession(true);
+  		session.update("officialUpdate",vo);
+  		session.close();
+  	}
 }

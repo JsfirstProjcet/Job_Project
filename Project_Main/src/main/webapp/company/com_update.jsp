@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <script type="text/javascript">
 $(function(){
+	if(${sessionScope.cid==null}){
+		alert("기업계정으로 로그인 후 이용해주세요")
+		location.href="../company/com_detail.do?cno="+${param.cno}
+		return
+	}else if(${sessionScope.cid!=vo.cid}){
+		alert("접근한 기업정보를 수정할 권한이 없습니다")
+		location.href="../company/com_detail.do?cno="+${param.cno}
+		return
+	}
 	printHistory()
 	wtabChange(1)
 	$('.tab').hide()
@@ -196,15 +205,6 @@ function updateCancel(hno){
 function printHistory(){
 	html=''
 	cno=${param.cno}
-	if(${sessionScope.cid==null}){
-		alert("기업계정으로 로그인 후 이용해주세요")
-		location.href="com_detail.do?cno="+${param.cno}
-		return
-	}else if(${sessionScope.cid!=vo.cid}){
-		alert("접근한 기업정보를 수정할 권한이 없습니다")
-		location.href="com_detail.do?cno="+${param.cno}
-		return
-	}
 	$.ajax({
 		type:'post',
 		url:'../company/history_print.do',

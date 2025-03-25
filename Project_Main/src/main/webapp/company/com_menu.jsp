@@ -17,7 +17,6 @@ $(function(){
 })
 function insertComFollow(cno){
 	let id='${sessionScope.id}'
-	console.log(id)
 	let type=0
 	if(${sessionScope.id!=null} && ${sessionScope.isadmin==0}){
 		$.ajax({
@@ -118,10 +117,8 @@ function printComFollow(){
 					</div>
 					<ul class="list-group">
 						<li class="list-group-item"><a href="../company/com_update.do?cno=${vo.cno }">기업 정보 수정</a></li>
-						<li class="list-group-item"><a href="#">새 공고 등록</a></li>
-						<li class="list-group-item"><a href="#">공고 관리</a></li>
-						<li class="list-group-item"><a href="#">지원자 관리</a></li>
-						<li class="list-group-item"><a href="../official/official_detail.do?cno=${vo.cno }">계정 관리</a></li>
+						<li class="list-group-item"><a href="../official/emp_list.do?cno=${vo.cno }">공고 관리</a></li>
+						<li class="list-group-item"><a href="../official/official_detail.do?cno=${vo.cno }">계정 정보</a></li>
 					</ul>
 				</div>
 			</c:if>

@@ -3,11 +3,17 @@ package com.sist.vo;
 import java.util.*;
 
 public class EmpVO {
-	private int eno,salary,education,hit,fo_count,se_count,rtype,dtype;
+	private int eno,salary,education,hit,fo_count,se_count,rtype,dtype,num;
 	private String name,title,personal_history,salary_str,loc,emp_type,cid,content,dbregdate,dbdeadline;
 	private Date regdate,deadline;
 	private CompanyVO cvo=new CompanyVO();
 	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getSalary_str() {
 		return salary_str;
 	}

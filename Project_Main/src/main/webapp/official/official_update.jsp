@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
+	if(${sessionScope.cid==null}){
+		alert("기업계정으로 로그인 후 이용해주세요")
+		location.href="../company/com_detail.do?cno="+${param.cno}
+		return
+	}else if(${sessionScope.cid!=vo.cid}){
+		alert("접근한 계정정보를 수정할 권한이 없습니다")
+		location.href="../company/com_detail.do?cno="+${param.cno}
+		return
+	}
 	let phone='${ovo.phone}'
 	startPhone(phone)
 	let brnumber='${ovo.brnumber}'
@@ -101,7 +110,7 @@ input[type='number'] {
 	<div class="container mt-5">
 		<div class="row" style="width: 600px;margin: 0px auto;">
 			<h3>기업 계정정보 수정</h3>
-			<form method="post" action="../official/official_update_ok">
+			<form method="post" action="../official/official_update_ok.do">
 				<table class="table">
 					<tr>
 						<th width="20%">아이디</th>
@@ -154,7 +163,7 @@ input[type='number'] {
 					</tr>
 					<tr>
 						<td colspan="2" class="text-end">
-							<input type="button" class="btn btn-sm btn-primary" style="color: white;" value="수정완료">
+							<input type="submit" class="btn btn-sm btn-primary" style="color: white;" value="수정완료">
 							<a href="../official/official_detail.do?cno=${vo.cno }" class="btn btn-sm btn-danger" style="color: white;">취소</a>
 						</td>
 					</tr>

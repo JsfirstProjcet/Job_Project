@@ -11,12 +11,13 @@
 let check=false
 let deadline='${evo.dbdeadline}'
 let date=new Date(deadline.replace(" ", "T"));
+let timer
 $(function(){
 	if(${evo.deadline==null}){
 		$('.deadline-text').text("상시 모집")
 	}else{
-		updateDeadline();
-	    const timer = setInterval(updateDeadline, 1000);
+		updateDeadline(0);
+	    timer = setInterval(updateDeadline(1), 1000);
 	}
 	
 	$('.btn-map').click(function(){
@@ -44,15 +45,16 @@ $(function(){
 		$('.recruit-btn').text("지원 완료")
 	}
 })
-function updateDeadline() {
+function updateDeadline(mode) {
     const now = new Date();
     const timeDiff = date - now;
     if (timeDiff <= 0) {
     	$('.deadline-text').text("지원 마감")
+    	$('.recruit-btn').text("지원 마감")
     	$('.recruit-btn').removeAttr("href")
     	$('.recruit-btn').css({"background-color":"gray","border":"black","cursor":"default"})
-
-        clearInterval(timer);
+		
+		clearInterval(timer)
         return;
     }
 

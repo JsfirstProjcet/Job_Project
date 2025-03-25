@@ -97,4 +97,38 @@ public class EmpDAO {
 		session.close();
 		return count;
 	}
+	public static List<EmpVO> empOfficialListData(Map map) {
+		SqlSession session = ssf.openSession();
+		List<EmpVO> list=session.selectList("empOfficialListData", map);
+		session.close();
+		return list;
+	}
+	public static int empOfficialCount(String cid) {
+		SqlSession session = ssf.openSession();
+		int count = session.selectOne("empOfficialCount", cid);
+		session.close();
+		return count;
+	}
+	public static void empClose(int eno) {
+		SqlSession session = ssf.openSession(true);
+		session.update("empClose", eno);
+		session.close();
+	}
+	public static void empCloseSeeker(int eno) {
+		SqlSession session = ssf.openSession(true);
+		session.update("empCloseSeeker", eno);
+		session.close();
+	}
+	public static List<SeekerVO> empSeekerListData(Map map){
+		SqlSession session = ssf.openSession();
+		List<SeekerVO> list=session.selectList("empSeekerListData", map);
+		session.close();
+		return list;
+	}
+	public static int empSeekerCount(int eno){
+		SqlSession session = ssf.openSession();
+		int count=session.selectOne("empSeekerCount", eno);
+		session.close();
+		return count;
+	}
 }

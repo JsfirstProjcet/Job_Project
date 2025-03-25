@@ -6,6 +6,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+$(function(){
+	if(${sessionScope.cid==null}){
+		alert("기업계정으로 로그인 후 이용해주세요")
+		location.href="../company/com_detail.do?cno="+${param.cno}
+		return
+	}else if(${sessionScope.cid!=vo.cid}){
+		alert("접근한 계정정보를 수정할 권한이 없습니다")
+		location.href="../company/com_detail.do?cno="+${param.cno}
+		return
+	}
+})
 </script>
 </head>
 <body>

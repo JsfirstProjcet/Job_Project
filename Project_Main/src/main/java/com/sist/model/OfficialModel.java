@@ -1,6 +1,9 @@
 package com.sist.model;
 
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
@@ -127,8 +130,118 @@ public class OfficialModel {
 		String cname=request.getParameter("cname");
 		String phone=request.getParameter("phone");
 		String brnumber=request.getParameter("brnumber");
-		return "redirect:../official/official_detail.do";
+		
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		
+		OfficialVO vo=new OfficialVO();
+		vo.setName(name);
+		vo.setCname(cname);
+		vo.setPhone(phone);
+		vo.setBrnumber(brnumber);
+		vo.setCid(cid);
+		
+		OfficialDAO.officialUpdate(vo);
+		
+		return "redirect:../official/official_detail.do?cno="+cno;
 	}
-	
+	@RequestMapping("official/emp_list.do")
+	public String official_emp_list(HttpServletRequest request, HttpServletResponse response) {		
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		CompanyVO vo=CompanyDAO.comDetailData(cno);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("cno", cno);
+		request.setAttribute("com_jsp", "../official/emp_list.jsp");
+		request.setAttribute("main_jsp", "../company/com_main.jsp");
+		return "../main/main.jsp";
+	}
+	@RequestMapping("official/emp_list_print.do")
+	public String official_emp_list_print(HttpServletRequest request, HttpServletResponse response) {		
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		
+		int curpage=Integer.parseInt(page);
+		final int BLOCK=10;
+		
+		Map map=new HashMap();
+		map.put("cid", cid);
+		map.put("start", (curpage*10)-9);
+		map.put("end", (curpage*10));
+		
+		List<EmpVO> list=EmpDAO.empOfficialListData(map);
+		int count=EmpDAO.empOfficialCount(cid);
+		int totalpage=(int)(Math.ceil(count/10.0));
 
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		request.setAttribute("cno", cno);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("list", list);
+		return "../official/emp_list_print.jsp";
+	}
+	@RequestMapping("official/emp_close.do")
+	public void official_emp_close(HttpServletRequest request, HttpServletResponse response) {
+		String eno=request.getParameter("eno");
+		
+		EmpDAO.empCloseSeeker(Integer.parseInt(eno));
+		EmpDAO.empClose(Integer.parseInt(eno));
+	}
+	@RequestMapping("official/seeker_list.do")
+	public String official_seeker_list(HttpServletRequest request, HttpServletResponse response) {
+		String eno=request.getParameter("eno");
+		String page=request.getParameter("page");
+		if(page==null)
+			page="1";
+		
+		int curpage=Integer.parseInt(page);
+		final int BLOCK=10;
+		
+		Map map=new HashMap();
+		map.put("eno", eno);
+		map.put("start", (curpage*10)-9);
+		map.put("end", (curpage*10));
+		
+		List<SeekerVO> list=EmpDAO.empSeekerListData(map);
+		int count=EmpDAO.empSeekerCount(Integer.parseInt(eno));
+		int totalpage=(int)(Math.ceil(count/10.0));
+
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("list", list);
+		return "../official/seeker_list.jsp";
+	}
+	@RequestMapping("official/emp_insert.do")
+	public String official_emp_insert(HttpServletRequest request, HttpServletResponse response) {		
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		CompanyVO vo=CompanyDAO.comDetailData(cno);
+
+		request.setAttribute("vo", vo);
+		request.setAttribute("cno", cno);
+		request.setAttribute("com_jsp", "../official/emp_insert.jsp");
+		request.setAttribute("main_jsp", "../company/com_main.jsp");
+		return "../main/main.jsp";
+	}
 }
