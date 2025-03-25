@@ -142,7 +142,7 @@ public class PersonalModel {
 		ResumeVO vo=ResumeDAO.resumeDetailData(Integer.parseInt(rno));
 		/*
 		 * private int rno,num;
-			private String id,name,email,phone,birth,disclosure,scholar,skill,carreer,self_intro,title;
+			private String id,name,email,phone,birth,disclosure,scholar,skill,career,self_intro,title;
 			private String address,sex,poster;
 			private char isbasic;
 		 */
@@ -156,7 +156,7 @@ public class PersonalModel {
 		obj.put("disclosure", vo.getDisclosure());
 		obj.put("scholar", vo.getScholar());
 		obj.put("skill", vo.getSkill());
-		obj.put("carreer", vo.getCarreer());
+		obj.put("carreer", vo.getCareer());
 		obj.put("self_intro", vo.getSelf_intro());
 		obj.put("title", vo.getTitle());
 		obj.put("address", vo.getAddress());
