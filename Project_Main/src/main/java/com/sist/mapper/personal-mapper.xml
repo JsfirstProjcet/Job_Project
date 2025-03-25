@@ -34,16 +34,4 @@
       FROM personal
       WHERE email=#{email}
   </select>
-  <insert id="personalInsertSeeker" parameterType="SeekerVO">
-  	INSERT INTO job_seeker(jno,eno,rno,id) VALUES(
-  		(SELECT NVL(MAX(jno)+1,1) FROM job_seeker),
-  		#{eno},
-  		#{rno},
-  		#{id}
-  	)
-  </insert>
-  <select id="personalSeekerCheck" resultType="int" parameterType="SeekerVO">
-  	SELECT COUNT(*) FROM job_seeker
-  	WHERE id=#{id} AND eno=#{eno}
-  </select>
 </mapper>

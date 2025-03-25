@@ -24,6 +24,7 @@
            	   <if test="tab != 'all'"> 
                      AND emp_type LIKE '%' || #{tab} || '%'
  		       </if>
+ 		       		 AND deadline > SYSDATE
  	       </where>
  	  	  )
  	   )
@@ -53,6 +54,7 @@
             <if test="jno != null">
                 AND ej.jno = #{jno}
             </if>
+            	AND deadline > SYSDATE
         )
     )
     WHERE num BETWEEN #{start} AND #{end}
@@ -189,39 +191,5 @@
 		FROM emp_job e, job j
 		WHERE e.jno=j.jno
 		AND eno=#{eno}
-	</select>
-	<select id="empOfficialListData" resultType="EmpVO" parameterType="hashmap">
-		SELECT eno,title,hit,se_count,fo_count,TO_CHAR(deadline,'YYYY-MM-DD') as dbdeadline,num
-		FROM (SELECT eno,title,hit,se_count,fo_count,deadline,rownum as num
-		FROM (SELECT eno,title,hit,se_count,fo_count,deadline
-		FROM employment WHERE cid=#{cid} AND (deadline > SYSDATE OR deadline IS NULL) ORDER BY deadline ASC))
-		WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	<select id="empOfficialCount" resultType="int" parameterType="String">
-		SELECT COUNT(*) FROM employment
-		WHERE cid=#{cid} AND (deadline > SYSDATE OR deadline IS NULL)
-	</select>
-	<update id="empClose" parameterType="int">
-		UPDATE employment SET
-		deadline=SYSDATE
-		WHERE eno=#{eno}
-	</update>
-	<update id="empCloseSeeker" parameterType="int">
-		UPDATE job_seeker SET
-		state=2
-		WHERE eno=#{eno} AND state=0
-	</update>
-	<select id="empSeekerListData" resultType="SeekerVO" parameterType="hashmap">
-		SELECT jno,eno,state,rno,pname,rtitle,etitle,num
-		FROM (SELECT jno,eno,state,rno,pname,rtitle,etitle,rownum as num 
-		FROM (SELECT jno,s.eno as eno,state,s.rno as rno,p.name as pname,r.title as rtitle,e.title as etitle
-		FROM job_seeker s,personal p, resume r,employment e
-		WHERE s.eno=#{eno}
-		AND s.id=p.id AND s.rno=r.rno AND s.eno=e.eno
-        ORDER BY jno desc))
-        WHERE num BETWEEN #{start} AND #{end}
-	</select>
-	<select id="empSeekerCount" resultType="int" parameterType="int">
-		SELECT COUNT(*) FROM job_seeker where eno=#{eno}
 	</select>
 </mapper>
