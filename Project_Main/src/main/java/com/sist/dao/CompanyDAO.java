@@ -27,10 +27,24 @@ public class CompanyDAO {
 		session.close();
 		return list;
 	}
+	public static List<CompanyVO> companyFindData(Map map)
+	{
+		SqlSession session=ssf.openSession();
+		List<CompanyVO> list=session.selectList("companyFindData",map);
+		session.close();
+		return list;
+	}
 	public static int companyTotalPage(String tab)
 	{
 		SqlSession session=ssf.openSession();
 		int total=session.selectOne("companyTotalPage",tab);
+		session.close();
+		return total;
+	}
+	public static int companyFindTotalPage(Map map)
+	{
+		SqlSession session=ssf.openSession();
+		int total=session.selectOne("companyFindTotalPage",map);
 		session.close();
 		return total;
 	}

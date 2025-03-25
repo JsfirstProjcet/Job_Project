@@ -247,6 +247,49 @@ public class CompanyModel {
 	}
 	@RequestMapping("company/com_find.do")
 	public String com_find(HttpServletRequest request, HttpServletResponse response) {
+	    String page = request.getParameter("page");
+	    if (page == null) {
+	        page = "1";
+	    }
+	    
+	    int curpage = Integer.parseInt(page);
+ 
+	    String keyword = request.getParameter("keyword"); 
+	    if (keyword == null || keyword.isEmpty()) {
+	        keyword = "";
+	    }
+	    String c_type = request.getParameter("c_type");
+	    if (c_type == null || c_type.isEmpty()) {
+	    	c_type = null;
+	    }	    
+	    String address = request.getParameter("address");
+	    if (address == null || address.isEmpty()) {
+	    	address = null;
+	    }	    
+
+	    Map map = new HashMap();
+		map.put("start", (curpage*12)-11);
+		map.put("end",curpage*12);
+	    map.put("keyword", keyword);           
+	    map.put("c_type", c_type);            
+	    map.put("address", address);           
+
+		List<CompanyVO> list=CompanyDAO.companyFindData(map);
+		int totalpage=CompanyDAO.companyFindTotalPage(map);
+	  
+	    final int BLOCK = 10;  
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+
+	    if (endPage > totalpage) {
+	        endPage = totalpage;
+	    }
+	    
+	    request.setAttribute("list", list);
+	    request.setAttribute("curpage", curpage);
+	    request.setAttribute("totalpage", totalpage);
+	    request.setAttribute("startPage", startPage);
+	    request.setAttribute("endPage", endPage);
 		request.setAttribute("main_jsp", "../company/com_find.jsp");
 		return "../main/main.jsp";
 	}
