@@ -205,6 +205,7 @@ public class ResumeModel {
 			
 		ResumeVO vo=new ResumeVO();
 		vo.setRno(Integer.parseInt(rno));
+		vo.setId(id);
 		vo.setName(name==null?"":name);
 		vo.setEmail(email==null?"":email);
 		vo.setPhone(phone==null?"":phone);
