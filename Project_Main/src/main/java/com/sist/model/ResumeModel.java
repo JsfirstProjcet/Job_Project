@@ -199,10 +199,12 @@ public class ResumeModel {
 		String poster=request.getParameter("poster");
 		String rno=request.getParameter("rno");
 		System.out.println("JobEntryProject>ResumeModel>rno: "+rno);
+		System.out.println("JobEntryProject>ResumeModel>id: "+id);
+		System.out.println("JobEntryProject>ResumeModel>name: "+name);
 		System.out.println("JobEntryProject>ResumeModel>title: "+title);
 			
 		ResumeVO vo=new ResumeVO();
-		vo.setId(id);
+		vo.setRno(Integer.parseInt(rno));
 		vo.setName(name==null?"":name);
 		vo.setEmail(email==null?"":email);
 		vo.setPhone(phone==null?"":phone);
