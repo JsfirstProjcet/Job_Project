@@ -104,7 +104,8 @@
 		                                            <span class="text-truncate me-3"><i class="far fa-building text-primary me-2"></i>${vo.name }</span>
 		                                            <span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>${vo.fo_count }</span>
 		                                            <span class="text-truncate me-3"><i class="fas fa-user-tie text-primary me-2"></i>${vo.se_count }</span>
-		                                            <span class="text-truncate me-0"><i class="fas fa-project-diagram text-primary me-2"></i>${vo.emp_type }</span>
+		                                            <span class="text-truncate me-3"><i class="fas fa-project-diagram text-primary me-2"></i>${vo.emp_type }</span>
+		                                            <span class="text-truncate me-0"><i class="fas fa-suitcase text-primary me-2"></i>${vo.loc }</span>
 		                                        </div>
 		                                    </div>
 		                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">

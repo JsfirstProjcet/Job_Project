@@ -24,6 +24,7 @@
            	   <if test="tab != 'all'"> 
                      AND emp_type LIKE '%' || #{tab} || '%'
  		       </if>
+ 		       		 AND deadline > SYSDATE
  	       </where>
  	  	  )
  	   )
@@ -53,6 +54,7 @@
             <if test="jno != null">
                 AND ej.jno = #{jno}
             </if>
+            	AND deadline > SYSDATE
         )
     )
     WHERE num BETWEEN #{start} AND #{end}
