@@ -26,4 +26,12 @@
   <select id="officialDetailData" resultType="OfficialVO" parameterType="String">
   	SELECT * FROM official WHERE cid=#{cid}
   </select>
+  <update id="officialUpdate" parameterType="OfficialVO">
+  	UPDATE official SET
+  	name=#{name},
+  	cname=#{cname},
+  	phone=#{phone},
+  	brnumber=#{brnumber}
+  	WHERE cid=#{cid}
+  </update>
  </mapper> 
