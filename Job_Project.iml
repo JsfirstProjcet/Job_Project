@@ -3,7 +3,14 @@
   <component name="NewModuleRootManager">
     <output url="file://$MODULE_DIR$/bin" />
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/JOBPRO_Admin/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/JOBPRO_Admin/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/JOBPRO_Admin/out" />
+      <excludeFolder url="file://$MODULE_DIR$/JOBPRO_Admin/out/artifacts/JOBPRO_Admin_war_exploded/WEB-INF/classes/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/JOBPRO_Admin/out/artifacts/JOBPRO_Admin_war_exploded/WEB-INF/classes/target" />
+      <excludeFolder url="file://$MODULE_DIR$/JOBPRO_Admin/target" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

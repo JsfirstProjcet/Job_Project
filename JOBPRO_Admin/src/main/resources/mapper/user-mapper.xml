@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.user-mapper">
+  <!-- 유저 리스트 -->
+  <select id="getUserList" resultType="UserVO" parameterType="hashmap">
+    SELECT id, nickname, email, name, phone, num
+    FROM (SELECT id, nickname, email, name, phone, rownum as num
+          FROM (SELECT id, nickname, email, name, phone
+                FROM PERSONAL
+                order by id desc))
+    WHERE (num BETWEEN #{start} AND #{end})
+      and (id != 'p0')
+  </select>
+  <!-- 유저 상세 보기 -->
+  <select id="getUserDetail" resultType="UserVO" parameterType="string">
+    SELECT id,
+           nickname,
+           email,
+           sex,
+           addr1,
+           addr2,
+           poster,
+           name,
+           phone
+    FROM PERSONAL
+    where id = #{id}
+  </select>
+  <!-- 유저 삭제 -->
+  <delete id="userDelete" parameterType="string">
+    delete
+    from PERSONAL
+    where id = #{id}
+  </delete>
+  <!-- 유저 검색 -->
+  <select id="getUserSearch" resultType="UserVO" parameterType="hashmap">
+    SELECT id, nickname, email, name, phone, num
+    FROM (SELECT id, nickname, email, name, phone, rownum as num
+          FROM (SELECT id, nickname, email, name, phone
+                FROM PERSONAL
+                where (id like '%' || #{id} || '%'
+                  or nickname like '%' || #{id} || '%'
+                  or email like '%' || #{id} || '%'
+                  or name like '%' || #{id} || '%'
+                  or phone like '%' || #{id} || '%')
+                order by id desc))
+    where (num between #{start} and #{end})
+      and (id != 'p0')
+  </select>
+  <select id="getUserSearchCount" resultType="int" parameterType="string">
+    SELECT CEIL(COUNT(*) / 15.0)
+    FROM (SELECT id, nickname, email, name, phone
+          FROM PERSONAL
+          where (id like '%' || #{id} || '%'
+            or nickname like '%' || #{id} || '%'
+            or email like '%' || #{id} || '%'
+            or name like '%' || #{id} || '%'
+            or phone like '%' || #{id} || '%')
+          order by id desc)
+    where (id != 'p0')
+  </select>
+  <select id="getAdminAccount" resultType="UserVO" parameterType="UserVO">
+    SELECT id, email, isadmin
+    FROM PERSONAL
+    where email = #{email}
+      and pw = #{pw}
+      and isadmin = 1
+  </select>
+</mapper>
