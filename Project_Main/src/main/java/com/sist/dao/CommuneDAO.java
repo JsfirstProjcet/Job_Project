@@ -21,7 +21,7 @@ public class CommuneDAO {
 	 * 
 	 * <select id="communeListData" resultType="CommuneVO" parameterType="hashmap">
 	   </select>
-	 */
+	 */ 
 	
 	public static List<CommuneVO> communeListData(Map map){
 		SqlSession session=null;
