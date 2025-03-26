@@ -15,6 +15,9 @@ NICKNAME          VARCHAR2(60)
 
 import java.util.*;
 
+import lombok.Data;
+
+@Data
 public class CommuneVO {
 	private int bno,hit,type,reply,likes;
 	private String subject,content,id,nickname,dbday,hashtag,poster;

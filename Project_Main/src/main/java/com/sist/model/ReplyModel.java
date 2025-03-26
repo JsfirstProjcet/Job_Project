@@ -32,6 +32,9 @@ public class ReplyModel {
 	    System.out.println(bno +" "+id +" "+msg +" "+nickname +" "+poster);
 		ReplyDAO.replyInsert(vo);
 		
+		// 댓글 추가시 interview reply +1
+		ReplyDAO.communeReplyCountIncrement(Integer.parseInt(bno));
+		
 		return "redirect:../interview/commune_detail.do?bno=" + bno;
 	}
 	
@@ -43,6 +46,10 @@ public class ReplyModel {
 		String rno=request.getParameter("rno");
 		
 		ReplyDAO.replyDelete(Integer.parseInt(rno));
+		
+		// 댓글 삭제시 interview reply -1
+		ReplyDAO.communeReplyCountDecrement(Integer.parseInt(bno));
+				
 		return "redirect:../interview/commune_detail.do?bno=" + bno;
 	}
 	
@@ -56,7 +63,6 @@ public class ReplyModel {
 		ReplyVO vo=new ReplyVO();
 		vo.setRno(Integer.parseInt(rno));
 		vo.setMsg(msg);
-		
 		ReplyDAO.replyUpdate(vo);
 		
 		return "redirect:../interview/commune_detail.do?bno=" + bno;

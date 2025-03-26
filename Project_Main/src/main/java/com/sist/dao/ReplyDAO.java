@@ -60,6 +60,7 @@ public class ReplyDAO {
 		try {
 			session=ssf.openSession(true);
 			session.insert("replyInsert",vo);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -129,4 +130,52 @@ public class ReplyDAO {
 				session.close();
 		}
 	}
+	
+	/*
+	 * 
+	 * <!-- 댓글 등록시 commune테이블 reply+1 -->
+	<update id="communeReplyCountIncrement" parameterType="int">
+		UPDATE community
+		SET
+		reply=reply+1
+		WHERE bno=#{bno}
+	</update>
+	<!-- 댓글 삭제시 commune테이블 reply-1 -->
+	<update id="communeReplyCountDecrement" parameterType="int">
+		UPDATE community
+		SET
+		reply=reply-1
+		WHERE bno=#{bno}
+	</update>
+	
+	 */
+	
+	public static void communeReplyCountIncrement(int bno) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.update("communeReplyCountIncrement",bno);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
+	
+	public static void communeReplyCountDecrement(int bno) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.update("communeReplyCountDecrement",bno);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
+	
 }

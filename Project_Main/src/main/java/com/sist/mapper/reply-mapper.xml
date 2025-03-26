@@ -33,7 +33,6 @@ NICKNAME            VARCHAR2(60)
 		(SELECT NVL(MAX(group_id)+1, 1) FROM community_reply),0,0,#{poster})
 	</insert>
 
-
 	<delete id="replyDelete" parameterType="int">
 		DELETE FROM community_reply
 		WHERE rno=#{rno}

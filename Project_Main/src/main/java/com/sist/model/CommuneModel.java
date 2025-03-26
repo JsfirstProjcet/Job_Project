@@ -1,13 +1,10 @@
 package com.sist.model;
 import java.util.*;
+
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
-import com.sist.dao.CommuneDAO;
-import com.sist.dao.InterviewDAO;
-import com.sist.dao.ReplyDAO;
-import com.sist.vo.CommuneVO;
-import com.sist.vo.InterviewVO;
-import com.sist.vo.ReplyVO;
+import com.sist.dao.*;
+import com.sist.vo.*;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -122,8 +119,18 @@ public class CommuneModel {
 		  request.setAttribute("rList", rlist);
 		  
 		  
-		//////////////////////////////////////////////////
-		  
+		 //////////////////////////////////////////////////
+		 //게시글 좋아요
+		  JjimVO jvo=new JjimVO();
+		  jvo.setBno(Integer.parseInt(bno));
+		  jvo.setId(id);
+		  if(id!=null)
+		  {
+			  int jcount=JjimDAO.jjimCheckCount(jvo);
+			  request.setAttribute("jcount", jcount);
+			  System.out.println("jcount="+jcount);
+		  }
+		  /////////////////////////////////////////////
 		
 		request.setAttribute("hash", hash);
 		request.setAttribute("vo", vo);

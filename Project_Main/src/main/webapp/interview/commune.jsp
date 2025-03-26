@@ -33,7 +33,7 @@
 		<!-- Testimonial Start -->
 		<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
 			<div class="container">
-				<h1 class="text-center mb-5">오늘의 인기글 !!!</h1>
+				<h1 class="text-center mb-5">이런 글은 어때요?</h1>
 				<div class="owl-carousel testimonial-carousel">
 				   <c:forEach var="tvo" items="${topList }">
 					    <div class="testimonial-item bg-light rounded p-4 position-relative" 

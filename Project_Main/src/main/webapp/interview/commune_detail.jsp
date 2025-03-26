@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 var IMP = window.IMP; 
@@ -44,6 +45,39 @@ function requestPay() {
 	  document.getElementById('replytext').value="";
   }
 
+</script>
+<!-- 댓글 수정버튼 클릭 시 동작 -->
+<script type="text/javascript">
+ let bClick=false
+ 
+$(function(){
+ 	$('.updates').click(function(){
+ 	let rno=$(this).attr("data-rno")
+ 	$('.ups').hide()
+ 		if(bClick==false){
+			$('#up'+rno).show()
+			$(this).text("수정 취소")
+			bClick=true
+		}
+ 		else
+		{			
+			$('#up'+rno).hide()
+			$(this).text("댓글 수정")
+			bClick=false
+    	}
+ 	
+ 	/* 취소 버튼 눌렀을때 사라지게 */
+ 	$('.replycancel').click(function(){
+ 		$('#up'+rno).hide()
+ 		$('.updates').text("댓글 수정")
+ 		bClick=false
+    })
+    
+   })
+   
+})
+ 
+ 
 </script>
 </head>
 <body>
@@ -112,12 +146,24 @@ function requestPay() {
 
 		<!-- 버튼 -->
 		<div class="d-flex mb-4">
-			<button class="btn btn-outline-secondary me-2 rounded-pill">
-				<i class="far fa-thumbs-up"></i> 좋아요 1
-			</button>
-			<button class="btn btn-outline-secondary me-2 rounded-pill">
-				<i class="far fa-bookmark"></i> 북마크
-			</button>
+			<c:if test="${sessionScope.id!=null }">
+					<c:if test="${jcount==0 }">
+						<button class="btn btn-outline-secondary me-2 rounded-pill" onclick="location.href='../jjim/jjim_insert.do?bno=${vo.bno }'">
+								<i class="far fa-heart"></i> 좋아요</button>
+						
+					</c:if>
+					<c:if test="${jcount==1 }">
+						<button class="btn btn-outline-secondary me-2 rounded-pill" onclick="alert('이미 좋아요한 게시물 입니다.');">
+						  <i class="fas fa-heart text-danger"></i> 좋아요
+						</button>
+					</c:if>
+			</c:if>
+			
+			<c:if test="${sessionScope.id==null }">
+				<button class="btn btn-outline-secondary me-2 rounded-pill" onclick="alert('로그인 후 사용 가능합니다.')">
+				<i class="far fa-heart"></i> 좋아요</button>
+			</c:if> 
+			
 			<button class="btn btn-outline-secondary me-2 rounded-pill">
 				<i class="far fa-heart"></i> 찜하기
 			</button>
@@ -138,25 +184,22 @@ function requestPay() {
 					<div class="fw-bold">${vo.nickname }</div>
 					<div class="text-muted small">상품기획·MD 2년차</div>
 				</div>
-				<button class="btn btn-outline-primary btn-sm me-2">팔로우</button>
-				<button class="btn btn-outline-secondary btn-sm">프로필 보기</button>
+				<!-- 공유하기 -->
+				<button class="btn btn-outline-secondary btn-sm" onclick="copyurl()">
+					<i class="fas fa-share"></i> 공유하기
+				</button>
 			</div>
 		</div>
 
-		<!-- 공유하기 -->
-		<div class="text-end mb-4">
-			<button class="btn btn-outline-secondary btn-sm" onclick="copyurl()">
-				<i class="fas fa-share"></i> 공유하기
-			</button>
-		</div>
+
 
 		<!-- 하단 영역 -->
 		<div class="p-4 rounded text-center"
 			style="background: url('../img/vip.png') center/cover no-repeat; height: 170px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center;">
 
 
-			<a href="#" class="btn btn-danger" onclick="requestPay()" style="margin-top: auto;">
-				지금 구매하기 </a>
+			<a href="#" class="btn btn-danger" onclick="requestPay()"
+				style="margin-top: auto;"> 지금 구매하기 </a>
 		</div>
 	</div>
 
@@ -238,12 +281,10 @@ function requestPay() {
 
 								<ul class="dropdown-menu dropdown-menu-end "
 									aria-labelledby="reportDropdown">
-									<form action="../reply/reply_update.do" method="post">
-										<li><input type="hidden" name="rno" value="${rvo.rno}">
-											<input type="hidden" name="bno" value="${vo.bno}"> <input
-											type="hidden" name="msg" value="${rvo.msg}">
-											<button type="submit" class="dropdown-item">댓글 수정</button></li>
-									</form>
+									<li>
+										<button type="submit" class="dropdown-item updates"
+											data-rno="${rvo.rno }">댓글 수정</button>
+									</li>
 									<li><a
 										href="../reply/reply_delete.do?rno=${rvo.rno }&bno=${vo.bno}"
 										class="dropdown-item">댓글 삭제</a></li>
@@ -263,17 +304,30 @@ function requestPay() {
 						</c:choose>
 					</div>
 				</div>
-
-
+				<!-- 댓글 내용표시 -->
 				<div class="mb-3" style="white-space: pre-line;">${rvo.msg }</div>
+
+
+
+				<!-- 댓글 수정 박스 표시 -->
+				<div class="comment-form ups"
+					style="display: none; text-align: right;" id="up${rvo.rno }">
+					<form action="../reply/reply_update.do" method="post">
+						<textarea class="form-control mb-2" rows="5" id="replytext"
+							name="msg" id="msg">${rvo.msg }</textarea>
+						<button type="button"
+							class="btn btn-light btn-sm me-2 replycancel text-end">취소</button>
+						<button type="submit" class="btn btn-primary btn-sm text-end">등록</button>
+						<input type="hidden" name="rno" value="${rvo.rno}"> <input
+							type="hidden" name="bno" value="${vo.bno}">
+					</form>
+				</div>
+
 
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="d-flex align-items-center">
 						<button class="btn btn-sm btn-light me-2">
 							<i class="far fa-thumbs-up"></i> 좋아요 0
-						</button>
-						<button class="btn btn-sm btn-light">
-							<i class="far fa-comment"></i> 답글 0
 						</button>
 					</div>
 				</div>

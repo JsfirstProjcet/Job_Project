@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.jjim-mapper">
+
+<select id="jjimCheckCount" resultType="int" parameterType="JjimVO">
+	SELECT COUNT(*) FROM community_like
+	WHERE id=#{id} AND bno=#{bno}
+</select>
+
+<insert id="jjimInsert" parameterType="JjimVO">
+	INSERT INTO community_like VALUES(
+	ji_no_seq.nextval,#{id},#{bno}
+	)
+</insert> 
+
+<resultMap type="JjimVO" id="jjimMap">
+		<result property="cvo.nickname" column="nickname"/>
+		<result property="cvo.bno" column="bno"/>
+</resultMap>
+
+	<delete id="jjim_Delete" parameterType="int">
+		DELETE FROM community_like
+		WHERE no=#{no}
+	</delete>
+
+
+</mapper>
