@@ -17,7 +17,7 @@ public class CommuneDAO {
 		
 		ssf=CreateSqlSessionFactory.getSsf();
 	}
-	/*
+	/* 
 	 * 
 	 * <select id="communeListData" resultType="CommuneVO" parameterType="hashmap">
 	   </select>
