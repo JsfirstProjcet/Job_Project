@@ -235,7 +235,51 @@ public class CommuneDAO {
 	}
 	return poster;
 	}
+	/*
+	 * 
+	 * <!-- 댓글 좋아요 선택시 likes+1 -->
+	<update id="communeReplyLikeIncrement" parameterType="int">
+		UPDATE community_reply
+		SET
+		like_count=like_count+1
+		WHERE rno=#{rno}
+	</update>
+	<!-- 댓글  좋아요 취소시  likes-1 -->
+	<update id="communeReplyLikeDecrement" parameterType="int">
+		UPDATE community_reply
+		SET
+		like_count=like_count-1
+		WHERE rno=#{rno}
+	</update>
+	 */
+	public static void communeReplyLikeIncrement(int rno) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.update("communeReplyLikeIncrement",rno);
+			session.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
 	
-
+	public static void communeReplyLikeDecrement(int rno) {
+		SqlSession session=null;
+		try {
+			session=ssf.openSession(true);
+			session.update("communeReplyLikeDecrement",rno);
+			session.commit();
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+	}
 	
 }

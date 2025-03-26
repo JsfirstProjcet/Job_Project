@@ -94,4 +94,19 @@
 		reply=reply-1
 		WHERE bno=#{bno}
 	</update>
+
+	<!-- 댓글 좋아요 선택시 likes+1 -->
+	<update id="communeReplyLikeIncrement" parameterType="int">
+		UPDATE community_reply
+		SET
+		like_count=like_count+1
+		WHERE rno=#{rno}
+	</update>
+	<!-- 댓글  좋아요 취소시  likes-1 -->
+	<update id="communeReplyLikeDecrement" parameterType="int">
+		UPDATE community_reply
+		SET
+		like_count=like_count-1
+		WHERE rno=#{rno}
+	</update>
 </mapper>

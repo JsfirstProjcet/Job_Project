@@ -1,8 +1,13 @@
 package com.sist.model;
 
+import java.io.PrintWriter;
+
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.dao.CommuneDAO;
+import com.sist.dao.JjimDAO;
 import com.sist.dao.ReplyDAO;
+import com.sist.vo.JjimVO;
 import com.sist.vo.ReplyVO;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -67,4 +72,7 @@ public class ReplyModel {
 		
 		return "redirect:../interview/commune_detail.do?bno=" + bno;
 	}
+	
+	
+	
 }

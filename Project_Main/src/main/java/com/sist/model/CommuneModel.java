@@ -1,4 +1,5 @@
 package com.sist.model;
+import java.io.PrintWriter;
 import java.util.*;
 
 import com.sist.controller.Controller;
@@ -117,19 +118,27 @@ public class CommuneModel {
 		  int count=ReplyDAO.replyCount(Integer.parseInt(bno));
 		  request.setAttribute("count", count);
 		  request.setAttribute("rList", rlist);
-		  
-		  
+		 
 		 //////////////////////////////////////////////////
-		 //게시글 좋아요
-		  JjimVO jvo=new JjimVO();
-		  jvo.setBno(Integer.parseInt(bno));
-		  jvo.setId(id);
-		  if(id!=null)
-		  {
-			  int jcount=JjimDAO.jjimCheckCount(jvo);
-			  request.setAttribute("jcount", jcount);
-			  System.out.println("jcount="+jcount);
-		  }
+		 //게시글 좋아요 누른 상태인지 아닌지 확인
+		  if (id != null) {
+			    // 좋아요 상태 확인 
+			    JjimVO likeVO = new JjimVO();
+			    likeVO.setId(id);
+			    likeVO.setBno(Integer.parseInt(bno));
+			    likeVO.setType("1");
+			    int jcount1 = JjimDAO.jjimCheckCount(likeVO);
+			    request.setAttribute("jcount1", jcount1);
+
+			    // 찜하기 상태 확인 
+			    JjimVO jjimVO = new JjimVO();
+			    jjimVO.setId(id);
+			    jjimVO.setBno(Integer.parseInt(bno));
+			    jjimVO.setType("2");
+			    int jcount2 = JjimDAO.jjimCheckCount(jjimVO);
+			    request.setAttribute("jcount2", jcount2);
+
+			}
 		  /////////////////////////////////////////////
 		
 		request.setAttribute("hash", hash);
@@ -138,6 +147,9 @@ public class CommuneModel {
 		request.setAttribute("main_jsp", "../interview/commune_detail.jsp");
 		return "../main/main.jsp";
 	}
+	
+	
+	
 	
 	// 업데이트
 	@RequestMapping("interview/commune_update.do")

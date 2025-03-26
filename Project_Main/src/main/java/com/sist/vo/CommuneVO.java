@@ -20,7 +20,7 @@ import lombok.Data;
 @Data
 public class CommuneVO {
 	private int bno,hit,type,reply,likes;
-	private String subject,content,id,nickname,dbday,hashtag,poster;
+	private String subject,content,id,nickname,dbday,hashtag,poster,like_count;
 	private Date regdate;
 	 
 	

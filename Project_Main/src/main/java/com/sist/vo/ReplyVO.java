@@ -18,7 +18,7 @@ import lombok.Data;
 @Data
 public class ReplyVO {
 	private int rno,bno,group_id,group_step,group_tab;
-	private String id,nickname,msg,dbday,poster;
+	private String id,nickname,msg,dbday,poster,like_count;
 	private Date regdate;
 	
 }

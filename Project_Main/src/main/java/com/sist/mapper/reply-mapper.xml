@@ -13,7 +13,7 @@ ID         NOT NULL VARCHAR2(10)
 NICKNAME            VARCHAR2(60)
 -->
 	<select id="replyListData" resultType="ReplyVO" parameterType="int">
-		SELECT rno,bno,id,nickname,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,poster
+		SELECT rno,bno,id,nickname,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,poster,like_count
 		FROM community_reply
 		WHERE bno=#{bno} 
 		ORDER BY rno ASC
@@ -26,11 +26,11 @@ NICKNAME            VARCHAR2(60)
 	
 	<!-- 댓글 쓰기 -->
 	<insert id="replyInsert" parameterType="ReplyVO">
-		INSERT INTO community_reply(rno,bno,id,nickname,msg,regdate,group_id,group_step,group_tap,poster)
+		INSERT INTO community_reply(rno,bno,id,nickname,msg,regdate,group_id,group_step,group_tap,poster,like_count)
 		VALUES(
 		(SELECT NVL(MAX(rno)+1, 1) FROM community_reply),
 		#{bno},#{id},#{nickname},#{msg},SYSDATE,
-		(SELECT NVL(MAX(group_id)+1, 1) FROM community_reply),0,0,#{poster})
+		(SELECT NVL(MAX(group_id)+1, 1) FROM community_reply),0,0,#{poster},0)
 	</insert>
 
 	<delete id="replyDelete" parameterType="int">
@@ -44,4 +44,5 @@ NICKNAME            VARCHAR2(60)
 		msg=#{msg}
 		WHERE rno=#{rno}
 	</update>
+	
 </mapper>
