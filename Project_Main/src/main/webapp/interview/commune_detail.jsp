@@ -79,6 +79,48 @@ $(function(){
  
  
 </script>
+<!-- 댓글 좋아요 -->
+<script type="text/javascript">
+$(function(){
+	  $('.reply-like').click(function(){
+	    let rno = $(this).data('rno')
+	    let bno = $(this).data('bno')
+		console.log(rno+"알엔오")
+		console.log(bno+"비엔오")
+	    $.ajax({
+		      type: 'POST',
+		      url: '../jjim/jjim_insert_ajax.do',
+		      data: { bno: bno, rno:rno, type: 3 },
+		      success: function(result) {
+		        if (result === 'liked') {
+		          alert('좋아요 완료!')
+		          // 현재 숫자 가져옴
+		          let countSpan = $('#like-count-' + rno);
+		          let currentCount = parseInt(countSpan.text());
+
+		          // 댓글 좋아요수 증가
+		          countSpan.text(currentCount + 1);
+		        } else if (result === 'unliked') {
+		          alert('좋아요 취소됨!')
+		     	  // 현재 숫자 가져옴
+		          let countSpan = $('#like-count-' + rno);
+		          let currentCount = parseInt(countSpan.text());
+
+		          // 댓글 좋아요수 감소
+		          countSpan.text(currentCount - 1);
+		        } else if (result === 'nologin') {
+		          alert('로그인 후 이용해주세요!')
+		        }
+		      },
+		      error: function() {
+		        alert('서버 오류 발생!')
+		      }
+		    })
+
+	  })
+	  
+})
+</script>
 </head>
 <body>
 	<div class="container my-5" style="max-width: 800px;">
@@ -147,26 +189,51 @@ $(function(){
 		<!-- 버튼 -->
 		<div class="d-flex mb-4">
 			<c:if test="${sessionScope.id!=null }">
-					<c:if test="${jcount==0 }">
-						<button class="btn btn-outline-secondary me-2 rounded-pill" onclick="location.href='../jjim/jjim_insert.do?bno=${vo.bno }'">
-								<i class="far fa-heart"></i> 좋아요</button>
-						
-					</c:if>
-					<c:if test="${jcount==1 }">
-						<button class="btn btn-outline-secondary me-2 rounded-pill" onclick="alert('이미 좋아요한 게시물 입니다.');">
-						  <i class="fas fa-heart text-danger"></i> 좋아요
-						</button>
-					</c:if>
+
+				<!-- 좋아요 버튼 -->
+				<c:if test="${jcount1==0 }">
+					<button class="btn btn-outline-secondary me-2 rounded-pill"
+						onclick="location.href='../jjim/jjim_insert.do?bno=${vo.bno }&type=1'">
+						<i class="far fa-heart"></i> 좋아요
+					</button>
+
+				</c:if>
+				<c:if test="${jcount1==1 }">
+
+					<button class="btn btn-outline-secondary me-2 rounded-pill"
+						onclick="location.href='../jjim/jjim_cancel.do?bno=${vo.bno}&type=1'">
+						<i class="fas fa-heart text-danger"></i> 좋아요
+					</button>
+				</c:if>
+
+				<!-- 찜하기 버튼 -->
+				<c:if test="${jcount2 == 0}">
+					<button class="btn btn-outline-secondary me-2 rounded-pill"
+						onclick="location.href='../jjim/jjim_insert.do?bno=${vo.bno}&type=2'">
+						<i class="far fa-star"></i> 찜하기
+					</button>
+				</c:if>
+				<c:if test="${jcount2 == 1}">
+					<button class="btn btn-outline-secondary me-2 rounded-pill"
+						onclick="location.href='../jjim/jjim_cancel.do?bno=${vo.bno}&type=2'">
+						<i class="fas fa-star text-warning"></i> 찜하기
+					</button>
+				</c:if>
+
 			</c:if>
-			
+
+			<!-- 로그인 안했을때  -->
 			<c:if test="${sessionScope.id==null }">
-				<button class="btn btn-outline-secondary me-2 rounded-pill" onclick="alert('로그인 후 사용 가능합니다.')">
-				<i class="far fa-heart"></i> 좋아요</button>
-			</c:if> 
-			
-			<button class="btn btn-outline-secondary me-2 rounded-pill">
-				<i class="far fa-heart"></i> 찜하기
-			</button>
+				<button class="btn btn-outline-secondary me-2 rounded-pill"
+					onclick="alert('로그인 후 사용 가능합니다.')">
+					<i class="far fa-heart"></i> 좋아요
+				</button>
+
+				<button class="btn btn-outline-secondary me-2 rounded-pill"
+					onclick="alert('로그인 후 사용 가능합니다.')">
+					<i class="far fa-heart"></i> 찜하기
+				</button>
+			</c:if>
 
 			<a href="../interview/commune.do"
 				class="btn btn-outline-primary ms-auto rounded-pill"> <i
@@ -323,17 +390,18 @@ $(function(){
 					</form>
 				</div>
 
-
+				<!-- 댓글 좋아요 ajax로  -->
 				<div class="d-flex justify-content-between align-items-center">
 					<div class="d-flex align-items-center">
-						<button class="btn btn-sm btn-light me-2">
-							<i class="far fa-thumbs-up"></i> 좋아요 0
+						<button class="btn btn-sm btn-light me-2 reply-like"
+							data-bno="${vo.bno}" data-rno="${rvo.rno}">
+							<i class="far fa-thumbs-up"></i> 좋아요 <span
+								id="like-count-${rvo.rno}">${rvo.like_count}rno는${rvo.rno }</span>
 						</button>
 					</div>
 				</div>
 			</div>
 		</c:forEach>
-
 	</div>
 	<!-- 댓글 영역 끝 -->
 </body>

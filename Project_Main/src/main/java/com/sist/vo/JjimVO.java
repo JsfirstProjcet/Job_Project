@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class JjimVO {
-	private int no,bno;
-	private String id;
+	private int no,bno,rno;
+	private String id,type;
 	private CommuneVO cvo=new CommuneVO();
 	
 	
