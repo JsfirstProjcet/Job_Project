@@ -37,6 +37,7 @@ public class ResumeModel {
 			rvo.setAddress(addr1+" "+addr2);
 			rvo.setBirth(birth);
 			rvo.setPoster(poster);
+			rvo.setTitle("제목 없음");
 			rvo.setIsbasic('y');
 			
 			ResumeDAO.resumeInsert(rvo);
@@ -56,40 +57,35 @@ public class ResumeModel {
 	{
 		ResumeVO rvo=new ResumeVO();
 		String rno=request.getParameter("rno");
-		if(rno==null)
-		{
-			HttpSession session=request.getSession();
-			String id=(String)session.getAttribute("id");
-			String name=(String)session.getAttribute("name");
-			String email=(String)session.getAttribute("email");
-			PersonalVO vo=PersonalDAO.personalGetInfo(id);
-			String phone=vo.getPhone();
-			String addr1=vo.getAddr1();
-			String addr2=vo.getAddr2();
-			String birth=vo.getBirth();
-			String poster=vo.getPoster();
-			System.out.println("JobEntryProject>ResumeModel>vo.getPoster()(null)"+vo.getPoster());
+		HttpSession session=request.getSession();
+		String id=(String)session.getAttribute("id");
+		String name=(String)session.getAttribute("name");
+		String email=(String)session.getAttribute("email");
+		String sex=(String)session.getAttribute("sex");
+		rvo.setId(id);
+		rvo.setName(name);
+		rvo.setEmail(email);
+		rvo.setSex(sex);
 
-			rvo.setId(id);
-			rvo.setName(name);
-			rvo.setEmail(email);
-			rvo.setPhone(phone);
-			rvo.setAddress(addr1+" "+addr2);
-			rvo.setBirth(birth);
-			rvo.setPoster(poster);
-			rvo.setTitle("제목 없음");
-			rvo.setIsbasic('n');
-		}
-		else
+		PersonalVO vo=PersonalDAO.personalGetInfo(id);
+		String addr1=vo.getAddr1();
+		String addr2=vo.getAddr2();
+		String poster=vo.getPoster();
+		String phone=vo.getPhone();
+		String birth=vo.getBirth();
+		rvo.setAddress(addr1+" "+addr2);
+		rvo.setPoster(poster);
+		rvo.setPhone(phone);
+		rvo.setBirth(birth);
+		rvo.setTitle("제목 없음");
+		rvo.setIsbasic('n');
+
+		if(rno!=null)
 		{
 			rvo=ResumeDAO.resumeDetailData(Integer.parseInt(rno));
-			String id=request.getParameter("id");
-			PersonalVO vo=PersonalDAO.personalGetInfo(id);
-			rvo.setPoster(vo.getPoster());
-			System.out.println("JobEntryProject>ResumeModel>vo.getPoster()(not null)"+vo.getPoster());
-			rvo.setAddress(vo.getAddr1()+" "+vo.getAddr2());
-			rvo.setSex(vo.getSex());
-			System.out.println("JobEntryProject>ResumeModel>rvo.getIsbasic()(not null)"+rvo.getIsbasic());
+			rvo.setSex(sex);
+			rvo.setAddress(addr1+" "+addr2);
+			rvo.setPoster(poster);
 		}
 		request.setAttribute("rvo", rvo);
 		
@@ -199,9 +195,12 @@ public class ResumeModel {
 		String poster=request.getParameter("poster");
 		String rno=request.getParameter("rno");
 		System.out.println("JobEntryProject>ResumeModel>rno: "+rno);
+		System.out.println("JobEntryProject>ResumeModel>id: "+id);
+		System.out.println("JobEntryProject>ResumeModel>name: "+name);
 		System.out.println("JobEntryProject>ResumeModel>title: "+title);
 			
 		ResumeVO vo=new ResumeVO();
+		vo.setRno(Integer.parseInt(rno));
 		vo.setId(id);
 		vo.setName(name==null?"":name);
 		vo.setEmail(email==null?"":email);

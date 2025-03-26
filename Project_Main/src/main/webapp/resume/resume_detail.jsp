@@ -43,7 +43,7 @@
             border: none; /* Border 없애기 */
             border-radius: 0.5rem;   /* 둥근 모서리 */
             padding: 0.5rem;
-            font-size: 1.7rem;
+            font-size: 1.1rem;
             background-color: transparent;
         }
         .form-label {
@@ -54,13 +54,20 @@
             box-shadow: none; /* 포커스시 하이라이트 제거 */
             border-color: #007bff; /* 포커스 시 파란색 테두리 */
         }
+        .flex-align {
+		    display: flex;
+		    align-items: center; /* 아이콘과 텍스트 수직 정렬 */
+		    gap: 8px; /* 아이콘과 텍스트 사이 간격 */
+		    min-width: 200px; /* 최소 너비 설정 */
+		}
 </style>
 <script>
 $(document).ready(function(){
     let careerIndex = 0; // 경력 입력 폼의 인덱스
 
     // 경력 추가 버튼 클릭 시
-    $("#addCareer").click(function(){
+//    $("#addCareer").click(function(){
+    $(document).on("click", "#addCareer", function(){
         careerIndex++;
         let careerForm = `
             <div class="card shadow-sm mb-3 career-entry" data-index="${careerIndex}">
@@ -101,7 +108,8 @@ $(document).ready(function(){
     let educationIndex = 0; // 학력 입력 폼의 인덱스
 
     // 학력 추가 버튼 클릭 시
-    $("#addEducation").click(function(){
+//    $("#addEducation").click(function(){
+    $(document).on("click", "#addEducation", function(){
         educationIndex++;
         let educationForm = `
             <div class="card shadow-sm mb-3 education-entry" data-index="${educationIndex}">
@@ -148,7 +156,8 @@ $(document).ready(function(){
     const imageUpload = document.getElementById("imageUpload");
     const uploadLabel = document.getElementById("uploadLabel");
 
-    imageUpload.addEventListener("change", function(event) {
+//    imageUpload.addEventListener("change", function(event) {
+    $(document).on("change", "#imageUpload", function(event){
         var formData = new FormData();
         var fileName = $("#id").val()+'_'+$("#imageUpload")[0].files[0].name;
         formData.append("file", $("#imageUpload")[0].files[0]);
@@ -176,46 +185,15 @@ $(document).ready(function(){
         });
     });
 
-    uploadLabel.addEventListener("click", (event) => {
+//    uploadLabel.addEventListener("click", (event) => {
+/*
+    $(document).on("click", "#uploadLabel", function(event){
     	event.preventDefault(); // 🚀 기본 동작 방지
         imageUpload.click(); // label이 아닌 직접 실행
     });
-    
-	$('#jBtn').click(function(){
-/* 		let email=$('#email_pr').val()
-		if(email.trim()==="")
-		{
-			alert("개인 이메일 중복체크를 해야 됩니다")
-			return
-		}
-		let pwd1=$('#pwd1_pr').val()
-		if(pwd1.trim()==="")
-		{
-			$('#pwd1').focus()
-			return
-		}	
-        let pwd2=$('#pwd2_pr').val()
-		if(pwd1!==pwd2.trim())
-		{
-			alert("입력한 비밀번호가 서로 다릅니다")
-			$('#pwd2_pr').val("")
-			$('#pwd2_pr').focus()
-			return
-		}	
-        let name=$('#name_pr').val()
-        if(name.trim()==="")
-        {
-        	alert("이름을 입력 해야 됩니다")
-            $('#name_pr').focus()
-            return
-        }  
-        let post=$('#post').val()
-        if(post.trim()==="")
-        {
-        	alert("우편번호 검색을 해야 됩니다")
-        	return
-        }	
-        */        
+*/   
+//	$('#jBtn').click(function(){
+    $(document).on("click", "#jBtn", function(){
         $('#frm_resume').submit()
 	})
 
@@ -229,7 +207,7 @@ $(document).ready(function(){
     <div class="card shadow-sm">
         <div class="card-header bg-light input-container">
             <label for="name" class="form-label">제목</label>
-            <input type="text" id="title" class="form-control" value="${rvo.title }">
+            <input type="text" name="title" class="form-control" value="${rvo.title }" style="font-size: 1.7rem;">
         </div>
     </div>
     <!-- 프로필 섹션 -->
@@ -250,26 +228,47 @@ $(document).ready(function(){
 		          </label>  
 		          <input type="file" id="imageUpload" accept="image/*" class="d-none" style="display: none;" >
 		        </div>
-                <!-- 왼쪽: 정보 -->
+                <!-- 왼쪽: 정보 
                 <div class="me-4">
-                    <p><i class="bi bi-envelope me-2"></i><strong>이메일:&nbsp;&nbsp;</strong>${rvo.email }</p>
-                    <p><i class="bi bi-telephone me-2"></i><strong>전화번호:&nbsp;&nbsp;</strong>${rvo.phone }</p>
+                    <p class="flex-align"><span class="col-sm-3"><i class="bi bi-envelope">&nbsp;</i><strong>이메일:&nbsp;&nbsp;</strong></span>
+                    </p>
+                    <p class="flex-align"><i class="bi bi-telephone"></i>&nbsp;<strong>전화번호:&nbsp;&nbsp;</strong>
+                    </p>
 				    <p><i class="bi 
 					        <c:choose>
 					            <c:when test="${rvo.sex == '여자'}">bi-gender-female</c:when>
 					            <c:otherwise>bi-gender-male</c:otherwise>
 					        </c:choose> 
-					    	me-1">
+					    	">
 					   </i><strong>성별:&nbsp;&nbsp;</strong>${rvo.sex }
 				    </p>
-                    <p><i class="bi bi-calendar me-2"></i><strong>생년월일:&nbsp;&nbsp;</strong>${rvo.birth }</p>
-                    <p><i class="bi bi-house-door me-2"></i><strong>주소:&nbsp;&nbsp;</strong>${rvo.address }</p>
+                    <p class="flex-align"><i class="bi bi-calendar"></i>&nbsp;<strong>생년월일:&nbsp;&nbsp;</strong>
+                    </p>
+                    <p class="flex-align"><i class="bi bi-house-door"></i><strong>주소:&nbsp;&nbsp;</strong>
+                    ${rvo.address }
+                    </p>
                 </div>
+-->
+                 <!-- 왼쪽: 정보 -->
+                 <div class="me-4">
+                     <p><i class="bi bi-envelope me-2"></i><strong>이메일:&nbsp;&nbsp;</strong>${rvo.email }</p>
+                     <p><i class="bi bi-telephone me-2"></i><strong>전화번호:&nbsp;&nbsp;</strong>${rvo.phone }</p>
+ 				    <p><i class="bi 
+ 					        <c:choose>
+ 					            <c:when test="${rvo.sex == '여자'}">bi-gender-female</c:when>
+ 					            <c:otherwise>bi-gender-male</c:otherwise>
+ 					        </c:choose> 
+ 					    	me-1">
+ 					   </i><strong>성별:&nbsp;&nbsp;</strong>${rvo.sex }
+ 				    </p>
+                     <p><i class="bi bi-calendar me-2"></i><strong>생년월일:&nbsp;&nbsp;</strong>${rvo.birth }</p>
+                     <p><i class="bi bi-house-door me-2"></i><strong>주소:&nbsp;&nbsp;</strong>${rvo.address }</p>
+                 </div>                
             </div>
         </div>
     </div>
 
-    <!-- 추가 내용 예시 -->
+    <!-- 스킬 입력 
     <div class="card shadow-sm mb-3">
         <div class="card-header bg-light">
             <h5>직종/스킬</h5>
@@ -278,7 +277,7 @@ $(document).ready(function(){
             <p>이곳에 추가적인 정보나 내용들을 배치할 수 있습니다. 예를 들어 이력서 내용이나, 관심사 등을 포함할 수 있습니다.</p>
         </div>
     </div>
-            
+    -->         
     <div class="card shadow-sm mb-3">
         <div class="card-header bg-light">
             <h5>경력 사항</h5>
@@ -323,13 +322,14 @@ $(document).ready(function(){
 	    </div>
 	    <button id="addEducation" class="btn btn-link text-primary mt-2">+ 추가</button>
     </div>
+    
     <!-- hidden field -->
 	<input type="hidden" id="id" name="id" value="${rvo.id }" >
 	<input type="hidden" id="rno" name="rno" value="${rvo.rno }" >
 	<input type="hidden" id="name" name="name" value="${rvo.name }" >
-	<input type="hidden" id="email" name="email" value="${rvo.email }" >
-	<input type="hidden" id="phone" name="phone" value="${rvo.phone }" >
-	<input type="hidden" id="birth" name="birth" value="${rvo.birth }" >
+    <input type="hidden" id="email" name="email" value="${rvo.email }">
+    <input type="hidden" id="phone" name="phone" value="${rvo.phone }">
+    <input type="hidden" id="birth" name="birth" value="${rvo.birth }">
 	<input type="hidden" id="scholar" name="scholar" value="${rvo.scholar }" >
 	<input type="hidden" id="skill" name="skill" value="${rvo.skill }" >
 	<input type="hidden" id="career" name="career" value="${rvo.career }" >
@@ -341,8 +341,6 @@ $(document).ready(function(){
       <button type="button" class="btn btn-outline-secondary" onclick="history.back()">취소</button>
     </div>
     </form>
-        
-		
-    <!-- / main body -->
+
 </body>
 </html>
