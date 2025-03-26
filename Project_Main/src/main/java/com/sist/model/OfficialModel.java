@@ -160,8 +160,11 @@ public class OfficialModel {
 		return "../main/main.jsp";
 	}
 	@RequestMapping("official/emp_list_print.do")
-	public String official_emp_list_print(HttpServletRequest request, HttpServletResponse response) {		
+	public String official_emp_list_print(HttpServletRequest request, HttpServletResponse response) {
 		String page=request.getParameter("page");
+		String filter=request.getParameter("filter");
+		if(filter==null)
+			filter="0";
 		if(page==null)
 			page="1";
 		HttpSession session=request.getSession();
@@ -173,6 +176,7 @@ public class OfficialModel {
 		
 		Map map=new HashMap();
 		map.put("cid", cid);
+		map.put("filter", filter);
 		map.put("start", (curpage*10)-9);
 		map.put("end", (curpage*10));
 		
@@ -186,6 +190,7 @@ public class OfficialModel {
 			endPage=totalpage;
 		
 		request.setAttribute("cno", cno);
+		request.setAttribute("filter", filter);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("startPage", startPage);
@@ -203,6 +208,14 @@ public class OfficialModel {
 	@RequestMapping("official/seeker_list.do")
 	public String official_seeker_list(HttpServletRequest request, HttpServletResponse response) {
 		String eno=request.getParameter("eno");
+		
+		request.setAttribute("eno", eno);
+		return "../official/seeker_list.jsp";
+	}
+	@RequestMapping("official/seeker_list_print.do")
+	public String official_seeker_list_print(HttpServletRequest request, HttpServletResponse response) {
+		String eno=request.getParameter("eno");
+		String state=request.getParameter("state");
 		String page=request.getParameter("page");
 		if(page==null)
 			page="1";
@@ -212,13 +225,14 @@ public class OfficialModel {
 		
 		Map map=new HashMap();
 		map.put("eno", eno);
+		map.put("state", state);
 		map.put("start", (curpage*10)-9);
 		map.put("end", (curpage*10));
 		
 		List<SeekerVO> list=EmpDAO.empSeekerListData(map);
-		int count=EmpDAO.empSeekerCount(Integer.parseInt(eno));
+		int count=EmpDAO.empSeekerCount(map);
 		int totalpage=(int)(Math.ceil(count/10.0));
-
+		
 		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		if(endPage>totalpage)
@@ -229,7 +243,17 @@ public class OfficialModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
-		return "../official/seeker_list.jsp";
+		return "../official/seeker_list_print.jsp";
+	}
+	@RequestMapping("official/seeker_update.do")
+	public void official_seeker_update(HttpServletRequest request, HttpServletResponse response) {
+		String jno=request.getParameter("jno");
+		String state=request.getParameter("state");
+		
+		SeekerVO vo=new SeekerVO();
+		vo.setJno(Integer.parseInt(jno));
+		vo.setState(Integer.parseInt(state));
+		EmpDAO.empSeekerUpdate(vo);
 	}
 	@RequestMapping("official/emp_insert.do")
 	public String official_emp_insert(HttpServletRequest request, HttpServletResponse response) {		
@@ -243,5 +267,48 @@ public class OfficialModel {
 		request.setAttribute("com_jsp", "../official/emp_insert.jsp");
 		request.setAttribute("main_jsp", "../company/com_main.jsp");
 		return "../main/main.jsp";
+	}
+	@RequestMapping("official/emp_insert_ok.do")
+	public void official_emp_insert_ok(HttpServletRequest request, HttpServletResponse response) {	
+		String name=request.getParameter("name");
+		String title=request.getParameter("title");
+		String personal_history=request.getParameter("personal_history");
+		String salary=request.getParameter("salary");
+		String salary_str=request.getParameter("salary_str");
+		String education=request.getParameter("education");
+		String emp_type=request.getParameter("emp_type");
+		String loc=request.getParameter("loc");
+		String deadline=request.getParameter("deadline");
+		String content=request.getParameter("content");
+		
+		System.out.println(name);
+		System.out.println(title);
+		System.out.println(personal_history);
+		System.out.println(salary);
+		System.out.println(salary_str);
+		System.out.println(education);
+		System.out.println(emp_type);
+		System.out.println(loc);
+		System.out.println(deadline);
+		System.out.println(content);
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int cno=CompanyDAO.conByCid(cid);
+		
+		EmpVO vo=new EmpVO();
+		vo.setCid(cid);
+		vo.setName(name);
+		vo.setTitle(title);
+		vo.setPersonal_history(personal_history);
+		vo.setSalary(Integer.parseInt(salary));
+		vo.setSalary_str(salary_str);
+		vo.setEducation(Integer.parseInt(education));
+		vo.setEmp_type(emp_type);
+		vo.setLoc(loc);
+		vo.setContent(content);
+		if(!deadline.equals("")) {
+			vo.setDbdeadline(deadline);
+		}
+		EmpDAO.empInsert(vo);
 	}
 }

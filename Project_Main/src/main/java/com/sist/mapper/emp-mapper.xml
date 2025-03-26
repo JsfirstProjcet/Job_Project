@@ -192,11 +192,38 @@
 		WHERE e.jno=j.jno
 		AND eno=#{eno}
 	</select>
-		<select id="empOfficialListData" resultType="EmpVO" parameterType="hashmap">
-		SELECT eno,title,hit,se_count,fo_count,TO_CHAR(deadline,'YYYY-MM-DD') as dbdeadline,num
-		FROM (SELECT eno,title,hit,se_count,fo_count,deadline,rownum as num
-		FROM (SELECT eno,title,hit,se_count,fo_count,deadline
-		FROM employment WHERE cid=#{cid} AND (deadline > SYSDATE OR deadline IS NULL) ORDER BY deadline ASC))
+	<select id="empOfficialListData" resultType="EmpVO" parameterType="hashmap">
+		SELECT eno,title,hit,se_count,fo_count,
+		<choose>
+			<when test="filter==0">
+				TO_CHAR(deadline,'YYYY-MM-DD')
+			</when>
+			<when test="filter==1">
+				TO_CHAR(regdate,'YYYY-MM-DD')
+			</when>
+			<when test="filter==2">
+				dtype||'명'
+			</when>
+		</choose>
+		as dbdeadline,dtype,rtype,num
+		FROM (SELECT eno,title,hit,se_count,fo_count,deadline,regdate,dtype,rtype,rownum as num
+		FROM (SELECT e.eno as eno,title,hit,se_count,fo_count,deadline,regdate,
+		(SELECT COUNT(*) FROM job_seeker j WHERE j.eno=e.eno AND state=0) as dtype,
+		(SELECT COUNT(*) FROM employment s WHERE s.eno=e.eno AND TO_DATE(s.regdate,'YYYY-MM-DD')=TO_DATE(SYSDATE,'YYYY-MM-DD')) as rtype
+		FROM employment e WHERE cid=#{cid}
+		AND (deadline > SYSDATE OR deadline IS NULL)
+		<choose>
+			<when test="filter==0">
+				ORDER BY deadline ASC
+			</when>
+			<when test="filter==1">
+				ORDER BY regdate DESC
+			</when>
+			<when test="filter==2">
+				ORDER BY dtype DESC
+			</when>
+		</choose>
+		))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	<select id="empOfficialCount" resultType="int" parameterType="String">
@@ -219,11 +246,39 @@
 		FROM (SELECT jno,s.eno as eno,state,s.rno as rno,p.name as pname,r.title as rtitle,e.title as etitle
 		FROM job_seeker s,personal p, resume r,employment e
 		WHERE s.eno=#{eno}
+		AND state=#{state}
 		AND s.id=p.id AND s.rno=r.rno AND s.eno=e.eno
-        ORDER BY jno desc))
+        ORDER BY jno DESC))
         WHERE num BETWEEN #{start} AND #{end}
 	</select>
-	<select id="empSeekerCount" resultType="int" parameterType="int">
-		SELECT COUNT(*) FROM job_seeker where eno=#{eno}
+	<select id="empSeekerCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*) FROM job_seeker where eno=#{eno} AND state=#{state}
 	</select>
+	<update id="empSeekerUpdate" parameterType="SeekerVO">
+		UPDATE job_seeker SET
+		state=#{state}
+		WHERE jno=#{jno}
+	</update>
+	<insert id="empInsert" parameterType="EmpVO">
+		INSERT INTO employment(eno,name,title,personal_history,salary,salary_str,education,emp_type,loc,content,cid
+		<if test="deadline!=null">
+			,deadline
+		</if>
+		) VALUES(
+			(SELECT NVL(MAX(eno)+1,1) FROM employment),
+			#{name},
+			#{title},
+			#{personal_history},
+			#{salary},
+			#{salary_str},
+			#{education},
+			#{emp_type},
+			#{loc},
+			#{content},
+			#{cid}
+			<if test="deadline!=null">
+				,#{deadline}
+			</if>
+		)
+	</insert>
 </mapper>

@@ -47,18 +47,27 @@ function seekerList(eno,title){
         content:'../official/seeker_list.do?eno='+eno,
         player:'iframe',
         width:800,
-        height:600,
+        height:1000,
         title:title+' 지원자 목록'
     })	
 }
 </script>
+<style type="text/css">
+.emp-title{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 300px;
+}
+</style>
 </head>
 <body>
 	<table class="table">
 	<tr>
 		<td colspan="8">
 			<input type="checkbox" id="all-check">&nbsp;전체 선택
-			<a onclick="closing()" class="btn btn-sm btn-danger" style="color: white; float: right;">조기 마감</a>
+			<a href="../official/emp_insert.do?cno=${cno }" class="btn btn-sm btn-info" style="color: white; float: right;">새 공고</a>
+			<a onclick="closing()" class="btn btn-sm btn-danger" style="color: white; margin-left: 5px">조기 마감</a>
 		</td>
 	</tr>
 	<tr>
@@ -69,8 +78,12 @@ function seekerList(eno,title){
 		<th width="5%" class="text-center"><i class="far bi-eye text-dark me-2"></i></th>
 		<th width="5%" class="text-center"><i class="far fa-heart text-danger me-2"></i></th>
 		<th width="5%" class="text-center"><i class="fas fa-user-tie text-primary me-2"></i></th>
-		<th width="15%" class="text-center">마감일</th>
-		<th width="20%" class="text-center">마감일</th>
+		<th width="15%" class="text-center">
+			<c:if test="${filter==0 }">마감일</c:if>
+			<c:if test="${filter==1 }">등록일</c:if>
+			<c:if test="${filter==2 }">신규 지원자</c:if>
+		</th>
+		<th width="20%" class="text-center"></th>
 	</tr>
 	<c:forEach var="evo" items="${list }">
 		<tr>
@@ -78,13 +91,20 @@ function seekerList(eno,title){
 				<input type="checkbox" name="eno" class="eno eno${evo.eno }" value="${evo.eno }">
 			</td>
 			<td width="10%" class="text-center">${evo.num }</td>
-			<td width="35%" class="text-start" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">${evo.title }</td>
+			<td width="35%" class="text-start emp-title">
+				<a href="../emp/emp_detail.do?no=${evo.eno }">
+					<c:if test="${evo.rtype==1 }">
+						<img src="../img/icon/new.gif">
+					</c:if>
+					<span>${evo.title }</span>
+				</a>
+			</td>
 			<td width="5%" class="text-center">${evo.hit }</td>
 			<td width="5%" class="text-center">${evo.fo_count }</td>
 			<td width="5%" class="text-center">${evo.se_count }</td>
 			<td width="15%" class="text-center">${evo.dbdeadline!=null?evo.dbdeadline:"상시 모집" }</td>
 			<td width="20%" class="text-center">
-				<a onclick="seekerList(${evo.eno},'${evo.title }')" class="btn btn-sm btn-primary">지원자 목록</a>
+				<a onclick="seekerList(${evo.eno},'${evo.title }')" class="btn btn-sm ${evo.dtype==0?'btn-primary':'btn-danger' }">지원자 목록</a>
 			</td>
 		</tr>
 	</c:forEach>

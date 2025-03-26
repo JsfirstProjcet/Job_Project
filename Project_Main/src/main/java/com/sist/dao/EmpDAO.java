@@ -125,10 +125,24 @@ public class EmpDAO {
 		session.close();
 		return list;
 	}
-	public static int empSeekerCount(int eno){
+	public static int empSeekerCount(Map map){
 		SqlSession session = ssf.openSession();
-		int count=session.selectOne("empSeekerCount", eno);
+		int count=session.selectOne("empSeekerCount", map);
 		session.close();
 		return count;
+	}
+	public static void empSeekerUpdate(SeekerVO vo) {
+		SqlSession session = ssf.openSession(true);
+		session.update("empSeekerUpdate", vo);
+		session.close();
+	}
+	public static void empInsert(EmpVO vo) {
+		SqlSession session = ssf.openSession(true);
+		try {
+			session.update("empInsert", vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		session.close();
 	}
 }
