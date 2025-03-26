@@ -138,11 +138,13 @@ public class EmpDAO {
 	}
 	public static void empInsert(EmpVO vo) {
 		SqlSession session = ssf.openSession(true);
-		try {
-			session.update("empInsert", vo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		session.update("empInsert", vo);
 		session.close();
+	}
+	public static List<JobVO> empTab(){
+		SqlSession session = ssf.openSession();
+		List<JobVO> list=session.selectList("empTab");
+		session.close();
+		return list;
 	}
 }

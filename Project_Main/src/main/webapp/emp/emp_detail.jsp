@@ -295,7 +295,31 @@ function recruit(eno){
 	                    			<div class="col-3">
 	                    				학력
 	                    			</div>
-	                    			<div class="col-9">${evo.education }</div>
+	                    			<div class="col-9">
+	                    				<c:choose>
+	                    					<c:when test="${evo.education==0 }">
+	                    						학력무관
+	                    					</c:when>
+	                    					<c:when test="${evo.education==1 }">
+	                    						고등학교 졸업
+	                    					</c:when>
+	                    					<c:when test="${evo.education==2 }">
+	                    						대학 졸업(2,3년제)
+	                    					</c:when>
+	                    					<c:when test="${evo.education==3 }">
+	                    						대학교 졸업(4년제)
+	                    					</c:when>
+	                    					<c:when test="${evo.education==4 }">
+	                    						대학원 석사 졸업
+	                    					</c:when>
+	                    					<c:when test="${evo.education==5 }">
+	                    						대학원 박사 졸업
+	                    					</c:when>
+	                    					<c:when test="${evo.education==6 }">
+	                    						박사 졸업 이상
+	                    					</c:when>
+	                    				</c:choose>
+	                    			</div>
 	                    		</div>
                             </c:if>
                             <c:if test="${evo.emp_type!=null }">
@@ -322,7 +346,7 @@ function recruit(eno){
                         	${evo.content }
                         </div>
                         
-                        <div class="com-introduction row pt-3 pb-3" style="border: 1px solid gray; border-radius: 10px">
+                        <div class="com-introduction row pt-3 pb-3  mt-5" style="border: 1px solid gray; border-radius: 10px">
                         	<div class="row">
                         		<div class="col-10">
 		                        	<h3>기업정보</h3>

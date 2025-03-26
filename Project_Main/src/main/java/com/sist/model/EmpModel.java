@@ -54,7 +54,7 @@ public class EmpModel {
 	@RequestMapping("emp/emp_detail_before.do")
 	public String emp_detail_before(HttpServletRequest request,HttpServletResponse response)
 	{
-		String eno=request.getParameter("eno");
+		String eno=request.getParameter("no");
 		Cookie cookie=new Cookie("emp_"+eno, eno);
 		cookie.setPath("/");
 		cookie.setMaxAge(60*60*24);
@@ -62,7 +62,7 @@ public class EmpModel {
 		response.addCookie(cookie);
   
 		// 화면 이동 
-		return "redirect:emp_detail.do?eno="+eno;
+		return "redirect:emp_detail.do?no="+eno;
 	}
 	@RequestMapping("emp/emp_detail.do")
 	public String emp_detail(HttpServletRequest request, HttpServletResponse response) {

@@ -281,4 +281,7 @@
 			</if>
 		)
 	</insert>
+	<select id="empTab" resultType="JobVO">
+		SELECT * FROM JOB WHERE jno2 is null ORDER BY jno asc
+	</select>
 </mapper>

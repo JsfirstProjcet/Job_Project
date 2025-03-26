@@ -99,7 +99,7 @@
 		                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
 		                                        <div class="text-start ps-4">
 		                                            <h5 class="mb-3">
-												        <a href="../emp/emp_detail.do?no=${vo.eno }" class="text-decoration-none text-dark">${vo.title }</a>
+												        <a href="../emp/emp_detail_before.do?no=${vo.eno }" class="text-decoration-none text-dark">${vo.title }</a>
 												    </h5>
 		                                            <span class="text-truncate me-3"><i class="far fa-building text-primary me-2"></i>${vo.name }</span>
 		                                            <span class="text-truncate me-3"><i class="far fa-heart text-danger me-2"></i>${vo.fo_count }</span>
@@ -111,7 +111,7 @@
 		                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
 		                                        <div class="d-flex mb-3">
  	                                            	<a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
-		                                            <a class="btn btn-primary" href="../emp/emp_detail.do?no=${vo.eno }">Detail</a>
+		                                            <a class="btn btn-primary" href="../emp/emp_detail_before.do?no=${vo.eno }">Detail</a>
 		                                        </div>
 		                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>등록일 : 
 													<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />

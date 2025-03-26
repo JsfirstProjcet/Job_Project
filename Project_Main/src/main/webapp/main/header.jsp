@@ -20,7 +20,6 @@
 	    <div class="collapse navbar-collapse" id="navbarCollapse">
 	        <div class="navbar-nav ms-auto p-4 p-lg-0">
 	            <a href="../main/main.do" class="nav-item nav-link active">Home</a>
-	            <a href="about.html" class="nav-item nav-link">About</a>
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">공고</a>
 	                <div class="dropdown-menu rounded-0 m-0">
@@ -47,12 +46,7 @@
 	            </div>
 	            <c:if test="${sessionScope.cid!=null }">
 		            <div class="nav-item dropdown">
-		                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">기업페이지</a>
-		                <div class="dropdown-menu rounded-0 m-0">
-		                    <a href="../company/com_main.do" class="dropdown-item">MyCompany</a>
-		                    <a href="#" class="dropdown-item">등록한 공고</a>
-		                    <a href="#" class="dropdown-item">지원자</a>
-		                </div>
+			            <a href="../company/com_main.do" class="nav-item nav-link active">기업페이지</a>
 		            </div>
 	            </c:if>
 	            <c:if test="${sessionScope.id!=null and sessionScope.isadmin==0 }">
@@ -67,28 +61,6 @@
 	                </div>
 	            </div>
 	            </c:if>
-	            <c:if test="${sessionScope.id!=null and sessionScope.isadmin==1 }">
-	            <div class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">관리자페이지</a>
-	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="" class="dropdown-item"></a>
-	                    <a href="" class="dropdown-item"></a>
-	                    <a href="" class="dropdown-item"></a>
-	                </div>
-	            </div>
-	            </c:if>
-	            <div class="nav-item dropdown">
-	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">샘플페이지</a>
-	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="../pages/404.html" class="dropdown-item">404.html</a>
-	                    <a href="../pages/about.html" class="dropdown-item">about.html</a>
-	                    <a href="../pages/category.html" class="dropdown-item">category.html</a>
-	                    <a href="../pages/contact.html" class="dropdown-item">contact.html</a>
-	                    <a href="../pages/job-detail.html" class="dropdown-item">job-detail.html</a>
-	                    <a href="../pages/job-list.html" class="dropdown-item">job-list.html</a>
-	                    <a href="../pages/testimonial.html" class="dropdown-item">testimonial.html</a>
-	                </div>
-	            </div>
 	        </div>
 	        <div id="sign" class="d-lg-block">
 	 		  	<c:if test="${sessionScope.email==null }">
