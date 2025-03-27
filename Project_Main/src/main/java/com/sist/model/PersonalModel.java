@@ -135,40 +135,15 @@ public class PersonalModel {
 	 		return "../personal/recruit.jsp";
 	 	}
 	 	@RequestMapping("personal/recruit_detail.do") 
-	 	public void personal_recruit_detail(HttpServletRequest request,HttpServletResponse response){
+	 	public String personal_recruit_detail(HttpServletRequest request,HttpServletResponse response){
 	 		String eno=request.getParameter("eno");
 	 		String rno=request.getParameter("rno");
 	 		
 	 		ResumeVO vo=ResumeDAO.resumeDetailData(Integer.parseInt(rno));
-	 		/*
-	 		 * private int rno,num;
-	 			private String id,name,email,phone,birth,disclosure,scholar,skill,career,self_intro,title;
-	 			private String address,sex,poster;
-	 			private char isbasic;
-	 		 */
-	 		JSONObject obj=new JSONObject();
-	 		obj.put("rno", vo.getRno());
-	 		obj.put("id", vo.getId());
-	 		obj.put("name", vo.getName());
-	 		obj.put("email", vo.getEmail());
-	 		obj.put("phone", vo.getPhone());
-	 		obj.put("birth", vo.getBirth());
-	 		obj.put("disclosure", vo.getDisclosure());
-	 		obj.put("scholar", vo.getScholar());
-	 		obj.put("skill", vo.getSkill());
-	 		obj.put("carreer", vo.getCareer());
-	 		obj.put("self_intro", vo.getSelf_intro());
-	 		obj.put("title", vo.getTitle());
-	 		obj.put("address", vo.getAddress());
-	 		obj.put("sex", vo.getSex());
-	 		obj.put("poster", vo.getPoster());
-	 		obj.put("isbasic", Character.toString(vo.getIsbasic()));
 	 		
-	 		try {
-	 			response.setContentType("text/plain;charset=UTF-8");
-	 			PrintWriter out=response.getWriter();
-	 			out.write(obj.toJSONString());
-	 		} catch (Exception e) {}
+	 		request.setAttribute("vo", vo);
+	 		request.setAttribute("rno", rno);
+	 		return "../personal/recruit_detail.jsp";
 	 	}
 	 	@RequestMapping("personal/recruit_insert.do") 
 	 	public String personal_recruit_insert(HttpServletRequest request,HttpServletResponse response){

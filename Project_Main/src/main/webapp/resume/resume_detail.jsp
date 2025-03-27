@@ -66,7 +66,6 @@ $(document).ready(function(){
     let careerIndex = 0; // 경력 입력 폼의 인덱스
 
     // 경력 추가 버튼 클릭 시
-//    $("#addCareer").click(function(){
     $(document).on("click", "#addCareer", function(){
         careerIndex++;
         let careerForm = `

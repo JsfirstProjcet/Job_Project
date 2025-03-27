@@ -241,9 +241,9 @@
 		WHERE eno=#{eno} AND state=0
 	</update>
 	<select id="empSeekerListData" resultType="SeekerVO" parameterType="hashmap">
-		SELECT jno,eno,state,rno,pname,rtitle,etitle,num
-		FROM (SELECT jno,eno,state,rno,pname,rtitle,etitle,rownum as num 
-		FROM (SELECT jno,s.eno as eno,state,s.rno as rno,p.name as pname,r.title as rtitle,e.title as etitle
+		SELECT jno,eno,state,rno,pname,rtitle,etitle,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,num
+		FROM (SELECT jno,eno,state,rno,pname,rtitle,etitle,regdate,rownum as num 
+		FROM (SELECT jno,s.eno as eno,state,s.rno as rno,p.name as pname,r.title as rtitle,e.title as etitle,s.regdate
 		FROM job_seeker s,personal p, resume r,employment e
 		WHERE s.eno=#{eno}
 		AND state=#{state}

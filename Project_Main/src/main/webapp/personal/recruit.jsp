@@ -21,13 +21,12 @@ function resumeDetail(rno){
 	let eno=${eno}
 	$('.resume-list').hide()
 	$('.resume-detail').show()
-	$('.recruit-btn').attr("onclick","recruit("+rno+")")
 	$.ajax({
 		type:'post',
 		url:'../personal/recruit_detail.do',
 		data:{"eno":eno,"rno":rno},
 		success:function(res){
-			let json=JSON.parse(res)
+			$('.resume-detail').html(res)
 		}
 	})
 }
@@ -50,43 +49,32 @@ function recruit(rno){
 </script>
 </head>
 <body>
-	<div class="container resume-list mt-5">
-		<h3 class="text-center">나의 이력서 목록${eno }</h3>
-		<div class="row">
-			<table class="table">
-				<tr>
-					<td class="text-end" colspan="3">
-						<a class="btn btn-sm btn-danger" onclick="cancel()">닫기</a>
-					</td>
-				</tr>
-				<tr>
-					<th class="text-center" width="10%">번호</th>
-					<th class="text-center" width="75%">제목</th>
-					<th class="text-center" width="15%"></th>
-				</tr>
-				<c:forEach var="vo" items="${list }">
+	<div class="container mt-5" style="min-height: 500px">
+		<div class="row" style="min-height: 400px">
+			<div class="resume-list">
+				<h3 class="text-center">나의 이력서 목록</h3>
+				<table class="table">
 					<tr>
-						<td class="text-center" width="10%">${vo.num }</td>
-						<td class="text-start" width="75%">${vo.title }</td>
-						<td class="text-center" width="15%">
-							<a class="btn btn-sm btn-info"  onclick="resumeDetail(${vo.rno})">상세보기</a>
-						</td>
+						<th class="text-center" width="10%">번호</th>
+						<th class="text-center" width="75%">제목</th>
+						<th class="text-center" width="15%"></th>
 					</tr>
-				</c:forEach>
-			</table>
+					<c:forEach var="vo" items="${list }">
+						<tr>
+							<td class="text-center" width="10%">${vo.num }</td>
+							<td class="text-start" width="75%">${vo.title }</td>
+							<td class="text-center" width="15%">
+								<a class="btn btn-sm btn-info"  onclick="resumeDetail(${vo.rno})" style="color: white;">상세보기</a>
+							</td>
+						</tr>
+					</c:forEach>	
+				</table>
+			</div>
+			<div class="resume-detail">
+			</div>
 		</div>
-	</div>
-	<div class="container resume-detail mt-5">
-		<h3 class="text-center">나의 이력서 상세</h3>
-		<div class="row">
-			<table>
-				<tr>
-					<td class="text-end">
-						<a class="btn btn-sm btn-success recruit-btn" onclick="recruit()">지원</a>
-						<a class="btn btn-sm btn-primary" onclick="resumeList()">목록</a>
-					</td>
-				</tr>
-			</table>
+		<div class="mt-5" style="bottom: 5px">
+			<a class="btn btn-sm btn-danger" onclick="cancel()" style="float: right;">닫기</a>
 		</div>
 	</div>
 </body>

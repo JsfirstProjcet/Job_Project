@@ -80,6 +80,8 @@ function insertComFollow(cno){
 		})
 	}else if(${sessionScope.cid!=null}){
 		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다\n로그아웃 하시겠습니까?")){
+			location.href='../personal/logout.do?mode=2&no='+${evo.eno}
+			return
 		}else{
 			return
 		}
@@ -140,7 +142,8 @@ function insertEmpFollow(eno){
 		})
 	}else if(${sessionScope.cid!=null}){
 		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다\n로그아웃 하시겠습니까?")){
-				
+			location.href='../personal/logout.do?mode=2&no='+${evo.eno}
+			return
 		}else{
 			return
 		}
@@ -214,6 +217,12 @@ function recruit(eno){
 }
 #content style {
     display: none;
+}
+.back-to-page {
+    position: fixed;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
 }
 </style>
 </head>
@@ -532,5 +541,7 @@ function recruit(eno){
             </div>
         </div>
         <!-- Job Detail End -->
+        
+        <a href="javascript:history.back()" class="btn btn-lg btn-danger btn-lg-square back-to-page" style="margin-bottom: 50px"><i class="bi bi-arrow-left"></i></a>
 </body>
 </html>

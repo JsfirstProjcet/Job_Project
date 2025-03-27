@@ -111,6 +111,9 @@ function empInsert(){
 		}
 	})
 }
+function insertCancel(){
+	location.href="../official/emp_list.do?cno="+${cno}
+}
 </script>
 <style type="text/css">
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
@@ -204,6 +207,7 @@ input[type='number'] {
 				<tr>
 					<td colspan="4" class="text-center">
 						<a class="btn btn-sm btn-primary" onclick="empInsert()">공고 등록</a>
+						<a class="btn btn-sm btn-danger" onclick="insertCancel()">취소</a>
 					</td>
 				</tr>
 			</table>

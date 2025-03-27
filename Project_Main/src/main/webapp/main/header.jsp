@@ -52,11 +52,10 @@
 	            <div class="nav-item dropdown">
 	                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">마이페이지</a>
 	                <div class="dropdown-menu rounded-0 m-0">
-	                    <a href="#l" class="dropdown-item">My</a>
-	                    <a href="#l" class="dropdown-item">계정</a>
-	                    <a href="#l" class="dropdown-item">리뷰</a>
+	                    <a href="#" class="dropdown-item">계정 관리</a>
+	                    <a href="../mypage/mypage_follow.do" class="dropdown-item">팔로우 관리</a>
+	                    <a href="../mypage/mypage_recruit.do" class="dropdown-item">지원 관리</a>
 	                    <a href="../resume/resume.do" class="dropdown-item">이력서</a>
-	                    <a href="#l" class="dropdown-item">멤버십/결제</a>
 	                </div>
 	            </div>
 	            </c:if>

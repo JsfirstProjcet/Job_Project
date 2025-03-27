@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.mypage-mapper">
+	<!-- 계정 -->
+	<select id="myInfoData" resultType="PersonalVO" parameterType="String">
+		SELECT * FROM personal WHERE id=#{id}
+	</select>
+	<!-- 찜 -->
+	<select id="myFollowListData" resultType="FollowVO" parameterType="hashmap">
+		SELECT fno,no,type,name,num
+		FROM (SELECT fno,no,type,name,rownum as num 
+		FROM (SELECT fno,no,type,
+		<choose>
+			<when test="type==0">
+				c.name as name
+			</when>
+			<when test="type==1">
+				e.title as name
+			</when>
+		</choose>
+		FROM follow f,
+		<choose>
+			<when test="type==0">
+				company c
+			</when>
+			<when test="type==1">
+				employment e
+			</when>
+		</choose>
+		WHERE id=#{id} AND type=#{type} AND
+		<choose>
+			<when test="type==0">
+				f.no=c.cno
+			</when>
+			<when test="type==1">
+				f.no=e.eno
+			</when>
+		</choose>
+		ORDER BY fno DESC
+		))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="followTotalCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*) FROM follow
+		WHERE id=#{id} AND type=#{type}
+	</select>
+	<delete id="mypageFollowDelete" parameterType="int">
+		DELETE FROM follow
+		WHERE fno=#{fno}
+	</delete>
+	<!-- 지원 -->
+	<select id="mypageRecruitListDat" resultType="SeekerVO" parameterType="hashmap">
+		SELECT jno,eno,etitle,state,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,num
+		FROM (SELECT jno,eno,etitle,state,regdate,rownum as num 
+		FROM (SELECT jno,s.eno,e.title as etitle,s.state,s.regdate
+		FROM job_seeker s, employment e
+		WHERE id=#{id} AND e.eno=s.eno ORDER BY s.regdate desc))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="mypageRecruitTotalCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*) FROM job_seeker
+		WHERE id=#{id}
+	</select>
+	<delete id="mypageRecruitDelete" parameterType="int">
+		DELETE FROM job_seeker
+		WHERE jno=#{jno}
+	</delete>
+</mapper>

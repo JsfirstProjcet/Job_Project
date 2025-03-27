@@ -46,5 +46,6 @@
     <mapper resource="com/sist/mapper/reply-mapper.xml" />
     <mapper resource="com/sist/mapper/history-mapper.xml" />
     <mapper resource="com/sist/mapper/jjim-mapper.xml" />
+    <mapper resource="com/sist/mapper/mypage-mapper.xml" />
   </mappers>
 </configuration>

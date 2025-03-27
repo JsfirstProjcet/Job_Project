@@ -204,6 +204,8 @@ function insertEmpFollow(eno){
 		})
 	}else if(${sessionScope.cid!=null}){
 		if(confirm("기업계정으로 이용 불가능한 기능입니다\n일반 사용자 계정으로 로그인 후 이용가능한 기능입니다\n로그아웃 하시겠습니까?")){
+			location.href='../personal/logout.do?mode=1&no='+cno
+			return
 		}else{
 			return
 		}

@@ -108,6 +108,7 @@ public class OfficialModel {
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("ovo", ovo);
+		request.setAttribute("com_title", "계정 관리");
 		request.setAttribute("com_jsp", "../official/official_detail.jsp");
 		request.setAttribute("main_jsp", "../company/com_main.jsp");
 		return "../main/main.jsp";
@@ -153,6 +154,7 @@ public class OfficialModel {
 		int cno=CompanyDAO.conByCid(cid);
 		CompanyVO vo=CompanyDAO.comDetailData(cno);
 		
+		request.setAttribute("com_title", "공고 관리");
 		request.setAttribute("vo", vo);
 		request.setAttribute("cno", cno);
 		request.setAttribute("com_jsp", "../official/emp_list.jsp");
@@ -262,6 +264,8 @@ public class OfficialModel {
 		int cno=CompanyDAO.conByCid(cid);
 		CompanyVO vo=CompanyDAO.comDetailData(cno);
 
+		
+		request.setAttribute("com_title", "새 공고 등록");
 		request.setAttribute("vo", vo);
 		request.setAttribute("cno", cno);
 		request.setAttribute("com_jsp", "../official/emp_insert.jsp");

@@ -48,11 +48,10 @@ $(function(){
 				<th width="5%" class="text-center">
 				</th>
 				<th width="10%" class="text-center">번호</th>
-				<th width="30%" class="text-center">공고 제목</th>
-				<th width="20%" class="text-center">이력서</i></th>
+				<th width="40%" class="text-center">이력서</i></th>
+				<th width="20%" class="text-center">등록일</th>
 				<th width="15%" class="text-center">이름</th>
-				<th width="10%" class="text-center">상태</th>
-				<th width="10%" class="text-center"></th>
+				<th width="15%" class="text-center">상태</th>
 			</tr>
 			<c:if test="${list.size()==0 }">
 				<tr>
@@ -68,10 +67,10 @@ $(function(){
 							</c:if>
 						</td>
 						<td width="10%" class="text-center">${svo.num }</td>
-						<td width="35%" class="text-start">${svo.etitle }</td>
-						<td width="15%" class="text-center">${svo.rtitle }</td>
-						<td width="10%" class="text-center">${svo.pname }</td>
-						<td width="10%" class="text-center">
+						<td width="40%" class="text-start">${svo.rtitle }</td>
+						<td width="20%" class="text-center">${svo.dbday }</td>
+						<td width="15%" class="text-center">${svo.pname }</td>
+						<td width="15%" class="text-center">
 							<c:if test="${svo.state==0 }">
 								지원
 							</c:if>
@@ -82,7 +81,6 @@ $(function(){
 								불합격
 							</c:if>
 						</td>
-						<td width="15%" class="text-center"></td>
 					</tr>
 				</c:forEach>
 			</c:if>

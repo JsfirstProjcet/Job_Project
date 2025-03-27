@@ -278,6 +278,14 @@ function wtabChange(wno){
 	$('.wtab').hide()
 	$('.wtab-'+wno).show()
 }
+function updateShow(){
+	$('#comdetail').hide()
+	$('#comupdate').show()
+}
+function updateCancel(){
+	$('#comdetail').show()
+	$('#comupdate').hide()
+}
 </script>
 <style type="text/css">
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button {
@@ -315,82 +323,154 @@ input[type='number'].take {
 			<option value="3">기업 복지</option>
 		</select>
 		<div class="row tab tab-1">
-			<form method="post" action="../company/com_update_ok.do">
+			<div id="comdetail">
 				<table class="table">
 					<tr>
 						<th class="text-center" width="15%">기업명</th>
 						<td width="85%" colspan="3">
-							<input type="text" name="name" id="name" size="30" value="${vo.name }" readonly disabled>
+							${vo.name }
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">설립일</th>
 						<td width="35%">
-							<input type="date" name="estdate" id="estdate" value="${vo.dbestdate }">
+							${vo.dbestdate }
 						</td>
 						<th class="text-center" width="15%">대표자명</th>
 						<td width="35%">
-							<input type="text" name="representative" id="representative" size="30" value="${vo.representative==null?'':vo.representative }">
+							${vo.representative==null?'':vo.representative }
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">기업형태</th>
 						<td width="35%">
-							<select name="c_type" id="c_type">
-								<c:forEach var="i" begin="0" end="6">
-									<option value="${ctype[i] }"  ${ctype[i]=="기타"?((vo.c_type==null||vo.c_type=="기타")?"selected":""):(ctype[i]==vo.c_type?"selected":"") }>${ctype[i] }</option>
-								</c:forEach>
-							</select>
+							${vo.c_type }
 						</td>
 						<th class="text-center" width="15%">홈페이지</th>
 						<td width="35%">
-							<input type="text" name="homepage" id="homepage" size="30" value="${vo.homepage==null?'':vo.homepage }">
+							${vo.homepage==null?'':vo.homepage }
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">사원수</th>
 						<td width="35%">
-							<input type="number" name="ecount" id="ecount" size="30" value="${vo.ecount }" min="0">
+							${vo.ecount }
 						</td>
 						<th class="text-center" width="15%">매출액</th>
 						<td width="35%">
-							<input type="number" class="take text-right" name="jo" id="jo" size="5" value="${vo.jo }" min="0">조
-							<input type="number" class="take text-right" name="uk" id="uk" size="5" value="${vo.uk }" min="0">억
-							<input type="number" class="take text-right" name="man" id="man" size="5" value="${vo.man }" min="0">만
+							${vo.jo==0?'':vo.jo+'조 ' }${vo.uk==0?'':vo.jo+'억 ' }${vo.man==0?'':vo.jo+'만 ' }
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">주소</th>
 						<td width="85%" colspan="3">
-							<input type="text" name="address" id="address" size="70" value="${vo.address==null?'':vo.address }">
-							<input type="button" value="주소찾기" id="postBtn">
+							${vo.address==null?'':vo.address }
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">업종</th>
 						<td width="85%" colspan="3">
-							<input type="text" name="industry" id="industry" size="80" value="${vo.industry==null?'':vo.industry }">
+							${vo.industry==null?'':vo.industry }
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">사업내용</th>
 						<td width="85%" colspan="3">
-							<textarea rows="4" cols="80" name="bu_details" id="bu_details">${vo.bu_details==null?'':vo.bu_details }</textarea>
+							<pre>${vo.bu_details==null?'':vo.bu_details }</pre>
 						</td>
 					</tr>
 					<tr>
 						<th class="text-center" width="15%">사업내용</th>
 						<td width="85%" colspan="3">
-							<textarea rows="20" cols="80" name="introduction" id="introduction">${vo.introduction==null?'':vo.introduction }</textarea>
+							<pre>${vo.introduction==null?'':vo.introduction }</pre>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="4" class="text-end">
-							<input type="submit" class="btn btn-sm btn-info mx-3" value="저장">
+							<a onclick="updateShow()" class="btn btn-primary">수정</a>
 						</td>
 					</tr>
 				</table>
-			</form>
+			</div>
+			<div  id="comupdate" style="display: none;">
+				<form method="post" action="../company/com_update_ok.do">
+					<table class="table">
+						<tr>
+							<th class="text-center" width="15%">기업명</th>
+							<td width="85%" colspan="3">
+								<input type="text" name="name" id="name" size="30" value="${vo.name }" readonly disabled>
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">설립일</th>
+							<td width="35%">
+								<input type="date" name="estdate" id="estdate" value="${vo.dbestdate }">
+							</td>
+							<th class="text-center" width="15%">대표자명</th>
+							<td width="35%">
+								<input type="text" name="representative" id="representative" size="30" value="${vo.representative==null?'':vo.representative }">
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">기업형태</th>
+							<td width="35%">
+								<select name="c_type" id="c_type">
+									<c:forEach var="i" begin="0" end="6">
+										<option value="${ctype[i] }"  ${ctype[i]=="기타"?((vo.c_type==null||vo.c_type=="기타")?"selected":""):(ctype[i]==vo.c_type?"selected":"") }>${ctype[i] }</option>
+									</c:forEach>
+								</select>
+							</td>
+							<th class="text-center" width="15%">홈페이지</th>
+							<td width="35%">
+								<input type="text" name="homepage" id="homepage" size="30" value="${vo.homepage==null?'':vo.homepage }">
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">사원수</th>
+							<td width="35%">
+								<input type="number" name="ecount" id="ecount" size="30" value="${vo.ecount }" min="0">
+							</td>
+							<th class="text-center" width="15%">매출액</th>
+							<td width="35%">
+								<input type="number" class="take text-right" name="jo" id="jo" size="5" value="${vo.jo }" min="0">조
+								<input type="number" class="take text-right" name="uk" id="uk" size="5" value="${vo.uk }" min="0">억
+								<input type="number" class="take text-right" name="man" id="man" size="5" value="${vo.man }" min="0">만
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">주소</th>
+							<td width="85%" colspan="3">
+								<input type="text" name="address" id="address" size="70" value="${vo.address==null?'':vo.address }">
+								<input type="button" value="주소찾기" id="postBtn">
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">업종</th>
+							<td width="85%" colspan="3">
+								<input type="text" name="industry" id="industry" size="80" value="${vo.industry==null?'':vo.industry }">
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">사업내용</th>
+							<td width="85%" colspan="3">
+								<textarea rows="4" cols="80" name="bu_details" id="bu_details">${vo.bu_details==null?'':vo.bu_details }</textarea>
+							</td>
+						</tr>
+						<tr>
+							<th class="text-center" width="15%">사업내용</th>
+							<td width="85%" colspan="3">
+								<textarea rows="20" cols="80" name="introduction" id="introduction">${vo.introduction==null?'':vo.introduction }</textarea>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" class="text-end">
+								<input type="submit" class="btn btn-sm btn-info mx-3" value="저장">
+								<a onclick="updateCancel()" class="btn btn-sm btn-danger">취소</a>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		</div>
 		<div class="row tab tab-2">
 			<table class="table">

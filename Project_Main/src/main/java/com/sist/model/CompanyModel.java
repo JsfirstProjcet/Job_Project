@@ -354,6 +354,7 @@ public class CompanyModel {
 		List<WelfareVO> wList=CompanyDAO.comUpdateWelfareData(vo.getCid());
 		List<WelfareVO> tList=CompanyDAO.comUpdateWelfareTag();
 		
+		request.setAttribute("com_title", "기업 정보 수정");
 		request.setAttribute("vo", vo);
 		request.setAttribute("icons", icons);
 		request.setAttribute("wList", wList);
@@ -399,7 +400,7 @@ public class CompanyModel {
 		
 		CompanyDAO.comUpdate(vo);
 		
-		return "redirect:../company/com_detail.do?cno="+cno;
+		return "redirect:../company/com_update.do?cno="+cno;
 	}
 	@RequestMapping("company/com_wel_insert.do")
 	public void com_wel_insert(HttpServletRequest request, HttpServletResponse response) {

@@ -46,6 +46,9 @@ function seekerUpdate(){
         })
     })
 }
+function closeBox() {
+	parent.Shadowbox.close()
+}
 </script>
 </head>
 <body>
@@ -57,6 +60,7 @@ function seekerUpdate(){
 		</select>
 		<div class="row seeklist">
 		</div>
+		<a onclick="closeBox()" class="btn btn-sm btn-danger" style="float: right;">닫기</a>
 	</div>
 </body>
 </html>
