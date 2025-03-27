@@ -221,10 +221,10 @@
 					<figure>
 						<header class="heading"></header>
 						<c:if test="${empty key }">
-						<h2>현직자 인터뷰 | ${category[mode-1] }</h2>
+						<h2 class="text-center mb-5">현직자 인터뷰 | ${category[mode-1] }</h2>
 						</c:if>
 						<c:if test="${not empty key}">
-						<h2>현직자 인터뷰 | ${key }</h2>
+						<h2 class="text-center mb-5">현직자 인터뷰 | ${key }</h2>
 						</c:if>
 					        <div class="category-box">
 							    <c:forEach var="cate" items="${category}" varStatus="status">
