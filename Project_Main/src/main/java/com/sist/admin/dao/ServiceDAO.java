@@ -1,11 +1,11 @@
 package com.sist.admin.dao;
 
+import com.sist.admin.vo.ServiceVO;
 import com.sist.commons.CreateSqlSessionFactory;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.sist.admin.vo.ServiceVO;
 
 public class ServiceDAO {
 
@@ -22,9 +22,9 @@ public class ServiceDAO {
     return list;
   }
 
-  public static List<ServiceVO> getServiceDetail(String id) {
+  public static ServiceVO getServiceDetail(String id) {
     SqlSession session = ssf.openSession();
-    List<ServiceVO> list = session.selectList("getServiceDetail", id);
+    ServiceVO list = session.selectOne("getServiceDetail", id);
     session.close();
     return list;
   }
@@ -53,5 +53,37 @@ public class ServiceDAO {
     int result = session.selectOne("getServiceSearchCount", id);
     session.close();
     return result;
+  }
+
+  public static List<ServiceVO> getServiceMainList(Map map) {
+    SqlSession session = ssf.openSession();
+    List<ServiceVO> list = session.selectList("getServiceMainList", map);
+    session.close();
+    return list;
+  }
+
+  public static int getServiceMainCount() {
+    SqlSession session = ssf.openSession();
+    int page = session.selectOne("getMainPageCount");
+    session.close();
+    return page;
+  }
+
+  public static void serviceQuestionInsert(Map map) {
+    SqlSession session = ssf.openSession(true);
+    session.insert("serviceQuestionInsert", map);
+    session.close();
+  }
+
+  public static void serviceQuestionDelete(String id) {
+    SqlSession session = ssf.openSession(true);
+    session.delete("serviceQuestionDelete", id);
+    session.close();
+  }
+
+  public static void serviceQuestionUpdate(Map map) {
+    SqlSession session = ssf.openSession(true);
+    session.update("serviceQuestionUpdate", map);
+    session.close();
   }
 }

@@ -26,11 +26,7 @@
     FROM SERVICE
     where id = #{id}
   </select>
-  <!-- 문의 -->
-  <insert id="serviceInsert" parameterType="AdminServiceVO">
-    INSERT INTO SERVICE(id, pid, qtitle, qcontent, visible, qdate)
-    VALUES (SERVICE_LIST_SEQ.nextval, #{pid}, #{title}, #{content}, #{visible}, sysdate)
-  </insert>
+
   <!-- 답변 -->
   <update id="serviceAnswerInsert" parameterType="hashmap">
     UPDATE SERVICE
@@ -82,4 +78,46 @@
             and PID != 'p0'
           order by id desc)
   </select>
+  <!-- QnA 메인 리스트 -->
+  <select id="getServiceMainList" resultType="AdminServiceVO" parameterType="hashmap">
+    select id,
+           pid,
+           qtitle,
+           qcontent,
+           visible,
+           ok,
+           qdate,
+           adate,
+           num
+    from (select id,
+                 pid,
+                 qtitle,
+                 qcontent,
+                 visible,
+                 ok,
+                 qdate,
+                 adate,
+                 ROWNUM as num
+          from (select id,
+                       pid,
+                       qtitle,
+                       qcontent,
+                       visible,
+                       ok,
+                       qdate,
+                       adate
+                from SERVICE))
+    WHERE num BETWEEN #{start} AND #{end}
+    order by qdate desc
+  </select>
+  <!-- QnA 메인 페이지 counting -->
+  <select id="getMainPageCount" resultType="int">
+    SELECT CEIL(COUNT(*) / 10.0)
+    FROM SERVICE
+  </select>
+  <!-- 문의 -->
+  <insert id="serviceQuestionInsert" parameterType="AdminServiceVO">
+    INSERT INTO SERVICE(id, pid, qtitle, qcontent, visible, qdate)
+    VALUES (SERVICE_LIST_SEQ.nextval, #{pid}, #{title}, #{content}, #{visible}, sysdate)
+  </insert>
 </mapper>

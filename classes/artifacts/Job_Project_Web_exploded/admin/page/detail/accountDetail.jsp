@@ -17,8 +17,8 @@
     <div class="flex grid justify-center">
         <div class="relative size-90 grid m-4 text-gray-700 bg-gray-300 bg-clip-border rounded-xl place-items-center">
             <c:if test="${top == 'user'}">
-                <c:if test="${vo[0].poster}">
-                    <img src="${vo[0].poster}" alt="ProfileImage"/>
+                <c:if test="${vo.poster}">
+                    <img src="${vo.poster}" alt="ProfileImage"/>
                 </c:if>
             </c:if>
             <c:if test="${!user}">
@@ -34,21 +34,19 @@
     </div>
     <div class="flex justify-center vertical-middle m-4 p-4">
         <table class="table-auto h-12 border-collapse border border-gray-400 text-left vertical-middle p-2 rounded-lg">
-            <c:forEach items="${vo}" var="v">
-                <c:forEach items="${thead}" var="h">
-                    <tr>
-                        <td class="px-4 py-2 border border-gray-300 bg-gray-200">
-                            <p class="text-md">
-                                    ${h.value}
-                            </p>
-                        </td>
-                        <td class="px-4 py-2 border border-gray-300">
-                            <p class="text-md">
-                                    ${v[h.key]}
-                            </p>
-                        </td>
-                    </tr>
-                </c:forEach>
+            <c:forEach items="${thead}" var="h">
+                <tr>
+                    <td class="px-4 py-2 border border-gray-300 bg-gray-200">
+                        <p class="text-md">
+                                ${h.value}
+                        </p>
+                    </td>
+                    <td class="px-4 py-2 border border-gray-300">
+                        <p class="text-md">
+                                ${vo[h.key]}
+                        </p>
+                    </td>
+                </tr>
             </c:forEach>
         </table>
     </div>

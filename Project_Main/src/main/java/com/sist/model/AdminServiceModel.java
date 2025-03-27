@@ -90,7 +90,7 @@ public class AdminServiceModel {
     head.put("qcontent", "Content");
     head.put("qdate", "Date");
 
-    List<ServiceVO> vo = ServiceDAO.getServiceDetail(id);
+    ServiceVO vo = ServiceDAO.getServiceDetail(id);
 
     request.setAttribute("vo", vo);
     request.setAttribute("pre", pre);
@@ -99,7 +99,7 @@ public class AdminServiceModel {
     request.setAttribute("id", id);
     request.setAttribute("submit", "answer.do");
 
-    request.setAttribute("size", vo.size());
+    request.setAttribute("size", vo != null ? 1 : null);
     request.setAttribute("path", path);
     request.setAttribute("origin", "service");
 

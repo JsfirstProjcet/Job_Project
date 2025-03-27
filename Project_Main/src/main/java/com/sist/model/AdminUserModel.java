@@ -94,7 +94,7 @@ public class AdminUserModel {
     head.put("addr1", "Address1");
     head.put("addr2", "Address2");
 
-    List<UserVO> vo = UserDAO.getUserDetail(id);
+    UserVO vo = UserDAO.getUserDetail(id);
 
     request.setAttribute("vo", vo);
     request.setAttribute("id", id);
@@ -103,7 +103,7 @@ public class AdminUserModel {
     request.setAttribute("thead", head);
     request.setAttribute("top", "user");
 
-    request.setAttribute("size", vo.size());
+    request.setAttribute("size", vo != null ? 1 : null);
     request.setAttribute("path", path);
     request.setAttribute("origin", "user");
     return "../main.jsp";

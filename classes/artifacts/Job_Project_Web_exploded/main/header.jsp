@@ -45,6 +45,9 @@
                     <a href="../interview/interview_find.do" class="dropdown-item">인터뷰 찾기</a>
                 </div>
             </div>
+            <a href="../service/main.do" class="nav-item nav-link">
+                고객센터
+            </a>
             <c:if test="${sessionScope.cid!=null }">
                 <div class="nav-item dropdown">
                     <a href="../company/com_main.do" class="nav-item nav-link active">기업페이지</a>
@@ -81,7 +84,7 @@
                         </div>
                     </c:if>
                     <c:if test="${sessionScope.isadmin == 1 }">
-                        <div onclick="goAdmin()"
+                        <div onclick="location.href = '/admin/main.do';"
                              class="btn btn-outline-primary text-center me-3 px-3 py-2">
                             <span class="d-block fw-bold"><b>${sessionScope.name}</b></span>
                             <span class="d-block small text-muted">(관리자)</span>
@@ -152,9 +155,4 @@
   </header>
   -->
 </body>
-<script>
-  const goAdmin = () => {
-    location.href = "/admin/main.do";
-  }
-</script>
 </html>

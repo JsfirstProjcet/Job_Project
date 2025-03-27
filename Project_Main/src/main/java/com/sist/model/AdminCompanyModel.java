@@ -88,7 +88,7 @@ public class AdminCompanyModel {
     head.put("cname", "Company");
     head.put("phone", "Phone");
 
-    List<CompanyVO> vo = CompanyDAO.getCompanyDetail(id);
+    CompanyVO vo = CompanyDAO.getCompanyDetail(id);
 
     request.setAttribute("vo", vo);
     request.setAttribute("pre", pre);
@@ -96,7 +96,7 @@ public class AdminCompanyModel {
     request.setAttribute("thead", head);
     request.setAttribute("top", "company");
 
-    request.setAttribute("size", vo.size());
+    request.setAttribute("size", vo != null ? 1 : null);
     request.setAttribute("path", path);
     request.setAttribute("origin", "company");
 

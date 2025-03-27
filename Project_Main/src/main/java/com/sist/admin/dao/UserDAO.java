@@ -1,11 +1,11 @@
 package com.sist.admin.dao;
 
+import com.sist.admin.vo.UserVO;
 import com.sist.commons.CreateSqlSessionFactory;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.sist.admin.vo.UserVO;
 
 public class UserDAO {
 
@@ -22,11 +22,11 @@ public class UserDAO {
     return list;
   }
 
-  public static List<UserVO> getUserDetail(String id) {
+  public static UserVO getUserDetail(String id) {
     SqlSession session = ssf.openSession();
-    List<UserVO> list = session.selectList("getUserDetail", id);
+    UserVO result = session.selectOne("getUserDetail", id);
     session.close();
-    return list;
+    return result;
   }
 
   public static void userDelete(String id) {

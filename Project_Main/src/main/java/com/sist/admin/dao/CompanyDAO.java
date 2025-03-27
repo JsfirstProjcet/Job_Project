@@ -1,11 +1,11 @@
 package com.sist.admin.dao;
 
+import com.sist.admin.vo.CompanyVO;
 import com.sist.commons.CreateSqlSessionFactory;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.sist.admin.vo.CompanyVO;
 
 public class CompanyDAO {
 
@@ -22,9 +22,9 @@ public class CompanyDAO {
     return list;
   }
 
-  public static List<CompanyVO> getCompanyDetail(String id) {
+  public static CompanyVO getCompanyDetail(String id) {
     SqlSession session = ssf.openSession();
-    List<CompanyVO> list = session.selectList("getCompanyDetail", id);
+    CompanyVO list = session.selectOne("getCompanyDetail", id);
     session.close();
     return list;
   }
