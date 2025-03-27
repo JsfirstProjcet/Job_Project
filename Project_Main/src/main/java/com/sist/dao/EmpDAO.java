@@ -147,4 +147,10 @@ public class EmpDAO {
 		session.close();
 		return list;
 	}
+    public static List<EmpVO> getEmpListByDate(Map dateMap) {
+        SqlSession session = ssf.openSession();
+        List<EmpVO> list = session.selectList("getEmpListByDate", dateMap);
+        session.close();
+        return list;
+    }
 }

@@ -172,4 +172,66 @@ public class EmpModel {
 
 	    return "../main/main.jsp";
 	}
+	@RequestMapping("emp/emp_calendar.do")
+	public String emp_calendar(HttpServletRequest request,
+		  HttpServletResponse response)
+	{
+	    String strYear = request.getParameter("year");
+	    String strMonth = request.getParameter("month");
+	    String strDay = request.getParameter("day");
+
+	    // 기본 날짜값 설정: 오늘 날짜를 기준으로
+	    Calendar todayCal = Calendar.getInstance();  // 오늘 날짜를 가져옴
+	    if (strYear == null || strYear.isEmpty()) {
+	        strYear = String.valueOf(todayCal.get(Calendar.YEAR)); // 오늘 년도
+	    }
+	    if (strMonth == null || strMonth.isEmpty()) {
+	        strMonth = String.format("%02d", todayCal.get(Calendar.MONTH) + 1); // 오늘 월
+	    }
+	    if (strDay == null || strDay.isEmpty()) {
+	        strDay = String.format("%02d", todayCal.get(Calendar.DAY_OF_MONTH)); // 오늘 날짜
+	    }
+
+	    int year = Integer.parseInt(strYear);
+	    int month = Integer.parseInt(strMonth);
+	    int day = Integer.parseInt(strDay);
+
+	    // 날짜 설정
+	    Calendar cal = Calendar.getInstance();
+	    cal.set(Calendar.YEAR, year);
+	    cal.set(Calendar.MONTH, month - 1); // 월은 0부터 시작
+	    cal.set(Calendar.DATE, 1); // 1일로 설정
+
+	    // 첫째 주의 요일(1: 일요일, 2: 월요일 등)
+	    int week = cal.get(Calendar.DAY_OF_WEEK) - 1; 
+	    int lastday = cal.getActualMaximum(Calendar.DATE); // 마지막 날짜
+
+	    // 날짜 배열 설정
+	    int[] rday = new int[lastday + 1];  // lastday 날짜 범위에 맞는 배열
+	    Arrays.fill(rday, 1);
+
+	    // 날짜, 공고 목록 정보 설정
+	    Map<String, Object> dateMap = new HashMap<>();
+	    dateMap.put("year", year);
+	    dateMap.put("month", month);
+	    dateMap.put("day", strDay);
+	    dateMap.put("rday", rday);
+	    
+	    // 공고 목록 조회
+	    List<EmpVO> list = EmpDAO.getEmpListByDate(dateMap);
+
+	    // JSP로 전달할 데이터 설정
+	    request.setAttribute("rday", rday);
+	    request.setAttribute("year", year);
+	    request.setAttribute("month", month);
+	    request.setAttribute("week", week);
+	    request.setAttribute("lastday", lastday);
+	    request.setAttribute("day", day);
+	    request.setAttribute("emp_list", list);
+	    
+	    String[] weeks = {"일", "월", "화", "수", "목", "금", "토"};
+	    request.setAttribute("weeks", weeks);
+	    request.setAttribute("main_jsp", "../emp/emp_calendar.jsp");
+		return "../main/main.jsp";
+	}
 }

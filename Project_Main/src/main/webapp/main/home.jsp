@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,12 +143,12 @@
                                                     class="far fa-heart text-primary"></i></a>
                                             <a class="btn btn-primary" href="">Recruit</a>
                                         </div>
-                                        <small class="text-truncate"><i
-                                                class="far fa-calendar-alt text-primary me-2"></i>등록일
-                                            : ${vo.regdate }</small>
-                                        <small class="text-truncate"><i
-                                                class="far fa-calendar-times text-primary me-2"></i>마감일
-                                            : ${vo.deadline }</small>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>등록일 : 
+											<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />
+										</small>
+                                        <small class="text-truncate"><i class="far fa-calendar-times text-primary me-2"></i>마감일 : 
+											<fmt:formatDate value="${vo.deadline}" pattern="yyyy-MM-dd" />
+                                        </small>
                                     </div>
                                 </div>
                             </div>

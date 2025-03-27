@@ -284,4 +284,19 @@
 	<select id="empTab" resultType="JobVO">
 		SELECT * FROM JOB WHERE jno2 is null ORDER BY jno asc
 	</select>
+	<select id="getEmpListByDate" resultType="EmpVO" parameterType="map">
+		SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,num
+		FROM (
+		    SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,rownum AS num
+		    FROM (
+		        SELECT /*+ INDEX_ASC(employment employment_list_seq)*/ eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count
+		        FROM employment
+		        WHERE deadline >= TO_DATE(
+		            #{year} || '-' || LPAD(#{month}, 2, '0') || '-' || LPAD(#{day}, 2, '0'),
+		            'YYYY-MM-DD'
+		        )
+		    )
+		)
+	   	WHERE num BETWEEN 1 AND 12    
+    </select>
 </mapper>

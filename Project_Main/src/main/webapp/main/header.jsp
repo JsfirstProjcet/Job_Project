@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +27,7 @@
 	                <div class="dropdown-menu rounded-0 m-0">
 	                    <a href="../emp/emp_list.do" class="dropdown-item">공고 목록</a>
 	                    <a href="../emp/emp_find_home.do" class="dropdown-item">공고 검색</a>
-	                    <a href="#" class="dropdown-item">실시간 공고</a>
+	                    <a href="../emp/emp_calendar.do" class="dropdown-item">실시간 공고</a>
 	                </div>
 	            </div>
 	            <div class="nav-item dropdown">
