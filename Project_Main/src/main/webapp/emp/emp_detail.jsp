@@ -210,6 +210,16 @@ function recruit(eno){
         title:'${evo.title} 지원하기'
     })	
 }
+//지원자 리스트
+function seekerList(eno,title){
+	Shadowbox.open({
+        content:'../official/seeker_list.do?eno='+eno,
+        player:'iframe',
+        width:800,
+        height:1000,
+        title:title+' 지원자 목록'
+    })	
+}
 </script>
 <style type="text/css">
 #content script {
@@ -278,7 +288,12 @@ function recruit(eno){
 									<c:if test="${eCheck==1 }">
 		                           		<a class="btn btn-light btn-square me-3 col-3 follow-emp" onclick="deleteEmpFollow(${evo.eno})"><i class="far bi-heart-fill text-primary"></i></a>
 									</c:if>
-									<a class="btn btn-primary col-9 recruit-btn" onclick="recruit(${evo.eno })">지원하기</a>
+									<c:if test="${sessionScope.cid!=evo.cid }">
+										<a class="btn btn-primary col-9 recruit-btn" onclick="recruit(${evo.eno })">지원하기</a>
+									</c:if>
+									<c:if test="${sessionScope.cid==evo.cid }">
+										<a class="btn btn-primary col-9 recruit-List-btn" onclick="seekerList(${evo.eno },'${evo.title }')">지원자 보기</a>
+									</c:if>
 									<span class="text-end deadline-text">남은 기간:&nbsp;<span class="deadline" style="color: red;">${evo.dbdeadline }</span></span>
 	                           	</div>
                             </div>
