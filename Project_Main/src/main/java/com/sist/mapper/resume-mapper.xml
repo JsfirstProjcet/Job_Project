@@ -36,4 +36,11 @@
 		DELETE resume 
 		WHERE rno=#{rno}
 	</delete>
+	<!-- 지원하기 -->
+ 	<select id="myResumeListData" resultType="com.sist.vo.ResumeVO" parameterType="string">
+ 		SELECT rno,title,num
+ 		FROM (SELECT rno,title,rownum as num 
+ 		FROM (SELECT rno,title
+ 		FROM resume WHERE id=#{id} ORDER BY rno desc))
+ 	</select>
 </mapper>

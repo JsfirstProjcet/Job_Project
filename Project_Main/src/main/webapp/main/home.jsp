@@ -12,7 +12,7 @@
 
 	    <!-- Carousel Start -->
         <div class="container-fluid p-0">
-            <div class="owl-carousel header-carousel position-relative">
+            <div class="owl-carousel header-carousel position-relative" style="height: 200px;overflow: hidden;">
                 <div class="owl-carousel-item position-relative">
                     <img class="../img-fluid" src="../img/carousel-1.jpg" alt="">
                     <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
@@ -106,10 +106,10 @@
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Job</h1>
             <div class="row g-4">
             	<c:forEach var="jvo" items="${tList }" varStatus="i">
-	                <div class="col-lg-2 col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
-	                    <a class="cat-item rounded p-4" href="../emp/emp_find.do?jno=${jvo.jno }">
-	                        <i class="fa fa-3x ${icons[jvo.jno] } text-primary mb-4"></i>
-	                        <h6 class="mb-3">${jvo.name }</h6>
+	                <div class="col-2  wow fadeInUp" data-wow-delay="0.1s">
+	                    <a class="cat-item rounded p-2" href="../emp/emp_find.do?jno=${jvo.jno }" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
+	                        <i class="fa ${icons[jvo.jno] } text-primary mb-2"></i>
+	                        <span>${jvo.name }</span>
 	                    </a>
 	                </div>
             	</c:forEach>
