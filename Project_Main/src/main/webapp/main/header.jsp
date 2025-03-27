@@ -41,6 +41,7 @@
 	                  	<a href="../interview/commune.do" class="dropdown-item">묻고답하기</a>
 	                    <a href="../interview/interview_list.do" class="dropdown-item">인터뷰</a>
 	                    <a href="../interview/interview_find.do" class="dropdown-item">인터뷰 찾기</a>
+	                    <a href="../chat/chat.do" class="dropdown-item">실시간채팅</a>
 	                    <a href="../sal/calculator.jsp" class="dropdown-item">연봉계산기</a>
 	                    <a href="../self/self_list.do" class="dropdown-item">자기소개서 샘플</a>
 	                    <a href="../self/self_find.do" class="dropdown-item">자소서 검색</a>
