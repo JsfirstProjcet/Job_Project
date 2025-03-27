@@ -9,7 +9,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>연봉 계산기</title>
     <link rel="stylesheet" href="../shadow/css/shadowbox.css">
+<style>
+.salary-card {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
 
+.salary-card h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-group input {
+    height: 50px;
+    font-size: 18px;
+}
+
+.input-group button {
+    height: 50px;
+    font-size: 18px;
+}
+
+.result-card {
+    max-width: 500px;
+    margin: auto;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+</style>
 <!-- Favicon -->
 <link href="../img/favicon.ico" rel="icon">
 
@@ -49,28 +89,30 @@
 		
         <jsp:include page="${main_jsp }"/>
         <div class="container mt-5">
-    <div class="card shadow-lg p-4">
-        <h2 class="text-center mb-4">연봉 계산기</h2>
-        <div class="input-group mb-3">
-            <input type="number" id="salary" class="form-control" placeholder="당신의 월급을 입력하세요" aria-label="월급 입력" required>
-            <button class="btn btn-primary" onclick="calculator()">계산하기</button>
+    <div class="salary-card">
+        <h2>💰 연봉 계산기</h2>
+        <div class="input-group">
+            <input type="number" id="salary" class="form-control" placeholder="월급 입력 (원)">
+            <button class="btn btn-primary" onclick="calculator()">
+                <i class="fas fa-calculator"></i> 계산하기
+            </button>
         </div>
     </div>
 
-    <div class="card shadow-lg p-4 mt-4" id="result" style="display: none;">
-        <h2 class="text-center">연봉 계산 결과</h2>
+    <div class="result-card mt-4" id="result" style="display: none;">
+        <h2>📊 연봉 계산 결과</h2>
         <p><strong>총 연봉:</strong> <span id="annualSalary"></span> 원</p>
-        <h4>세금 내역</h4>
+        <h4>📝 세금 내역</h4>
         <ul>
-            <li>소득세: <span id="incomeTax"></span> 원</li>
-            <li>지방소득세: <span id="localTax"></span> 원</li>
-            <li>건강보험: <span id="healthInsurance"></span> 원</li>
-            <li>국민연금: <span id="nationalPension"></span> 원</li>
-            <li>고용보험: <span id="employmentInsurance"></span> 원</li>
-            <li><strong>총 세금:</strong> <span id="totalTax"></span> 원</li>
+            <li>💸 소득세: <span id="incomeTax"></span> 원</li>
+            <li>🏙 지방소득세: <span id="localTax"></span> 원</li>
+            <li>🏥 건강보험: <span id="healthInsurance"></span> 원</li>
+            <li>👴 국민연금: <span id="nationalPension"></span> 원</li>
+            <li>💼 고용보험: <span id="employmentInsurance"></span> 원</li>
+            <li><strong>🛑 총 세금:</strong> <span id="totalTax"></span> 원</li>
         </ul>
-        <p><strong>세금 공제 후 연봉:</strong> <span id="netSalary"></span> 원</p>
-        <button class="btn btn-secondary" onclick="resetCalculator()">다시 계산하기</button>
+        <p><strong>💰 실수령 연봉:</strong> <span id="netSalary"></span> 원</p>
+        <button class="btn btn-secondary" onclick="resetCalculator()">🔄 다시 계산</button>
     </div>
 </div>
 
