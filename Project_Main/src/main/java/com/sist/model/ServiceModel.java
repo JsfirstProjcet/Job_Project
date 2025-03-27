@@ -107,9 +107,9 @@ public class ServiceModel {
       HttpServletResponse response) {
     String id = request.getParameter("id");
 
-    ServiceDAO.serviceDelete(id);
+    ServiceDAO.serviceQuestionDelete(id);
 
     request.setAttribute("main_jsp", "/service/main.jsp");
-    return "../main/main.jsp";
+    return "redirect:/service/main.do";
   }
 }

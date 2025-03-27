@@ -19,8 +19,7 @@
         </c:if>
         <c:if test="${sessionScope.id == svo.pid }">
             <button type="button"
-                    href="/service/main.jsp"
-                    onclick="fetch('/service/delete.do?id=${svo.pid }', {method: 'get'})"
+                    onclick="deleteQuestion()"
                     class="btn btn-sm btn-outline-secondary">
                 삭제
             </button>
@@ -49,7 +48,9 @@
             </c:if>
             <div class="flex-grow-1">
                 <div class="fw-bold">${uvo.nickname }</div>
-                <div class="text-muted small">상품기획·MD 2년차</div>
+                <c:if test="${uvo.isadmin == 1}">
+                    <div class="text-muted small">관리자</div>
+                </c:if>
             </div>
         </div>
     </div>
@@ -75,7 +76,18 @@
             <small>작성 ${svo.adate }</small>
         </div>
         <!-- 본문 내용 -->
-        <p class="my-4">${svo.acontent }</p>
+        <p class="mt-4 mb-12">${svo.acontent }</p>
     </div>
 </c:if>
 </body>
+<script>
+  const deleteQuestion = () => {
+    if (confirm("정말 삭제하시겠습니까?")) {
+      fetch('/service/delete.do?id=${svo.id }', {method: 'get'});
+      alert("삭제되었습니다!")
+      setInterval(() => {
+        location.href = "/service/main.do"
+      }, 2000)
+    }
+  }
+</script>
