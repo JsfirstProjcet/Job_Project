@@ -15,7 +15,7 @@
 			return;
 		}
 		websocket = new WebSocket(
-				"ws://localhost:8080/BackUpProject/chat/chat-ws");
+				"ws://localhost:8080/Project_Main/chat/chat-ws");
 		websocket.onopen = onOpen;
 		websocket.onclose = onClose;
 		websocket.onmessage = onMessage;
