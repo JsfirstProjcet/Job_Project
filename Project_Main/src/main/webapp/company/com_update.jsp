@@ -358,7 +358,7 @@ input[type='number'].take {
 						</td>
 						<th class="text-center" width="15%">매출액</th>
 						<td width="35%">
-							${vo.jo==0?'':vo.jo+'조 ' }${vo.uk==0?'':vo.jo+'억 ' }${vo.man==0?'':vo.jo+'만 ' }
+							${vo.jo==0?'':vo.jo }조${vo.uk==0?'':vo.uk }억${vo.man==0?'':vo.man }만
 						</td>
 					</tr>
 					<tr>
@@ -382,7 +382,7 @@ input[type='number'].take {
 					<tr>
 						<th class="text-center" width="15%">사업내용</th>
 						<td width="85%" colspan="3">
-							<pre>${vo.introduction==null?'':vo.introduction }</pre>
+							<pre style="white-space: pre-wrap;">${vo.introduction==null?'':vo.introduction }</pre>
 						</td>
 					</tr>
 					<tr>
