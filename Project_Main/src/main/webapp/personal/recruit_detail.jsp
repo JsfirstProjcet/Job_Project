@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td class="text-end" colspan="2">
-				<a class="btn btn-sm btn-success recruit-btn" onclick="recruit(${rno}))" style="color: white;">지원</a>
+				<a class="btn btn-sm btn-success recruit-btn" onclick="recruit(${rno})" style="color: white;">지원</a>
 				<a class="btn btn-sm btn-primary" onclick="resumeList()">목록</a>
 			</td>
 		</tr>

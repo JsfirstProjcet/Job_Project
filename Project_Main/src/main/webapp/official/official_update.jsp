@@ -149,7 +149,7 @@ input[type='number'] {
 							</select>
 							<input type="number" class="phone update" size="8" id="phone1" min="0" max="9999" required>
 							<input type="number" class="phone update" size="8" id="phone2" min="0" max="9999" required>
-							<input type="text" size="15" name="phone" id="phone" value="${ovo.phone }" readonly>
+							<input type="hidden" size="15" name="phone" id="phone" value="${ovo.phone }" readonly>
 						</td>
 					</tr>
 					<tr>
@@ -158,7 +158,7 @@ input[type='number'] {
 							<input type="number" class="brnumber update" size="6" id="brnumber0" min="0" max="999" required>
 							<input type="number" class="brnumber update" size="4" id="brnumber1" min="0" max="99" required>
 							<input type="number" class="brnumber update" size="10" id="brnumber2" min="0" max="99999" required>
-							<input type="text" size="15" name="brnumber" id="brnumber" value="${ovo.brnumber }" readonly>
+							<input type="hidden" size="15" name="brnumber" id="brnumber" value="${ovo.brnumber }" readonly>
 						</td>
 					</tr>
 					<tr>

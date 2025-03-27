@@ -17,6 +17,7 @@ let page3=1//마감된 전체
 $(function(){
 	print()
 	print1()
+	$('.dead').hide()
 	
 	$('.type').change(function(){
 		type=$(this).val()
@@ -31,6 +32,16 @@ $(function(){
 	})
 	$('.emp-box').click(function(){
 		let test=$(this).attr("data-on")
+	})
+	$('.type2').change(function(){
+		let type2=$(this).val()
+		if(type2==0){
+			$('.ing').show()
+			$('.dead').hide()
+		}else if(type2==1){
+			$('.ing').hide()
+			$('.dead').show()
+		}
 	})
 })
 function pageChange0(p){
@@ -265,7 +276,11 @@ function printEmpFollow(eno){
 <body>
 	<!-- Jobs Start -->
     <div class="container-xxl py-5">
-        <div class="container">
+    	<select class="type2">
+        	<option value="0">진행중인 공고</option>
+        	<option value="1">마감된 공고</option>
+        </select>
+        <div class="container ing">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">진행중인 공고</h1>
             <div class="tab-class text-left wow fadeInUp" data-wow-delay="0.3s">
                 <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
@@ -296,7 +311,7 @@ function printEmpFollow(eno){
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container dead">
             <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">마감된 공고<span class="ed-count"></span></h1>
             <div class="tab-class text-left wow fadeInUp" data-wow-delay="0.3s">
                 <div class="tab-content">

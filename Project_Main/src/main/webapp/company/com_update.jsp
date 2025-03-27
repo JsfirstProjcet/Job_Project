@@ -168,7 +168,7 @@ function updateHistory(hno,year){
 					+'</a>'
 				+'</td>'
 				+'<td width="5%">'
-					+'<a class="btn btn-sm btn-danger" onclick=updateCancel('+hno+')>'
+					+'<a class="btn btn-sm btn-danger" onclick=updatehCancel('+hno+')>'
 						+'<i class="fas bi-x"></i>'
 					+'</a>'
 				+'</td>'
@@ -198,7 +198,7 @@ function updateOk(hno,year,month){
 		}
 	})
 }
-function updateCancel(hno){
+function updatehCancel(hno){
 	$('.tr-n').hide()
 	$('.tr-y').show()
 }
@@ -313,6 +313,11 @@ input[type='number'].take {
 .wtabBtn{
 	cursor: pointer;
 }
+.text-left{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 </style>
 </head>
 <body>
@@ -376,7 +381,7 @@ input[type='number'].take {
 					<tr>
 						<th class="text-center" width="15%">사업내용</th>
 						<td width="85%" colspan="3">
-							<pre>${vo.bu_details==null?'':vo.bu_details }</pre>
+							<pre style="white-space: pre-wrap;">${vo.bu_details==null?'':vo.bu_details }</pre>
 						</td>
 					</tr>
 					<tr>

@@ -149,7 +149,7 @@ public class PersonalModel {
 	 	public String personal_recruit_insert(HttpServletRequest request,HttpServletResponse response){
 	 		String eno=request.getParameter("eno");
 	 		String rno=request.getParameter("rno");
-	 		
+	 		System.out.println(eno+rno);
 	 		HttpSession session=request.getSession();
 	 		String id=(String)session.getAttribute("id");
 	 		
@@ -159,6 +159,7 @@ public class PersonalModel {
 	 		vo.setEno(Integer.parseInt(eno));
 	 		
 	 		PersonalDAO.personalInsertSeeker(vo);
+	 		System.out.println(1);
 	 		return "redirect:../emp/emp_detail.do?no="+eno;
 	 	}
 }
