@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.company-mapper">
+	<select id="companyMainHouseData" resultType="CompanyVO">
+		SELECT * FROM (SELECT * FROM company
+		ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE rownum&lt;=1
+	</select>
+	<select id="companyListData" resultType="CompanyVO" parameterType="hashmap">
+	   SELECT cno,name,poster,estdate,c_type,ecount,address,num
+	   FROM (SELECT cno,name,poster,estdate,c_type,ecount,address,rownum as num 
+	   FROM (SELECT /*+ INDEX_ASC(company company_list_seq)*/cno,name,poster,estdate,c_type,ecount,address
+	   FROM company
+ 			<where>
+ 			   <if test="tab == 'all'">
+ 			   		1 = 1
+ 			   </if>
+ 			   <if test="tab != 'all'"> 
+                     AND c_type LIKE '%' || #{tab} || '%'
+ 		       </if>
+ 		       <if test="tab == '대기업'">
+ 				    AND c_type NOT LIKE '%1000대기업%'
+ 			   </if>
+ 	       </where>
+ 	  	  )
+ 	   )
+ 	   WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="companyTotalPage" resultType="int">
+	   SELECT CEIL(COUNT(*)/12.0) 
+	   FROM company
+	   <where>
+	      <if test="tab != 'all'">
+	            AND c_type = #{tab}
+	      </if>
+       </where>	   
+	</select>
+	<select id="companyFindData" resultType="CompanyVO" parameterType="hashmap">
+	   SELECT cno,name,poster,estdate,c_type,ecount,address,num
+	   FROM (SELECT cno,name,poster,estdate,c_type,ecount,address,rownum as num 
+	   FROM (SELECT /*+ INDEX_ASC(company company_list_seq)*/cno,name,poster,estdate,c_type,ecount,address
+	   FROM company WHERE name LIKE '%' || #{keyword} || '%'   
+           <if test="c_type != null and c_type != ''">
+              AND c_type = #{c_type}
+           </if>
+           <if test="address != null and address != ''">
+              AND SUBSTR(address, 1, 2) = #{address}
+           </if>
+ 	  	  )
+ 	   )
+ 	   WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="companyFindTotalPage" resultType="int">
+	   SELECT CEIL(COUNT(*)/12.0) 
+	   FROM company
+	   <where>
+          <if test="keyword != null and keyword != ''">
+             AND e.title LIKE '%' || #{keyword} || '%' 
+          </if>
+	      <if test="c_type != null and c_type != ''">
+	         AND c_type = #{c_type}
+	      </if>
+	      <if test="address != null and address != ''">
+	         AND SUBSTR(address, 1, 2) = #{address}
+	      </if>
+	   </where>
+	</select>
+	<!-- 기업 상세보기 -->
+	<select id="comDetailData" resultType="CompanyVO" parameterType="int">
+		SELECT cid,name,introduction,TO_CHAR(estdate,'YYYY-MM-DD') as dbestdate,estdate,c_type,ecount,
+		TRUNC(take/1000000000000) as jo,
+		TRUNC(MOD(take,1000000000000)/100000000) as uk,
+		TRUNC(MOD(take,100000000)/10000) as man,
+		industry,representative,homepage,bu_details,address,history,access_key,poster,sample,fo_count,cno
+		FROM company
+		WHERE cno=#{cno}
+	</select>
+	<!-- 기업 복지 -->
+	<select id="comDetailWelfareData" resultType="WelfareVO" parameterType="String">
+		SELECT w.*
+		FROM welfare w,com_welfare c
+		WHERE w.wno=c.wno
+		AND cid=#{cid}
+	</select>
+	<!-- 기업 복지 태그 -->
+	<select id="comDetailWelfareTag" resultType="WelfareVO" parameterType="String">
+		SELECT *
+		FROM welfare
+		WHERE wno IN(
+			SELECT distinct w.wno2
+		    FROM welfare w,com_welfare c
+		    WHERE w.wno=c.wno
+		    AND cid=#{cid})
+	</select>
+	<select id="comUpdateWelfareData" resultType="WelfareVO" parameterType="String">
+		SELECT w.wno,name,wno2,
+			CASE
+				WHEN cid IS NULL THEN 0
+				ELSE 1
+			END AS wcheck
+		FROM welfare w,(SELECT * FROM com_welfare WHERE cid=#{cid}) c
+		WHERE w.wno=c.wno(+) AND wno2 IS NOT NULL
+		ORDER BY wno ASC
+	</select>
+	<select id="comUpdateWelfareTag" resultType="WelfareVO">
+		SELECT * FROM welfare
+		WHERE wno2 IS NULL
+	</select>
+	<insert id="comWelfareInsert" parameterType="WelfareVO">
+		INSERT INTO com_welfare VALUES(#{wno},#{cid})
+	</insert>
+	<delete id="comWelfareDelete" parameterType="WelfareVO">
+		DELETE FROM com_welfare
+		WHERE wno=#{wno} AND cid=#{cid}
+	</delete>
+	<select id="cnoByCid" resultType="int" parameterType="String">
+		SELECT cno
+		FROM company
+		WHERE cid=#{cid}
+	</select>
+	<insert id="comInsert" parameterType="CompanyVO">
+		INSERT INTO company(cid,name,cno)
+		VALUES(
+			#{cid},
+			#{name},
+			(SELECT NVL(MAX(cno)+1,1) FROM company)
+		)
+	</insert>
+	<update id="comUpdate" parameterType="CompanyVO">
+		UPDATE company SET
+		estdate=#{dbestdate},
+		representative=#{representative},
+		c_type=#{c_type},
+		homepage=#{homepage},
+		ecount=#{ecount},
+		take=#{jo}*1000000000000+#{uk}*100000000+#{man}*10000,
+		address=#{address},
+		industry=#{industry},
+		bu_details=#{bu_details},
+		introduction=#{introduction}
+		WHERE cid=#{cid}
+	</update>
+</mapper>

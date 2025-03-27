@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.emp-mapper">
+	<!-- 공통 -->
+	<select id="empMainHouseData" resultType="EmpVO">
+		SELECT * FROM (SELECT * FROM employment
+		ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE rownum&lt;=1
+	</select>
+	<select id="empMainHouseData8" resultType="EmpVO">
+ 		SELECT * FROM (SELECT * FROM employment
+ 		ORDER BY DBMS_RANDOM.RANDOM)
+ 		WHERE rownum&lt;=8
+ 	</select>
+	<select id="empListData" resultType="EmpVO" parameterType="hashmap">
+	   SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,num
+	   FROM (SELECT eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count,rownum AS num 
+	   FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq)*/eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count
+	   FROM employment
+ 		   <where>
+ 			   <if test="tab == 'all'">
+ 			   		1 = 1
+ 			   </if>
+           	   <if test="tab != 'all'"> 
+                     AND emp_type LIKE '%' || #{tab} || '%'
+ 		       </if>
+ 		       		 AND deadline > SYSDATE
+ 	       </where>
+ 	  	  )
+ 	   )
+ 	   WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="empTotalPage" resultType="int">
+	   SELECT CEIL(COUNT(*)/12.0) 
+	   FROM employment
+	   <where>
+	       <if test="tab != 'all'">
+	            AND emp_type = #{tab}
+	       </if>
+       </where>
+	</select>
+	<select id="empFindData" resultType="EmpVO" parameterType="hashmap">
+	SELECT eno,name,title,personal_history,salary_str,loc,loc_num,emp_type,regdate,deadline,hit,fo_count,se_count,num
+    FROM (SELECT eno,name,title,personal_history,salary_str,loc,loc_num,emp_type,regdate,deadline,hit,fo_count,se_count,rownum AS num
+          FROM (SELECT /*+ INDEX_ASC(employment employment_list_seq) */
+                    e.eno,e.name,e.title,e.personal_history,e.salary_str,e.loc,e.loc_num,e.emp_type,e.regdate,e.deadline,e.hit,e.fo_count,e.se_count
+            FROM employment e
+            LEFT JOIN emp_job ej ON e.eno = ej.eno  
+            LEFT JOIN job j ON ej.jno = j.jno      
+            WHERE e.title LIKE '%' || #{keyword} || '%'  
+            <if test="loc != null and loc != ''">
+                AND e.loc_num = #{loc}
+            </if>
+            <if test="jno != null">
+                AND ej.jno = #{jno}
+            </if>
+            	AND deadline > SYSDATE
+        )
+    )
+    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="empFindTotalPage" resultType="int" parameterType="hashmap">
+    SELECT CEIL(COUNT(*) / 12.0)  
+    FROM employment e
+    LEFT JOIN emp_job ej ON e.eno = ej.eno
+    LEFT JOIN job j ON ej.jno = j.jno  
+      <where>
+        <if test="keyword != null and keyword != ''">
+            AND e.title LIKE '%' || #{keyword} || '%' 
+        </if>
+        <if test="loc != null and loc != ''">
+            AND e.loc_num = #{loc}  
+        </if>
+        <if test="jno != null">
+            AND ej.jno = #{jno}  
+        </if>
+      </where>
+	</select>
+	<select id="empgetCategoryCount" resultType="int" parameterType="hashmap">
+    SELECT j.jno AS job_category, COUNT(e.eno) AS count_vacancies
+    FROM employment e
+    LEFT JOIN emp_job ej ON e.eno = ej.eno
+    LEFT JOIN job j ON ej.jno = j.jno
+    <where>
+        <if test="jno != null">
+            AND ej.jno = #{jno}
+        </if>
+    </where>
+    GROUP BY j.jno
+    ORDER BY count_vacancies DESC
+	</select>	
+	<!-- 기업 -->
+	<select id="empComListData" resultType="EmpVO" parameterType="hashmap">
+		SELECT eno,name,title,personal_history,loc,emp_type,hit,
+			TO_CHAR(regdate,'YYYY-MM-DD') as dbregdate,
+			TO_CHAR(deadline,'YYYY-MM-DD') as dbdeadline,
+			fo_count,se_count,dtype,rtype,num
+		FROM (SELECT eno,name,title,personal_history,loc,emp_type,hit,regdate,deadline,fo_count,se_count,dtype,rtype,rownum as num
+		FROM (SELECT eno,e.name,title,personal_history,loc,emp_type,hit,regdate,deadline,e.fo_count,se_count,
+				NVL(TRUNC(deadline,'DD')-TRUNC(SYSDATE,'DD'),-1) as dtype,
+				TRUNC(SYSDATE,'DD')-TRUNC(regdate,'DD') as rtype
+		FROM employment e,company c
+		WHERE e.cid=c.cid 
+		AND cno=#{cno}
+			<choose>
+				<when test="mode==1"><!-- 마감된 공고 -->
+					AND deadline&lt;SYSDATE
+				</when>
+				<when test="mode==0"><!-- 진행중인 공고 -->
+					AND (deadline&gt;SYSDATE OR deadline is null)
+					<choose>
+						<!-- 
+							0 : 전체
+							1 : 신입
+							2 : 경력
+						 -->
+						<when test="ph==0">
+						
+						</when>
+						<when test="ph==1">
+							AND personal_history LIKE '%'||'신입'||'%'
+						</when>
+						<when test="ph==2">
+							AND personal_history LIKE '%'||'경력'||'%'
+						</when>
+					</choose>
+					<choose>
+						<!-- 
+							0 : 마감임박순
+							1 : 최신등록순
+							2 : 조회수많은순
+						 -->
+						<when test="type==0">
+							ORDER BY deadline ASC
+						</when>
+						<when test="type==1">
+							ORDER BY regdate DESC
+						</when>
+						<when test="type==2">
+							ORDER BY hit DESC
+						</when>
+					</choose>
+				</when>
+			</choose>
+		))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="empComCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*)
+		FROM employment e,company c
+		WHERE e.cid=c.cid 
+		AND cno=#{cno}
+		<choose>
+			<when test="mode==1"><!-- 마감된 공고 -->
+				AND deadline&lt;SYSDATE
+			</when>
+			<when test="mode==0"><!-- 진행중인 공고 -->
+				AND (deadline&gt;SYSDATE OR deadline is null)
+				<choose>
+					<!-- 
+						0 : 전체
+						1 : 신입
+						2 : 경력
+					 -->
+					<when test="ph==0">
+					
+					</when>
+					<when test="ph==1">
+						AND personal_history LIKE '%'||'신입'||'%'
+					</when>
+					<when test="ph==2">
+						AND personal_history LIKE '%'||'경력'||'%'
+					</when>
+				</choose>
+			</when>
+		</choose>
+	</select>
+	<select id="empDetailData" resultType="EmpVO" parameterType="int">
+		SELECT e.*, TO_CHAR(deadline,'YYYY-MM-DD HH24:MI:SS') as dbdeadline
+		FROM employment e
+		WHERE eno=#{eno}
+	</select>
+	<update id="empHitIncrement" parameterType="int">
+		UPDATE employment SET
+		hit=hit+1
+		WHERE eno=#{eno}
+	</update>
+	<!-- 공고 업종 -->
+	<select id="empDetailJobData" resultType="JobVO" parameterType="int">
+		SELECT *
+		FROM emp_job e, job j
+		WHERE e.jno=j.jno
+		AND eno=#{eno}
+	</select>
+	<select id="empOfficialListData" resultType="EmpVO" parameterType="hashmap">
+		SELECT eno,title,hit,se_count,fo_count,
+		<choose>
+			<when test="filter==0">
+				TO_CHAR(deadline,'YYYY-MM-DD')
+			</when>
+			<when test="filter==1">
+				TO_CHAR(regdate,'YYYY-MM-DD')
+			</when>
+			<when test="filter==2">
+				dtype||'명'
+			</when>
+		</choose>
+		as dbdeadline,dtype,rtype,num
+		FROM (SELECT eno,title,hit,se_count,fo_count,deadline,regdate,dtype,rtype,rownum as num
+		FROM (SELECT e.eno as eno,title,hit,se_count,fo_count,deadline,regdate,
+		(SELECT COUNT(*) FROM job_seeker j WHERE j.eno=e.eno AND state=0) as dtype,
+		(SELECT COUNT(*) FROM employment s WHERE s.eno=e.eno AND TO_DATE(s.regdate,'YYYY-MM-DD')=TO_DATE(SYSDATE,'YYYY-MM-DD')) as rtype
+		FROM employment e WHERE cid=#{cid}
+		AND (deadline > SYSDATE OR deadline IS NULL)
+		<choose>
+			<when test="filter==0">
+				ORDER BY deadline ASC
+			</when>
+			<when test="filter==1">
+				ORDER BY regdate DESC
+			</when>
+			<when test="filter==2">
+				ORDER BY dtype DESC
+			</when>
+		</choose>
+		))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="empOfficialCount" resultType="int" parameterType="String">
+		SELECT COUNT(*) FROM employment
+		WHERE cid=#{cid} AND (deadline > SYSDATE OR deadline IS NULL)
+	</select>
+	<update id="empClose" parameterType="int">
+		UPDATE employment SET
+		deadline=SYSDATE
+		WHERE eno=#{eno}
+	</update>
+	<update id="empCloseSeeker" parameterType="int">
+		UPDATE job_seeker SET
+		state=2
+		WHERE eno=#{eno} AND state=0
+	</update>
+	<select id="empSeekerListData" resultType="SeekerVO" parameterType="hashmap">
+		SELECT jno,eno,state,rno,pname,rtitle,etitle,num
+		FROM (SELECT jno,eno,state,rno,pname,rtitle,etitle,rownum as num 
+		FROM (SELECT jno,s.eno as eno,state,s.rno as rno,p.name as pname,r.title as rtitle,e.title as etitle
+		FROM job_seeker s,personal p, resume r,employment e
+		WHERE s.eno=#{eno}
+		AND state=#{state}
+		AND s.id=p.id AND s.rno=r.rno AND s.eno=e.eno
+        ORDER BY jno DESC))
+        WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="empSeekerCount" resultType="int" parameterType="hashmap">
+		SELECT COUNT(*) FROM job_seeker where eno=#{eno} AND state=#{state}
+	</select>
+	<update id="empSeekerUpdate" parameterType="SeekerVO">
+		UPDATE job_seeker SET
+		state=#{state}
+		WHERE jno=#{jno}
+	</update>
+	<insert id="empInsert" parameterType="EmpVO">
+		INSERT INTO employment(eno,name,title,personal_history,salary,salary_str,education,emp_type,loc,content,cid
+		<if test="deadline!=null">
+			,deadline
+		</if>
+		) VALUES(
+			(SELECT NVL(MAX(eno)+1,1) FROM employment),
+			#{name},
+			#{title},
+			#{personal_history},
+			#{salary},
+			#{salary_str},
+			#{education},
+			#{emp_type},
+			#{loc},
+			#{content},
+			#{cid}
+			<if test="deadline!=null">
+				,#{deadline}
+			</if>
+		)
+	</insert>
+	<select id="empTab" resultType="JobVO">
+		SELECT * FROM JOB WHERE jno2 is null ORDER BY jno asc
+	</select>
+</mapper>

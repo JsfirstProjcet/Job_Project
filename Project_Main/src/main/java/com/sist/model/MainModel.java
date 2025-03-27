@@ -33,6 +33,11 @@ public class MainModel {
  		request.setAttribute("tList", tList);
  		request.setAttribute("icons", icons);
  		
+ 		// 조회수 높은거 상단 고정 
+ 		List<CommuneVO> topList = CommuneDAO.communeTop4();
+ 		request.setAttribute("topList", topList);
+ 		
+ 		
 		request.setAttribute("main_jsp", "../main/home.jsp");
 		return "../main/main.jsp";
 	}

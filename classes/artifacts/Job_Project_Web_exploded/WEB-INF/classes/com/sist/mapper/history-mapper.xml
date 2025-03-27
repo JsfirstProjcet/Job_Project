@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.history-mapper">
+	<!-- 기업 연혁 -->
+	<select id="comHistoryList" resultType="HistoryVO" parameterType="String">
+		SELECT * FROM com_history
+		WHERE cid=#{cid}
+		ORDER BY year desc,month desc,step asc
+	</select>
+	<!-- 기업 연혁 년도 -->
+	<select id="comHistoryYMList" resultType="HistoryVO" parameterType="String">
+		SELECT year,MAX(month) as month,COUNT(*) as count FROM com_history
+		WHERE cid=#{cid}
+		GROUP BY year
+		ORDER BY year desc
+	</select>
+	<!-- 등록 순서 검색 -->
+	<select id="historyStep" resultType="int" parameterType="HistoryVO">
+		SELECT NVL((MAX(step)+1),1)
+		FROM com_history
+		WHERE cid=#{cid}
+		AND year=#{year}
+		AND month=#{month}
+	</select>
+	<insert id="insertHistory" parameterType="HistoryVO">
+		INSERT INTO com_history VALUES(
+			(SELECT NVL(MAX(HNO)+1,1) FROM com_history),
+			#{year},
+			#{month},
+			#{content},
+			#{step},
+			#{cid}
+		)
+	</insert>
+	<delete id="deleteHistory" parameterType="HistoryVO">
+		DELETE FROM com_history
+		WHERE hno=#{hno}
+	</delete>
+	<select id="historyDetail" resultType="HistoryVO" parameterType="int">
+		SELECT hno,year,month,content,step,cid
+		FROM com_history
+		WHERE hno=#{hno}
+	</select>
+	<update id="updateDelStep" parameterType="HistoryVO">
+		UPDATE com_history SET
+		step=step-1
+		WHERE cid=#{cid}
+		AND year=#{year}
+		AND month=#{month}
+		AND step&gt;#{step}
+	</update>
+	<select id="historyHnoOfNextStep" resultType="int" parameterType="HistoryVO">
+		SELECT hno
+		FROM com_history
+		WHERE cid=#{cid}
+		AND year=#{year}
+		AND month=#{month}
+		AND step=#{step}+1
+	</select>
+	<select id="historyHnoOfPrevStep" resultType="int" parameterType="HistoryVO">
+		SELECT hno
+		FROM com_history
+		WHERE cid=#{cid}
+		AND year=#{year}
+		AND month=#{month}
+		AND step=#{step}-1
+	</select>
+	<update id="updateHStep" parameterType="HistoryVO">
+		UPDATE com_history SET
+		step=#{step}
+		WHERE hno=#{hno}
+	</update>
+	<update id="updateHContent" parameterType="HistoryVO">
+		UPDATE com_history SET
+		content=#{content}
+		WHERE hno=#{hno}
+	</update>
+</mapper>

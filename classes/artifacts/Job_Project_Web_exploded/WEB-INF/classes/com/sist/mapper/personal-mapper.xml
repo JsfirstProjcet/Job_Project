@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.personal-mapper">
+  <select id="personalGetInfo" resultType="PersonalVO" parameterType="string">
+      SELECT phone,addr1,addr2,birth,poster,sex
+      FROM personal
+      WHERE id=#{id}
+  </select>	
+  <select id="personalIdcheck" resultType="int" parameterType="string">
+      SELECT COUNT(*) FROM personal
+      WHERE email=#{email}
+  </select>
+  <insert id="personalInsert" parameterType="PersonalVO">
+      <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        SELECT 'p' || personal_list_seq.NEXTVAL FROM DUAL
+      </selectKey>
+      INSERT INTO personal (id,pw,email,name,poster,sex,phone,birth,addr1,addr2,isadmin) VALUES(
+          #{id},#{pw},#{email},#{name},#{poster},#{sex},#{phone},#{birth},
+          #{addr1},#{addr2},0
+      )
+  </insert>
+  <update id="personalPosterUpdate" parameterType="PersonalVO">
+      UPDATE personal SET
+      poster=#{poster}
+      WHERE id=#{id}
+  </update>
+  <!-- 로그인 -->
+  <select id="personalIdCheckCount" resultType="int" parameterType="string">
+      SELECT COUNT(*) FROM personal
+      WHERE email=#{email} 
+  </select>
+  <select id="personalGetPassword" resultType="PersonalVO" parameterType="string">
+      SELECT id,pw,name,sex,isadmin
+      FROM personal
+      WHERE email=#{email}
+  </select>
+  <insert id="personalInsertSeeker" parameterType="SeekerVO">
+   	INSERT INTO job_seeker(jno,eno,rno,id) VALUES(
+   		(SELECT NVL(MAX(jno)+1,1) FROM job_seeker),
+   		#{eno},
+   		#{rno},
+   		#{id}
+   	)
+   </insert>
+   <select id="personalSeekerCheck" resultType="int" parameterType="SeekerVO">
+   	SELECT COUNT(*) FROM job_seeker
+   	WHERE id=#{id} AND eno=#{eno}
+   </select>
+</mapper>
