@@ -47,7 +47,7 @@ public class InterviewModel {
 			  HttpServletResponse response)
 	  {	
 		  String ino=request.getParameter("ino");
-		  System.out.println(ino); 
+		  //System.out.println(ino); 
 		  InterviewVO vo=InterviewDAO.interviewDetailData(Integer.parseInt(ino));
 		  
 		  String idate=vo.getIdate();
@@ -56,7 +56,7 @@ public class InterviewModel {
 		  //년도 달 잘라서 양식별로 다르게 보이게 해야함.
 		  int year =Integer.parseInt(idate.substring(2,4));
 		  int month =Integer.parseInt(idate.substring(5,7));
-		  System.out.println("year : "+year+" month : "+month);
+		  //System.out.println("year : "+year+" month : "+month);
 		  
 		  // 2018년 8월 이후꺼 양식
 		  if((year >= 19) || (year >= 18 && month >= 8)) {
@@ -65,7 +65,7 @@ public class InterviewModel {
 			  String ques[]=vo.getQuestion().split("\\^");
 			  String ans[]=vo.getAnswer().split("\\^");
 			  
-			  System.out.println(vo.getIdate());
+			  //System.out.println(vo.getIdate());
 			  
 			  // 앞에 q1이런것도 자르기
 			  String[] ques1 = new String[ques.length];
@@ -108,7 +108,7 @@ public class InterviewModel {
 		List<InterviewVO> list;
 		
 		String key=request.getParameter("search");
-		System.out.println(key);
+		//System.out.println(key);
 		
 		if(key != null) {
 			list=InterviewDAO.interviewSearch(key);

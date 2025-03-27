@@ -219,7 +219,7 @@
 				<div id="gallery">
 					<figure>
 						<header class="heading"></header>
-						<h2 style="margin-bottom: 50px;">현직자 인터뷰 리스트</h2>
+						<h2 style="margin-bottom: 50px;" class="text-center mb-5">현직자 인터뷰 리스트</h2>
 						<ul class="nospace clear">
 							<c:forEach var="vo" items="${list }">
 
