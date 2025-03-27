@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sist.mapper.WriteMapper">
+<select id="writeListData" resultType="WriteVO" parameterType="hashmap">
+     SELECT SNO,WNO,ID,NAME,DEMAND1,DEMAND2,DEMAND3,DEMAND4,DEMAND5,TEXT1,TEXT2,TEXT3,TEXT4,TEXT5,TITLE,num
+     FROM (SELECT SNO,WNO,ID,NAME,DEMAND1,DEMAND2,DEMAND3,DEMAND4,DEMAND5,TEXT1,TEXT2,TEXT3,TEXT4,TEXT5,TITLE,rownum as num
+     FROM (SELECT SNO,WNO,ID,NAME,DEMAND1,DEMAND2,DEMAND3,DEMAND4,DEMAND5,TEXT1,TEXT2,TEXT3,TEXT4,TEXT5,TITLE
+     FROM WRITE ORDER BY SNO DESC,WNO ASC))
+     WHERE num BETWEEN #{start} AND #{end}
+   </select>
+   <select id="writeTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/10.0) FROM WRITE
+ </select>
+ 
+<select id="getWriteData" resultType="WriteVO" parameterType="int">
+   SELECT SNO, DEMAND1, DEMAND2, DEMAND3, DEMAND4, DEMAND5 , TITLE
+   FROM WRITE
+   WHERE SNO = #{sno}
+</select>
+
+
+ <select id="writeDetailData" resultType="WriteVO" parameterType="int">
+   SELECT SNO, WNO, ID, NAME, DEMAND1, DEMAND2, DEMAND3, DEMAND4, DEMAND5, TEXT1, TEXT2, TEXT3, TEXT4, TEXT5 , TITLE
+   FROM WRITE
+   WHERE SNO = #{sno}
+ </select>
+ 
+ <update id="writeUpdate" parameterType="WriteVO">
+   UPDATE WRITE SET
+   NAME=#{name},
+   TEXT1=#{text1},
+   TEXT2=#{text2},
+   TEXT3=#{text3},
+   TEXT4=#{text4},
+   TEXT5=#{text5}
+   WHERE SNO=#{sno}
+ </update>
+ 
+ <select id="writeGetPassword" resultType="string" 
+     parameterType="int">
+   SELECT pwd FROM WRITE
+   WHERE SNO=#{sno}
+ </select>
+  <delete id="writeDelete" parameterType="int">
+   DELETE FROM WRITE
+   WHERE SNO=#{sno}
+ </delete>
+</mapper>

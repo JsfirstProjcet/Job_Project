@@ -198,6 +198,7 @@ public class ResumeModel {
 		System.out.println("JobEntryProject>ResumeModel>id: "+id);
 		System.out.println("JobEntryProject>ResumeModel>name: "+name);
 		System.out.println("JobEntryProject>ResumeModel>title: "+title);
+		System.out.println("JobEntryProject>ResumeModel>career: "+career);
 			
 		ResumeVO vo=new ResumeVO();
 		vo.setRno(Integer.parseInt(rno));

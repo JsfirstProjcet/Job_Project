@@ -231,8 +231,11 @@
 
 			} else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-				alert('검색 결과가 존재하지 않습니다.');
-				return;
+				// 기본 키워드 예: "서울역"
+				document.getElementById('keyword').value = "서울";
+
+				// 다시 검색 실행
+				searchPlaces();
 
 			} else if (status === kakao.maps.services.Status.ERROR) {
 

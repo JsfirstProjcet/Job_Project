@@ -20,6 +20,15 @@
     <typeAlias type="com.sist.vo.HistoryVO" alias="HistoryVO"/>
     <typeAlias type="com.sist.vo.SeekerVO" alias="SeekerVO"/>
     <typeAlias type="com.sist.vo.JjimVO" alias="JjimVO"/>
+    <typeAlias type="com.sist.vo.SelfVO" alias="SelfVO"/>
+    <typeAlias type="com.sist.vo.WriteVO" alias="WriteVO"/>
+    <typeAlias type="com.sist.vo.ChatVO" alias="ChatVO"/>
+    <!--   admin   -->
+    <typeAlias type="com.sist.admin.vo.CommunityVO" alias="AdminCommunityVO"/>
+    <typeAlias type="com.sist.admin.vo.CompanyVO" alias="AdminCompanyVO"/>
+    <typeAlias type="com.sist.admin.vo.RecruitVO" alias="AdminRecruitVO"/>
+    <typeAlias type="com.sist.admin.vo.ServiceVO" alias="AdminServiceVO"/>
+    <typeAlias type="com.sist.admin.vo.UserVO" alias="AdminUserVO"/>
   </typeAliases>
   <!-- 오라클 환경 설정 getConnection / disConnection-->
   <environments default="development">
@@ -46,6 +55,18 @@
     <mapper resource="com/sist/mapper/reply-mapper.xml" />
     <mapper resource="com/sist/mapper/history-mapper.xml" />
     <mapper resource="com/sist/mapper/jjim-mapper.xml" />
+    <mapper resource="com/sist/mapper/mypage-mapper.xml" />
+    <mapper resource="com/sist/mapper/self-mapper.xml" />
+    <mapper resource="com/sist/mapper/write-mapper.xml" />
+    <mapper resource="com/sist/mapper/chat-mapper.xml" />
+    <!--   admin   -->
+    <mapper resource="com/sist/admin/mapper/auth-mapper.xml"/>
+    <mapper resource="com/sist/admin/mapper/common-mapper.xml"/>
+    <mapper resource="com/sist/admin/mapper/community-mapper.xml"/>
+    <mapper resource="com/sist/admin/mapper/company-mapper.xml"/>
+    <mapper resource="com/sist/admin/mapper/recruit-mapper.xml"/>
+    <mapper resource="com/sist/admin/mapper/service-mapper.xml"/>
+    <mapper resource="com/sist/admin/mapper/user-mapper.xml"/>
     <mapper resource="com/sist/mapper/mypage-mapper.xml" />
   </mappers>
 </configuration>

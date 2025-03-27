@@ -62,6 +62,44 @@
 		}
 </style>
 <script>
+function submitForm() {
+    // 1. form 요소 생성
+    let form = document.createElement("form");
+    form.method = "POST";  // HTTP 요청 방식
+    form.action = "../resume/resume_edit.do"; // 전송할 URL
+
+    // 2. id 입력 필드 추가
+    let title=$('#title').val()
+    let id=$('#id').attr("value")
+    let rno=$('#rno').attr("value")
+    let name=$('#name').attr("value")
+    let email=$('#email').attr("value")
+    let phone=$('#phone').attr("value")
+    let birth=$('#birth').attr("value")
+    let poster=$('#poster').attr("value")
+    let scholar=$('#scholar').attr("value")
+    let skill=$('#skill').attr("value")
+    let career=$('#career').attr("value")
+    let self_intro=$('#self_intro').attr("value")
+    let isbasic=$('#isbasic').attr("value")
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "title", value: title }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "id", value: id }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "rno", value: rno }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "name", value: name }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "email", value: email }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "phone", value: phone }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "birth", value: birth }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "poster", value: poster }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "scholar", value: scholar }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "skill", value: skill }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "career", value: career }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "self_intro", value: self_intro }));
+    form.appendChild(Object.assign(document.createElement("input"), { type: "hidden", name: "isbasic", value: isbasic }));
+
+    // 3. form을 body에 추가하고 전송
+    document.body.appendChild(form);
+    form.submit();
+}
 $(document).ready(function(){
     let careerIndex = 0; // 경력 입력 폼의 인덱스
 
@@ -107,7 +145,6 @@ $(document).ready(function(){
     let educationIndex = 0; // 학력 입력 폼의 인덱스
 
     // 학력 추가 버튼 클릭 시
-//    $("#addEducation").click(function(){
     $(document).on("click", "#addEducation", function(){
         educationIndex++;
         let educationForm = `
@@ -155,7 +192,6 @@ $(document).ready(function(){
     const imageUpload = document.getElementById("imageUpload");
     const uploadLabel = document.getElementById("uploadLabel");
 
-//    imageUpload.addEventListener("change", function(event) {
     $(document).on("change", "#imageUpload", function(event){
         var formData = new FormData();
         var fileName = $("#id").val()+'_'+$("#imageUpload")[0].files[0].name;
@@ -171,8 +207,8 @@ $(document).ready(function(){
             success: function(response) {
                 $("#uploadLabel").html(
                         '<img src="../file/image.jsp?fileName='+fileName+'&t=' + new Date().getTime() + '" alt="Uploaded Image" '
-                      + 'style="display: block; max-width: 100%; height: auto;">'
-                      +'<input type="hidden" name="poster" value="'+fileName+'">');            
+                      + 'style="display: block; max-width: 100%; height: auto;">');   
+                $('#poster').val(fileName)
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error("AJAX 요청 실패!");
@@ -184,16 +220,8 @@ $(document).ready(function(){
         });
     });
 
-//    uploadLabel.addEventListener("click", (event) => {
-/*
-    $(document).on("click", "#uploadLabel", function(event){
-    	event.preventDefault(); // 🚀 기본 동작 방지
-        imageUpload.click(); // label이 아닌 직접 실행
-    });
-*/   
-//	$('#jBtn').click(function(){
     $(document).on("click", "#jBtn", function(){
-        $('#frm_resume').submit()
+        submitForm()
 	})
 
 });
@@ -202,11 +230,10 @@ $(document).ready(function(){
 <body>
    <!-- main body -->
     <!-- 제목 섹션 -->
-    <form method="post" action="../resume/resume_edit.do" id="frm_resume">
     <div class="card shadow-sm">
         <div class="card-header bg-light input-container">
             <label for="name" class="form-label">제목</label>
-            <input type="text" name="title" class="form-control" value="${rvo.title }" style="font-size: 1.7rem;">
+            <input type="text" id="title" name="title" class="form-control" value="${rvo.title }" style="font-size: 1.7rem;">
         </div>
     </div>
     <!-- 프로필 섹션 -->
@@ -329,17 +356,18 @@ $(document).ready(function(){
     <input type="hidden" id="email" name="email" value="${rvo.email }">
     <input type="hidden" id="phone" name="phone" value="${rvo.phone }">
     <input type="hidden" id="birth" name="birth" value="${rvo.birth }">
+	<input type="hidden" id="poster" name="poster" value="${rvo.poster }" >
 	<input type="hidden" id="scholar" name="scholar" value="${rvo.scholar }" >
 	<input type="hidden" id="skill" name="skill" value="${rvo.skill }" >
 	<input type="hidden" id="career" name="career" value="${rvo.career }" >
 	<input type="hidden" id="self_intro" name="self_intro" value="${rvo.self_intro }" >
-    <input type="hidden" name="isbasic" value="${rvo.isbasic}">
+    <input type="hidden" id="isbasic" name="isbasic" value="${rvo.isbasic}">
+    
     <!-- 버튼 -->
     <div class="text-center">
       <button type="button" class="btn btn-outline-success" id="jBtn">등록</button>
       <button type="button" class="btn btn-outline-secondary" onclick="history.back()">취소</button>
     </div>
-    </form>
 
 </body>
 </html>

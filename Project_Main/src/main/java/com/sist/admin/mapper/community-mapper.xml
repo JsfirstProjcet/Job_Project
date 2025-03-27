@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.admin.mapper.community-mapper">
+  <!-- 커뮤니티 게시글 리스트 -->
+  <select id="getCommunityBoardList" resultType="AdminCommunityVO" parameterType="hashmap">
+    SELECT bno, id, nickname, subject, regdate, num
+    FROM (SELECT bno, id, nickname, subject, regdate, rownum as num
+          FROM (SELECT bno, id, nickname, subject, regdate
+                FROM COMMUNITY
+                order by bno desc))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <!-- 게시글 상세 보기 -->
+  <select id="getCommunityBoardDetail" resultType="AdminCommunityVO" parameterType="hashmap">
+    SELECT bno,
+           id,
+           nickname,
+           subject,
+           regdate,
+           hit,
+           type,
+           reply,
+           likes,
+           content
+    FROM COMMUNITY
+    WHERE bno = #{id}
+  </select>
+  <!-- 게시글 삭제 -->
+  <delete id="communityBoardDelete" parameterType="string">
+    delete
+    from COMMUNITY
+    where bno = #{id}
+  </delete>
+  <!--  게시글 검색  -->
+  <select id="getCommunityBoardSearch" resultType="AdminCommunityVO" parameterType="hashmap">
+    SELECT bno, id, nickname, subject, regdate, num
+    FROM (SELECT bno, id, nickname, subject, regdate, rownum as num
+          FROM (SELECT bno, id, nickname, subject, regdate
+                FROM COMMUNITY
+                where bno like '%' || #{id} || '%'
+                   or id like '%' || #{id} || '%'
+                   or nickname like '%' || #{id} || '%'
+                   or subject like '%' || #{id} || '%'
+                   or regdate like '%' || #{id} || '%'
+                order by bno desc))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="getCommunityBoardSearchCount" resultType="int" parameterType="string">
+    SELECT CEIL(COUNT(*) / 15.0)
+    FROM (SELECT bno, id, nickname, subject, regdate
+          FROM COMMUNITY
+          where bno like '%' || #{id} || '%'
+             or id like '%' || #{id} || '%'
+             or nickname like '%' || #{id} || '%'
+             or subject like '%' || #{id} || '%'
+             or regdate like '%' || #{id} || '%'
+          order by bno desc)
+  </select>
+</mapper>

@@ -7,7 +7,14 @@
 
     for (String ext : extensions) {
         if (fileName.contains(ext)) {
-            imageFile = new File(uploadPath, fileName);
+        	try
+        	{
+        		imageFile = new File(uploadPath, fileName);
+        	}
+        	catch(Exception ex)
+        	{
+        		imageFile = new File(uploadPath, "default-icon.png");
+        	}
             response.setContentType("image/" + ext.substring(1));
             break;
         }
@@ -20,6 +27,6 @@
         fis.close();
         response.getOutputStream().write(buffer);
     } else {
-        response.sendRedirect("default-icon.png");
+        response.sendRedirect("c:\\uploads\\default-icon.png");
     }
 %>
