@@ -215,11 +215,9 @@ public class EmpModel {
 	    dateMap.put("year", year);
 	    dateMap.put("month", month);
 	    dateMap.put("day", strDay);
-	    dateMap.put("rday", rday);
-	    
 	    // 공고 목록 조회
 	    List<EmpVO> list = EmpDAO.getEmpListByDate(dateMap);
-
+	    
 	    // JSP로 전달할 데이터 설정
 	    request.setAttribute("rday", rday);
 	    request.setAttribute("year", year);
@@ -233,5 +231,39 @@ public class EmpModel {
 	    request.setAttribute("weeks", weeks);
 	    request.setAttribute("main_jsp", "../emp/emp_calendar.jsp");
 		return "../main/main.jsp";
+	}
+	@RequestMapping("emp/emp_calendar_print.do")
+	public String emp_calendar_print(HttpServletRequest request,
+			HttpServletResponse response)
+	
+	{
+		String strYear = request.getParameter("year");
+	    String strMonth = request.getParameter("month");
+	    String strDay = request.getParameter("day");
+	    
+	    // 기본 날짜값 설정: 오늘 날짜를 기준으로
+	    Calendar todayCal = Calendar.getInstance();  // 오늘 날짜를 가져옴
+	    if (strYear == null || strYear.isEmpty()) {
+	        strYear = String.valueOf(todayCal.get(Calendar.YEAR)); // 오늘 년도
+	    }
+	    if (strMonth == null || strMonth.isEmpty()) {
+	        strMonth = String.format("%02d", todayCal.get(Calendar.MONTH) + 1); // 오늘 월
+	    }
+	    if (strDay == null || strDay.isEmpty()) {
+	        strDay = String.format("%02d", todayCal.get(Calendar.DAY_OF_MONTH)); // 오늘 날짜
+	    }
+	    
+	    int year = Integer.parseInt(strYear);
+	    int month = Integer.parseInt(strMonth);
+	    int day = Integer.parseInt(strDay);	    Map<String, Object> dateMap = new HashMap<>();
+	    
+	    dateMap.put("year", year);
+	    dateMap.put("month", month);
+	    dateMap.put("day", strDay);
+	    // 공고 목록 조회
+	    List<EmpVO> list = EmpDAO.getEmpListByDate(dateMap);
+	    
+	    request.setAttribute("eList", list);
+		return "../emp/emp_calendar_print.jsp";
 	}
 }

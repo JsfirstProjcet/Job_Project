@@ -45,7 +45,7 @@ $(function(){
         // 날짜 선택 시 요청
         $.ajax({
             type: 'POST',
-            url: '../emp/emp_calendar.do',
+            url: '../emp/emp_calendar_print.do',
             data: { "year": year, "month": month, "day": day },
             success: function(result) {
                 // 결과로 넘어온 HTML로 emp_list 영역을 갱신
