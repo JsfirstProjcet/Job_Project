@@ -396,7 +396,7 @@ $(function(){
 						<button class="btn btn-sm btn-light me-2 reply-like"
 							data-bno="${vo.bno}" data-rno="${rvo.rno}">
 							<i class="far fa-thumbs-up"></i> 좋아요 <span
-								id="like-count-${rvo.rno}">${rvo.like_count}rno는${rvo.rno }</span>
+								id="like-count-${rvo.rno}">${rvo.like_count}</span>
 						</button>
 					</div>
 				</div>

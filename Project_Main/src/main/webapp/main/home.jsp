@@ -200,53 +200,33 @@
         <!-- Testimonial Start -->
         <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container">
-                <h1 class="text-center mb-5">Our Clients Say!!!</h1>
+           	 <h1 class="text-center mb-5">이런 글은 어때요?</h1>
                 <div class="owl-carousel testimonial-carousel">
-                    <div class="testimonial-item bg-light rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="../img-fluid flex-shrink-0 rounded" src="../img/testimonial-1.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-light rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="../img-fluid flex-shrink-0 rounded" src="../img/testimonial-2.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-light rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="../img-fluid flex-shrink-0 rounded" src="../img/testimonial-3.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-item bg-light rounded p-4">
-                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
-                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
-                        <div class="d-flex align-items-center">
-                            <img class="../img-fluid flex-shrink-0 rounded" src="../img/testimonial-4.jpg" style="width: 50px; height: 50px;">
-                            <div class="ps-3">
-                                <h5 class="mb-1">Client Name</h5>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				   <c:forEach var="tvo" items="${topList }">
+					    <div class="testimonial-item bg-light rounded p-4 position-relative" 
+      						   style="height: 220px; display: flex; flex-direction: column; justify-content: space-between;">
+						  <!-- 인기글 배지 -->
+						      <span class="badge bg-danger position-absolute me-2 rounded-pill" style="top: 15px; left: 20px; z-index: 1;">
+						        인기글
+						      </span>
+						<div>
+						<a href="../interview/commune_detail.do?bno=${tvo.bno }" >
+							<h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: black; margin-top: 20px;">${tvo.subject }</h5>
+							<p style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; color: black">${tvo.content }</p>
+						</a>
+						</div>
+						<div class="d-flex align-items-center mt-2">
+							<img class="../img-fluid flex-shrink-0 rounded"	src="../img/${tvo.poster }"		style="width: 50px; height: 50px;">
+							<div class="ps-3">
+								<h5 class="mb-1">${tvo.nickname}</h5>
+								<small>${tvo.dbday }</small>
+							
+							</div>
+						</div>
+					</div>
+					
+				    </c:forEach>
+				</div>
             </div>
         </div>
         <!-- Testimonial End -->
