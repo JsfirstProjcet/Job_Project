@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.self-mapper">
+<select id="selfMainHouseData" resultType="SelfVO">
+		SELECT * FROM (SELECT * FROM self
+		ORDER BY DBMS_RANDOM.RANDOM)
+		WHERE rownum&lt;=1
+	</select>
+   <select id="selfListData" resultType="SelfVO" parameterType="hashmap">
+   SELECT sno, title, poster, content, hit, num
+    FROM (SELECT sno, title, poster, content, hit, ROW_NUMBER() OVER (ORDER BY sno ASC) AS num
+    FROM self)
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="selfTotalPage" resultType="int">
+   SELECT CEIL(COUNT(*)/12.0) FROM self
+  </select>
+   <select id="selfDetailData" resultType="SelfVO" parameterType="int">
+    SELECT * FROM self
+    WHERE sno=#{sno}
+  </select>
+  <update id="selfHitIncrement" parameterType="int">
+    UPDATE self SET
+    hit=hit+1
+    WHERE sno=#{sno}
+  </update>
+  <select id="selfFindData" resultType="SelfVO" parameterType="hashmap">
+    SELECT sno,title,poster,content,num
+    FROM (SELECT sno,title,poster,content,rownum as num 
+    FROM (SELECT /*+ INDEX_ASC(self self_sno_pk)*/sno,title,poster,content
+    FROM self WHERE ${fd} LIKE '%'||#{ss}||'%'))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
+  <select id="selfFindTotalPage" resultType="int" parameterType="hashmap">
+    SELECT CEIL(COUNT(*)/12.0) 
+    FROM self
+    WHERE ${fd} LIKE '%'||#{ss}||'%'
+  </select>
+
+</mapper>
