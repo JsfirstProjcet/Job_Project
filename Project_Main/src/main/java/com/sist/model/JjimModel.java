@@ -91,7 +91,7 @@ public class JjimModel {
 
 			
 			int count = JjimDAO.jjimReplyCheckCount(vo);
-
+			
 			if (count == 0) {
 				JjimDAO.jjimInsert(vo);
 				CommuneDAO.communeReplyLikeIncrement(Integer.parseInt(rno));

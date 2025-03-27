@@ -157,4 +157,28 @@ public class JjimDAO {
 		}
 		return count;
 	}
+	
+	/*
+	 * 	<select id="jjimReplyCurrent" parameterType="JjimVO" resultType="int">
+		SELECT rno
+		FROM community_like
+		WHERE id=#{id} AND no=#{no} AND bno=#{bno} AND type=#{type}
+		</select>
+	 */
+	
+	public static int jjimReplyCurrent(JjimVO vo) {
+		SqlSession session=null;
+		int count=0;
+		try {
+			session=ssf.openSession();
+			count=session.selectOne("jjimReplyCurrent",vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}finally {
+			if(session!=null)
+				session.close();
+		}
+		return count;
+	}
 }

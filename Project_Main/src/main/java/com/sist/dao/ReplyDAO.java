@@ -154,5 +154,28 @@ public class ReplyDAO {
 				session.close();
 		}
 	}
+/*
+ * <select id="replyLikeCount" resultType="int" parameterType="int">
+		SELECT like_count 
+		FROM community_reply
+		WHERE rno=#{rno}
+	</select>
+ */
+	
+	public static int replyLikeCount(int rno) {
 
+		SqlSession session = null;
+		int count = 0;
+		try {
+			session = ssf.openSession();
+			count = session.selectOne("replyLikeCount", rno);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return count;
+	}
 }

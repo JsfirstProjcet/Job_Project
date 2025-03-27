@@ -118,6 +118,30 @@ public class CommuneModel {
 		  int count=ReplyDAO.replyCount(Integer.parseInt(bno));
 		  request.setAttribute("count", count);
 		  request.setAttribute("rList", rlist);
+		  
+		  
+		  // id랑 rno랑 비교해서 내가 댓글에 좋아요 했는지 확인
+		  Map<Integer, Boolean> likedMap = new HashMap<>();
+		  String userId = (String) session.getAttribute("id");
+
+		  if (userId != null) {
+		      for (ReplyVO rrvo : rlist) {
+		          int rno = rrvo.getRno();
+		          
+		          // 로그인한 사용자가 해당 댓글에 좋아요 눌렀는지 체크
+		          JjimVO jjvo = new JjimVO();
+		          jjvo.setId(userId);
+		          jjvo.setRno(rno);
+		          //type 에는 3들어가있으니까.
+		          
+		          int liked = JjimDAO.jjimReplyCheckCount(jjvo);
+		          likedMap.put(rno, liked > 0);  // true or false
+		          
+		          System.out.println(liked);
+		      }
+		  }
+		  request.setAttribute("likedMap", likedMap);
+		  
 		 
 		 //////////////////////////////////////////////////
 		 //게시글 좋아요 누른 상태인지 아닌지 확인

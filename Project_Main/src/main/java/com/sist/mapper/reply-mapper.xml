@@ -44,5 +44,10 @@ NICKNAME            VARCHAR2(60)
 		msg=#{msg}
 		WHERE rno=#{rno}
 	</update>
-	
+	<!-- 각 댓글별 좋아요 수  -->
+	<select id="replyLikeCount" resultType="int" parameterType="int">
+		SELECT like_count 
+		FROM community_reply
+		WHERE rno=#{rno}
+	</select>
 </mapper>

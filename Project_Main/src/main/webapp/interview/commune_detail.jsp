@@ -81,45 +81,39 @@ $(function(){
 </script>
 <!-- 댓글 좋아요 -->
 <script type="text/javascript">
-$(function(){
-	  $('.reply-like').click(function(){
-	    let rno = $(this).data('rno')
-	    let bno = $(this).data('bno')
-		console.log(rno+"알엔오")
-		console.log(bno+"비엔오")
+$(function() {
+	  $('.reply-like').click(function() {
+	    let rno = $(this).data('rno');
+	    let bno = $(this).data('bno');
+
+	    let $button = $(this);            // 버튼 자체
+	    let $icon = $button.find("i");    // 좋아요 아이콘
+	    let $countSpan = $('#like-count-' + rno); // 숫자 span
+	    let currentCount = parseInt($countSpan.text()); // 숫자 가져오기
+
 	    $.ajax({
-		      type: 'POST',
-		      url: '../jjim/jjim_insert_ajax.do',
-		      data: { bno: bno, rno:rno, type: 3 },
-		      success: function(result) {
-		        if (result === 'liked') {
-		          alert('좋아요 완료!')
-		          // 현재 숫자 가져옴
-		          let countSpan = $('#like-count-' + rno);
-		          let currentCount = parseInt(countSpan.text());
-
-		          // 댓글 좋아요수 증가
-		          countSpan.text(currentCount + 1);
-		        } else if (result === 'unliked') {
-		          alert('좋아요 취소됨!')
-		     	  // 현재 숫자 가져옴
-		          let countSpan = $('#like-count-' + rno);
-		          let currentCount = parseInt(countSpan.text());
-
-		          // 댓글 좋아요수 감소
-		          countSpan.text(currentCount - 1);
-		        } else if (result === 'nologin') {
-		          alert('로그인 후 이용해주세요!')
-		        }
-		      },
-		      error: function() {
-		        alert('서버 오류 발생!')
-		      }
-		    })
-
-	  })
-	  
-})
+	      type: 'POST',
+	      url: '../jjim/jjim_insert_ajax.do',
+	      data: { bno: bno, rno: rno, type: 3 },
+	      success: function(result) {
+	        if (result === 'liked') {
+	          alert('좋아요 완료!');
+	          $countSpan.text(currentCount + 1);
+	          $icon.removeClass('far').addClass('fas text-warning');
+	        } else if (result === 'unliked') {
+	          alert('좋아요 취소됨!');
+	          $countSpan.text(currentCount - 1);
+	          $icon.removeClass('fas text-warning').addClass('far');
+	        } else if (result === 'nologin') {
+	          alert('로그인 후 이용해주세요!');
+	        }
+	      },
+	      error: function() {
+	        alert('서버 오류 발생!');
+	      }
+	    });
+	  });
+	});
 </script>
 </head>
 <body>
@@ -395,8 +389,8 @@ $(function(){
 					<div class="d-flex align-items-center">
 						<button class="btn btn-sm btn-light me-2 reply-like"
 							data-bno="${vo.bno}" data-rno="${rvo.rno}">
-							<i class="far fa-thumbs-up"></i> 좋아요 <span
-								id="like-count-${rvo.rno}">${rvo.like_count}</span>
+							<i class="${likedMap[rvo.rno] ? 'fas fa-thumbs-up text-warning' : 'far fa-thumbs-up'}"></i> 좋아요 
+							<span id="like-count-${rvo.rno}">${rvo.like_count}</span>
 						</button>
 					</div>
 				</div>
