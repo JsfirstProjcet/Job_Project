@@ -22,10 +22,12 @@ function pwdChange(){
 	$('#pwdcheck').val("")
 	$('#pwdchange').val("")
 	if(pw){
+		$('#pwdBtn').text("비밀번호 수정")
 		$('#pwd_check').hide()
 		$('#pwd_change').hide()
 		pw=false
 	}else{
+		$('#pwdBtn').text("수정 취소")
 		$('#pwd_check').show()
 		pw=true
 	}
@@ -102,7 +104,7 @@ function pwdChangeOk(){
 				</tr>
 				<tr>
 					<td colspan="2" class="text-end">
-						<a onclick="pwdChange()" class="btn btn-sm btn-warning" style="color: white;">비밀번호 수정</a>
+						<a onclick="pwdChange()" class="btn btn-sm btn-warning" style="color: white;" id="pwdBtn">비밀번호 수정</a>
 						<a href="../official/official_update.do?cno=${vo.cno }" class="btn btn-sm btn-info" style="color: white;">수정</a>
 					</td>
 				</tr>
