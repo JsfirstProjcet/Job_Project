@@ -88,7 +88,7 @@
 	                        </div>
 	                    </c:if>
 	                    <c:if test="${sessionScope.isadmin == 1 }">
-	                        <div onclick="location.href = '../admin/main.do';"
+	                        <div onclick="location.href = '/admin/main.do';"
 	                             class="btn btn-outline-primary text-center me-3 px-3 py-2">
 	                            <span class="d-block fw-bold"><b>${sessionScope.name}</b></span>
 	                            <span class="d-block small text-muted">(관리자)</span>
