@@ -17,7 +17,7 @@ $(function(){
 		$('.deadline-text').text("상시 모집")
 	}else{
 		updateDeadline(0);
-	    timer = setInterval(updateDeadline(1), 1000);
+	    timer = setInterval(() =>updateDeadline(1), 1000);
 	}
 	
 	$('.btn-map').click(function(){
