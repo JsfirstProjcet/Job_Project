@@ -26,9 +26,11 @@ public class UploadServlet extends HttpServlet {
             return;
         }
 
-        // 상대경로 설정
-        //String uploadPath = getServletContext().getRealPath("uploads/");
-        String uploadPath = "c:\\uploads";
+        // 경로 설정
+        String projectRoot = System.getProperty("user.dir");
+        String uploadPath = Paths.get(projectRoot, "uploads").toString();
+        System.out.println("commons/UploadServlet/uploadPath["+uploadPath+"]");
+        //String uploadPath = "c:\\uploads";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();

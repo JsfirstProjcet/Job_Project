@@ -1,7 +1,8 @@
-<%@ page import="java.io.*, jakarta.servlet.*" %>
+<%@ page import="java.io.*,java.nio.file.*, jakarta.servlet.*" %>
 <%
     String fileName = request.getParameter("fileName");
-    String uploadPath = "C:/uploads";
+	String projectRoot = System.getProperty("user.dir");
+    String uploadPath = Paths.get(projectRoot, "uploads").toString();
     String[] extensions = {".jpg", ".png", ".gif"};
     File imageFile = null;
 
