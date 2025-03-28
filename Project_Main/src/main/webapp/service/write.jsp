@@ -172,7 +172,7 @@
 <script>
   const writeCancel = () => {
     if (confirm("취소하시고 이전화면으로 이동하시겠습니까?")) {
-      location.href = "/service/main.do";
+      location.href = "/Project_Main/service/main.do";
     }
   }
 </script>

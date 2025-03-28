@@ -56,7 +56,7 @@
                 <div class="text-end" style="margin-right: 200px; margin-bottom: 30px;">
                     <c:if test="${sessionScope.id!=null }">
                         <a class="btn btn-primary py-3 px-5"
-                           href="/service/write.do?id=${sessionScope.id}">
+                           href="/Project_Main/service/write.do?id=${sessionScope.id}">
                             새글 작성
                         </a>
                     </c:if>
@@ -76,7 +76,7 @@
                                 <div>
                                     <div class="d-flex align-items-center">
                                         <div class="text-start ps-4" style="flex-grow: 1;">
-                                            <a href="/service/detail.do?page=${cur}&id=${v.id}">
+                                            <a href="/Project_Main/service/detail.do?page=${cur}&id=${v.id}">
                                                 <h5 class="mb-3">
                                                         ${v.qtitle }
                                                 </h5>
@@ -140,8 +140,3 @@
     </nav>
 </div>
 </body>
-<script>
-  const notLogin = () => {
-
-  }
-</script>

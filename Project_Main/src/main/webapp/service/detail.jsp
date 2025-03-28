@@ -83,10 +83,10 @@
 <script>
   const deleteQuestion = () => {
     if (confirm("정말 삭제하시겠습니까?")) {
-      fetch('/service/delete.do?id=${svo.id }', {method: 'get'});
+      fetch('/Project_Main/service/delete.do?id=${svo.id }', {method: 'get'});
       alert("삭제되었습니다!")
       setInterval(() => {
-        location.href = "/service/main.do"
+        location.href = "/Project_Main/service/main.do"
       }, 2000)
     }
   }
