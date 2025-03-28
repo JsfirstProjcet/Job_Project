@@ -81,7 +81,7 @@
                         </c:when>
                         <c:when test="${th.key == 'accountDetail'}">
                             <td class="p-2 rounded-lg border-b border-blue-gray-50">
-                                <button onclick="location.href = '/admin/${origin}/accountDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
+                                <button onclick="location.href = '${origin}/accountDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
                                         class="w-full h-full hover:cursor-pointer text-blue-gray-300 hover:text-blue-500 hover:bg-gray-200 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                          fill="currentColor" class="size-5">
@@ -94,7 +94,7 @@
                         </c:when>
                         <c:when test="${th.key == 'boardDetail'}">
                             <td class="p-2 rounded-lg border-b border-blue-gray-50">
-                                <button onclick="location.href = '/admin/${origin}/boardDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
+                                <button onclick="location.href = '${origin}/boardDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
                                         class="w-full h-full hover:cursor-pointer text-blue-gray-300 hover:text-blue-500 hover:bg-gray-200 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                          fill="currentColor" class="size-5">
@@ -110,7 +110,7 @@
                         </c:when>
                         <c:when test="${th.key == 'recruitDetail'}">
                             <td class="p-2 rounded-lg border-b border-blue-gray-50">
-                                <button onclick="location.href = '/admin/${origin}/recruitDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
+                                <button onclick="location.href = '${origin}/recruitDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
                                         class="w-full h-full hover:cursor-pointer text-blue-gray-300 hover:text-blue-500 hover:bg-gray-200 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                          fill="currentColor" class="size-5">
@@ -123,7 +123,7 @@
                         </c:when>
                         <c:when test="${th.key == 'serviceDetail'}">
                             <td class="p-2 rounded-lg border-b border-blue-gray-50">
-                                <button onclick="location.href = '/admin/${origin}/serviceDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
+                                <button onclick="location.href = '${origin}/serviceDetail.do?pre=${path}&page=${cur}&id=${detail[status.index]}';"
                                         class="w-full h-full hover:cursor-pointer text-blue-gray-300 hover:text-blue-500 hover:bg-gray-200 rounded-xl">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                          fill="currentColor" class="size-5">
@@ -163,29 +163,29 @@
   const allowAction = (id) => {
     if (confirm("정말 승인하시겠습니까?")) {
       alert("승인되었습니다!")
-      fetch('/admin/${origin}/allow.do?pre=${path}&page=${cur}&id=' + id, {
+      fetch('../${origin}/allow.do?pre=${path}&page=${cur}&id=' + id, {
         method: 'GET',
       })
       setInterval(() => {
-        location.href = '/admin/${origin}.do'
+        location.href = '../${origin}.do'
       }, 2000)
     } else {
-      location.href = '/admin/${origin}.do?page=${cur}'
+      location.href = '../${origin}.do?page=${cur}'
     }
   }
   const deleteAction = (id) => {
     if (confirm("정말 삭제하시겠습니까?")) {
       alert("삭제되었습니다!")
       document.getElementById('spinner').classList.toggle('hidden');
-      fetch('/admin/${origin}/delete.do?pre=${path}&page=${cur}&id=' + id, {
+      fetch('/Project_Main/${origin}/delete.do?pre=${path}&page=${cur}&id=' + id, {
         method: 'GET',
       })
       setInterval(() => {
         document.getElementById('spinner').classList.toggle('hidden');
-        location.href = '/admin/${origin}.do'
+        location.href = '/Project_Main/${origin}.do'
       }, 2000)
     } else {
-      location.href = '/admin/${origin}.do?page=${cur}'
+      location.href = '/Project_Main/${origin}.do?page=${cur}'
     }
   }
 </script>

@@ -16,7 +16,7 @@
     <jsp:include page="components/sidebar.jsp"/>
     <div class="flex flex-col w-5/6 max-w-screen h-full max-h-screen text-center justify-center align-middle p-4">
         <c:choose>
-            <c:when test="${vo.size() eq 0}">
+            <c:when test="${size eq null}">
                 <jsp:include page="components/error/noresult.jsp"/>
             </c:when>
             <c:when test="${path eq 'main.do'}">
@@ -37,11 +37,6 @@
             <c:when test="${path eq ('user.do' || 'company.do' || 'auth.do' || 'recruit.do' || 'community.do' || 'service.do' || 'allow.do' || 'delete.do' || 'search.do')}">
                 <jsp:include page="page/list.jsp"/>
             </c:when>
-            <%--            <c:otherwise>--%>
-            <%--                <script type="text/javascript">--%>
-            <%--                  location.href = "main.do"--%>
-            <%--                </script>--%>
-            <%--            </c:otherwise>--%>
         </c:choose>
     </div>
 </div>

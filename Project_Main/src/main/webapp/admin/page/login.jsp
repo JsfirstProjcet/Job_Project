@@ -17,7 +17,7 @@
             </p>
         </c:if>
     </div>
-    <form action="/admin/login_submit.do"
+    <form action="login_submit.do"
           method="post"
           class="w-sm mx-auto">
         <div class="relative z-0 w-full mb-5 group">

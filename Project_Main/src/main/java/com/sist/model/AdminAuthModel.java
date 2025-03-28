@@ -92,14 +92,14 @@ public class AdminAuthModel {
     head.put("cname", "Company");
     head.put("phone", "Phone");
 
-    List<CompanyVO> vo = AuthDAO.getAuthDetail(id);
+    CompanyVO vo = AuthDAO.getAuthDetail(id);
 
     request.setAttribute("vo", vo);
     request.setAttribute("pre", pre);
     request.setAttribute("page", page);
     request.setAttribute("thead", head);
 
-    request.setAttribute("size", vo.size());
+    request.setAttribute("size", vo != null ? 1 : null);
     request.setAttribute("path", path);
     return "../main.jsp";
   }

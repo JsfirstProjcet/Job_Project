@@ -5,7 +5,7 @@
 </head>
 <body>
 <div class="relative flex flex-row align-middle justify-between w-full my-4">
-    <button onclick="location.href = '/admin/${pre}?page=${page}'"
+    <button onclick="history.back()"
             class="absolute place-items-center size-16 top-0 left-0 rounded-xl focus:bg-gray-200 hover:cursor-pointer text-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
              class="size-6 text-bold">
@@ -31,15 +31,15 @@
     if (confirm("정말 삭제하시겠습니까?")) {
       alert("삭제되었습니다!")
       document.getElementById('spinner').classList.toggle('hidden');
-      fetch('/admin/${origin}/delete.do?pre=${pre}&page=${page}&id=' + id, {
+      fetch('/Project_Main/admin/${origin}/delete.do?pre=${pre}&page=${page}&id=' + id, {
         method: 'GET',
       })
       setInterval(() => {
         document.getElementById('spinner').classList.toggle('hidden');
-        location.href = '/admin/${origin}.do'
+        location.href = '/Project_Main/admin/${origin}.do'
       }, 2000)
     } else {
-      location.href = '/admin/${origin}.do?page=${page}'
+      location.href = '/Project_Main/admin/${origin}.do?page=${page}'
     }
   }
 </script>

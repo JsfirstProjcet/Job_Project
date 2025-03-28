@@ -1,11 +1,11 @@
 package com.sist.admin.dao;
 
+import com.sist.admin.vo.CompanyVO;
 import com.sist.commons.CreateSqlSessionFactory;
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.sist.admin.vo.CompanyVO;
 
 public class AuthDAO {
 
@@ -22,11 +22,11 @@ public class AuthDAO {
     return list;
   }
 
-  public static List<CompanyVO> getAuthDetail(String id) {
+  public static CompanyVO getAuthDetail(String id) {
     SqlSession session = ssf.openSession();
-    List<CompanyVO> list = session.selectList("getAuthDetail", id);
+    CompanyVO result = session.selectOne("getAuthDetail", id);
     session.close();
-    return list;
+    return result;
   }
 
   public static void authAllowUpdate(String id) {

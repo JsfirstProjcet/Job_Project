@@ -55,7 +55,9 @@
     </c:if>
     <c:if test="${vo.ok == 0}">
         <div class="w-full h-full border-1 border-gray-900 rounded-xl py-4 px-6">
-            <form name="form" action="${submit}?pre=${pre}&page=${page}&id=${id}" method="post">
+            <form name="form"
+                  action="/Project_Main/admin/${path}/${submit}?pre=${pre}&page=${page}&id=${id}"
+                  method="post">
                 <input type="text" name="title" placeholder="제목을 입력하세요."
                        class="w-full border-b border-gray-900 focus:border-b-2 focus:outline-none text-2xl p-2"/>
                 <textarea required name="content" placeholder="내용을 입력하세요." rows="20" cols="50"

@@ -14,6 +14,7 @@ public class AdminMainModel {
       HttpServletResponse response) {
     String path = request.getServletPath().replace("/admin/", "");
     request.setAttribute("path", path);
+    request.setAttribute("size", 1);
 
     return CommonDAO.login_checker(request, response);
   }

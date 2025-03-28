@@ -7,7 +7,7 @@
 <body>
 <div id="sidebar"
      class="h-screen max-h-screen w-1/6 max-w-70 flex flex-col bg-white p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5 duration-300">
-    <button onclick="location.href = '/admin/main.do'"
+    <button onclick="location.href = '/Project_Main/admin/main.do'"
             class="flex justify-start p-2 text-left hover:cursor-pointer">
         <h5 class="block whitespace-nowrap font-sans text-xl hover:font- duration-500 antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
             Admin Management
@@ -15,7 +15,7 @@
     </button>
     <nav class="flex max-w-[15vw] min-w-[230px] flex-col gap-1 p-2 font-sans text-base font-normal text-blue-gray-700 hover:cursor-pointer">
         <div role="button" id="main.do"
-             onclick="location.href = '/admin/main.do'; document.getElementById('spinner').classList.toggle('hidden');"
+             onclick="location.href = '/Project_Main/admin/main.do'; document.getElementById('spinner').classList.toggle('hidden');"
              class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400">
             <div class="grid mr-4 place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -27,7 +27,7 @@
             Main
         </div>
         <div role="button" id="user.do"
-             onclick="location.href = '/admin/user.do'; document.getElementById('spinner').classList.toggle('hidden');"
+             onclick="location.href = '/Project_Main/admin/user.do'; document.getElementById('spinner').classList.toggle('hidden');"
              class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400  hover:cursor-pointer">
             <div class="grid mr-4 place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -73,7 +73,7 @@
                 <div class="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
                     <nav class="flex min-w-[200px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
                         <div role="button" id="company.do"
-                             onclick="location.href = '/admin/company.do'; document.getElementById('spinner').classList.toggle('hidden');"
+                             onclick="location.href = '/Project_Main/admin/company.do'; document.getElementById('spinner').classList.toggle('hidden');"
                              class="flex items-center w-full max-w-inherit p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400  hover:cursor-pointer">
                             <div class="grid mr-4 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -86,7 +86,7 @@
                             Account
                         </div>
                         <div role="button" id="auth.do"
-                             onclick="location.href = '/admin/auth.do'; document.getElementById('spinner').classList.toggle('hidden');"
+                             onclick="location.href = '/Project_Main/admin/auth.do'; document.getElementById('spinner').classList.toggle('hidden');"
                              class="flex items-center w-full max-w-inherit p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400 hover:cursor-pointer">
                             <div class="grid mr-4 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -104,7 +104,7 @@
         </div>
         <hr class="w-full my-2 border-blue-gray-50"/>
         <div role="button" id="recruit.do"
-             onclick="location.href = '/admin/recruit.do'; document.getElementById('spinner').classList.toggle('hidden');"
+             onclick="location.href = '/Project_Main/admin/recruit.do'; document.getElementById('spinner').classList.toggle('hidden');"
              class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400 hover:cursor-pointer">
             <div class="grid mr-4 place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -120,7 +120,7 @@
             Recruit
         </div>
         <div role="button" id="community.do"
-             onclick="location.href = '/admin/community.do'; document.getElementById('spinner').classList.toggle('hidden');"
+             onclick="location.href = '/Project_Main/admin/community.do'; document.getElementById('spinner').classList.toggle('hidden');"
              class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400 hover:cursor-pointer">
             <div class="grid mr-4 place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -131,7 +131,7 @@
             Community
         </div>
         <div role="button" id="service.do"
-             onclick="location.href = '/admin/service.do'; document.getElementById('spinner').classList.toggle('hidden');"
+             onclick="location.href = '/Project_Main/admin/service.do'; document.getElementById('spinner').classList.toggle('hidden');"
              class="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-200 focus:bg-blue-400">
             <div class="grid mr-4 place-items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
@@ -175,11 +175,11 @@
     document.getElementById('spinner').classList.toggle('hidden');
     if (confirm('로그아웃하시겠습니까?')) {
       alert('로그아웃되었습니다.')
-      fetch('/admin/logout.do', {
+      fetch('/Project_Main/admin/logout.do', {
         method: 'GET',
       })
       setInterval(() => {
-        location.href = '/admin/main.do'
+        location.href = '/Project_Main/admin/main.do'
       }, 2000)
     }
   }
