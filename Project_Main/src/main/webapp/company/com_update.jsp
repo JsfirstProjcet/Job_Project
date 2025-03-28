@@ -363,7 +363,15 @@ input[type='number'].take {
 						</td>
 						<th class="text-center" width="15%">매출액</th>
 						<td width="35%">
-							${vo.jo==0?'':vo.jo }조${vo.uk==0?'':vo.uk }억${vo.man==0?'':vo.man }만
+							<c:if test="${vo.jo!=0 }">
+								${vo.jo }조
+							</c:if>
+							<c:if test="${vo.uk!=0 }">
+								${vo.uk }억
+							</c:if>
+							<c:if test="${vo.man!=0 }">
+								${vo.man }만
+							</c:if>
 						</td>
 					</tr>
 					<tr>

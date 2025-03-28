@@ -49,7 +49,7 @@ $(function(){
 	                    			<span>${vo.ecount }</span>
 	                    		</div>
                     		</c:if>
-                    		<c:if test="${vo.take!=0 }">
+                    		<c:if test="${vo.jo!=0 or vo.uk!=0 or vo.man!=0}">
 	                    		<div class="col-2 text-center">
 	                    			<span><i class="bi-clock-history text-primary me-2" style="font-size: 50px"></i></span><br>
 	                    			<span>매출</span><br>
