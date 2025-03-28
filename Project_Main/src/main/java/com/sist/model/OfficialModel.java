@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.dao.*;
@@ -146,6 +148,56 @@ public class OfficialModel {
 		OfficialDAO.officialUpdate(vo);
 		
 		return "redirect:../official/official_detail.do?cno="+cno;
+	}
+	@RequestMapping("official/pwd_check.do")
+	public void official_pwd_check(HttpServletRequest request, HttpServletResponse response) {
+		String pwd=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		int bCheck=0;
+		String db_pwd=OfficialDAO.officialPwdCheck(cid);
+		if(db_pwd.equals(pwd)) {
+			bCheck=1;
+		}else {
+			bCheck=0;
+		}
+		JSONObject obj=new JSONObject();
+		obj.put("bCheck", bCheck);
+		
+		try {
+			response.setContentType("text/plain;charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.write(obj.toJSONString());
+		} catch (Exception e) {}
+	}
+	@RequestMapping("official/pwd_change.do")
+	public void official_pwd_change(HttpServletRequest request, HttpServletResponse response) {
+		String pwd=request.getParameter("pwd");
+		HttpSession session=request.getSession();
+		String cid=(String)session.getAttribute("cid");
+		
+		OfficialVO vo=new OfficialVO();
+		vo.setPw(pwd);
+		vo.setCid(cid);
+		
+		int bCheck=0;
+		try {
+			OfficialDAO.officialPwdChange(vo);
+			bCheck=1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			bCheck=0;
+		}
+		String db_pwd=OfficialDAO.officialPwdCheck(cid);
+		JSONObject obj=new JSONObject();
+		obj.put("bCheck", bCheck);
+		obj.put("db_pwd", db_pwd);
+		
+		try {
+			response.setContentType("text/plain;charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.write(obj.toJSONString());
+		} catch (Exception e) {}
 	}
 	@RequestMapping("official/emp_list.do")
 	public String official_emp_list(HttpServletRequest request, HttpServletResponse response) {		

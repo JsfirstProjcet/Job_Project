@@ -34,4 +34,10 @@
   	brnumber=#{brnumber}
   	WHERE cid=#{cid}
   </update>
+  <select id="officialPwdCheck" resultType="String" parameterType="String">
+  	SELECT pw FROM official WHERE cid=#{cid}
+  </select>
+  <update id="officialPwdChange" parameterType="OfficialVO">
+  	UPDATE official SET pw=#{pw} WHERE cid=#{cid}
+  </update>
  </mapper> 

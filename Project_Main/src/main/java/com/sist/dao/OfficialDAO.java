@@ -62,4 +62,17 @@ public class OfficialDAO {
   		session.update("officialUpdate",vo);
   		session.close();
   	}
+  	//<select id="officialPwdCheck" resultType="String" parameterType="String">
+  	public static String officialPwdCheck(String cid) {
+  		SqlSession session=ssf.openSession();
+  		String pwd=session.selectOne("officialPwdCheck",cid);
+  		session.close();
+  		return pwd;
+  	}
+  	//<update id="officialPwdChange" parameterType="OfficialVO">
+  	public static void officialPwdChange(OfficialVO vo) {
+  		SqlSession session=ssf.openSession(true);
+  		session.update("officialPwdChange",vo);
+  		session.close();
+  	}
 }
