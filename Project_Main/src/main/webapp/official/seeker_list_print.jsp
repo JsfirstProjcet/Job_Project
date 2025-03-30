@@ -67,7 +67,7 @@ $(function(){
 							</c:if>
 						</td>
 						<td width="10%" class="text-center">${svo.num }</td>
-						<td width="40%" class="text-start">${svo.rtitle }</td>
+						<td width="40%" class="text-start"><a onclick="resumeDetail(${svo.rno})">${svo.rtitle }</a></td>
 						<td width="20%" class="text-center">${svo.dbday }</td>
 						<td width="15%" class="text-center">${svo.pname }</td>
 						<td width="15%" class="text-center">

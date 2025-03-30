@@ -49,16 +49,37 @@ function seekerUpdate(){
 function closeBox() {
 	parent.Shadowbox.close()
 }
+function resumeDetail(rno){
+	let eno=${eno}
+	$('.resume-list').hide()
+	$('.resume-detail').show()
+	$.ajax({
+		type:'post',
+		url:'../personal/recruit_detail.do',
+		data:{"eno":eno,"rno":rno},
+		success:function(res){
+			$('.resume-detail').html(res)
+		}
+	})
+}
+function resumeList(){
+	$('.resume-list').show()
+	$('.resume-detail').hide()
+}
 </script>
 </head>
 <body>
 	<div class="container mt-5 ">
-		<select id="state">
-			<option value="0" selected>지원</option>
-			<option value="1">합격</option>
-			<option value="2">불합격</option>
-		</select>
-		<div class="row seeklist">
+		<div class="resume-list">
+			<select id="state">
+				<option value="0" selected>지원</option>
+				<option value="1">합격</option>
+				<option value="2">불합격</option>
+			</select>
+			<div class="row seeklist">
+			</div>
+		</div>
+		<div class="resume-detail">
 		</div>
 		<a onclick="closeBox()" class="btn btn-sm btn-danger" style="float: right;">닫기</a>
 	</div>

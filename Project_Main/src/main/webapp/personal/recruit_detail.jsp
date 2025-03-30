@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -29,7 +30,9 @@
 		</tr>
 		<tr>
 			<td class="text-end" colspan="2">
-				<a class="btn btn-sm btn-success recruit-btn" onclick="recruit(${rno})" style="color: white;">지원</a>
+				<c:if test="${sessionScope.id!=null }">
+					<a class="btn btn-sm btn-success recruit-btn" onclick="recruit(${rno})" style="color: white;">지원</a>
+				</c:if>
 				<a class="btn btn-sm btn-primary" onclick="resumeList()">목록</a>
 			</td>
 		</tr>

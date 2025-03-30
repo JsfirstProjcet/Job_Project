@@ -111,7 +111,7 @@ $(function(){
 		                   				</a>
 		                   			</div>
 		                   		</div>
-		                    	<div class="row map">
+		                    	<div class="row map mt-2">
 		                    		<div class="content div-map">
 										<div id="map" style="width:100%;height:350px; border-radius: 10px"></div>
 		                    			<p>

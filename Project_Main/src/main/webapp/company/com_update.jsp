@@ -81,14 +81,6 @@ $(function(){
 			})
 		}
 	})
-	$('.wtabBtn').mouseover(function(){
-		$(this).removeClass("bg-light")
-		$(this).addClass("bg-primary")
-	})
-	$('.wtabBtn').mouseout(function(){
-		$(this).removeClass("bg-primary")
-		$(this).addClass("bg-light")
-	})
 })
 function insertHistory(){
 	if($('#content').val().trim()==""){
@@ -106,6 +98,7 @@ function insertHistory(){
 			printHistory()
 		}
 	})
+	$('#content').val("")
 }
 function delHistory(hno){
 	$.ajax({
@@ -243,7 +236,7 @@ function printHistory(){
 							+'</td>'
 							+'<td class="text-center" width="5%">'
 							if(i!=json.hList.length-1){
-								if(yvo.year==hvo.year && json.hList[i].month==json.hList[i+1].month){
+								if(json.hList[i].year == json.hList[i+1].year && json.hList[i].month == json.hList[i+1].month){
 									html+=''
 									+'<a class="btn btn-sm btn-info" onclick="downHistory('+hvo.hno+')">'
 										+'<i class="fas bi-chevron-double-down"></i>'
@@ -269,12 +262,15 @@ function printHistory(){
 				})
 			html+=''
 			+'</table>'
-			console.log(html)
 			$('.history-box').html(html)
 		}
 	})
 }
 function wtabChange(wno){
+	$('.wtabBtn').addClass("bg-light")
+	$('.wtabBtn').removeClass("bg-primary")
+	$('.wtabBtn-'+wno).addClass("bg-primary")
+	$('.wtabBtn-'+wno).removeClass("bg-light")
 	$('.wtab').hide()
 	$('.wtab-'+wno).show()
 }
