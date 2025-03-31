@@ -24,7 +24,7 @@
            	   <if test="tab != 'all'"> 
                      AND emp_type LIKE '%' || #{tab} || '%'
  		       </if>
- 		       		 AND deadline > SYSDATE
+ 		       		 AND deadline &gt; SYSDATE
  	       </where>
  	  	  )
  	   )
@@ -211,7 +211,7 @@
 		(SELECT COUNT(*) FROM job_seeker j WHERE j.eno=e.eno AND state=0) as dtype,
 		(SELECT COUNT(*) FROM employment s WHERE s.eno=e.eno AND TO_DATE(s.regdate,'YYYY-MM-DD')=TO_DATE(SYSDATE,'YYYY-MM-DD')) as rtype
 		FROM employment e WHERE cid=#{cid}
-		AND (deadline > SYSDATE OR deadline IS NULL)
+		AND (deadline &gt; SYSDATE OR deadline IS NULL)
 		<choose>
 			<when test="filter==0">
 				ORDER BY deadline ASC
@@ -228,7 +228,7 @@
 	</select>
 	<select id="empOfficialCount" resultType="int" parameterType="String">
 		SELECT COUNT(*) FROM employment
-		WHERE cid=#{cid} AND (deadline > SYSDATE OR deadline IS NULL)
+		WHERE cid=#{cid} AND (deadline &gt; SYSDATE OR deadline IS NULL)
 	</select>
 	<update id="empClose" parameterType="int">
 		UPDATE employment SET
@@ -291,7 +291,7 @@
 		    FROM (
 		        SELECT /*+ INDEX_ASC(employment employment_list_seq)*/ eno,name,title,personal_history,salary_str,loc,emp_type,regdate,deadline,hit,fo_count,se_count
 		        FROM employment
-		        WHERE deadline >= TO_DATE(
+		        WHERE deadline &gt;= TO_DATE(
 		            #{year} || '-' || LPAD(#{month}, 2, '0') || '-' || LPAD(#{day}, 2, '0'),
 		            'YYYY-MM-DD'
 		        )
