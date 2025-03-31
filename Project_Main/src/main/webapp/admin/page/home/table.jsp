@@ -8,13 +8,13 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
             <th scope="col" class="px-6 py-3">
-                Product name
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Color
-            </th>
-            <th scope="col" class="px-6 py-3">
                 Category
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Today New
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Total
             </th>
         </tr>
         </thead>
@@ -22,37 +22,37 @@
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple MacBook Pro 17"
+                Users
             </th>
             <td class="px-6 py-4">
-                Silver
+                142
             </td>
             <td class="px-6 py-4">
-                Laptop
+                45,718
             </td>
         </tr>
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Microsoft Surface Pro
+                Company
             </th>
             <td class="px-6 py-4">
-                White
+                21
             </td>
             <td class="px-6 py-4">
-                Laptop PC
+                1,879
             </td>
         </tr>
         <tr class="bg-white dark:bg-gray-800">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Magic Mouse 2
+                Recruit
             </th>
             <td class="px-6 py-4">
-                Black
+                71
             </td>
             <td class="px-6 py-4">
-                Accessories
+                2,854
             </td>
         </tr>
         </tbody>
@@ -63,13 +63,13 @@
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
             <th scope="col" class="px-6 py-3">
-                Product name
-            </th>
-            <th scope="col" class="px-6 py-3">
-                Color
-            </th>
-            <th scope="col" class="px-6 py-3">
                 Category
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Today New
+            </th>
+            <th scope="col" class="px-6 py-3">
+                Total
             </th>
         </tr>
         </thead>
@@ -77,37 +77,37 @@
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Apple MacBook Pro 17"
+                Community
             </th>
             <td class="px-6 py-4">
-                Silver
+                58
             </td>
             <td class="px-6 py-4">
-                Laptop
+                2,492
             </td>
         </tr>
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Microsoft Surface Pro
+                Community Reply
             </th>
             <td class="px-6 py-4">
-                White
+                209
             </td>
             <td class="px-6 py-4">
-                Laptop PC
+                9,807
             </td>
         </tr>
         <tr class="bg-white dark:bg-gray-800">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                Magic Mouse 2
+                QnA
             </th>
             <td class="px-6 py-4">
-                Black
+                2
             </td>
             <td class="px-6 py-4">
-                Accessories
+                142
             </td>
         </tr>
         </tbody>

@@ -132,7 +132,7 @@
     <div class="comm-write-container">
         <h2 class="title">문의사항 작성</h2>
 
-        <form method="post" action="/service/write_submit.do?id=${sessionScope.id }">
+        <form method="post" action="/Project_Main/service/write_submit.do?id=${sessionScope.id }">
 
             <!-- 제목 -->
             <div class="form-section">

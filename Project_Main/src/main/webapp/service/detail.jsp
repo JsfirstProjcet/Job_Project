@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <head>
     <title></title>
     <script type="text/javascript"
@@ -30,7 +32,8 @@
     <h3 class="fw-bold mb-3">${svo.qtitle }</h3>
     <!-- 작성 정보 -->
     <div class="text-muted mb-4">
-        <small>작성 ${svo.qdate }</small>
+        <small>작성 <fmt:formatDate value="${svo.qdate}"
+                                  pattern="yyyy-MM-dd a HH:mm"/></small>
     </div>
     <!-- 본문 내용 -->
     <p class="mb-4">${svo.qcontent }</p>
@@ -73,7 +76,8 @@
         <h3 class="fw-bold my-2">${svo.atitle }</h3>
         <!-- 작성 정보 -->
         <div class="text-muted my-2">
-            <small>작성 ${svo.adate }</small>
+            <small>작성 <fmt:formatDate value="${svo.adate}"
+                                      pattern="yyyy-MM-dd a HH:mm"/></small>
         </div>
         <!-- 본문 내용 -->
         <p class="mt-4 mb-12">${svo.acontent }</p>

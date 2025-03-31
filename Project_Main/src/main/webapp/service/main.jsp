@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <head>
     <title></title>
     <style type="text/css">
@@ -86,13 +88,10 @@
                                             </a>
                                             <div class="d-flex align-items-center justify-content-start mt-2">
                                                 <div class="d-flex">
-                                                    <span class="text-truncate me-3">
-                                                        <i class="fa fa-map-marker-alt text-primary me-2"></i>
-														${v.id}
-														</span>
                                                     <span class="text-truncate me-0">
                                                         <i class="far fa-calendar-alt text-primary me-2"></i>
-														${v.qdate}
+														<fmt:formatDate value="${v.qdate}"
+                                                                        pattern="yyyy-MM-dd a HH:mm"/>
 														</span>
                                                 </div>
                                             </div>
@@ -101,10 +100,8 @@
                                     </div>
                                 </div>
                             </div>
-
                         </c:forEach>
                     </div>
-
                 </div>
             </div>
         </div>
