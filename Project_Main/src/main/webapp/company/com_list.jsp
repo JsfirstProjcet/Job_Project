@@ -9,6 +9,18 @@
 <head>
 <meta charset="UTF-8">
 <title>기업 목록</title>
+<style type="text/css">
+.pagination .current .page-link {
+    background-color: #28a745;
+    color: white; 
+    font-weight: bold; 
+}
+
+.pagination .page-item:hover .page-link {
+    background-color: #f1f1f1; 
+    color: #28a745;
+}
+</style>
 </head>
 <body>
         <!-- Jobs Start -->
