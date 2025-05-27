@@ -1,7 +1,7 @@
 ## JOBPRO
 
 <div align="center">
-    <img src="./Project_Main/src/main/webapp/img/logo/JOBPRO.webp" alt="JOBPRO"
+    <img src="./Project_Main/src/main/public/mainLogo.webp" alt="JOBPRO"
         style="height: 200px"/>
 </div>
 
@@ -12,6 +12,11 @@
 ### 🗓️&nbsp;Date
 
 2025.04 ~ 2025.05
+
+### 📄&nbsp;Presentation
+
+[JOBPRO_DECK](./Project_Main/src/main/public/presentationDeck.pdf)
+
 
 ### 🚀&nbsp;Intro & Function
 
