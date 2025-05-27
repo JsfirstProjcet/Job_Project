@@ -56,7 +56,7 @@
 ### 📂&nbsp;ERD
 
 <div align="center">
-<img src="./Project_Main/src/main/public/ERD.svg" alt="ERD" />
+<img src="./Project_Main/public/ERD.svg" alt="ERD" />
 </div>
 
 ### ⚙️&nbsp;Features
