@@ -1,7 +1,7 @@
 ## JOBPRO
 
 <div align="center">
-    <img src="./Project_Main/src/main/public/mainLogo.webp" alt="JOBPRO"
+    <img src="./Project_Main/public/mainLogo.webp" alt="JOBPRO"
         style="height: 200px"/>
 </div>
 
@@ -15,12 +15,14 @@
 
 ### 📄&nbsp;Presentation
 
-[JOBPRO_DECK](./Project_Main/src/main/public/presentationDeck.pdf)
+[JOBPRO.pdf](./Project_Main/public/presentation.pdf)
 
 
 ### 🚀&nbsp;Intro & Function
 
-> 회사와 구직자의 구인구직을 위한 플랫폼입니다.
+> 기업과 구직자의 구인구직을 위한 플랫폼입니다.
+> 
+> #### 주요 기능
 > - 회사가 구인 공고를 작성할 수 있습니다.
 > - 구직자는 이력서와 자기소개서를 작성하고, 공고에 지원할 수 있습니다.
 > - 관리자는 유저, 회사, 공고, 커뮤니티 글, 고객센터를 관리할 수 있습니다.
