@@ -4,3 +4,5 @@ bin
 Job_Project.iml
 .project
 web
+/build/
+apache-tomcat-11.0.0-M22/

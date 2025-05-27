@@ -4,25 +4,17 @@
 <mapper namespace="com.sist.admin.mapper.service-mapper">
   <!-- QnA 리스트 -->
   <select id="getServiceList" resultType="AdminServiceVO" parameterType="hashmap">
-    select id, pid, qtitle, visible, ok, qdate, num
-    from (select id, pid, qtitle, visible, ok, qdate, ROWNUM as num
-          from (select id, pid, qtitle, visible, ok, qdate
+    select id, pid, title, content, ok, num
+    from (select id, pid, title, content, ok, ROWNUM as num
+          from (select id, pid, title, content, ok
                 from SERVICE
+                where type=0
                 order by id desc))
     WHERE num BETWEEN #{start} AND #{end}
   </select>
   <!-- QnA 상세 보기 -->
   <select id="getServiceDetail" resultType="AdminServiceVO" parameterType="string">
-    SELECT id,
-           pid,
-           qtitle,
-           qcontent,
-           atitle,
-           acontent,
-           visible,
-           ok,
-           qdate,
-           adate
+    SELECT id, pid, title, content, ok
     FROM SERVICE
     where id = #{id}
   </select>
@@ -30,9 +22,9 @@
   <!-- 답변 -->
   <update id="serviceAnswerInsert" parameterType="hashmap">
     UPDATE SERVICE
-    SET ATITLE=#{title},
-        ACONTENT=#{content},
-        ADATE=#{date},
+    SET TITLE=#{title},
+        CONTENT=#{content},
+        REGDATE=#{date},
         OK=1
     WHERE id = #{id}
   </update>
@@ -45,22 +37,22 @@
   <!-- 답변 삭제 -->
   <update id="serviceDelete" parameterType="string">
     update SERVICE
-    set atitle   = null,
-        acontent = null,
-        adate    = null,
+    set title   = null,
+        content = null,
+        regdate  = null,
         ok       = 0
     where id = #{id}
   </update>
   <!-- QnA 검색 -->
   <select id="getServiceSearch" resultType="AdminServiceVO" parameterType="hashmap">
-    select id, pid, qtitle, visible, ok, qdate, num
-    from (select id, pid, qtitle, visible, ok, qdate, ROWNUM as num
-          from (select id, pid, qtitle, visible, ok, qdate
+    select id, pid, title, content, ok, num
+    from (select id, pid, title, content, ok, ROWNUM as num
+          from (select id, pid, title, content, ok
                 from SERVICE
                 where (id like '%' || #{id} || '%'
                   or pid like '%' || #{id} || '%'
-                  or qtitle like '%' || #{id} || '%'
-                  or visible like '%' || #{id} || '%'
+                  or title like '%' || #{id} || '%'
+                  or content like '%' || #{id} || '%'
                   or ok like '%' || #{id} || '%')
                   and PID != 'p0'
                 order by id desc))
@@ -68,57 +60,37 @@
   </select>
   <select id="getServiceSearchCount" resultType="int" parameterType="string">
     SELECT CEIL(COUNT(*) / 15.0)
-    from (select id, pid, qtitle, visible, ok, qdate
+    from (select id, pid, title, content, ok
           from SERVICE
           where (id like '%' || #{id} || '%'
             or pid like '%' || #{id} || '%'
-            or qtitle like '%' || #{id} || '%'
-            or visible like '%' || #{id} || '%'
+            or title like '%' || #{id} || '%'
+            or content like '%' || #{id} || '%'
             or ok like '%' || #{id} || '%')
             and PID != 'p0'
           order by id desc)
   </select>
   <!-- QnA 메인 리스트 -->
   <select id="getServiceMainList" resultType="AdminServiceVO" parameterType="hashmap">
-    select id,
-           pid,
-           qtitle,
-           qcontent,
-           visible,
-           ok,
-           qdate,
-           adate,
-           num
-    from (select id,
-                 pid,
-                 qtitle,
-                 qcontent,
-                 visible,
-                 ok,
-                 qdate,
-                 adate,
-                 ROWNUM as num
-          from (select id,
-                       pid,
-                       qtitle,
-                       qcontent,
-                       visible,
-                       ok,
-                       qdate,
-                       adate
-                from SERVICE))
+    select id, pid, title, content, regdate, ok, num
+    from (select id, pid, title, content, regdate, ok, ROWNUM as num
+          from (select id, pid, title, content, regdate, ok
+                from SERVICE
+                where type=0
+                order by regdate desc))
     WHERE num BETWEEN #{start} AND #{end}
-    order by qdate desc
+
   </select>
   <!-- QnA 메인 페이지 counting -->
   <select id="getMainPageCount" resultType="int">
     SELECT CEIL(COUNT(*) / 10.0)
     FROM SERVICE
+    where type=0
   </select>
   <!-- 문의 -->
   <insert id="serviceQuestionInsert" parameterType="AdminServiceVO">
-    INSERT INTO SERVICE(id, pid, qtitle, qcontent, visible, qdate)
-    VALUES (SERVICE_LIST_SEQ.nextval, #{pid}, #{title}, #{content}, #{visible}, sysdate)
+    INSERT INTO SERVICE(id, pid, title, content, regdate)
+    VALUES (SERVICE_SEQ.nextval, #{pid}, #{title}, #{content}, sysdate)
   </insert>
   <!-- 문의 삭제 -->
   <delete id="serviceQuestionDelete" parameterType="string">

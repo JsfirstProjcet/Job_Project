@@ -58,7 +58,7 @@
                 <div class="text-end" style="margin-right: 200px; margin-bottom: 30px;">
                     <c:if test="${sessionScope.id!=null }">
                         <a class="btn btn-primary py-3 px-5"
-                           href="/Project_Main/service/write.do?id=${sessionScope.id}">
+                           href="../service/write.do?id=${sessionScope.id}">
                             새글 작성
                         </a>
                     </c:if>
@@ -78,19 +78,19 @@
                                 <div>
                                     <div class="d-flex align-items-center">
                                         <div class="text-start ps-4" style="flex-grow: 1;">
-                                            <a href="/Project_Main/service/detail.do?page=${cur}&id=${v.id}">
+                                            <a href="../service/detail.do?page=${cur}&id=${v.id}">
                                                 <h5 class="mb-3">
-                                                        ${v.qtitle }
+                                                        ${v.title }
                                                 </h5>
                                                 <p class="mb-3" style="color:gray;">
-                                                        ${v.qcontent }
+                                                        ${v.content }
                                                 </p>
                                             </a>
                                             <div class="d-flex align-items-center justify-content-start mt-2">
                                                 <div class="d-flex">
                                                     <span class="text-truncate me-0">
                                                         <i class="far fa-calendar-alt text-primary me-2"></i>
-														<fmt:formatDate value="${v.qdate}"
+														<fmt:formatDate value="${v.regdate}"
                                                                         pattern="yyyy-MM-dd a HH:mm"/>
 														</span>
                                                 </div>
@@ -111,7 +111,7 @@
         <ul>
             <c:if test="${start>1 }">
                 <li>
-                    <a class="page-link" href="/service/main.do?page=${start-1 }">
+                    <a class="page-link" href="../service/main.do?page=${start-1 }">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                         이전
                     </a>
@@ -120,14 +120,14 @@
             <c:forEach var="i" begin="${start }" end="${end }">
                 <li class="${i==curpage?'current':'' }">
                     <a class="page-link"
-                       href="/service/main.do?page=${i }">
+                       href="../service/main.do?page=${i }">
                             ${i }
                     </a>
                 </li>
             </c:forEach>
             <c:if test="${end<total }">
                 <li class="page-item">
-                    <a class="page-link" href="service/main.do?page=${end+1 }">
+                    <a class="page-link" href="../service/main.do?page=${end+1 }">
                         다음
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </a>
