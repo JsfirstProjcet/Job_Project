@@ -1,7 +1,7 @@
 ## JOBPRO
 
 <div align="center">
-    <img src="./Project_Main/public/mainLogo.webp" alt="JOBPRO"
+    <img src="public/mainLogo.webp" alt="JOBPRO"
         style="height: 200px"/>
 </div>
 
@@ -15,7 +15,7 @@
 
 ### 📄&nbsp;Presentation
 
-[JOBPRO.pdf](./Project_Main/public/presentation.pdf)
+[JOBPRO.pdf](public/presentation.pdf)
 
 
 ### 🚀&nbsp;Intro & Function
@@ -56,7 +56,7 @@
 ### 📂&nbsp;ERD
 
 <div align="center">
-<img src="./Project_Main/public/ERD.svg" alt="ERD" />
+<img src="public/ERD.svg" alt="ERD" />
 </div>
 
 ### ⚙️&nbsp;Features
